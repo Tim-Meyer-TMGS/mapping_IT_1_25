@@ -1,161 +1,192 @@
-/* TMGS Easter Eggs: Dog(Wandern) + Konami(90s Web Look)
+/* TMGS Easter Eggs
+   Eggs included:
+   - Dog (Wandern-in-table-only): triggers when hovering a table cell containing the word "Wandern"
+   - Konami (Strong 90s CRT look, NO marquee): toggle via ↑↑↓↓←→←→ B A
    Usage: <script src="easteregg-two-eggs.js" defer></script>
-   Disable: ?noegg=1 or <html data-disable-easteregg>
+   Disable entirely: add ?noegg=1 to URL or <html data-disable-easteregg>
 */
 (() => {
   const DISABLED = new URLSearchParams(location.search).has('noegg') ||
                    document.documentElement.hasAttribute('data-disable-easteregg');
   if (DISABLED) return;
 
-  const KEYWORD = 'wandern'; // exact keyword trigger (case-insensitive)
+  const KEYWORD = 'wandern'; // standalone word match, case-insensitive
   const onReady = (fn) => (document.readyState === 'loading'
     ? document.addEventListener('DOMContentLoaded', fn)
     : fn());
 
-  // ========== Egg #A: Wandern-Hund (delegated listeners) ==========
+  // ========== Egg #A: Wandern-Hund (table cells only) ==========
   function wandernDogEgg() {
-    const COOLDOWN_MS = 8000;
-    const SPEED_MS = 4200;
-    let lastRun = 0;
+    // Config
+    const SPEED_MS = 7000;        // slower for readability
+    const MAX_RUNS = 1;           // only once per page impression
+    const DIRECTION = 'ltr';      // 'ltr' or 'rtl'
+    let runs = 0;
 
     injectStyle(`
       .egg-dog {
-        position: fixed; z-index: 9999; left: -14vw;
-        font-size: clamp(24px, 4vw, 48px); line-height: 1;
+        position: fixed; z-index: 9999; left: -16vw;
+        font-size: clamp(28px, 4.6vw, 56px); line-height: 1;
         pointer-events: none; user-select: none; white-space: nowrap;
         filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
-        animation: egg-dog-run var(--dog-speed, 4.2s) linear forwards;
       }
-      .egg-dog .trail { opacity:.9; margin-left:.1em }
-      @keyframes egg-dog-run {
+      .egg-dog.run-ltr { animation: egg-dog-run-ltr var(--dog-speed, 7s) linear forwards; }
+      .egg-dog.run-rtl { right: -16vw; left: auto; animation: egg-dog-run-rtl var(--dog-speed, 7s) linear forwards; }
+      .egg-dog .trail { opacity:.9; }
+      .egg-dog .gap { display:inline-block; width:.2em; }
+      @keyframes egg-dog-run-ltr {
         from { transform: translateX(-12vw); }
         to   { transform: translateX(112vw); }
       }
+      @keyframes egg-dog-run-rtl {
+        from { transform: translateX(12vw); }
+        to   { transform: translateX(-112vw); }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .egg-dog { animation: egg-dog-fade var(--dog-speed, 3s) ease-in-out forwards; left: 50%; transform: translateX(-50%); }
+        .egg-dog.run-ltr, .egg-dog.run-rtl {
+          animation: egg-dog-fade var(--dog-speed, 4s) ease-in-out forwards; left: 50%; right: auto; transform: translateX(-50%);
+        }
         @keyframes egg-dog-fade {
           0%{ opacity:0 } 10%{ opacity:1 } 90%{ opacity:1 } 100%{ opacity:0 }
         }
       }
     `, 'egg-dog-style');
 
-    // Robust label check: innerText, aria-label, title (word-boundary around 'wandern')
-    const hasWandernLabel = (el) => {
-      if (!el) return false;
-      const texts = [
-        (el.getAttribute && el.getAttribute('aria-label')) || '',
-        (el.getAttribute && el.getAttribute('title')) || '',
-        (el.innerText || el.textContent || '')
-      ].join(' ').toLowerCase();
-      // word boundary around the keyword (avoid matching "wandernd", "Wanderroute" if undesired)
-      return new RegExp(`\\b${KEYWORD}\\b`, 'i').test(texts);
-    };
+    // Attach listeners only to table cells; do not modify the DOM (no tabindex)
+    setupTableCellListeners();
+    observeFutureTables();
 
-    const runDog = () => {
-      const now = Date.now();
-      if (now - lastRun < COOLDOWN_MS) return;
-      lastRun = now;
+    function setupTableCellListeners(ctx = document) {
+      const cells = Array.from(ctx.querySelectorAll('table td, table th'));
+      for (const cell of cells) {
+        if (!cell.__eggDogBound) {
+          cell.__eggDogBound = true;
+          cell.addEventListener('pointerenter', onCellEnter, { passive: true });
+        }
+      }
+    }
 
-      const hero = pickHero();
-      const y = hero ? (hero.getBoundingClientRect().top + Math.min(hero.clientHeight*0.3, 240)) + window.scrollY
-                     : window.scrollY + innerHeight * 0.7;
+    function onCellEnter(e) {
+      const cell = e.currentTarget;
+      if (runs >= MAX_RUNS) return;
+      if (!containsKeyword(cell)) return;
+      runs++;
 
+      const dir = DIRECTION;
       const dog = document.createElement('div');
-      dog.className = 'egg-dog';
+      dog.className = 'egg-dog ' + (dir === 'rtl' ? 'run-rtl' : 'run-ltr');
       dog.style.setProperty('--dog-speed', `${SPEED_MS}ms`);
+
+      // Place along Y near the hovered cell
+      const rect = cell.getBoundingClientRect();
+      const y = (window.scrollY + rect.top + Math.min(rect.height * 0.6, 180));
       dog.style.top = `${Math.max(16, Math.min(y, window.scrollY + innerHeight - 64))}px`;
-      dog.innerHTML = `<span class="dog" aria-hidden="true">🐕‍🦺</span><span class="trail" aria-hidden="true">💨</span><span class="sr-only" style="position:absolute;left:-9999px">Hund läuft durchs Bild</span>`;
+
+      const dogEmoji = '🐕‍🦺';  // faces right on most platforms
+      const trailEmoji = '💨';
+      if (dir === 'rtl') {
+        dog.innerHTML = `<span class="dog" aria-hidden="true" style="display:inline-block; transform: scaleX(-1)">${dogEmoji}</span><span class="gap"></span><span class="trail" aria-hidden="true">${trailEmoji}</span><span class="sr-only" style="position:absolute;left:-9999px">Hund läuft von rechts nach links</span>`;
+      } else {
+        dog.innerHTML = `<span class="trail" aria-hidden="true">${trailEmoji}</span><span class="gap"></span><span class="dog" aria-hidden="true">${dogEmoji}</span><span class="sr-only" style="position:absolute;left:-9999px">Hund läuft von links nach rechts</span>`;
+      }
+
       document.body.appendChild(dog);
       setTimeout(() => dog.remove(), SPEED_MS + 300);
-    };
-
-    // Event delegation to catch late-rendered navs/menus
-    const maybeTrigger = (target) => {
-      let el = target;
-      let hops = 0;
-      while (el && el !== document.body && hops < 6) {
-        if (hasWandernLabel(el)) { runDog(); return; }
-        el = el.parentElement;
-        hops++;
-      }
-    };
-
-    document.addEventListener('pointerover', (e) => maybeTrigger(e.target), { passive: true });
-    document.addEventListener('focusin', (e) => maybeTrigger(e.target));
-    document.addEventListener('touchstart', (e) => maybeTrigger(e.target), { passive: true });
-
-    // Helper: find a hero/large image to run across
-    function pickHero() {
-      const sels = [
-        'header .hero, .hero, .stage, .banner, .lead, .cover',
-        'main img[alt*="Wander" i], .gallery img, figure img',
-        'header img, .teaser img'
-      ];
-      for (const sel of sels) {
-        const els = Array.from(document.querySelectorAll(sel)).filter(inView);
-        if (els.length) return els[0];
-      }
-      const imgs = Array.from(document.images).filter(inView).sort((a,b)=> (b.clientWidth*b.clientHeight)-(a.clientWidth*a.clientHeight));
-      return imgs[0] || null;
     }
-    function inView(node) {
-      const r = node.getBoundingClientRect();
-      return r.width*r.height > 0 && r.bottom > 0 && r.top < innerHeight;
+
+    function containsKeyword(cell) {
+      const text = (cell.innerText || cell.textContent || '').toLowerCase();
+      return new RegExp(`\\b${KEYWORD}\\b`, 'i').test(text);
+    }
+
+    function observeFutureTables() {
+      const mo = new MutationObserver((muts) => {
+        for (const mut of muts) {
+          for (const node of mut.addedNodes) {
+            if (!(node instanceof Element)) continue;
+            if (node.matches && (node.matches('table') || node.matches('table *'))) {
+              setupTableCellListeners(node.matches('table') ? node : node.closest('table') || node);
+            } else {
+              const tables = node.querySelectorAll ? node.querySelectorAll('table') : [];
+              tables.forEach(t => setupTableCellListeners(t));
+            }
+          }
+        }
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
     }
   }
 
-  // ========== Egg #B: Konami → 90s Web Look (toggle) ==========
+  // ========== Egg #B: Konami → Strong 90s CRT Look (no marquee) ==========
   function konami90sEgg() {
     const SEQ = [38,38,40,40,37,39,37,39,66,65]; // ↑↑↓↓←→←→BA
     let buf = [];
     let on = false;
 
     injectStyle(`
-      /* 90s web palette + link colors + beveled UI */
+      /* Strong CRT look: greenish tint, chromatic aberration, scanlines, vignette, flicker */
       html[data-retro90s] body {
-        background:
-          repeating-linear-gradient(45deg, #101c2b 0, #101c2b 12px, #0d1723 12px, #0d1723 24px),
-          radial-gradient(1200px 600px at 10% -10%, rgba(0,255,195,.08), transparent 60%),
-          radial-gradient(1200px 600px at 90% 110%, rgba(255,0,180,.08), transparent 60%);
-        background-attachment: fixed, fixed, fixed;
+        background-color: #060a0f;
+        filter: saturate(1.35) contrast(1.25) hue-rotate(125deg) brightness(0.95);
+        color-scheme: dark;
       }
       html[data-retro90s] * {
-        text-shadow: 0 0 1px rgba(0,255,180,.45);
+        text-shadow:
+          0 0 6px rgba(0,255,170,.75),
+          1px 0 0 rgba(255,60,80,.45),
+          -1px 0 0 rgba(0,120,255,.45);
+        letter-spacing: .2px;
       }
-      html[data-retro90s] a { color: #00ffff !important; text-decoration: underline !important; cursor: crosshair; }
-      html[data-retro90s] a:visited { color: #ff66ff !important; }
-      html[data-retro90s] button, html[data-retro90s] .btn, html[data-retro90s] input[type="button"], html[data-retro90s] input[type="submit"] {
-        border: 2px solid #d9e0ff; border-top-color:#fff; border-left-color:#fff;
-        background: linear-gradient(#2b3f6b, #1a2542); color: #eaffff;
-        box-shadow: inset 0 0 0 1px #0a1330, 0 2px 0 0 #000;
+      html[data-retro90s] a { color: #7fffd4 !important; text-decoration: underline !important; cursor: crosshair; }
+      html[data-retro90s] img, html[data-retro90s] canvas, html[data-retro90s] video { image-rendering: pixelated; }
+      html[data-retro90s] code, html[data-retro90s] pre, html[data-retro90s] kbd, html[data-retro90s] samp {
+        background: rgba(0, 30, 25, .6); border: 1px solid rgba(95, 255, 210, .35); padding: .15em .35em; border-radius: 3px;
       }
-      html[data-retro90s] img, html[data-retro90s] canvas, html[data-retro90s] video {
-        image-rendering: pixelated;
+
+      /* Overlays */
+      #crt-scan, #crt-vignette, #crt-flicker {
+        position: fixed; inset: 0; pointer-events: none; z-index: 10000;
       }
-      /* marquee bar */
-      #retro90s-marquee {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 10000; pointer-events: none;
-        height: 34px; background: linear-gradient(90deg, #0f2244, #08305a);
-        border-bottom: 2px solid #59ffc9;
-        box-shadow: 0 4px 18px rgba(0,0,0,.4);
-        display: flex; align-items: center; overflow: hidden;
-        font-family: "Comic Sans MS", "Comic Sans", "Trebuchet MS", system-ui, sans-serif;
-        color: #d4fff2; letter-spacing: .3px;
+      #crt-scan {
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,.04) 0px,
+          rgba(255,255,255,.04) 1px,
+          rgba(0,0,0,0) 3px,
+          rgba(0,0,0,0) 4px
+        );
+        mix-blend-mode: multiply;
+        animation: scan-opacity 6s linear infinite;
       }
-      #retro90s-marquee b { color: #59ffc9; }
-      #retro90s-marquee .line {
-        white-space: nowrap; will-change: transform;
-        animation: marquee-slide 14s linear infinite;
+      @keyframes scan-opacity {
+        0% { opacity:.18; }
+        50% { opacity:.33; }
+        100% { opacity:.18; }
       }
-      @keyframes marquee-slide {
-        from { transform: translateX(100%); }
-        to   { transform: translateX(-100%); }
+      #crt-vignette {
+        background:
+          radial-gradient(80% 70% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.35) 85%, rgba(0,0,0,.55) 100%);
+        mix-blend-mode: multiply;
       }
-      @media (prefers-reduced-motion: reduce) {
-        #retro90s-marquee .line { animation: none; position: absolute; left: 12px; }
+      #crt-flicker {
+        background: radial-gradient(40% 20% at 50% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 70%);
+        animation: flicker 1.7s steps(2, start) infinite;
+        opacity: .25;
       }
-      /* sparkle cursor on body (subtle) */
-      html[data-retro90s] body { cursor: default; }
+      @keyframes flicker {
+        0% { opacity: .18; } 50% { opacity: .32; } 100% { opacity: .18; }
+      }
+
+      /* Slight perspective (optional) */
+      html[data-retro90s] body {
+        transform: perspective(1200px) translateZ(0) scale(1) skewX(0deg);
+      }
+
+      /* Chunky focus ring */
+      html[data-retro90s] :focus {
+        outline: 2px dashed #59ffc9 !important;
+        outline-offset: 2px;
+      }
     `, 'egg-retro90s-style');
 
     const onKey = (e) => {
@@ -165,7 +196,7 @@
         buf = [];
         on = !on;
         toggle90s(on);
-        toast(on ? '90s MODE: ON — erneut Konami zum Beenden' : '90s MODE: OFF');
+        toast(on ? '90s CRT MODE: ON — erneut Konami zum Beenden' : '90s CRT MODE: OFF');
       }
     };
     document.addEventListener('keydown', onKey, { passive: true });
@@ -173,29 +204,22 @@
     function toggle90s(state) {
       if (state) {
         document.documentElement.setAttribute('data-retro90s', 'true');
-        ensureMarquee();
+        ensureOverlays();
       } else {
         document.documentElement.removeAttribute('data-retro90s');
-        removeById('retro90s-marquee');
+        removeById('crt-scan'); removeById('crt-vignette'); removeById('crt-flicker');
       }
     }
 
-    function ensureMarquee() {
-      if (document.getElementById('retro90s-marquee')) return;
-      const bar = document.createElement('div');
-      bar.id = 'retro90s-marquee';
-      const line = document.createElement('div');
-      line.className = 'line';
-      line.innerHTML = `&nbsp;★ Willkommen im <b>90s-Mode</b>! &nbsp;|&nbsp; Viel Spaß beim Entdecken — drücke Konami nochmals zum Ausschalten. &nbsp;|&nbsp; <b>Under Construction</b> 😉 ★&nbsp;`;
-      bar.appendChild(line);
-      document.body.appendChild(bar);
-      // add top padding to avoid overlap (non-invasive: only visual if page has fixed header)
-      if (!document.documentElement.style.getPropertyValue('--egg-top-pad')) {
-        const pad = '34px';
-        document.documentElement.style.setProperty('--egg-top-pad', pad);
-        // try not to shift layout: apply transform to main wrapper if fixed header exists; otherwise ignore
-        const fixedHeader = document.querySelector('header') && getComputedStyle(document.querySelector('header')).position === 'fixed';
-        if (!fixedHeader) document.body.style.scrollMarginTop = pad;
+    function ensureOverlays() {
+      if (!document.getElementById('crt-scan')) {
+        const s = document.createElement('div'); s.id = 'crt-scan'; document.body.appendChild(s);
+      }
+      if (!document.getElementById('crt-vignette')) {
+        const v = document.createElement('div'); v.id = 'crt-vignette'; document.body.appendChild(v);
+      }
+      if (!document.getElementById('crt-flicker')) {
+        const f = document.createElement('div'); f.id = 'crt-flicker'; document.body.appendChild(f);
       }
     }
 
