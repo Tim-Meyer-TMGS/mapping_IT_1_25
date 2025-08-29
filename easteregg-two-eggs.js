@@ -1,12 +1,11 @@
-/* TMGS Easter Eggs (Hardened)
+/* TMGS Easter Eggs (Hardened v2)
    Includes:
    - Dog (Wandern-in-table-only): runs once per page when hovering a table cell with the word "Wandern"
-   - Konami (Windows 95 Style): toggle via ↑↑↓↓←→←→ B A; pauses dog while active
+   - Konami (Windows 95 Style): toggle via ↑↑↓↓←→←→ B A
    Usage: <script src="easteregg-two-eggs.js" defer></script>
    Disable: add ?noegg=1 or <html data-disable-easteregg>
 */
 (() => {
-  // ---------- Global guards (single init) ----------
   if (window.__TMGS_EGGS_INIT__) return;
   window.__TMGS_EGGS_INIT__ = true;
 
@@ -14,16 +13,14 @@
                    document.documentElement.hasAttribute('data-disable-easteregg');
   if (DISABLED) return;
 
-  // Cleanup any legacy overlays/flags from previous versions
+  // Clean legacy overlays/flags
   ['crt-scan','crt-vignette','crt-flicker','win95-taskbar'].forEach(id => { const el = document.getElementById(id); if (el) el.remove(); });
-  document.documentElement.removeAttribute('data-retro90s'); // old flag
-  // don't remove data-win95 here; we control it via toggle
+  document.documentElement.removeAttribute('data-retro90s');
 
   const KEYWORD = 'wandern';
   const STATE = {
     dogRuns: 0,
     dogMaxRuns: 1,
-    dogPaused: false,            // paused while Win95 mode is on
     win95On: false,
     konamiBuf: [],
     konamiSeq: [38,38,40,40,37,39,37,39,66,65]
@@ -36,7 +33,7 @@
   // ---------- Dog Egg (table cells only) ----------
   function wandernDogEgg() {
     const SPEED_MS = 7000;
-    const DIRECTION = 'ltr';  // or 'rtl'
+    const DIRECTION = 'ltr';
 
     injectStyle(`
       .egg-dog {
@@ -68,12 +65,14 @@
         if (!cell.__eggDogBound) {
           cell.__eggDogBound = true;
           cell.addEventListener('pointerenter', onCellEnter, { passive: true });
+          cell.addEventListener('mouseenter', onCellEnter);
+          cell.addEventListener('focusin', onCellEnter);
+          cell.addEventListener('touchstart', onCellEnter, { passive: true });
         }
       }
     }
 
     function onCellEnter(e) {
-      if (STATE.dogPaused) return;                 // pause while Win95 is active
       if (STATE.dogRuns >= STATE.dogMaxRuns) return;
       const cell = e.currentTarget;
       if (!containsKeyword(cell)) return;
@@ -121,7 +120,7 @@
     }
   }
 
-  // ---------- Konami → Windows 95 Style (pauses dog) ----------
+  // ---------- Konami → Windows 95 Style ----------
   function konamiWin95Egg() {
     injectStyle(`
       html[data-win95] body {
@@ -186,7 +185,6 @@
       }
     `, 'egg-win95-style');
 
-    // Single Konami listener
     if (!window.__TMGS_KONAMI_SETUP__) {
       window.__TMGS_KONAMI_SETUP__ = true;
       document.addEventListener('keydown', onKey, { passive: true });
@@ -195,11 +193,9 @@
     function onKey(e) {
       STATE.konamiBuf.push(e.keyCode);
       if (STATE.konamiBuf.length > STATE.konamiSeq.length) STATE.konamiBuf.shift();
-      // exact match
       for (let i = 0; i < STATE.konamiSeq.length; i++) {
         if (STATE.konamiBuf[i] !== STATE.konamiSeq[i]) return;
       }
-      // matched
       STATE.konamiBuf = [];
       STATE.win95On = !STATE.win95On;
       toggleWin95(STATE.win95On);
@@ -207,7 +203,6 @@
     }
 
     function toggleWin95(on) {
-      STATE.dogPaused = !!on; // pause dog triggers while active
       if (on) {
         document.documentElement.setAttribute('data-win95', 'true');
         ensureTaskbar();
