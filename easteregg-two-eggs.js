@@ -1,7 +1,7 @@
 /* TMGS Easter Eggs
    Eggs included:
    - Dog (Wandern-in-table-only): triggers when hovering a table cell containing the word "Wandern"
-   - Konami (Strong 90s CRT look, NO marquee): toggle via ↑↑↓↓←→←→ B A
+   - Konami (Windows 95 Style, no marquee): toggle via ↑↑↓↓←→←→ B A
    Usage: <script src="easteregg-two-eggs.js" defer></script>
    Disable entirely: add ?noegg=1 to URL or <html data-disable-easteregg>
 */
@@ -117,77 +117,109 @@
     }
   }
 
-  // ========== Egg #B: Konami → Strong 90s CRT Look (no marquee) ==========
-  function konami90sEgg() {
+  // ========== Egg #B: Konami → Windows 95 Style (toggle) ==========
+  function konamiWin95Egg() {
     const SEQ = [38,38,40,40,37,39,37,39,66,65]; // ↑↑↓↓←→←→BA
     let buf = [];
     let on = false;
 
     injectStyle(`
-      /* Strong CRT look: greenish tint, chromatic aberration, scanlines, vignette, flicker */
-      html[data-retro90s] body {
-        background-color: #060a0f;
-        filter: saturate(1.35) contrast(1.25) hue-rotate(125deg) brightness(0.95);
-        color-scheme: dark;
+      /* Windows 95-esque UI styling */
+      html[data-win95] body {
+        background-color: #008080; /* teal desktop */
+        color: #000;
+        font-family: "MS Sans Serif", Tahoma, Verdana, system-ui, sans-serif;
       }
-      html[data-retro90s] * {
-        text-shadow:
-          0 0 6px rgba(0,255,170,.75),
-          1px 0 0 rgba(255,60,80,.45),
-          -1px 0 0 rgba(0,120,255,.45);
-        letter-spacing: .2px;
+      html[data-win95] a { color: #0000ee !important; }
+      html[data-win95] a:visited { color: #551a8b !important; }
+
+      /* 3D controls */
+      html[data-win95] button,
+      html[data-win95] input[type="button"],
+      html[data-win95] input[type="submit"],
+      html[data-win95] input[type="text"],
+      html[data-win95] input[type="search"],
+      html[data-win95] input[type="email"],
+      html[data-win95] input[type="number"],
+      html[data-win95] select,
+      html[data-win95] textarea {
+        background: #c0c0c0;
+        color: #000;
+        border: 2px solid;
+        border-top-color: #ffffff;
+        border-left-color: #ffffff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #000;
       }
-      html[data-retro90s] a { color: #7fffd4 !important; text-decoration: underline !important; cursor: crosshair; }
-      html[data-retro90s] img, html[data-retro90s] canvas, html[data-retro90s] video { image-rendering: pixelated; }
-      html[data-retro90s] code, html[data-retro90s] pre, html[data-retro90s] kbd, html[data-retro90s] samp {
-        background: rgba(0, 30, 25, .6); border: 1px solid rgba(95, 255, 210, .35); padding: .15em .35em; border-radius: 3px;
+      html[data-win95] button:active,
+      html[data-win95] input[type="button"]:active,
+      html[data-win95] input[type="submit"]:active {
+        border-top-color: #808080;
+        border-left-color: #808080;
+        border-right-color: #ffffff;
+        border-bottom-color: #ffffff;
+        box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #000;
+      }
+      /* field look */
+      html[data-win95] input[type="text"],
+      html[data-win95] input[type="search"],
+      html[data-win95] input[type="email"],
+      html[data-win95] input[type="number"],
+      html[data-win95] select,
+      html[data-win95] textarea {
+        padding: 2px 4px;
       }
 
-      /* Overlays */
-      #crt-scan, #crt-vignette, #crt-flicker {
-        position: fixed; inset: 0; pointer-events: none; z-index: 10000;
-      }
-      #crt-scan {
-        background: repeating-linear-gradient(
-          to bottom,
-          rgba(255,255,255,.04) 0px,
-          rgba(255,255,255,.04) 1px,
-          rgba(0,0,0,0) 3px,
-          rgba(0,0,0,0) 4px
-        );
-        mix-blend-mode: multiply;
-        animation: scan-opacity 6s linear infinite;
-      }
-      @keyframes scan-opacity {
-        0% { opacity:.18; }
-        50% { opacity:.33; }
-        100% { opacity:.18; }
-      }
-      #crt-vignette {
-        background:
-          radial-gradient(80% 70% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.35) 85%, rgba(0,0,0,.55) 100%);
-        mix-blend-mode: multiply;
-      }
-      #crt-flicker {
-        background: radial-gradient(40% 20% at 50% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 70%);
-        animation: flicker 1.7s steps(2, start) infinite;
-        opacity: .25;
-      }
-      @keyframes flicker {
-        0% { opacity: .18; } 50% { opacity: .32; } 100% { opacity: .18; }
+      /* Title bar simulation on native headings */
+      html[data-win95] h1, html[data-win95] h2, html[data-win95] .titlebar {
+        background: linear-gradient(#000080, #000060);
+        color: #ffffff;
+        padding: 4px 8px;
+        border: 2px solid;
+        border-top-color: #ffffff;
+        border-left-color: #ffffff;
+        border-right-color: #000000;
+        border-bottom-color: #000000;
+        box-shadow: inset -1px -1px 0 #003, inset 1px 1px 0 #66a;
       }
 
-      /* Slight perspective (optional) */
-      html[data-retro90s] body {
-        transform: perspective(1200px) translateZ(0) scale(1) skewX(0deg);
+      /* Taskbar overlay (visual only) */
+      #win95-taskbar {
+        position: fixed; left: 0; right: 0; bottom: 0; height: 34px;
+        background: #c0c0c0; border-top: 2px solid #ffffff; z-index: 9999;
+        box-shadow: inset 0 2px 0 #808080, inset 0 -1px 0 #000;
+        display: flex; align-items: center; gap: 8px; padding: 4px; pointer-events: none;
+      }
+      #win95-start {
+        pointer-events: none;
+        display: inline-flex; align-items: center; gap: 6px;
+        background: #c0c0c0; color: #000; padding: 2px 8px;
+        border: 2px solid; border-top-color:#fff; border-left-color:#fff; border-right-color:#808080; border-bottom-color:#808080;
+        box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #000;
+        font-weight: 600;
+      }
+      #win95-clock {
+        margin-left: auto; padding: 2px 8px; background:#c0c0c0;
+        border: 2px solid; border-top-color:#fff; border-left-color:#fff; border-right-color:#808080; border-bottom-color:#808080;
+        box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #000;
+        min-width: 80px; text-align: center; font-variant-numeric: tabular-nums;
       }
 
-      /* Chunky focus ring */
-      html[data-retro90s] :focus {
-        outline: 2px dashed #59ffc9 !important;
-        outline-offset: 2px;
+      /* Window-like panels (generic) */
+      html[data-win95] .card, html[data-win95] .panel, html[data-win95] .box {
+        background: #c0c0c0 !important; color: #000 !important;
+        border: 2px solid;
+        border-top-color: #ffffff;
+        border-left-color: #ffffff;
+        border-right-color: #808080;
+        border-bottom-color: #808080;
+        box-shadow: inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #000;
       }
-    `, 'egg-retro90s-style');
+
+      /* Remove previous retro flags if any */
+      html[data-retro90s] body { filter: none !important; }
+    `, 'egg-win95-style');
 
     const onKey = (e) => {
       buf.push(e.keyCode);
@@ -195,40 +227,46 @@
       if (SEQ.every((c, i) => buf[i] === c)) {
         buf = [];
         on = !on;
-        toggle90s(on);
-        toast(on ? '90s CRT MODE: ON — erneut Konami zum Beenden' : '90s CRT MODE: OFF');
+        toggleWin95(on);
+        toast(on ? 'Windows 95 MODE: ON — erneut Konami zum Beenden' : 'Windows 95 MODE: OFF');
       }
     };
     document.addEventListener('keydown', onKey, { passive: true });
 
-    function toggle90s(state) {
+    function toggleWin95(state) {
       if (state) {
-        document.documentElement.setAttribute('data-retro90s', 'true');
-        ensureOverlays();
-      } else {
+        // ensure old retro is off
         document.documentElement.removeAttribute('data-retro90s');
-        removeById('crt-scan'); removeById('crt-vignette'); removeById('crt-flicker');
+        document.documentElement.setAttribute('data-win95', 'true');
+        ensureTaskbar();
+      } else {
+        document.documentElement.removeAttribute('data-win95');
+        removeById('win95-taskbar');
       }
     }
 
-    function ensureOverlays() {
-      if (!document.getElementById('crt-scan')) {
-        const s = document.createElement('div'); s.id = 'crt-scan'; document.body.appendChild(s);
-      }
-      if (!document.getElementById('crt-vignette')) {
-        const v = document.createElement('div'); v.id = 'crt-vignette'; document.body.appendChild(v);
-      }
-      if (!document.getElementById('crt-flicker')) {
-        const f = document.createElement('div'); f.id = 'crt-flicker'; document.body.appendChild(f);
-      }
+    function ensureTaskbar() {
+      if (document.getElementById('win95-taskbar')) return;
+      const bar = document.createElement('div'); bar.id = 'win95-taskbar';
+      const start = document.createElement('div'); start.id = 'win95-start'; start.textContent = 'Start';
+      const clock = document.createElement('div'); clock.id = 'win95-clock';
+      bar.appendChild(start); bar.appendChild(clock);
+      document.body.appendChild(bar);
+      updateClock(clock); setInterval(() => updateClock(clock), 30000);
+    }
+    function updateClock(el) {
+      const d = new Date();
+      const h = String(d.getHours()).padStart(2,'0');
+      const m = String(d.getMinutes()).padStart(2,'0');
+      el.textContent = `${h}:${m}`;
     }
 
     function toast(msg) {
       const n = document.createElement('div');
-      n.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:10001;background:#0c1410;color:#d9ffe6;border:1px solid #1e3b2b;border-radius:999px;padding:8px 12px;font-size:12px;box-shadow:0 8px 30px rgba(0,0,0,.35)';
+      n.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:44px;z-index:10001;background:#c0c0c0;color:#000;border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#808080;border-bottom-color:#808080;box-shadow:inset -1px -1px 0 #dfdfdf, inset 1px 1px 0 #000;border-radius:2px;padding:6px 10px;font-size:12px;font-family:"MS Sans Serif",Tahoma,Verdana,sans-serif';
       n.textContent = msg;
       document.body.appendChild(n);
-      setTimeout(() => n.remove(), 2600);
+      setTimeout(() => n.remove(), 2400);
     }
   }
 
@@ -245,6 +283,6 @@
   // ---------- boot ----------
   onReady(() => {
     try { wandernDogEgg(); } catch(e) { /* noop */ }
-    try { konami90sEgg(); } catch(e) { /* noop */ }
+    try { konamiWin95Egg(); } catch(e) { /* noop */ }
   });
 })();
