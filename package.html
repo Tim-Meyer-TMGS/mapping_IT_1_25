@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>SaTourN Mapping · Globale Pauschale</title>
+<style>
+:root { --bg:#0b1020; --panel:#111833; --line:#233057; --text:#e6edff; --muted:#8aa0c6; --head:#0e1730; --ok:#1fbf7a; --bad:#ff6b6b; --accent:#1fbf7a; }
+* { box-sizing:border-box; }
+body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
+header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
+.brand { font-weight:600; letter-spacing:.2px; }
+nav { display:flex; gap:8px; flex-wrap:wrap; }
+nav a { text-decoration:none; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:13px; background:#0e1730; }
+nav a.active { color:var(--text); background:#1b2551; }
+main { max-width:1100px; margin:0 auto; padding:20px; }
+section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:20px; }
+h1 { font-size:18px; margin:0 0 4px; }
+h2 { font-size:16px; margin:0 0 12px; }
+.sub { font-size:13px; color:var(--muted); margin:0; }
+table { width:100%; border-collapse:separate; border-spacing:0; }
+th, td { padding:8px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+th { text-align:left; background:#0e1730; position:sticky; top:0; z-index:2; }
+tbody tr:nth-child(odd) { background:#0b142d; }
+.new { color:var(--ok); font-weight:600; }
+.removed { color:var(--bad); font-weight:600; text-decoration:line-through; }
+code { background:#0e1730; padding:2px 6px; border-radius:6px; border:1px solid var(--line); }
+
+/* subtle left guides for sublevels (padding on 2. Spalte) */
+tr.depth-1 td:nth-child(2) { box-shadow: inset 3px 0 0 rgba(138,160,198,.25); }
+tr.depth-2 td:nth-child(2) { box-shadow: inset 6px 0 0 rgba(138,160,198,.18); }
+tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
+</style>
+</head>
+<body>
+<header>
+<div class="brand">SaTourN Mapping</div>
+<nav aria-label="Hauptmenü">
+<a href="index.html">POI</a>
+<a href="gastro.html">Gastro</a>
+<a href="tour.html">Touren</a>
+<a href="events.html">Veranstaltungen</a>
+<a href="artikel.html">Artikel</a>
+<a href="vermieter.html">Vermieter</a>
+<a class="active" aria-current="page" href="odta.html">ODTA</a>   
+</nav>
+</header>
+<main>
+<section>
+<h1>Globale Pauschale · SaTourN/eT4</h1>
+<p class="sub">Es gibt <strong>kein OA/ODTA/schema.org Mapping</strong>. Spalten bleiben leer.</p>
+<p class="sub">Gesamt: <strong>72</strong> · Mit OA-Mapping: <strong>0</strong> · Ohne OA-Mapping: <strong>72</strong> · Änderungen: <strong>0</strong> neu, <strong>0</strong> entfernt.</p>
+</section>
+<section>
+<table>
+<thead>
+<tr><th>OA-Kategorie(n)</th><th>SaTourN/eT4</th><th>ODTA</th><th>schema.org</th></tr>
+</thead>
+<tbody id="tbody-all">
+<tr class="depth-0"><td></td><td style="padding-left:0px">Aktiv &amp; Natur</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Winterurlaub</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Radfahren</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Angebotsart</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Individual-Angebot</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Gruppen-Angebot/Familien-Angebot</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Spezialangebote</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Vitalurlaub</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Herbst</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kulinarik</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Romantik</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kulinarische Führungen</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Frühling</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Familienurlaub</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Motorrad</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Städte &amp; Kultur</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Sommer</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Wandern</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Reiten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Angeln</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Advent/Weihnachten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Sport</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Wassersport</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Verleih</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Boote &amp; Yachten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Stehpaddeln</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Boots- &amp; Schiffsfahrten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Wakeboarden &amp; Wasserski</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Ball- &amp; Mannschaftssport</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kanu- &amp; Kajaktouren</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Fahrspaß</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Stadtrundfahrten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Mit dem Oldtimer</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Workshops &amp; Kurse</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Sonstige Kurse</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Fotografie &amp; Film</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Motto-Touren</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Literatur-Touren</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Fahrräder</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Fitness &amp; Kraftsport</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Yoga</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Ausflüge &amp; Erlebnisse</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Führungen</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Schmalspurbahn</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Tagesfahrten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Halbtagesfahrten</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Öffentliche Führung</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Wandern &amp; Trekking</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">geführte Wanderung</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Rad und Mountainbike</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">geführte Touren</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Gruppen-Erlebnisse</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Gruppenführung</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Halbtagesprogrramm für Gruppen</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Tagesprogramm für Gruppen</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Familien-Erlebnisse</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kinderspaß</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Erlebnis Wasser</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Gutscheine</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Eintrittskarten</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Eintrittskarten für Sehenswürdigkeiten</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Zoo, Tierpark</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Museum</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Bergwerk</td><td></td><td></td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Wassererlebnis</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Tickets</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Theater und Bühne</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Konzerte und Festivals</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">City Card</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Bestseller</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Wellness und Vital</td><td></td><td></td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Aktivitäten</td><td></td><td></td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</body>
+</html>
