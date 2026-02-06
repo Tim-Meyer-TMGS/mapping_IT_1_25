@@ -1,101 +1,47 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SaTourN Mapping · Tour</title>
-  <style>
-:root { --bg:#0b1020; --panel:#111833; --line:#233057; --text:#e6edff; --muted:#8aa0c6; --head:#0e1730; --ok:#1fbf7a; --bad:#ff6b6b; --accent:#1fbf7a; }
-* { box-sizing:border-box; }
-body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
-header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
-.brand { font-weight:600; letter-spacing:.2px; }
-nav { display:flex; gap:8px; flex-wrap:wrap; }
-nav a { text-decoration:none; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:13px; background:#0e1730; }
-nav a.active { color:var(--text); background:#1b2551; }
-main { max-width:1100px; margin:0 auto; padding:20px; }
-section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:20px; }
-h1 { font-size:18px; margin:0 0 4px; }
-h2 { font-size:16px; margin:0 0 12px; }
-.sub { font-size:13px; color:var(--muted); margin:0; }
-table { width:100%; border-collapse:separate; border-spacing:0; }
-th, td { padding:8px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
-th { text-align:left; background:#0e1730; position:sticky; top:0; z-index:2; }
-tbody tr:nth-child(odd) { background:#0b142d; }
-.new { color:var(--ok); font-weight:600; }
-.removed { color:var(--bad); font-weight:600; text-decoration:line-through; }
-code { background:#0e1730; padding:2px 6px; border-radius:6px; border:1px solid var(--line); }
+---
+layout: default
+title: "Touren Mapping"
+nav: "tour"
+---
+<h1>Touren – Kategorien-Mapping</h1>
+<p>Zuordnungen zwischen Outdooractive-Touren-Kategorien und SaTourN/eT4 sowie ODTA / schema.org.</p>
 
-/* Clearer separation for top-level categories */
-tr.topcat td { 
-  background: linear-gradient(90deg, rgba(31,191,122,0.15), rgba(31,191,122,0.05) 35%, transparent);
-  font-weight:700;
-  font-size:15px;
-  border-top:2px solid var(--accent);
-  position:relative;
-}
-tr.topcat td:first-child::before {
-  content:"";
-  position:absolute;
-  left:0; top:0; bottom:0;
-  width:4px;
-  background:var(--accent);
-}
+<div class="controls" data-mapping-page>
+  <input data-q placeholder="Suche … (OA / SaTourN / ODTA / schema.org)" autocomplete="off">
+  <select data-filter>
+    <option value="all">Alle</option>
+    <option value="new">Neu/Geändert</option>
+    <option value="missing">Fehlt (ODTA / schema.org)</option>
+  </select>
+  <span class="badge"><span class="dot"></span><span data-count>0</span> Treffer</span>
+</div>
 
-/* subtle left guides for sublevels */
-tr.depth-1 td:nth-child(2) { box-shadow: inset 3px 0 0 rgba(138,160,198,.25); }
-tr.depth-2 td:nth-child(2) { box-shadow: inset 6px 0 0 rgba(138,160,198,.18); }
-tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
-  </style>
-  <script src="easteregg-two-eggs.js" defer></script>
-
-</head>
-<body>
-  <header>
-    <div class="brand">SaTourN Mapping</div>
-    <nav aria-label="Hauptmenü">
-      <a href="index.html" POI>POI</a>
-      <a href="gastro.html">Gastro</a>
-      <a href="tour.html" class="active" aria-current="page">Touren</a>
-      <a href="events.html">Veranstaltungen</a>
-      <a href="blog.html">Artikel</a>
-      <a href="vermieter.html">Vermieter</a>
-      <a href="package.html">Angebote</a> 
-      <a href="odta.html">ODTA</a>  
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h1>Tour-Mapping Outdooractive -> SaTourN -> ODTA</h1>
-      <p class="sub"><span class="new">Grün</span> = wurde neu hinzugefügt. OA-Spalte leer, wenn kein Mapping existiert.</p>
-      <p class="sub">Gesamt: <strong>39</strong> · Mit OA-Mapping: <strong>38</strong> · Ohne OA-Mapping: <strong>1</strong> · Änderungen: <strong>13</strong> neu, <strong>0</strong> entfernt.</p>
-    </section>
-
-    <section>
-       <table>
-        <thead>
-          <tr><th>OA-Kategorie(n)</th><th>SaTourN/eT4</th><th>ODTA</th><th>schema.org</th></tr>
-        </thead>
-        <tbody id="tbody-mapping">
-          <tr><td>Alpinklettern</td><td class='new'>Alpinklettern</td><td>AlpineClimbing</td><td>Trail</td></tr><tr><td></td><td>Barrierefrei</td><td></td><td></td></tr><tr><td>Bergtour</td><td class='new'>Bergtour</td><td>MountainTour</td><td>Trail</td></tr><tr><td>Bootstour</td><td>Bootstour</td><td></td><td>Trail</td></tr><tr><td>E-Bike</td><td>E-Bike</td><td>BikeTour</td><td>Trail</td></tr><tr><td>Eisklettern</td><td class='new'>Eisklettern</td><td>IceClimbing</td><td>Trail</td></tr><tr><td>Fernradweg</td><td>Fernradweg</td><td>LongDistanceBikeTour</td><td>Trail</td></tr><tr><td>Fernwanderweg</td><td>Fernwanderweg</td><td>LongDistanceHikeTrail</td><td>Trail</td></tr><tr><td>Gravel-Bike</td><td class='new'>Gravel-Bike</td><td>MountainBikeTour</td><td>Trail</td></tr><tr><td>Hochtour</td><td class='new'>Hochtour</td><td>HighAltitudeTour</td><td>Trail</td></tr><tr><td>Inline-Skating</td><td>Inline-Skating</td><td>InlineSkating</td><td>Trail</td></tr><tr><td>Jogging</td><td class='new'>Jogging</td><td>Jogging</td><td>Trail</td></tr><tr><td>Canyoning; Kajak</td><td>Kajak</td><td>Kayak</td><td>Trail</td></tr><tr><td>Kanu</td><td>Kanu</td><td>Canoe</td><td>Trail</td></tr><tr><td>Klettersteig</td><td>Klettersteig</td><td>AlpineClimbing</td><td>Trail</td></tr><tr><td>Kutschfahrt</td><td class='new'>Kutschfahrt</td><td></td><td>Trail</td></tr><tr><td>Langlauf</td><td>Langlauf</td><td>AlpineTour</td><td>Trail</td></tr><tr><td>MTB-Transalp</td><td>MTB-Transalp</td><td>MountainBikeTour</td><td>Trail</td></tr><tr><td>Motorrad</td><td>Motorrad</td><td>Motorcycle</td><td>Trail</td></tr><tr><td>Mountainbike</td><td>Mountainbike</td><td>MountainBikeTour</td><td>Trail</td></tr><tr><td>Nordic Walking</td><td>Nordic Walking</td><td>NordicWalking</td><td>Trail</td></tr><tr><td>Offroad</td><td class='new'>Offroad</td><td>Offroad</td><td>Trail</td></tr><tr><td>Panoramastraße</td><td>Panoramastraße</td><td>Panorama</td><td>Trail</td></tr><tr><td>Pferdeschlitten</td><td class='new'>Pferdeschlitten</td><td>HorseRiding</td><td>Trail</td></tr><tr><td>Pilgerweg</td><td>Pilgerweg</td><td>PilgrimageTrail</td><td>Trail</td></tr><tr><td>Qualitätswege</td><td>Qualitätswanderwege</td><td>HikeTrail</td><td>Trail</td></tr><tr><td>Radfahren; Radtour</td><td>Radfahren</td><td>BikeTour</td><td>Trail</td></tr><tr><td>Reiten</td><td>Reiten</td><td>HorseRiding</td><td>Trail</td></tr><tr><td>Rennrad</td><td>Rennrad</td><td>RacingBikeTour</td><td>Trail</td></tr><tr><td>Rodeln</td><td>Rodeln</td><td>AlpineTour</td><td>Trail</td></tr><tr><td>SUP</td><td class='new'>SUP</td><td>SUP</td><td>Trail</td></tr><tr><td>Schneeschuh</td><td>Schneeschuh</td><td>AlpineTour</td><td>Trail</td></tr><tr><td>Ski-Freeride; Skidurchquerung; Skifahren; Skijöring; Skitour</td><td>Skitour</td><td>AlpineTour</td><td>Trail</td></tr><tr><td>Stadtrundgang</td><td class='new'>Stadtrundgang</td><td>SightseeingTrail</td><td>Trail</td></tr><tr><td>Themenweg</td><td>Themenweg</td><td>ThematicTrail</td><td>Trail</td></tr><tr><td>Trailrunning</td><td class='new'>Trailrunning</td><td>TrailRunning</td><td>Trail</td></tr><tr><td>Wanderung</td><td>Wandern</td><td>HikeTrail</td><td>Trail</td></tr><tr><td>Winterwandern</td><td>Winterwandern</td><td>AlpineTour</td><td>Trail</td></tr><tr><td>Wohnmobil</td><td class='new'>Wohnmobil</td><td></td><td></td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="sec-changes-tours">
-      <h2>Änderungen · Touren</h2>
-      <p class="sub">
-        <strong>13</strong> hinzugefügt (davon <strong>13</strong> mit OA-Mapping sichtbar),
-        <strong>0</strong> entfernt.
-      </p>
-      <table>
-        <thead><tr><th>Kategorie</th><th>Status</th></tr></thead>
-        <tbody id="tbody-changes">
-          <tr><td class='new'>Alpinklettern</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Bergtour</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Eisklettern</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Gravel-Bike</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Hochtour</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Jogging</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Kutschfahrt</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Offroad</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Pferdeschlitten</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>SUP</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Stadtrundgang</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Trailrunning</td><td class='new'>Hinzugefügt</td></tr><tr><td class='new'>Wohnmobil</td><td class='new'>Hinzugefügt</td></tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
-</body>
-</html>
+<table>
+  <thead>
+    <tr>
+      <th>OA-Kategorie(n)</th>
+      <th>SaTourN/eT4</th>
+      <th>ODTA</th>
+      <th>schema.org</th>
+      <th>Kategorie</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody data-mapping>
+    {% for row in site.data.tour %}
+    <tr class="depth-{{ row.depth | default: 0 }}">
+      <td>{{ row.oa }}</td>
+      <td>{% if row.changed %}<span class="new">{{ row.satourn }}</span>{% else %}{{ row.satourn }}{% endif %}</td>
+      <td>{{ row.odta }}</td>
+      <td>{{ row.schema }}</td>
+      <td class="small">{{ row.category }}</td>
+      <td>
+        {% assign st = row.status | default: 'ok' %}
+        <span class="pill {'{'} st {'}'}">
+          {% if st == 'ok' %}OK{% elsif st == 'warn' %}offen{% else %}prüfen{% endif %}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
