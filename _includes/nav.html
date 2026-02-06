@@ -1,0 +1,8 @@
+<nav aria-label="Hauptmenü" class="nav">
+  {% assign current = page.nav | default: "" %}
+  <a class="nav__item {% if current == 'poi' %}active{% endif %}" href="{{ site.baseurl }}/poi.html">POI</a>
+  <a class="nav__item {% if current == 'gastro' %}active{% endif %}" href="{{ site.baseurl }}/gastro.html">Gastro</a>
+  <a class="nav__item {% if current == 'tour' %}active{% endif %}" href="{{ site.baseurl }}/tour.html">Touren</a>
+  <a class="nav__item {% if current == 'events' %}active{% endif %}" href="{{ site.baseurl }}/events.html">Veranstaltungen</a>
+  <a class="nav__item {% if current == 'vermieter' %}active{% endif %}" href="{{ site.baseurl }}/vermieter.html">Gastgeber</a>
+</nav>
