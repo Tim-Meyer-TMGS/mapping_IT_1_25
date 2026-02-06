@@ -1,100 +1,47 @@
-<!DOCTYPE html>
+---
+layout: default
+title: "Gastro Mapping"
+nav: "gastro"
+---
+<h1>Gastro – Betriebsarten-Mapping</h1>
+<p>Zuordnungen zwischen Outdooractive-Gastro-Kategorien und SaTourN/eT4 sowie ODTA / schema.org.</p>
 
-<html lang="de"><head><style>
-:root { --bg:#0b1020; --panel:#111833; --line:#233057; --text:#e6edff; --muted:#8aa0c6; --head:#0e1730; --ok:#1fbf7a; --bad:#ff6b6b; --accent:#1fbf7a; }
-* { box-sizing:border-box; }
-body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
-header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
-.brand { font-weight:600; letter-spacing:.2px; }
-nav { display:flex; gap:8px; flex-wrap:wrap; }
-nav a { text-decoration:none; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:13px; background:#0e1730; }
-nav a.active { color:var(--text); background:#1b2551; }
-main { max-width:1100px; margin:0 auto; padding:20px; }
-section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:20px; }
-h1 { font-size:18px; margin:0 0 4px; }
-h2 { font-size:16px; margin:0 0 12px; }
-.sub { font-size:13px; color:var(--muted); margin:0; }
-table { width:100%; border-collapse:separate; border-spacing:0; }
-th, td { padding:8px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
-th { text-align:left; background:#0e1730; position:sticky; top:0; z-index:2; }
-tbody tr:nth-child(odd) { background:#0b142d; }
-.new { color:var(--ok); font-weight:600; }
-.removed { color:var(--bad); font-weight:600; text-decoration:line-through; }
-code { background:#0e1730; padding:2px 6px; border-radius:6px; border:1px solid var(--line); }
+<div class="controls" data-mapping-page>
+  <input data-q placeholder="Suche … (OA / SaTourN / ODTA / schema.org)" autocomplete="off">
+  <select data-filter>
+    <option value="all">Alle</option>
+    <option value="new">Neu/Geändert</option>
+    <option value="missing">Fehlt (ODTA / schema.org)</option>
+  </select>
+  <span class="badge"><span class="dot"></span><span data-count>0</span> Treffer</span>
+</div>
 
-/* Clearer separation for top-level categories */
-tr.topcat td { 
-  background: linear-gradient(90deg, rgba(31,191,122,0.15), rgba(31,191,122,0.05) 35%, transparent);
-  font-weight:700;
-  font-size:15px;
-  border-top:2px solid var(--accent);
-  position:relative;
-}
-tr.topcat td:first-child::before {
-  content:"";
-  position:absolute;
-  left:0; top:0; bottom:0;
-  width:4px;
-  background:var(--accent);
-}
-
-/* subtle left guides for sublevels */
-tr.depth-1 td:nth-child(2) { box-shadow: inset 3px 0 0 rgba(138,160,198,.25); }
-tr.depth-2 td:nth-child(2) { box-shadow: inset 6px 0 0 rgba(138,160,198,.18); }
-tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
-  </style></head><body><header>
-<div class="brand">SaTourN Mapping</div>
-<nav aria-label="Hauptmenü">
-<a href="index.html">POI</a>
-<a aria-current="page" class="active" href="gastro.html">Gastro</a>
-<a href="tour.html">Touren</a>
-<a href="events.html">Veranstaltungen</a>
-<a href="artikel.html">Artikel</a>
-<a href="vermieter.html">Vermieter</a>
-<a href="package.html">Angebote</a>  
-<a href="odta.html">ODTA</a>  
-</nav>
-
-
-</header><main>
-
-    <section>
-      <h1>Gastro-Mapping Outdooractive -> SaTourN -> ODTA</h1>
-      <p class="sub"><span class="new">Grün</span> = wurde neu hinzugefügt. OA-Spalte leer, wenn kein Mapping existiert.</p>
-      <p class="sub">Gesamt: <strong>30</strong> · Mit OA-Mapping: <strong>29</strong> · Ohne OA-Mapping: <strong>1</strong> · Änderungen: <strong>15</strong> neu, <strong>0</strong> entfernt.</p>
-    </section>
-  
-</section><section><table><thead><tr><th>OA-Kategorie(n)</th><th>SaTourN/eT4</th><th>ODTA</th><th>schema.org</th></tr></thead><tbody id="tbody-gastro-betriebsarten"><tr class="depth-0"><td>Alpe bewirtschaftet</td><td class="new" style="padding-left:0px">Alpe (bewirtschaftet)</td><td>AlmOrHut</td><td>FoodEstablishment</td></tr>
-
-    
-    <tr class="depth-0"><td>Ausflugslokal</td><td style="padding-left:0px">Ausflugslokal</td><td>BeerGarden</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Bar</td><td style="padding-left:0px">Bar</td><td>CocktailBar</td><td>BarOrPub,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Berggasthof</td><td class="new" style="padding-left:0px">Berggasthof</td><td>AlmOrHut</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Biergarten</td><td style="padding-left:0px">Biergarten</td><td>BeerGarden</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Bistro</td><td style="padding-left:0px">Bistro</td><td>Bistro</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Brauerei</td><td style="padding-left:0px">Brauereigaststätte</td><td></td><td>Brewery,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Cafe</td><td style="padding-left:0px">Café</td><td></td><td>CafeOrCoffeeShop,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Disko</td><td class="new" style="padding-left:0px">Disko</td><td>CocktailBar</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Eisdiele</td><td style="padding-left:0px">Eisdiele/Eiscafé</td><td></td><td>IceCreamShop,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Eventrestaurant</td><td class="new" style="padding-left:0px">Eventrestaurant</td><td></td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Fischlokal</td><td style="padding-left:0px">Fischlokal</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Gasthof</td><td style="padding-left:0px">Gasthof</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Gaststätte; Gaststätte (zeitw. geöffnet)</td><td style="padding-left:0px">Gaststätte</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Haubenlokal</td><td class="new" style="padding-left:0px">Haubenlokal</td><td></td><td>FoodEstablishment,Restaurant</td></tr>
-<tr class="depth-0"><td>Heuriger</td><td class="new" style="padding-left:0px">Heuriger</td><td>SeasonalWineTavern</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Imbiss</td><td class="new" style="padding-left:0px">Imbiss</td><td></td><td>FoodEstablishment,FastFoodRestaurant</td></tr>
-<tr class="depth-0"><td>Jausenstation</td><td class="new" style="padding-left:0px">Jausenstation</td><td>AlmOrHut</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Kaffeehaus</td><td class="new" style="padding-left:0px">Kaffeehaus</td><td></td><td>FoodEstablishment,CafeOrCoffeeshop</td></tr>
-<tr class="depth-0"><td>Käserei</td><td class="new" style="padding-left:0px">Käserei</td><td></td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Kochstudio</td><td></td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Nightlife</td><td class="new" style="padding-left:0px">Nightlife</td><td></td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Pizzeria</td><td class="new" style="padding-left:0px">Pizzeria</td><td></td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Kneipe; Pub</td><td style="padding-left:0px">Pub/Kneipe</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Restaurant</td><td style="padding-left:0px">Restaurant</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Schiffsgastronomie</td><td style="padding-left:0px">Schiffsgastronomie</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Sennalpe</td><td class="new" style="padding-left:0px">Sennalpe</td><td>AlmOrHut</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Vereinsgaststätte</td><td style="padding-left:0px">Vereinsgaststätte</td><td></td><td>Restaurant,FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Weingut</td><td class="new" style="padding-left:0px">Weingut</td><td>WineBar</td><td>FoodEstablishment</td></tr>
-<tr class="depth-0"><td>Vinothek</td><td style="padding-left:0px">Weinstube/Vinothek</td><td>WineBar</td><td>Winery,FoodEstablishment</td></tr></tbody></table></section><section id="sec-changes-gastro">
-  
-  <h2>Änderungen · Gastro (Betriebsarten)</h2><table><thead><tr><th>Kategorie</th><th>Status</th></tr></thead><tbody id="tbody-gastro-changes"><tr><td class="new">Alpe (bewirtschaftet)</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Berggasthof</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Disko</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Eventrestaurant</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Haubenlokal</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Heuriger</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Imbiss</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Jausenstation</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Kaffeehaus</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Kochstudio</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Käserei</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Nightlife</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Pizzeria</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Sennalpe</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Weingut</td><td class="new">Hinzugefügt</td></tr></tbody></table></section></main></body></html>
+<table>
+  <thead>
+    <tr>
+      <th>OA-Kategorie(n)</th>
+      <th>SaTourN/eT4</th>
+      <th>ODTA</th>
+      <th>schema.org</th>
+      
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody data-mapping>
+    {% for row in site.data.gastro %}
+    <tr class="depth-{{ row.depth | default: 0 }}">
+      <td>{{ row.oa }}</td>
+      <td>{% if row.changed %}<span class="new">{{ row.satourn }}</span>{% else %}{{ row.satourn }}{% endif %}</td>
+      <td>{{ row.odta }}</td>
+      <td>{{ row.schema }}</td>
+      
+      <td>
+        {% assign st = row.status | default: 'ok' %}
+        <span class="pill {'{'} st {'}'}">
+          {% if st == 'ok' %}OK{% elsif st == 'warn' %}offen{% else %}prüfen{% endif %}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
