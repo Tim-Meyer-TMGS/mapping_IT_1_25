@@ -1,0 +1,47 @@
+---
+layout: default
+title: "POI Mapping"
+nav: "poi"
+---
+<h1>POI – Kategorien-Mapping</h1>
+<p>Zuordnungen zwischen Outdooractive-Kategorien und SaTourN/eT4 sowie ODTA / schema.org.</p>
+
+<div class="controls" data-mapping-page>
+  <input data-q placeholder="Suche … (OA / SaTourN / ODTA / schema.org)" autocomplete="off">
+  <select data-filter>
+    <option value="all">Alle</option>
+    <option value="new">Neu/Geändert</option>
+    <option value="missing">Fehlt (ODTA / schema.org)</option>
+  </select>
+  <span class="badge"><span class="dot"></span><span data-count>0</span> Treffer</span>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>OA-Kategorie(n)</th>
+      <th>SaTourN/eT4</th>
+      <th>ODTA</th>
+      <th>schema.org</th>
+      <th>Kategorie</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody data-mapping>
+    {% for row in site.data.poi %}
+    <tr class="depth-{{ row.depth | default: 0 }}">
+      <td>{{ row.oa }}</td>
+      <td>{% if row.changed %}<span class="new">{{ row.satourn }}</span>{% else %}{{ row.satourn }}{% endif %}</td>
+      <td>{{ row.odta }}</td>
+      <td>{{ row.schema }}</td>
+      <td class="small">{{ row.category }}</td>
+      <td>
+        {% assign st = row.status | default: 'ok' %}
+        <span class="pill {'{'} st {'}'}">
+          {% if st == 'ok' %}OK{% elsif st == 'warn' %}offen{% else %}prüfen{% endif %}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

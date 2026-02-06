@@ -1,0 +1,13 @@
+title: "SaTourN Mapping"
+description: "Mapping zwischen SaTourN/eT4 und schema.org/ODTA"
+markdown: kramdown
+theme: null
+plugins: []
+# Für Project Pages ggf. baseurl setzen, z.B. "/SaTourN"
+baseurl: ""
+url: ""
+exclude:
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - tools
