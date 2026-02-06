@@ -113,3 +113,8 @@ td.small{color:var(--muted);font-size:12px}
 .depth-1 td:nth-child(2){box-shadow: inset 3px 0 0 rgba(138,160,198,.22)}
 .depth-2 td:nth-child(2){box-shadow: inset 6px 0 0 rgba(138,160,198,.18)}
 .depth-3 td:nth-child(2){box-shadow: inset 9px 0 0 rgba(138,160,198,.12)}
+
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+
