@@ -1,0 +1,14 @@
+- oa: Bistro
+  satourn: Bistro
+  odta: Bistro
+  schema: FoodEstablishment
+  status: ok
+  depth: 0
+  changed: false
+- oa: Alpe bewirtschaftet
+  satourn: Alpe (bewirtschaftet)
+  odta: AlmOrHut
+  schema: FoodEstablishment
+  status: ok
+  depth: 0
+  changed: true

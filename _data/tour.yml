@@ -1,0 +1,16 @@
+- oa: Beispiel-Kategorie
+  satourn: Beispiel SaTourN
+  odta: ExampleODTAType
+  schema: TouristAttraction
+  category: Kultur
+  status: ok
+  depth: 0
+  changed: false
+- oa: Neue Kategorie
+  satourn: Neues SaTourN
+  odta: ''
+  schema: ''
+  category: ''
+  status: warn
+  depth: 0
+  changed: true
