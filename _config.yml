@@ -4,8 +4,8 @@ markdown: kramdown
 theme: null
 plugins: []
 # Für Project Pages ggf. baseurl setzen, z.B. "/SaTourN"
-baseurl: ""
-url: ""
+baseurl: "/mapping_IT_1_25"
+url: "https://tim-meyer-tmgs.github.io"
 exclude:
   - vendor
   - Gemfile
