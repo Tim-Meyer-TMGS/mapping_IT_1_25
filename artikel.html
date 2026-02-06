@@ -1,61 +1,10 @@
-<!DOCTYPE html>
-<html lang="de"><head><style>
-:root { --bg:#0b1020; --panel:#111833; --line:#233057; --text:#e6edff; --muted:#8aa0c6; --head:#0e1730; --ok:#1fbf7a; --bad:#ff6b6b; --accent:#1fbf7a; }
-* { box-sizing:border-box; }
-body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
-header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
-.brand { font-weight:600; letter-spacing:.2px; }
-nav { display:flex; gap:8px; flex-wrap:wrap; }
-nav a { text-decoration:none; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:13px; background:#0e1730; }
-nav a.active { color:var(--text); background:#1b2551; }
-main { max-width:1100px; margin:0 auto; padding:20px; }
-section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:20px; }
-h1 { font-size:18px; margin:0 0 4px; }
-h2 { font-size:16px; margin:0 0 12px; }
-.sub { font-size:13px; color:var(--muted); margin:0; }
-table { width:100%; border-collapse:separate; border-spacing:0; }
-th, td { padding:8px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
-th { text-align:left; background:#0e1730; position:sticky; top:0; z-index:2; }
-tbody tr:nth-child(odd) { background:#0b142d; }
-.new { color:var(--ok); font-weight:600; }
-.removed { color:var(--bad); font-weight:600; text-decoration:line-through; }
-code { background:#0e1730; padding:2px 6px; border-radius:6px; border:1px solid var(--line); }
+---
+layout: default
+title: "Artikel"
+nav: "artikel"
+---
 
-/* Clearer separation for top-level categories */
-tr.topcat td { 
-  background: linear-gradient(90deg, rgba(31,191,122,0.15), rgba(31,191,122,0.05) 35%, transparent);
-  font-weight:700;
-  font-size:15px;
-  border-top:2px solid var(--accent);
-  position:relative;
-}
-tr.topcat td:first-child::before {
-  content:"";
-  position:absolute;
-  left:0; top:0; bottom:0;
-  width:4px;
-  background:var(--accent);
-}
-
-/* subtle left guides for sublevels */
-tr.depth-1 td:nth-child(2) { box-shadow: inset 3px 0 0 rgba(138,160,198,.25); }
-tr.depth-2 td:nth-child(2) { box-shadow: inset 6px 0 0 rgba(138,160,198,.18); }
-tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
-  </style></head><body><header>
-<div class="brand">SaTourN Mapping</div>
-<nav aria-label="Hauptmenü">
-<a href="index.html">POI</a>
-<a href="gastro.html">Gastro</a>
-<a href="tour.html">Touren</a>
-<a href="events.html">Veranstaltungen</a>
-<a aria-current="page" class="active" href="artikel.html">Artikel</a>
-<a href="vermieter.html">Vermieter</a>
-<a href="package.html">Angebote</a>  
-<a href="odta.html">ODTA</a>  
-</nav>
-    
-</header><main>
-      <section>
+<section>
       <h1>Artikel - Kategorien SaTourN</h1>
       <p class="sub"><span class="new">Grün</span> = wurde neu hinzugefügt. OA-Spalte leer, wenn kein Mapping existiert.</p>
       <p class="sub">Gesamt: <strong>41</strong> · Mit OA-Mapping: <strong>0</strong> · Ohne OA-Mapping: <strong>41</strong> · Änderungen: <strong>13</strong> neu, <strong>0</strong> entfernt.</p>
@@ -102,4 +51,4 @@ tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
 <tr class="depth-0"><td></td><td style="padding-left:0px">Willkommensseite</td><td></td><td>MediaObject</td></tr>
 <tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Wissenschaft &amp; Wirtschaft</td><td></td><td></td></tr>
 <tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Wissenswertes</td><td></td><td></td></tr>
-<tr class="depth-0"><td></td><td style="padding-left:0px">360° Panorama</td><td></td><td>MediaObject</td></tr></tbody></table></section><section id="sec-changes-artikel"><h2>Änderungen · Artikel</h2><table><thead><tr><th>Kategorie</th><th>Status</th></tr></thead><tbody><tr><td class="new">Branchen News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Branchenkompetenzen</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Daten &amp; Zahlen</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Dresden Convention Service</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Nachhaltigkeit</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Rahmenprogramm</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Rezepte</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Standort</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Standort News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Trends</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Veranstaltung News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Wissenschaft &amp; Wirtschaft</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Wissenswertes</td><td class="new">Hinzugefügt</td></tr></tbody></table></section></main></body></html>
+<tr class="depth-0"><td></td><td style="padding-left:0px">360° Panorama</td><td></td><td>MediaObject</td></tr></tbody></table></section><section id="sec-changes-artikel"><h2>Änderungen · Artikel</h2><table><thead><tr><th>Kategorie</th><th>Status</th></tr></thead><tbody><tr><td class="new">Branchen News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Branchenkompetenzen</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Daten &amp; Zahlen</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Dresden Convention Service</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Nachhaltigkeit</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Rahmenprogramm</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Rezepte</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Standort</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Standort News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Trends</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Veranstaltung News</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Wissenschaft &amp; Wirtschaft</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Wissenswertes</td><td class="new">Hinzugefügt</td></tr></tbody></table></section>
