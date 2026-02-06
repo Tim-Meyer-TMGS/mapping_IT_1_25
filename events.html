@@ -1,47 +1,126 @@
 ---
 layout: default
-title: "Veranstaltungen Mapping"
+title: "Veranstaltungen"
 nav: "events"
 ---
-<h1>Veranstaltungen – Kategorien-Mapping</h1>
-<p>Zuordnungen zwischen Outdooractive-Veranstaltungen und SaTourN/eT4 sowie ODTA / schema.org.</p>
 
-<div class="controls" data-mapping-page>
-  <input data-q placeholder="Suche … (OA / SaTourN / ODTA / schema.org)" autocomplete="off">
-  <select data-filter>
-    <option value="all">Alle</option>
-    <option value="new">Neu/Geändert</option>
-    <option value="missing">Fehlt (ODTA / schema.org)</option>
-  </select>
-  <span class="badge"><span class="dot"></span><span data-count>0</span> Treffer</span>
-</div>
-
+<section>
+<h1>Veranstaltungsmapping · Outdooractive → SaTourN/eT4 → ODTA/Schema.org</h1>
+</section>
+<section>
 <table>
-  <thead>
-    <tr>
-      <th>OA-Kategorie(n)</th>
-      <th>SaTourN/eT4</th>
-      <th>ODTA</th>
-      <th>schema.org</th>
-      <th>Kategorie</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody data-mapping>
-    {% for row in site.data.events %}
-    <tr class="depth-{{ row.depth | default: 0 }}">
-      <td>{{ row.oa }}</td>
-      <td>{% if row.changed %}<span class="new">{{ row.satourn }}</span>{% else %}{{ row.satourn }}{% endif %}</td>
-      <td>{{ row.odta }}</td>
-      <td>{{ row.schema }}</td>
-      <td class="small">{{ row.category }}</td>
-      <td>
-        {% assign st = row.status | default: 'ok' %}
-        <span class="pill {'{'} st {'}'}">
-          {% if st == 'ok' %}OK{% elsif st == 'warn' %}offen{% else %}prüfen{% endif %}
-        </span>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
+<thead>
+<tr><th>OA-Kategorie(n)</th><th>SaTourN/eT4</th><th>ODTA</th><th>schema.org</th></tr>
+</thead>
+<tbody id="tbody-all"><tr class="depth-0"><td>Exkursion</td><td style="padding-left:0px">Ausflugsfahrt</td><td>Excursion</td><td>Event</td></tr>
+<tr class="depth-0"><td>Ausstellung</td><td style="padding-left:0px">Ausstellung</td><td>TemporaryExhibition</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Ball</td><td>Ballet</td><td>Event</td></tr>
+<tr class="depth-0"><td>Ballett</td><td class="new" style="padding-left:0px">Ballett</td><td>Ballet</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Bergparade</td><td>HistoricalParade</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Bühne/Theater</td><td>Theater</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Bürgerangebot</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Diskussion</td><td class="new" style="padding-left:0px">Diskussion</td><td>Conference</td><td>Event</td></tr>
+<tr class="depth-0"><td>Kinderprogramm</td><td style="padding-left:0px">Familie/Kinder</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Ferientipp</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Fest</td><td style="padding-left:0px">Fest</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Fest &amp; Feiertag</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Festival</td><td style="padding-left:0px">Festival</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Flohmarkt</td><td>FleaMarket</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Frühling</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Führung; Museumsführung; Stadtführung; Tag der offenen Tür</td><td style="padding-left:0px">Führung/Besichtigung</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Geselligkeit/Spiele/Treffen</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Herbst</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Film  Kino</td><td style="padding-left:0px">Kino/Film</td><td>FilmEvent</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kirchenveranstaltung/Religion</td><td></td><td>Church</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Kulinarik</td><td>CookingClass</td><td>FoodEvent</td></tr>
+<tr class="depth-0"><td>Kleinkunst, Comedy  Kabarett; Tradition, Brauchtum &amp; Kultur</td><td style="padding-left:0px">Kunst und Kultur</td><td>Culture</td><td>Event</td></tr>
+<tr class="depth-0 topcat"><td>Markttag</td><td style="padding-left:0px">Markt</td><td></td><td>SaleEvent</td></tr>
+<tr class="depth-1"><td>Historischer Markt</td><td class="new" style="padding-left:12px">Historischer Markt</td><td>HistoricalMarket</td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td class="new" style="padding-left:12px">Karneval &amp; Fasching</td><td>CarnivalSession</td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td class="new" style="padding-left:12px">Markttag</td><td>RegionalMarket</td><td>Event</td></tr>
+<tr class="depth-1"><td>Mittelaltermarkt</td><td class="new" style="padding-left:12px">Mittelaltermarkt</td><td>MedievalMarket</td><td>Event</td></tr>
+<tr class="depth-1"><td>Shopping</td><td class="new" style="padding-left:12px">Shopping</td><td></td><td>SaleEvent</td></tr>
+<tr class="depth-0"><td>Messe</td><td style="padding-left:0px">Messe</td><td>Fair</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Mettenschicht</td><td></td><td>Church</td></tr>
+<tr class="depth-0"><td>Musical</td><td class="new" style="padding-left:0px">Musical</td><td>Musical</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Open Air</td><td>OpenAir</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Oper</td><td>Opera</td><td>Event</td></tr>
+<tr class="depth-0"><td>Oper  Opertette</td><td class="new" style="padding-left:0px">Operette</td><td>Operetta</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Party/Nachtleben</td><td>Party</td><td>Event</td></tr>
+<tr class="depth-0 topcat"><td></td><td class="new" style="padding-left:0px">Konzert</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td>Black / Hip-Hop  R'n'B</td><td class="new" style="padding-left:12px">Black / Hip-Hop  R'n'B</td><td>HipHop</td><td>Event</td></tr>
+<tr class="depth-1"><td>Chanson</td><td class="new" style="padding-left:12px">Chanson</td><td>Chanson</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Club-Konzert</td><td class="new" style="padding-left:12px">Club-Konzert</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td></td><td class="new" style="padding-left:12px">Country</td><td>Country</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Electronic  Dance</td><td class="new" style="padding-left:12px">Electronic  Dance</td><td>ElectroMusic</td><td>Event</td></tr>
+<tr class="depth-1"><td>Folk</td><td class="new" style="padding-left:12px">Folk</td><td>Folkmusic</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Gospel</td><td class="new" style="padding-left:12px">Gospel</td><td>Gospel</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Hard  Heavy</td><td class="new" style="padding-left:12px">Hard  Heavy</td><td>RockMusic</td><td>Event</td></tr>
+<tr class="depth-1"><td>Independent</td><td class="new" style="padding-left:12px">Independent</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Indie  Alternative</td><td class="new" style="padding-left:12px">Indie  Alternative</td><td>Indie</td><td>Event</td></tr>
+<tr class="depth-1"><td>Jazz  Blues</td><td class="new" style="padding-left:12px">Jazz  Blues</td><td>Blues</td><td>Event</td></tr>
+<tr class="depth-1"><td>Klassik</td><td style="padding-left:12px">klassisches Konzert</td><td>Klassik</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Latin</td><td class="new" style="padding-left:12px">Latin</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Liedermacher</td><td class="new" style="padding-left:12px">Liedermacher</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Partymusik</td><td class="new" style="padding-left:12px">Party-Musik</td><td>Party</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Punk</td><td class="new" style="padding-left:12px">Punk</td><td>Punkrock</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Rock  Pop</td><td class="new" style="padding-left:12px">Rock  Pop</td><td>RockMusic</td><td>Event</td></tr>
+<tr class="depth-1"><td>Schlager  Volksmusik</td><td class="new" style="padding-left:12px">Schlager  Volksmusik</td><td>Folkmusic</td><td>Event</td></tr>
+<tr class="depth-1"><td>Sonstiges Konzert</td><td class="new" style="padding-left:12px">Sonstiges Konzert</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Soul</td><td class="new" style="padding-left:12px">Soul</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td>Weihnachtskonzert</td><td class="new" style="padding-left:12px">Weihnachtskonzert</td><td>Music</td><td>MusicEvent</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Pop-Konzert</td><td>Pop</td><td>MusicEvent</td></tr>
+<tr class="depth-0"><td>Public Viewing</td><td class="new" style="padding-left:0px">Public Viewing</td><td></td><td>MusicEvent</td></tr>
+<tr class="depth-0"><td>Kurs &amp; Mitmachen; Kurs &amp; Seminar</td><td style="padding-left:0px">Seminar/Kurs/Workshop</td><td>Seminar</td><td>Event</td></tr>
+<tr class="depth-0"><td>Show</td><td style="padding-left:0px">Show</td><td></td><td>TheaterEvent</td></tr>
+<tr class="depth-0"><td>Silvester</td><td class="new" style="padding-left:0px">Silvester</td><td>NewYearsEve</td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Sommer</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Sonstige Bühnenveranstaltung</td><td style="padding-left:0px">Sonstiges</td><td></td><td>Event</td></tr>
+<tr class="depth-0 topcat"><td></td><td class="new" style="padding-left:0px">Sportveranstaltungen</td><td>Sports</td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td>Bewegung  Entspannung</td><td class="new" style="padding-left:12px">Bewegung &amp; Entspannung</td><td></td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td>Boxen  Wrestling</td><td class="new" style="padding-left:12px">Boxen &amp; Wrestling</td><td>MartialArts</td><td>Event</td></tr>
+<tr class="depth-1"><td>Eishockey</td><td class="new" style="padding-left:12px">Eishockey</td><td>IceHockey</td><td>Event</td></tr>
+<tr class="depth-1"><td>Fitness</td><td class="new" style="padding-left:12px">Fitness</td><td>Fitness</td><td>Event</td></tr>
+<tr class="depth-1"><td>Flugsport</td><td class="new" style="padding-left:12px">Flugsport</td><td>Motorsport</td><td>Event</td></tr>
+<tr class="depth-1"><td>Funsport</td><td class="new" style="padding-left:12px">Funsport</td><td></td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td>Fußball</td><td class="new" style="padding-left:12px">Fußball</td><td>Football</td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Gesundheit/Wellness</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td>Golf</td><td class="new" style="padding-left:12px">Golf</td><td>Golf</td><td>Event</td></tr>
+<tr class="depth-1"><td>Handball</td><td class="new" style="padding-left:12px">Handball</td><td>Handball</td><td>Event</td></tr>
+<tr class="depth-1"><td>Laufsport</td><td class="new" style="padding-left:12px">Laufsport</td><td>Running</td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Motorrad-Veranstaltung</td><td>Motorsport</td><td>Event</td></tr>
+<tr class="depth-1"><td>Motorsport</td><td class="new" style="padding-left:12px">Motorsport</td><td>Motorsport</td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Mountainbike-Veranstaltung</td><td>Cycling</td><td>Event</td></tr>
+<tr class="depth-1"><td>Radsport</td><td style="padding-left:12px">Radveranstaltung</td><td>Cycling</td><td>Event</td></tr>
+<tr class="depth-1"><td>Reitsport</td><td class="new" style="padding-left:12px">Reitsport</td><td>HorseRiding</td><td>Event</td></tr>
+<tr class="depth-1"><td>Ski</td><td class="new" style="padding-left:12px">Ski</td><td>AlpineSkiing</td><td>Event</td></tr>
+<tr class="depth-1"><td>Sonstiger Ballsport</td><td class="new" style="padding-left:12px">Sonstiger Ballsport</td><td></td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Sport</td><td>Sports</td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td>Tanzen (zum Teilnehmen)</td><td class="new" style="padding-left:12px">Tanzen (zum Teilnehmen)</td><td>Dancing</td><td>Event</td></tr>
+<tr class="depth-1"><td>Tennis</td><td class="new" style="padding-left:12px">Tennis</td><td>Tennis</td><td>Event</td></tr>
+<tr class="depth-1"><td>Turnier  Wettbewerb</td><td class="new" style="padding-left:12px">Turnier &amp; Wettbewerb</td><td></td><td>SportsEvent</td></tr>
+<tr class="depth-1"><td>Wandern  Berge</td><td style="padding-left:12px">Wanderung</td><td>Hiking</td><td>Event</td></tr>
+<tr class="depth-1"><td>Wassersport</td><td style="padding-left:12px">Wassersportveranstaltung</td><td>WaterSports</td><td>Event</td></tr>
+<tr class="depth-1"><td>Wintersport  Eissport</td><td style="padding-left:12px">Wintersportveranstaltung</td><td>Wintersport</td><td>Event</td></tr>
+<tr class="depth-0"><td>Tagung  Konferenz</td><td class="new" style="padding-left:0px">Tagung &amp; Konferenz</td><td>Conference</td><td>Event</td></tr>
+<tr class="depth-0"><td>Tanz</td><td class="new" style="padding-left:0px">Tanz</td><td>DanceShow</td><td>Event</td></tr>
+<tr class="depth-0"><td>Theater</td><td class="new" style="padding-left:0px">Theater</td><td></td><td>TheaterEvent</td></tr>
+<tr class="depth-0 topcat"><td></td><td style="padding-left:0px">Tradition/Brauchtum</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td>Handwerk</td><td class="new" style="padding-left:12px">Handwerk</td><td>ArtsAndCraftsFair</td><td>Event</td></tr>
+<tr class="depth-1"><td>Ostern</td><td class="new" style="padding-left:12px">Ostern</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td style="padding-left:12px">Regionale Spezialitäten</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td></td><td class="new" style="padding-left:12px">Tradition, Brauchtum &amp; Kultur</td><td></td><td>Event</td></tr>
+<tr class="depth-1"><td>Weihnachten</td><td class="new" style="padding-left:12px">Weihnachten</td><td></td><td>Event</td></tr>
+<tr class="depth-2"><td></td><td style="padding-left:24px">Weihnachtsveranstaltung</td><td>Christmas</td><td>Event</td></tr>
+<tr class="depth-2"><td>Weihnachtsmarkt</td><td class="new" style="padding-left:24px">Weihnachtsmarkt</td><td>ChristmasMarket</td><td>Event</td></tr>
+<tr class="depth-0"><td>Traditioneller Tanz</td><td class="new" style="padding-left:0px">Traditioneller Tanz</td><td>Dancing</td><td>Event</td></tr>
+<tr class="depth-0"><td>Varieté  Revue</td><td class="new" style="padding-left:0px">Varieté &amp; Revue</td><td>VarietyShow</td><td>Event</td></tr>
+<tr class="depth-0"><td>Verkaufsoffener Sonntag</td><td class="new" style="padding-left:0px">Verkaufsoffener Sonntag</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td style="padding-left:0px">Volksfest</td><td>Funfair</td><td>Event</td></tr>
+<tr class="depth-0"><td>Volkstheater</td><td class="new" style="padding-left:0px">Volkstheater</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Vortrag</td><td class="new" style="padding-left:0px">Vortrag</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Lesung</td><td style="padding-left:0px">Vortrag/Lesung/Diskussion</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td></td><td class="new" style="padding-left:0px">Winter</td><td></td><td>Event</td></tr>
+<tr class="depth-0"><td>Zirkus</td><td class="new" style="padding-left:0px">Zirkus</td><td></td><td>Event</td></tr></tbody>
 </table>
+</section>
