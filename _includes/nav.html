@@ -1,0 +1,10 @@
+<nav class="site-nav" aria-label="Hauptmenü">
+  {% assign current = page.permalink | default: page.url %}
+  {% for item in site.data.nav %}
+    {% assign is_active = false %}
+    {% if item.url == current %}
+      {% assign is_active = true %}
+    {% endif %}
+    <a href="{{ item.url }}"{% if is_active %} class="active" aria-current="page"{% endif %}>{{ item.label }}</a>
+  {% endfor %}
+</nav>

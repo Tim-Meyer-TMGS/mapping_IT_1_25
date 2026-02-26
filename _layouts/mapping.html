@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<section class="panel">
+  <h1>{{ page.h1 }}</h1>
+  {% if page.subtitles %}
+    {% for s in page.subtitles %}
+      <p class="sub">{{ s }}</p>
+    {% endfor %}
+  {% endif %}
+</section>
+
+{% for t in page.tables %}
+  <section class="panel"{% if t.section_id %} id="{{ t.section_id }}"{% endif %}>
+    {% if t.h2 %}<h2>{{ t.h2 }}</h2>{% endif %}
+    {% if t.sub %}<p class="sub">{{ t.sub }}</p>{% endif %}
+
+    {% assign table_data = site.data[t.data] %}
+    {% if t.kind == "mapping" %}
+      {% include table_mapping.html data=table_data headers=t.headers %}
+    {% elsif t.kind == "changes" %}
+      {% include table_changes.html data=table_data headers=t.headers %}
+    {% endif %}
+  </section>
+{% endfor %}

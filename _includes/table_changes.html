@@ -1,0 +1,17 @@
+<table>
+  <thead>
+    <tr>
+      {% for h in include.headers %}
+        <th>{{ h }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in include.data %}
+      <tr{% if r.row_class and r.row_class != "" %} class="{{ r.row_class }}"{% endif %}>
+        <td{% if r.col1_class and r.col1_class != "" %} class="{{ r.col1_class }}"{% endif %}{% if r.col1_style and r.col1_style != "" %} style="{{ r.col1_style }}"{% endif %}>{{ r.col1_text }}</td>
+        <td{% if r.col2_class and r.col2_class != "" %} class="{{ r.col2_class }}"{% endif %}{% if r.col2_style and r.col2_style != "" %} style="{{ r.col2_style }}"{% endif %}>{{ r.col2_text }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

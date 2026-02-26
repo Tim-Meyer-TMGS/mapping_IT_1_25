@@ -1,0 +1,16 @@
+- label: POI
+  url: /index.html
+- label: Gastro
+  url: /gastro.html
+- label: Touren
+  url: /tour.html
+- label: Veranstaltungen
+  url: /events.html
+- label: Artikel
+  url: /artikel.html
+- label: Vermieter
+  url: /vermieter.html
+- label: Angebote
+  url: /package.html
+- label: ODTA
+  url: /odta.html
