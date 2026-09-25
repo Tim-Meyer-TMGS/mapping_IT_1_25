@@ -1,0 +1,47 @@
+[
+  {
+    "id": "tour",
+    "label": "Touren",
+    "sourceAliases": [
+      "Tour",
+      "tour"
+    ]
+  },
+  {
+    "id": "poi",
+    "label": "POI",
+    "sourceAliases": [
+      "POI",
+      "Poi"
+    ]
+  },
+  {
+    "id": "gastro",
+    "label": "Gastronomie",
+    "sourceAliases": [
+      "Gastro"
+    ]
+  },
+  {
+    "id": "event",
+    "label": "Veranstaltungen",
+    "sourceAliases": [
+      "event"
+    ]
+  },
+  {
+    "id": "accommodation",
+    "label": "Unterkünfte",
+    "sourceAliases": [
+      "Hotel"
+    ]
+  },
+  {
+    "id": "package",
+    "label": "Angebote",
+    "sourceAliases": [
+      "Package",
+      "_feratel_Erlebnisse"
+    ]
+  }
+]

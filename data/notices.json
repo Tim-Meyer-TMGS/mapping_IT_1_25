@@ -1,0 +1,32 @@
+[
+  {
+    "id": "oa-language-open-question",
+    "scope": {
+      "system": "outdooractive",
+      "datasetType": "Tour"
+    },
+    "status": "open",
+    "title": "Sprachabhängigkeit prüfen",
+    "text": "Bei einzelnen fremdsprachigen Touren wurde beobachtet, dass keine SaTourN-Kategorie ankommt. Ein Zusammenhang mit sprachabhängigen Outdooractive-Kategoriebezeichnungen ist plausibel, aber nicht verifiziert."
+  },
+  {
+    "id": "oa-keyword-assumption",
+    "scope": {
+      "system": "outdooractive",
+      "datasetType": null
+    },
+    "status": "assumption",
+    "title": "Keyword-Fallback noch nicht verifiziert",
+    "text": "Nicht gemappte Outdooractive-Merkmale können als Keywords ankommen. Dies ist eine Arbeitsannahme und keine verbindliche Mappingregel."
+  },
+  {
+    "id": "odta-mappings-missing",
+    "scope": {
+      "system": "odta",
+      "datasetType": null
+    },
+    "status": "open",
+    "title": "ODTA-Zuordnungen fehlen in der gelieferten Extraktion",
+    "text": "Die vorhandene ODTA-Seite enthält einen Wertekatalog, aber die gelieferte Extraktion enthält keine belastbaren SaTourN-zu-ODTA-Zuordnungen. Es wurden daher keine Exportregeln erzeugt."
+  }
+]

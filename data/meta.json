@@ -1,0 +1,19 @@
+{
+  "title": "SaTourN Mapping Hub",
+  "status": "current-standard",
+  "sourceName": "Mappingübersicht Fremdsysteme.docx",
+  "sourceDate": "2026-09-24",
+  "generatedAt": "2026-09-25",
+  "note": "Statische Arbeitsgrundlage für den Hub. ODTA-Exportregeln sind in der gelieferten Extraktion nicht enthalten.",
+  "sourceStats": {
+    "extractedRows": 991,
+    "activeRows": 982,
+    "commentedRowsExcluded": 9,
+    "productiveRules": 848,
+    "oneToManyRules": 118,
+    "noTargetRules": 1,
+    "noImportRules": 2,
+    "fallbackRules": 6,
+    "outboundRules": 0
+  }
+}

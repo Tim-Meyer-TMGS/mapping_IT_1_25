@@ -1,47 +1,51 @@
-# SaTourN Mapping (Jekyll)
+# SaTourN Mapping Hub
 
-Dieses Repository stellt die Mapping-Tabellen als **statische Jekyll-Website** bereit.
-Alle Tabellen werden aus **CSV-Dateien in `_data/`** gerendert (kein Live-Zugriff auf Schnittstellen).
+Der Umbau zu einem rein statischen Nachschlagewerk für GitHub Pages ist vorbereitet. Die normalisierte Arbeitsgrundlage liegt unter `data/`; Bestandsaufnahme, Grenzen und nächste Schritte stehen in `docs/umbau-vorbereitung.md`.
 
-## Struktur
+## Mappingdaten neu erzeugen und prüfen
 
-- `_data/*.csv`  
-  Enthält die Tabelleninhalte (inkl. Klassen/Styles wie `new`, `removed`, `depth-*`, `topcat`).
-- `index.md`, `gastro.md`, `tour.md`, `events.md`, `artikel.md`, `vermieter.md`, `odta.md`  
-  Seiten, die jeweils eine oder mehrere CSV-Tabellen einbinden.
-- `_includes/table_mapping.html`, `_includes/table_changes.html`  
-  Wiederverwendbare Templates zur Tabellenausgabe.
-- `assets/css/style.scss`  
-  Gemeinsames Styling (anlehnend an die ursprünglichen HTML-Dateien).
+Voraussetzung für die lokalen Hilfsskripte ist Node.js. Es werden keine npm-Pakete benötigt.
+
+```bash
+node tools/build-data.mjs
+node tools/check-data.mjs
+```
+
+Die Skripte sind ausschließlich Entwicklungshilfen. Die veröffentlichte Seite lädt statische JSON-Dateien und benötigt weder Node.js noch ein Backend.
+
+## Bestehender Prototyp
 
 ## Lokal starten
-
-Voraussetzungen: Ruby + Bundler
+Voraussetzung: Ruby + Bundler (siehe unten in den Installationshinweisen).
 
 ```bash
 bundle install
 bundle exec jekyll serve
 ```
 
-Dann im Browser: `http://localhost:4000`
+Dann im Browser öffnen: http://127.0.0.1:4000
 
-## Daten pflegen
+## Bisherige Beispieldaten
+Die Tabellen werden aus `_data/*.yml` gerendert:
 
-- Mapping-Tabellen liegen in `_data/*_mapping.csv`
-- Änderungslisten liegen in `_data/*_changes.csv`
+- `_data/poi.yml`
+- `_data/gastro.yml`
+- `_data/tour.yml`
+- `_data/events.yml`
+- `_data/vermieter.yml`
 
-Wichtig: Die CSV-Spaltenstruktur ist bewusst „ausführungsnah“, damit keine Information (inkl. Markierungen wie `new/removed` und Einrückungen via `padding-left`) verloren geht.
+Jeder Eintrag ist ein Objekt mit Feldern wie:
+- `oa` (String oder Array)
+- `satourn`
+- `odta`
+- `schema`
+- `category`
+- `status` (z.B. `ok`, `warn`, `bad`)
+- `depth` (0..3)
+- `changed` (true/false)
 
-## Deployment (GitHub Pages)
+Diese Dateien gehören zum Altprototyp und sind nicht die Datenquelle des neuen Hubs.
 
-Das Repo kann direkt als GitHub Pages Site deployed werden (Jekyll Build).
-Optional ist ein Workflow enthalten: `.github/workflows/pages.yml`.
-
-## CSV neu aus HTML erzeugen (optional)
-
-Wenn die HTML-Exports aktualisiert werden, können die CSVs automatisch regeneriert werden:
-
-```bash
-pip install -r scripts/requirements.txt
-python3 scripts/extract_tables.py
-```
+## XML → YAML (Altbestand)
+Unter `tools/xml_to_yaml.py` ist ein Grundgerüst, um XML-Mappings nach YAML zu konvertieren.
+Da XML-Schemata je Projekt variieren, musst du ggf. die XPath/Tag-Namen anpassen. Für den vorbereiteten Hub ist stattdessen `tools/build-data.mjs` maßgeblich.
