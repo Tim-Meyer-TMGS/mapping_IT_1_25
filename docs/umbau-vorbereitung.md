@@ -57,14 +57,16 @@ Die erzeugten JSON-Dateien sind die Arbeitsgrundlage für die neue Browser-App. 
 4. Die Outdooractive-Sprachlogik und der mögliche Keyword-Fallback bleiben als Hinweise, nicht als automatisch erzeugte Regeln.
 5. Die alten HTML-Tabellen enthalten teilweise Inhalte, die nicht Teil der neuen Extraktion sind (insbesondere Artikel und ODTA-Wertekatalog). Vor dem Ersetzen der Seiten ist fachlich zu entscheiden, ob diese als eigenständige Kataloge weitergeführt werden.
 
-## Nächster Umsetzungsschritt
+## Umgesetzte Oberfläche
 
-1. `index.html`, `assets/css/app.css` und ES-Module unter `assets/js/` anlegen.
-2. Startseite aus `mappings.json` erzeugen, damit Systeme je Datensatzart nicht hart codiert werden.
-3. Quellsicht und abgeleitete SaTourN-Rückwärtssicht aus derselben Regelmenge umsetzen.
-4. Suche, Query-URL-State und Detail-Accordions ergänzen.
-5. Alte Kernseiten erst nach Funktionsvergleich in kleine statische Weiterleitungen umwandeln.
-6. ODTA-Export erst nach Lieferung bzw. Bestätigung der tatsächlichen Exportregeln aktivieren.
+Die statische Browseranwendung ist inzwischen umgesetzt:
+
+1. `index.html` dient als zentrale App-Shell; Layout und Browserlogik liegen unter `assets/css/app.css` und `assets/js/`.
+2. Die Startseite und ihre Systemangaben werden vollständig aus `mappings.json` erzeugt.
+3. Quellsicht und SaTourN-Rückwärtssicht verwenden dieselbe Regelmenge.
+4. Suche, Query-URL-State, technische Detail-Accordions und responsive Darstellung sind enthalten.
+5. Die bisherigen Kernseiten leiten auf passende Hub-Zustände weiter.
+6. Der ODTA-Bereich zeigt den dokumentierten Datenstand, erzeugt aber bis zur Lieferung belastbarer Regeln keine erfundenen Zuordnungen.
 
 ## Lokale Befehle
 

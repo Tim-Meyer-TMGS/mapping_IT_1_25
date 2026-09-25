@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Zuordnungen touristischer Daten zwischen Quellsystemen, SaTourN und ODTA nachschlagen.">
+  <title>SaTourN Mapping Hub</title>
+  <link rel="stylesheet" href="./assets/css/app.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">Zum Inhalt springen</a>
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html" data-nav aria-label="SaTourN Mapping Hub – Startseite">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span><strong>SaTourN</strong><small>Mapping Hub</small></span>
+      </a>
+      <form class="global-search" role="search" data-search-form>
+        <label class="sr-only" for="global-search">Mappings durchsuchen</label>
+        <input id="global-search" name="q" type="search" placeholder="Begriff oder technische ID suchen" autocomplete="off">
+        <button type="submit">Suchen</button>
+      </form>
+    </div>
+  </header>
+  <main id="app" class="app-main" tabindex="-1" aria-live="polite">
+    <div class="loading" role="status">Mappingdaten werden geladen …</div>
+  </main>
+  <footer class="app-footer">
+    <span>SaTourN Mapping Hub</span>
+    <span data-data-stand></span>
+  </footer>
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

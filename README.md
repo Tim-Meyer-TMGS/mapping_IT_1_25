@@ -1,6 +1,6 @@
 # SaTourN Mapping Hub
 
-Der Umbau zu einem rein statischen Nachschlagewerk für GitHub Pages ist vorbereitet. Die normalisierte Arbeitsgrundlage liegt unter `data/`; Bestandsaufnahme, Grenzen und nächste Schritte stehen in `docs/umbau-vorbereitung.md`.
+Der SaTourN Mapping Hub läuft als rein statische Browseranwendung auf GitHub Pages. Die Oberfläche lädt die normalisierte Arbeitsgrundlage unter `data/`; Bestandsaufnahme und fachliche Grenzen stehen in `docs/umbau-vorbereitung.md`.
 
 ## Mappingdaten neu erzeugen und prüfen
 
