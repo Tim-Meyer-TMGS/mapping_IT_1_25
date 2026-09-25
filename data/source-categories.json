@@ -1,0 +1,442 @@
+[
+  {
+    "system": "outdooractive",
+    "sourceLine": 254,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Hotel",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 255,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Hotel Garni",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 256,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Pension",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 257,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Apartment",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 258,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Ferienwohnung",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 259,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Ferienhaus",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 260,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Privatzimmer",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 261,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Bauernhof",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 262,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Reiterhof",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 263,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Hütte",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 264,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Berghütte",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 265,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Jugendherberge",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 266,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Camping",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 267,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Wohnmobilstellplatz",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 268,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Erholungsheim",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 269,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Motel",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 270,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Biwak",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 271,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Selbstversorgerhütte",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 272,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Aparthotel",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 273,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Hostel",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 274,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Feriendorf",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "Oberkategorie \"Unterkünfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 276,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Campingplatz",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 277,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Privatvermieter",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 278,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Gruppenunterkunft",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 279,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Herberge / Hostel",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 280,
+    "categoryFamily": "VermieterCategory",
+    "sourceValue": "Frühstückspension",
+    "context": "Oberkategorie \"Unterkünfte\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 284,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Alpe bewirtschaftet",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 285,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Bar",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 286,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Berggasthof",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 287,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Biergarten",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 288,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Bistro",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 289,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Café",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 290,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Disko",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 291,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Eisdiele",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 292,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Gaststätte",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 293,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Haubenlokal",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 294,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Heurige",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 295,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Imbiss",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 296,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Jausenstation",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 297,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Kaffeehaus",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 298,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Kneipe",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 299,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Nightlife",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 300,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Pizzeria",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 301,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Pub",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 302,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Restaurant",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 303,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Sennalpe",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 304,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Vinothek",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 305,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Weinstube",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 306,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Gaststätte (zeitw. geöffnet)",
+    "context": "Oberkategorie \"Essen & Trinken\"",
+    "note": "Oberkategorie \"Essen & Trinken\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 308,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Gasthof",
+    "context": "Oberkategorie \"Unterknüfte\"",
+    "note": "Oberkategorie \"Unterknüfte\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 310,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Brauerei",
+    "context": "Oberkategorie \"Gewerbe\"",
+    "note": "Oberkategorie \"Gewerbe\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 311,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Brennerei",
+    "context": "Oberkategorie \"Gewerbe\"",
+    "note": "Oberkategorie \"Gewerbe\""
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 313,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Bewirtschaftete Hütte",
+    "context": "Oberkategorie \"Gewerbe\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 314,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Bewirtschaftete Alm",
+    "context": "Oberkategorie \"Gewerbe\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  },
+  {
+    "system": "outdooractive",
+    "sourceLine": 315,
+    "categoryFamily": "GastroCategory",
+    "sourceValue": "Heuriger",
+    "context": "Oberkategorie \"Gewerbe\"",
+    "note": "alte Cats die es wohl nicht mehr gibt?"
+  }
+]

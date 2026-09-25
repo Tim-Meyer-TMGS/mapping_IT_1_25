@@ -11,3 +11,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - tools
+  - source
+  - schemas
+  - docs

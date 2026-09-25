@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://satourn.travel/schemas/mapping-hub.schema.json",
+  "title": "SaTourN Mapping Hub Data",
+  "type": "object",
+  "required": ["meta", "mappings"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["title", "status"],
+      "properties": {
+        "title": {"type": "string"},
+        "status": {"type": "string", "enum": ["current-standard"]},
+        "sourceName": {"type": ["string", "null"]},
+        "publishedAt": {"type": ["string", "null"], "format": "date"},
+        "note": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "mappings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/mapping"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "required": ["system", "datasetType", "dimension"],
+      "properties": {
+        "system": {"type": "string", "minLength": 1},
+        "datasetType": {"type": ["string", "null"]},
+        "dimension": {
+          "type": "string",
+          "enum": ["category", "feature", "field", "textField", "checkbox", "value", "other"]
+        },
+        "keyType": {
+          "type": ["string", "null"],
+          "enum": ["id", "name", "code", "unknown", null]
+        },
+        "key": {"type": ["string", "null"]},
+        "label": {"type": ["string", "null"]},
+        "language": {"type": ["string", "null"]}
+      },
+      "allOf": [
+        {
+          "anyOf": [
+            {"required": ["key"]},
+            {"required": ["label"]}
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "target": {
+      "allOf": [
+        {"$ref": "#/$defs/endpoint"}
+      ]
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "note": {"type": ["string", "null"]},
+        "noticeIds": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "sourceFile": {"type": ["string", "null"]},
+        "sourceLine": {"type": ["integer", "null"], "minimum": 1},
+        "raw": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "required": ["id", "direction", "source", "targets", "behavior"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "direction": {
+          "type": "string",
+          "enum": ["inbound", "outbound"]
+        },
+        "source": {"$ref": "#/$defs/endpoint"},
+        "targets": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/target"}
+        },
+        "behavior": {
+          "type": "string",
+          "enum": ["map", "noTarget", "noImport", "fallback", "passthrough", "unknown"]
+        },
+        "display": {"$ref": "#/$defs/display"},
+        "provenance": {"$ref": "#/$defs/provenance"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"behavior": {"const": "map"}}
+          },
+          "then": {
+            "properties": {"targets": {"minItems": 1}}
+          }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

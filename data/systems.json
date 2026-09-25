@@ -1,0 +1,68 @@
+[
+  {
+    "id": "outdooractive",
+    "label": "Outdooractive",
+    "direction": "inbound",
+    "sortOrder": 10
+  },
+  {
+    "id": "feratel",
+    "label": "Feratel",
+    "direction": "inbound",
+    "sortOrder": 20
+  },
+  {
+    "id": "damas",
+    "label": "DAMAS",
+    "direction": "inbound",
+    "sortOrder": 30
+  },
+  {
+    "id": "bookingkit",
+    "label": "Bookingkit",
+    "direction": "inbound",
+    "sortOrder": 40
+  },
+  {
+    "id": "regiondo",
+    "label": "Regiondo",
+    "direction": "inbound",
+    "sortOrder": 50
+  },
+  {
+    "id": "tis-poi",
+    "label": "TIS POI",
+    "direction": "inbound",
+    "sortOrder": 60
+  },
+  {
+    "id": "tis-event",
+    "label": "TIS Event",
+    "direction": "inbound",
+    "sortOrder": 61
+  },
+  {
+    "id": "tis-gastro",
+    "label": "TIS Gastro",
+    "direction": "inbound",
+    "sortOrder": 62
+  },
+  {
+    "id": "tis-unterkuenfte",
+    "label": "TIS Unterkünfte",
+    "direction": "inbound",
+    "sortOrder": 63
+  },
+  {
+    "id": "satourn",
+    "label": "SaTourN",
+    "direction": null,
+    "sortOrder": 90
+  },
+  {
+    "id": "odta",
+    "label": "ODTA",
+    "direction": "outbound",
+    "sortOrder": 100
+  }
+]

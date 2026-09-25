@@ -1,4 +1,19 @@
-# SaTourN Mapping (Jekyll)
+# SaTourN Mapping Hub
+
+Der Umbau zu einem rein statischen Nachschlagewerk für GitHub Pages ist vorbereitet. Die normalisierte Arbeitsgrundlage liegt unter `data/`; Bestandsaufnahme, Grenzen und nächste Schritte stehen in `docs/umbau-vorbereitung.md`.
+
+## Mappingdaten neu erzeugen und prüfen
+
+Voraussetzung für die lokalen Hilfsskripte ist Node.js. Es werden keine npm-Pakete benötigt.
+
+```bash
+node tools/build-data.mjs
+node tools/check-data.mjs
+```
+
+Die Skripte sind ausschließlich Entwicklungshilfen. Die veröffentlichte Seite lädt statische JSON-Dateien und benötigt weder Node.js noch ein Backend.
+
+## Bestehender Prototyp
 
 ## Lokal starten
 Voraussetzung: Ruby + Bundler (siehe unten in den Installationshinweisen).
@@ -10,7 +25,7 @@ bundle exec jekyll serve
 
 Dann im Browser öffnen: http://127.0.0.1:4000
 
-## Inhalte pflegen
+## Bisherige Beispieldaten
 Die Tabellen werden aus `_data/*.yml` gerendert:
 
 - `_data/poi.yml`
@@ -29,6 +44,8 @@ Jeder Eintrag ist ein Objekt mit Feldern wie:
 - `depth` (0..3)
 - `changed` (true/false)
 
-## XML → YAML
+Diese Dateien gehören zum Altprototyp und sind nicht die Datenquelle des neuen Hubs.
+
+## XML → YAML (Altbestand)
 Unter `tools/xml_to_yaml.py` ist ein Grundgerüst, um XML-Mappings nach YAML zu konvertieren.
-Da XML-Schemata je Projekt variieren, musst du ggf. die XPath/Tag-Namen anpassen.
+Da XML-Schemata je Projekt variieren, musst du ggf. die XPath/Tag-Namen anpassen. Für den vorbereiteten Hub ist stattdessen `tools/build-data.mjs` maßgeblich.
