@@ -74,6 +74,14 @@ button, input { font: inherit; }
 
 .mapping-list, .reverse-list, .search-results { display: grid; gap: .75rem; }
 .poi-directory { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+.property-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.property-card { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 78px; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); text-decoration: none; transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease; }
+.property-card:hover { transform: translateY(-2px); border-color: #a6c7b5; box-shadow: var(--shadow); }
+.property-card-muted { background: var(--surface-soft); }
+.property-copy strong, .property-copy small { display: block; }
+.property-copy strong { color: var(--ink); }
+.property-copy small { margin-top: .2rem; color: var(--muted); font-size: .82rem; }
+.property-card .card-arrow { flex: 0 0 auto; }
 .poi-table { width: 100%; border-collapse: collapse; text-align: left; }
 .poi-table th, .poi-table td { padding: .72rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .poi-table th { background: var(--surface-soft); color: var(--muted); font-size: .75rem; font-weight: 800; text-transform: uppercase; }
@@ -142,6 +150,7 @@ button, input { font: inherit; }
   .app-main { padding-top: 1.5rem; }
   .hero { padding-top: 1rem; }
   .dataset-grid { grid-template-columns: 1fr; }
+  .property-grid { grid-template-columns: 1fr; }
   .toolbar { align-items: stretch; flex-direction: column; }
   .segmented { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: 100%; min-width: 0; }
   .segmented a { min-width: 0; text-align: center; white-space: normal; overflow-wrap: anywhere; }
