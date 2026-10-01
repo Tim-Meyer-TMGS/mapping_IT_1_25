@@ -1,4 +1,4 @@
-const ALLOWED = ['direction', 'type', 'property', 'dimension', 'mode', 'system', 'term', 'value', 'q'];
+const ALLOWED = ['direction', 'type', 'node', 'property', 'dimension', 'mode', 'system', 'term', 'value', 'q'];
 
 export function readState() {
   const params = new URLSearchParams(window.location.search);

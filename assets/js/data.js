@@ -4,6 +4,7 @@ const FILES = {
   datasetTypes: './data/dataset-types.json',
   mappings: './data/mappings.json',
   notices: './data/notices.json',
+  odtaSpecification: './data/odta-place-specification.json',
 };
 
 async function fetchJson(url) {
@@ -20,7 +21,7 @@ function fold(value) {
 }
 
 export async function loadData() {
-  const [meta, systems, datasetTypes, mappings, notices] = await Promise.all(
+  const [meta, systems, datasetTypes, mappings, notices, odtaSpecification] = await Promise.all(
     Object.values(FILES).map(fetchJson),
   );
   const systemById = new Map(systems.map((system) => [system.id, system]));
@@ -39,5 +40,19 @@ export async function loadData() {
 
   for (const mapping of mappings) mapping.datasetTypeId = datasetIdFor(mapping);
 
-  return { meta, systems, datasetTypes, mappings, notices, systemById, datasetById, fold };
+  const shapeById = new Map();
+  function indexShapes(value) {
+    if (Array.isArray(value)) {
+      value.forEach(indexShapes);
+      return;
+    }
+    if (!value || typeof value !== 'object') return;
+    if (value['@id'] && (value['sh:property'] || value['ds:propertyDisplayOrder'])) shapeById.set(value['@id'], value);
+    Object.values(value).forEach(indexShapes);
+  }
+  indexShapes(odtaSpecification['@graph']);
+  const poiSpecification = [...shapeById.values()].find((shape) => (shape['sh:property'] ?? [])
+    .some((property) => property['sh:path'] === 'odta:kindOfPOI'));
+
+  return { meta, systems, datasetTypes, mappings, notices, odtaSpecification, shapeById, poiSpecification, systemById, datasetById, fold };
 }

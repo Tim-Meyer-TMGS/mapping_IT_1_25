@@ -5,17 +5,18 @@ const DIMENSION_LABELS = {
   checkbox: 'Checkboxen', value: 'Werte', other: 'Weitere',
 };
 
-const POI_PROPERTIES = [
-  { id: 'name', label: 'Name', kind: 'Text', description: 'Name oder Bezeichnung des POI' },
-  { id: 'title', label: 'Titel', kind: 'Text', description: 'Titel oder alternative Überschrift' },
-  { id: 'url', label: 'URL', kind: 'URL', description: 'Weiterführende Webadresse' },
-  { id: 'media', label: 'Medien', kind: 'Medien', description: 'Bilder, Videos und weitere Medien' },
-  { id: 'category', label: 'Kategorien', kind: 'Werteliste', description: 'Klassifikation des POI', dimension: 'category' },
-  { id: 'feature', label: 'Merkmale', kind: 'Werteliste', description: 'Ausstattung und weitere Merkmale', dimension: 'feature' },
-  { id: 'address', label: 'Adresse', kind: 'Adresse', description: 'Postanschrift und Standortangaben' },
-  { id: 'contact', label: 'Kontakt', kind: 'Kontakt', description: 'Kontaktwege und Ansprechpartner' },
-  { id: 'openingHours', label: 'Öffnungszeiten', kind: 'Zeitraum', description: 'Öffnungs- und Verfügbarkeitszeiten' },
-];
+const POI_PROPERTY_DIMENSIONS = {
+  'odta:kindOfPOI': 'category',
+  'schema:amenityFeature': 'feature',
+};
+
+const PROPERTY_LABELS = {
+  'schema:name': 'Name', 'schema:description': 'Beschreibung', 'schema:identifier': 'Kennung',
+  'schema:image': 'Medien', 'schema:url': 'URL', 'schema:address': 'Adresse',
+  'schema:geo': 'Geodaten', 'schema:telephone': 'Telefon', 'schema:keywords': 'Schlagwörter',
+  'schema:openingHoursSpecification': 'Öffnungszeiten', 'schema:contactPoint': 'Kontakt',
+  'schema:amenityFeature': 'Merkmale', 'odta:kindOfPOI': 'Kategorien',
+};
 
 const BEHAVIOR_LABELS = {
   noTarget: 'ohne Zuordnung', noImport: 'nicht übernehmen', fallback: 'Fallback',
@@ -188,24 +189,64 @@ function poiDirectory(data, rules, dimension) {
   }).join('')}</tbody></table></div>`;
 }
 
-function poiProperties(data, rules) {
-  const availableDimensions = new Set(rules.map((mapping) => mapping.source.dimension));
-  return `<div class="poi-directory property-directory"><table class="poi-table property-table"><thead><tr><th>Eigenschaft</th><th>Typ</th><th>Beschreibung</th></tr></thead><tbody>${POI_PROPERTIES.map((property) => {
-    const available = property.dimension ? availableDimensions.has(property.dimension) : false;
-    const href = hrefFor({
-      direction: 'inbound',
-      type: 'poi',
-      property: property.id,
-      dimension: property.dimension ?? null,
-      value: null,
-      system: null,
-      term: null,
-    }, true);
-    const label = available
-      ? `<a class="poi-value-link" href="${escapeHtml(href)}" data-nav>${escapeHtml(property.label)}</a>`
-      : `<strong>${escapeHtml(property.label)}</strong>`;
-    return `<tr><td>${label}</td><td>${escapeHtml(property.kind)}</td><td>${escapeHtml(property.description)}</td></tr>`;
-  }).join('')}</tbody></table></div>`;
+function localName(value) {
+  return String(value ?? '').replace(/^.*[:/#]/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+}
+
+function propertyLabel(path) {
+  return PROPERTY_LABELS[path] ?? localName(path);
+}
+
+function shapeLabel(shape, fallback = 'Struktur') {
+  const classes = shape?.['sh:class'] ?? shape?.['sh:targetClass'] ?? [];
+  return localName(classes[0] ?? fallback);
+}
+
+function firstComment(property) {
+  const comment = property['rdfs:comment'];
+  if (!Array.isArray(comment)) return '';
+  return comment.find((item) => item['@language'] === 'de')?.['@value']
+    ?? comment[0]?.['@value']
+    ?? '';
+}
+
+function orderedProperties(shape) {
+  const properties = shape?.['sh:property'] ?? [];
+  const byPath = new Map(properties.map((property) => [property['sh:path'], property]));
+  const ordered = (shape?.['ds:propertyDisplayOrder'] ?? []).map((path) => byPath.get(path)).filter(Boolean);
+  return [...ordered, ...properties.filter((property) => !ordered.includes(property))];
+}
+
+function rangeTypes(data, property) {
+  return (property['sh:or'] ?? []).map((range) => {
+    if (range['ds:grammarNodeType'] === 'DataType') return { label: localName(range['sh:datatype']), href: null };
+    const reference = range['sh:node']?.['@id'];
+    if (!reference) return { label: localName(range['ds:grammarNodeType']), href: null };
+    const shape = data.shapeById.get(reference) ?? range['sh:node'];
+    return {
+      label: shapeLabel(shape, reference),
+      href: hrefFor({ direction: 'inbound', type: 'poi', node: reference, property: null, dimension: null, value: null, system: null, term: null }, true),
+    };
+  });
+}
+
+function specificationProperties(data, shape) {
+  const rows = orderedProperties(shape).map((property) => {
+    const path = property['sh:path'];
+    const dimension = POI_PROPERTY_DIMENSIONS[path];
+    const propertyHref = dimension
+      ? hrefFor({ direction: 'inbound', type: 'poi', property: dimension, dimension, node: null, value: null, system: null, term: null }, true)
+      : null;
+    const name = propertyHref
+      ? `<a class="poi-value-link" href="${escapeHtml(propertyHref)}" data-nav>${escapeHtml(propertyLabel(path))}</a>`
+      : `<strong>${escapeHtml(propertyLabel(path))}</strong>`;
+    const cardinality = `${property['sh:minCount'] ?? 0}${property['sh:maxCount'] === 1 ? '–1' : '–*'}`;
+    const types = rangeTypes(data, property).map((range) => range.href
+      ? `<a class="poi-value-link" href="${escapeHtml(range.href)}" data-nav>${escapeHtml(range.label)}</a>`
+      : escapeHtml(range.label)).join(' · ');
+    return `<tr><td>${name}</td><td>${escapeHtml(cardinality)}</td><td>${types}</td><td>${escapeHtml(firstComment(property))}</td></tr>`;
+  }).join('');
+  return `<div class="poi-directory property-directory"><table class="poi-table property-table"><thead><tr><th>Eigenschaft</th><th>Kardinalität</th><th>Typ</th><th>Beschreibung</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function poiMappingTable(data, rules, state) {
@@ -221,18 +262,20 @@ function poiMappingTable(data, rules, state) {
 }
 
 function poiView(data, state, rules) {
-  const property = POI_PROPERTIES.find((item) => item.id === state.property);
-  const propertyDimension = property?.dimension;
-  if (!property) {
+  const specificationNode = state.node ? data.shapeById.get(state.node) : data.poiSpecification;
+  const propertyDimension = state.property === 'category' ? 'category' : state.property === 'feature' ? 'feature' : null;
+  if (!propertyDimension) {
+    const label = state.node ? shapeLabel(specificationNode, 'POI') : 'POI';
     const crumb = breadcrumb([
       { label: 'Start', href: './index.html' },
       { label: 'Importe', href: './index.html' },
-      { label: 'POI' },
+      ...(state.node ? [{ label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) }, { label }] : [{ label: 'POI' }]),
     ]);
-    return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>POI</h1><p>Eigenschaften des Datentyps POI</p></section>${poiProperties(data, rules)}`;
+    if (!specificationNode) return '<div class="error-state"><h1>POI-Spezifikation konnte nicht geladen werden</h1></div>';
+    return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(label)}</h1><p>Eigenschaften gemäß ODTA-Domänenspezifikation</p></section>${specificationProperties(data, specificationNode)}`;
   }
 
-  if (!propertyDimension) {
+  /* Legacy placeholder-property route; POI navigation is now driven by the specification above.
     const crumb = breadcrumb([
       { label: 'Start', href: './index.html' },
       { label: 'Importe', href: './index.html' },
@@ -242,6 +285,7 @@ function poiView(data, state, rules) {
     return `${crumb}<section class="view-heading"><p class="eyebrow">POI-Eigenschaft</p><h1>${escapeHtml(property.label)}</h1><p>Für diese Eigenschaft sind im aktuellen Mappingstand keine Zuordnungen hinterlegt.</p></section><div class="empty-state"><h2>Noch keine Mappingdaten</h2><p>Die Eigenschaft ist als POI-Navigation vorgesehen, aber in der geladenen Datenbasis noch nicht enthalten.</p></div>`;
   }
 
+  */
   const stateWithDimension = { ...state, dimension: propertyDimension };
   const termMapping = rules.find((mapping) => mapping.id === state.term);
   const value = state.value ?? (termMapping ? `__mapping:${termMapping.id}` : null);
@@ -255,8 +299,8 @@ function poiView(data, state, rules) {
     { label: 'Importe', href: './index.html' },
     { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
     selected
-      ? { label: property.label, href: hrefFor({ direction: 'inbound', type: 'poi', property: property.id, dimension: propertyDimension, value: null, system: null, term: null }, true) }
-      : { label: property.label },
+      ? { label: DIMENSION_LABELS[propertyDimension], href: hrefFor({ direction: 'inbound', type: 'poi', property: state.property, dimension: propertyDimension, value: null, system: null, term: null }, true) }
+      : { label: DIMENSION_LABELS[propertyDimension] },
     ...(selected ? [{ label: groupLabel }] : []),
   ]);
   const selectedRules = selected ? controls.selectedRules : [];
@@ -264,7 +308,7 @@ function poiView(data, state, rules) {
     ? selectedRules.filter((mapping) => mapping.source.system === controls.system)
     : selectedRules;
   const viewState = { ...stateWithDimension, type: 'poi', dimension: controls.dimension, system: controls.system };
-  return `${crumb}<section class="view-heading"><p class="eyebrow">POI-Eigenschaft</p><h1>${escapeHtml(property.label)}</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
+  return `${crumb}<section class="view-heading"><p class="eyebrow">POI-Eigenschaft</p><h1>${escapeHtml(DIMENSION_LABELS[propertyDimension])}</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
     ${controls.html}${selected ? `<div class="poi-detail-heading"><h2>${escapeHtml(groupLabel)}</h2>${link('Zur Übersicht', { value: null, system: null, term: null }, false, 'poi-back-link')}</div>` : ''}
     ${scopedNotices(data, viewState)}
     ${selected
