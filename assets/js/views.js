@@ -6,15 +6,15 @@ const DIMENSION_LABELS = {
 };
 
 const POI_PROPERTIES = [
-  { id: 'name', label: 'Name' },
-  { id: 'title', label: 'Titel' },
-  { id: 'url', label: 'URL' },
-  { id: 'media', label: 'Medien' },
-  { id: 'category', label: 'Kategorien', dimension: 'category' },
-  { id: 'feature', label: 'Merkmale', dimension: 'feature' },
-  { id: 'address', label: 'Adresse' },
-  { id: 'contact', label: 'Kontakt' },
-  { id: 'openingHours', label: 'Öffnungszeiten' },
+  { id: 'name', label: 'Name', kind: 'Text', description: 'Name oder Bezeichnung des POI' },
+  { id: 'title', label: 'Titel', kind: 'Text', description: 'Titel oder alternative Überschrift' },
+  { id: 'url', label: 'URL', kind: 'URL', description: 'Weiterführende Webadresse' },
+  { id: 'media', label: 'Medien', kind: 'Medien', description: 'Bilder, Videos und weitere Medien' },
+  { id: 'category', label: 'Kategorien', kind: 'Werteliste', description: 'Klassifikation des POI', dimension: 'category' },
+  { id: 'feature', label: 'Merkmale', kind: 'Werteliste', description: 'Ausstattung und weitere Merkmale', dimension: 'feature' },
+  { id: 'address', label: 'Adresse', kind: 'Adresse', description: 'Postanschrift und Standortangaben' },
+  { id: 'contact', label: 'Kontakt', kind: 'Kontakt', description: 'Kontaktwege und Ansprechpartner' },
+  { id: 'openingHours', label: 'Öffnungszeiten', kind: 'Zeitraum', description: 'Öffnungs- und Verfügbarkeitszeiten' },
 ];
 
 const BEHAVIOR_LABELS = {
@@ -163,7 +163,7 @@ function poiControls(data, state, rules) {
     </div>${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { system: id, term: null }, false, id === system ? 'active' : '')).join('')}</div>` : ''}</div>` : '';
   return {
     dimension, dimensionRules, selectedRules, system, mode,
-    html: `<div class="tabs" aria-label="POI-Mappingdimension">${dimensions.map((id) => link(DIMENSION_LABELS[id] ?? id, { dimension: id, system: null, value: null, term: null }, false, id === dimension ? 'active' : '')).join('')}</div>${toolbar}`,
+    html: toolbar,
   };
 }
 
@@ -190,7 +190,7 @@ function poiDirectory(data, rules, dimension) {
 
 function poiProperties(data, rules) {
   const availableDimensions = new Set(rules.map((mapping) => mapping.source.dimension));
-  return `<div class="property-grid" aria-label="POI-Eigenschaften">${POI_PROPERTIES.map((property) => {
+  return `<div class="poi-directory property-directory"><table class="poi-table property-table"><thead><tr><th>Eigenschaft</th><th>Typ</th><th>Beschreibung</th></tr></thead><tbody>${POI_PROPERTIES.map((property) => {
     const available = property.dimension ? availableDimensions.has(property.dimension) : false;
     const href = hrefFor({
       direction: 'inbound',
@@ -201,11 +201,11 @@ function poiProperties(data, rules) {
       system: null,
       term: null,
     }, true);
-    return `<a class="property-card${available ? '' : ' property-card-muted'}" href="${escapeHtml(href)}" data-nav>
-      <span class="property-copy"><strong>${escapeHtml(property.label)}</strong><small>${available ? 'Mapping öffnen' : 'Keine Mappingdaten hinterlegt'}</small></span>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>`;
-  }).join('')}</div>`;
+    const label = available
+      ? `<a class="poi-value-link" href="${escapeHtml(href)}" data-nav>${escapeHtml(property.label)}</a>`
+      : `<strong>${escapeHtml(property.label)}</strong>`;
+    return `<tr><td>${label}</td><td>${escapeHtml(property.kind)}</td><td>${escapeHtml(property.description)}</td></tr>`;
+  }).join('')}</tbody></table></div>`;
 }
 
 function poiMappingTable(data, rules, state) {
@@ -252,9 +252,11 @@ function poiView(data, state, rules) {
     : value?.startsWith('__mapping:') ? termMapping?.source.label ?? termMapping?.source.key : value;
   const crumb = breadcrumb([
     { label: 'Start', href: './index.html' },
-      { label: 'Importe', href: './index.html' },
-      { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
-      { label: property.label, href: hrefFor({ direction: 'inbound', type: 'poi', property: property.id, dimension: propertyDimension, value: null, system: null, term: null }, true) },
+    { label: 'Importe', href: './index.html' },
+    { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
+    selected
+      ? { label: property.label, href: hrefFor({ direction: 'inbound', type: 'poi', property: property.id, dimension: propertyDimension, value: null, system: null, term: null }, true) }
+      : { label: property.label },
     ...(selected ? [{ label: groupLabel }] : []),
   ]);
   const selectedRules = selected ? controls.selectedRules : [];
