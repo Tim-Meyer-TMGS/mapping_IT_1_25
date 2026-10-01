@@ -11,7 +11,7 @@ function paint() {
   const state = readState();
   root.innerHTML = render(data, state);
   searchInput.value = state.q ?? '';
-  document.querySelector('[data-data-stand]').textContent = data.meta.sourceDate ? `Datenstand ${data.meta.sourceDate}` : '';
+  document.querySelector('[data-data-stand]').textContent = data.meta.generatedAt ? `Datenstand ${data.meta.generatedAt}` : '';
   document.title = state.q ? `Suche: ${state.q} – SaTourN Mapping Hub` : 'SaTourN Mapping Hub';
   const selected = state.term ? document.getElementById(state.term) : null;
   if (selected) requestAnimationFrame(() => selected.scrollIntoView({ behavior: 'smooth', block: 'center' }));

@@ -1,0 +1,169 @@
+{
+  "address": {
+    "sourceDirectory": "Address",
+    "files": 1,
+    "rootElements": {
+      "Adressen": 1
+    },
+    "objectElements": {
+      "Adresse": 1
+    },
+    "recordIdAttributes": {
+      "AdressenId": 1
+    },
+    "uniqueFieldNames": 29,
+    "languageFiles": {
+      "de-DE": 1
+    },
+    "sourceValues": {},
+    "sourceKeyValues": {},
+    "nonEmptyExternalSystemIdFields": {},
+    "observedVocabularyField": "Kategorie",
+    "observedVocabularyUniqueValues": 3
+  },
+  "article": {
+    "sourceDirectory": "Article",
+    "files": 153,
+    "rootElements": {
+      "ArtikelList": 153
+    },
+    "objectElements": {
+      "Artikel": 153
+    },
+    "recordIdAttributes": {
+      "ArtikelId": 153
+    },
+    "uniqueFieldNames": 103,
+    "languageFiles": {
+      "de-DE": 153,
+      "en-GB": 148
+    },
+    "sourceValues": {
+      "eT4": 1
+    },
+    "sourceKeyValues": {
+      "21117": 1
+    },
+    "nonEmptyExternalSystemIdFields": {},
+    "observedVocabularyField": "Kategorie",
+    "observedVocabularyUniqueValues": 10
+  },
+  "event": {
+    "sourceDirectory": "Event",
+    "files": 1,
+    "rootElements": {
+      "Veranstaltungen": 1
+    },
+    "objectElements": {
+      "Veranstaltung": 1
+    },
+    "recordIdAttributes": {
+      "VeranstaltungsId": 1
+    },
+    "uniqueFieldNames": 200,
+    "languageFiles": {
+      "de-DE": 1,
+      "en-GB": 1
+    },
+    "sourceValues": {},
+    "sourceKeyValues": {},
+    "nonEmptyExternalSystemIdFields": {},
+    "observedVocabularyField": "Kategorie",
+    "observedVocabularyUniqueValues": 3
+  },
+  "gastro": {
+    "sourceDirectory": "Gastro",
+    "files": 21,
+    "rootElements": {
+      "Gastros": 21
+    },
+    "objectElements": {
+      "Gastro": 21
+    },
+    "recordIdAttributes": {
+      "GastroID": 21
+    },
+    "uniqueFieldNames": 307,
+    "languageFiles": {
+      "de-DE": 21,
+      "en-GB": 20,
+      "pl-PL": 17,
+      "cs-CZ": 17,
+      "sk-SK": 1,
+      "nl-NL": 1
+    },
+    "sourceValues": {
+      "eT4": 1
+    },
+    "sourceKeyValues": {
+      "100013388": 1
+    },
+    "nonEmptyExternalSystemIdFields": {
+      "SYSTEMID_Feratel": 1
+    },
+    "observedVocabularyField": "Betriebsart",
+    "observedVocabularyUniqueValues": 12
+  },
+  "accommodation": {
+    "sourceDirectory": "Hotel",
+    "files": 127,
+    "rootElements": {
+      "Vermieter": 127
+    },
+    "objectElements": {
+      "Betrieb": 127
+    },
+    "recordIdAttributes": {
+      "Betriebsnummer": 127
+    },
+    "uniqueFieldNames": 429,
+    "languageFiles": {
+      "de-DE": 127,
+      "en-GB": 116
+    },
+    "sourceValues": {
+      "eT4": 3
+    },
+    "sourceKeyValues": {
+      "45498": 1,
+      "45714": 1,
+      "45725": 1
+    },
+    "nonEmptyExternalSystemIdFields": {},
+    "observedVocabularyField": "Kategorie",
+    "observedVocabularyUniqueValues": 20
+  },
+  "poi": {
+    "sourceDirectory": "Poi",
+    "files": 94,
+    "rootElements": {
+      "Pois": 94
+    },
+    "objectElements": {
+      "Poi": 94
+    },
+    "recordIdAttributes": {
+      "PID": 94
+    },
+    "uniqueFieldNames": 307,
+    "languageFiles": {
+      "de-DE": 94,
+      "en-GB": 90,
+      "pl-PL": 55,
+      "cs-CZ": 55,
+      "sk-SK": 2,
+      "nl-NL": 20,
+      "it-IT": 1
+    },
+    "sourceValues": {
+      "eT4": 2
+    },
+    "sourceKeyValues": {
+      "100119584": 1,
+      "100059872": 1
+    },
+    "nonEmptyExternalSystemIdFields": {},
+    "observedVocabularyField": "Kategorie",
+    "observedVocabularyUniqueValues": 64
+  }
+}

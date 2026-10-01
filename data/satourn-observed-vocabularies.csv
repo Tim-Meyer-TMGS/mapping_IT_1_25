@@ -1,0 +1,113 @@
+﻿datasetType,field,value,occurrences
+address,Kategorie,Ansprechpartner,1
+address,Kategorie,Veranstalter,1
+address,Kategorie,Veranstaltungsort,1
+article,Kategorie,Autor*in,2
+article,Kategorie,Blog-Artikel,151
+article,Kategorie,Branchen News,108
+article,Kategorie,Dresden Convention Service,34
+article,Kategorie,Kulturfans,1
+article,Kategorie,Mountainbiken,1
+article,Kategorie,Radfahren,1
+article,Kategorie,Standort News,5
+article,Kategorie,Veranstaltung News,17
+article,Kategorie,Wissenswertes,9
+event,Kategorie,Ausstellung,1
+event,Kategorie,Führung/Besichtigung,1
+event,Kategorie,klassisches Konzert,1
+gastro,Betriebsart,Ausflugslokal,1
+gastro,Betriebsart,Bar,3
+gastro,Betriebsart,Biergarten,3
+gastro,Betriebsart,Bistro,3
+gastro,Betriebsart,Brauereigaststätte,2
+gastro,Betriebsart,Café,8
+gastro,Betriebsart,Eisdiele/Eiscafé,1
+gastro,Betriebsart,Fischlokal,1
+gastro,Betriebsart,Gasthof,1
+gastro,Betriebsart,Gaststätte,6
+gastro,Betriebsart,Pub/Kneipe,1
+gastro,Betriebsart,Restaurant,10
+accommodation,Kategorie,Appartement,1
+accommodation,Kategorie,Burg/Schloss,1
+accommodation,Kategorie,Event Location,56
+accommodation,Kategorie,Ferienhaus,1
+accommodation,Kategorie,Ferienwohnung,1
+accommodation,Kategorie,Historische Location,31
+accommodation,Kategorie,Hotel,13
+accommodation,Kategorie,Industriekultur,1
+accommodation,Kategorie,Messe,1
+accommodation,Kategorie,Messe- / Kongresszentrum,6
+accommodation,Kategorie,Moderne Location,17
+accommodation,Kategorie,Museum,11
+accommodation,Kategorie,Museum/Galerie,3
+accommodation,Kategorie,Open Air Location,1
+accommodation,Kategorie,Special Location,42
+accommodation,Kategorie,Sportstätte,1
+accommodation,Kategorie,Tagungs- / Seminarhaus,26
+accommodation,Kategorie,Tagungshotel,38
+accommodation,Kategorie,Tagungskategorien,114
+accommodation,Kategorie,Universität,1
+poi,Kategorie,Agenturen,16
+poi,Kategorie,Architektur,6
+poi,Kategorie,Audioguide,1
+poi,Kategorie,Ausflugsziele,39
+poi,Kategorie,Aussichtspunkt/-turm,4
+poi,Kategorie,Ausstattung,5
+poi,Kategorie,Besucherbergwerk,1
+poi,Kategorie,Burg,1
+poi,Kategorie,Bücherei,1
+poi,Kategorie,Cateringunternehmen,1
+poi,Kategorie,Denkmal,2
+poi,Kategorie,Disko/Club,2
+poi,Kategorie,Einzelhandel,9
+poi,Kategorie,Eisen-/Schmalspurbahn,1
+poi,Kategorie,Erholung und Gesundheit,1
+poi,Kategorie,Event- und Incentiveagenturen,13
+poi,Kategorie,Event- und Inventiveagenturen,10
+poi,Kategorie,Festung,3
+poi,Kategorie,Fitness,1
+poi,Kategorie,Freibad,1
+poi,Kategorie,Freilichtbühne/-theater,1
+poi,Kategorie,Freizeitbahn,1
+poi,Kategorie,Freizeitpark,2
+poi,Kategorie,Funsport,1
+poi,Kategorie,Fußgängerzone,1
+poi,Kategorie,Galerie,1
+poi,Kategorie,Geschäfte und Dienstleistung,10
+poi,Kategorie,Hallenbad/Erlebnisbad,1
+poi,Kategorie,Historische Stätte,16
+poi,Kategorie,Industrie-/Werksbesichtigung,1
+poi,Kategorie,Interaktiv,1
+poi,Kategorie,Jugendtreff,1
+poi,Kategorie,Kinderspielplatz,1
+poi,Kategorie,Kirche,3
+poi,Kategorie,Klangkörper & Ensemble,2
+poi,Kategorie,Klettern,1
+poi,Kategorie,Kreativität/Gestalten,1
+poi,Kategorie,Kultur-/Veranstaltungsort,3
+poi,Kategorie,Kulturzentrum,5
+poi,Kategorie,Logistik,7
+poi,Kategorie,Luftsport,1
+poi,Kategorie,Mobil und Service,1
+poi,Kategorie,Museum/Sammlung,29
+poi,Kategorie,Orgel,2
+poi,Kategorie,Park/Garten,3
+poi,Kategorie,PCOs,3
+poi,Kategorie,Saunalandschaft,1
+poi,Kategorie,Schauwerkstatt/Manufaktur,1
+poi,Kategorie,Schloss,6
+poi,Kategorie,Sehenswertes,26
+poi,Kategorie,Servicedienstleister,19
+poi,Kategorie,Sonstige Mobilität und Services,1
+poi,Kategorie,Sonstige Sehenswürdigkeit,1
+poi,Kategorie,Souvenirs,1
+poi,Kategorie,Spa/Wellness,1
+poi,Kategorie,Spielstätte,10
+poi,Kategorie,Sport und Freizeit,2
+poi,Kategorie,Technikanbieter,6
+poi,Kategorie,Theater,4
+poi,Kategorie,Unterhaltung,11
+poi,Kategorie,Wassersport,1
+poi,Kategorie,Zoo/Tierpark,1
+poi,Kategorie,Öffentliche Gebäude,4
+poi,Kategorie,Öffentlicher Nahverkehr,1

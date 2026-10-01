@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "errors": [],
+  "counts": {
+    "generatedAt": "2026-10-01",
+    "sourcePriority": [
+      "Mappingübersicht Fremdsysteme.docx / extracted rows",
+      "AH67-T309 observed SaTourN samples",
+      "GitHub repository only as implementation reference"
+    ],
+    "activePhysicalMappingRows": 982,
+    "activeLogicalMappingRules": 855,
+    "activeRoutingRules": 55,
+    "activeFallbackRules": 6,
+    "totalActiveLogicalRules": 916,
+    "commentedRowsExcluded": 9,
+    "oneToManyMappingRules": 113,
+    "behaviorCounts": {
+      "map": 852,
+      "noTarget": 1,
+      "noImport": 2,
+      "route": 55,
+      "fallback": 6
+    },
+    "ruleKindCounts": {
+      "mapping": 855,
+      "routing": 55,
+      "fallback": 6
+    },
+    "mappingRulesByDatasetType": {
+      "accommodation": 69,
+      "event": 148,
+      "gastro": 26,
+      "package": 83,
+      "poi": 503,
+      "tour": 26
+    },
+    "mappingRulesBySystem": {
+      "damas": 110,
+      "feratel": 85,
+      "outdooractive": 432,
+      "tis-unterkuenfte": 1,
+      "tis-event": 20,
+      "tis-gastro": 7,
+      "bookingkit": 3,
+      "regiondo": 55,
+      "tis-poi": 142
+    },
+    "criticalCorrection": "Outdooractive Event blocks at extraction lines 589-728 are classified as Event, not POI. The prior extraction context remained POI across those comments.",
+    "odtaStatus": "No verified SaTourN-to-ODTA mapping rules were supplied. An ODTA vocabulary/specification must not be presented as a confirmed mapping."
+  }
+}

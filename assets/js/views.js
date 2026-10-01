@@ -1,395 +1,185 @@
 import { hrefFor } from './router.js';
 
-const DIMENSION_LABELS = {
-  category: 'Kategorien', feature: 'Merkmale', field: 'Felder', textField: 'Textfelder',
-  checkbox: 'Checkboxen', value: 'Werte', other: 'Weitere',
-};
-
-const POI_PROPERTY_DIMENSIONS = {
-  'odta:kindOfPOI': 'category',
-  'schema:amenityFeature': 'feature',
-};
-
-const PROPERTY_LABELS = {
-  'schema:name': 'Name', 'schema:description': 'Beschreibung', 'schema:identifier': 'Kennung',
-  'schema:image': 'Medien', 'schema:url': 'URL', 'schema:address': 'Adresse',
-  'schema:geo': 'Geodaten', 'schema:telephone': 'Telefon', 'schema:keywords': 'Schlagwörter',
-  'schema:openingHoursSpecification': 'Öffnungszeiten', 'schema:contactPoint': 'Kontakt',
-  'schema:amenityFeature': 'Merkmale', 'odta:kindOfPOI': 'Kategorien',
-};
-
-const BEHAVIOR_LABELS = {
-  noTarget: 'ohne Zuordnung', noImport: 'nicht übernehmen', fallback: 'Fallback',
-  passthrough: 'unverändert übernehmen', unknown: 'ungeklärt',
-};
+const DIMENSIONS = { category: 'Kategorien', feature: 'Merkmale' };
+const VIEW_LABELS = { mapping: 'Zuordnungen', routing: 'Routing', fallback: 'Fallbacks', structure: 'SaTourN-Struktur' };
 
 function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"]/g, (character) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
-  })[character]);
+  return String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 }
 
 function naturalSort(a, b) {
-  return String(a).localeCompare(String(b), 'de', { sensitivity: 'base', numeric: true });
+  return String(a ?? '').localeCompare(String(b ?? ''), 'de', { sensitivity: 'base', numeric: true });
 }
 
-function systemLabel(data, id) {
-  return data.systemById.get(id)?.label ?? id;
-}
-
-function datasetLabel(data, id) {
-  return data.datasetById.get(id)?.label ?? id;
-}
+function systemLabel(data, id) { return data.systemsById.get(id)?.label ?? id ?? '–'; }
+function datasetLabel(data, id) { return data.datasetById.get(id)?.label ?? id ?? '–'; }
 
 function link(label, changes, replace = false, className = '') {
-  return `<a class="${className}" href="${escapeHtml(hrefFor(changes, replace))}" data-nav>${escapeHtml(label)}</a>`;
+  return `<a${className ? ` class="${escapeHtml(className)}"` : ''} href="${escapeHtml(hrefFor(changes, replace))}" data-nav>${escapeHtml(label)}</a>`;
 }
 
-function breadcrumb(items) {
-  return `<nav class="breadcrumb" aria-label="Brotkrümelnavigation">${items.map((item, index) => {
-    const content = item.href ? `<a href="${escapeHtml(item.href)}" data-nav>${escapeHtml(item.label)}</a>` : `<span aria-current="page">${escapeHtml(item.label)}</span>`;
-    return `${index ? '<span aria-hidden="true">›</span>' : ''}${content}`;
-  }).join('')}</nav>`;
+function breadcrumbs(items) {
+  return `<nav class="breadcrumb" aria-label="Brotkrümelnavigation">${items.map((item, index) => `${index ? '<span aria-hidden="true">›</span>' : ''}${item.href ? `<a href="${escapeHtml(item.href)}" data-nav>${escapeHtml(item.label)}</a>` : `<span aria-current="page">${escapeHtml(item.label)}</span>`}`).join('')}</nav>`;
 }
 
-function behaviorBadge(mapping) {
-  const label = BEHAVIOR_LABELS[mapping.behavior];
-  return label ? `<span class="status status-${escapeHtml(mapping.behavior)}">${escapeHtml(label)}</span>` : '';
-}
+function activeRules(data, kind) { return data.rulesByKind.get(kind) ?? []; }
+function typeRules(data, kind, type) { return activeRules(data, kind).filter((rule) => rule.source?.datasetType === type || rule.target?.datasetType === type); }
 
-function details(mapping, data) {
+function details(rule) {
+  const provenance = rule.provenance ?? [];
   const rows = [
-    ['Regel-ID', mapping.id],
-    ['Quellsystem', systemLabel(data, mapping.source.system)],
-    ['Quell-Datentyp', mapping.source.datasetType],
-    ['Dimension', DIMENSION_LABELS[mapping.source.dimension] ?? mapping.source.dimension],
-    ['Schlüsseltyp', mapping.source.keyType],
-    ['Technischer Schlüssel', mapping.source.key],
-    ['Sprache', mapping.source.language],
-    ['Verhalten', mapping.behavior],
-    ['Quellzeile', mapping.provenance?.sourceLine],
-  ].filter(([, value]) => value !== null && value !== undefined);
-  return `<details class="technical-details"${mapping.id === new URLSearchParams(location.search).get('term') ? ' open' : ''}>
-    <summary>Technische Details</summary>
-    <dl>${rows.map(([key, value]) => `<div><dt>${escapeHtml(key)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
-    ${mapping.provenance?.raw ? `<details class="raw"><summary>Rohmapping anzeigen</summary><pre>${escapeHtml(mapping.provenance.raw)}</pre></details>` : ''}
+    ['Regel-ID', rule.id], ['Regelart', rule.ruleKind], ['Verhalten', rule.behavior],
+    ['Quell-Datensatzart', rule.source?.datasetTypeRaw ?? rule.source?.datasetType],
+    ['Dimension', rule.source?.dimension], ['Sprache', rule.source?.language],
+    ['Zielfeld', rule.target?.field], ['Feldnachweis', rule.target?.fieldEvidence],
+    ['Marker', (rule.technicalMarkers ?? []).join(', ')],
+  ].filter(([, value]) => value !== undefined && value !== null && value !== '');
+  return `<details class="technical-details"${new URLSearchParams(location.search).get('term') === rule.id ? ' open' : ''}>
+    <summary>Technische Details</summary><dl>${rows.map(([name, value]) => `<div><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
+    ${provenance.length ? `<div class="provenance"><strong>Provenienz</strong><ul>${provenance.map((item) => `<li>${escapeHtml(item.sourceFile)}${item.sourceLine ? `, Zeile ${escapeHtml(item.sourceLine)}` : ''}${item.market ? `, Markt ${escapeHtml(item.market)}` : ''}${item.raw ? `<details class="raw"><summary>Quelltext</summary><pre>${escapeHtml(item.raw)}</pre></details>` : ''}</li>`).join('')}</ul></div>` : ''}
   </details>`;
 }
 
-function scopedNotices(data, state) {
-  const notices = data.notices.filter((notice) => {
-    const scope = notice.scope ?? {};
-    if (scope.system && state.system && scope.system !== state.system) return false;
-    if (scope.system && !state.system && scope.system !== 'odta') return false;
-    if (scope.datasetType && state.type) {
-      const aliases = data.datasetById.get(state.type)?.sourceAliases ?? [];
-      if (scope.datasetType !== state.type && !aliases.includes(scope.datasetType)) return false;
-    }
-    return !scope.system || scope.system === state.system;
-  });
-  if (!notices.length) return '';
-  return `<div class="notices">${notices.map((notice) => `<aside class="notice notice-${escapeHtml(notice.status)}">
-    <strong>${escapeHtml(notice.title)}</strong><span>${escapeHtml(notice.text)}</span>
-  </aside>`).join('')}</div>`;
+function ruleNotice(rule) {
+  const notes = [...(rule.notes ?? []), ...(rule.reviewFlag ? ['Prüfhinweis vorhanden'] : [])];
+  return notes.length ? `<p class="mapping-note">${escapeHtml(notes.join(' · '))}</p>` : '';
+}
+
+function targetChips(rule) {
+  if (rule.behavior === 'noImport') return '<span class="status status-noImport">nicht übernehmen</span>';
+  if (rule.behavior === 'noTarget') return '<span class="status status-noTarget">kein Zielwert</span>';
+  const values = rule.target?.values ?? [];
+  return values.length ? values.map((value) => `<span>${escapeHtml(value)}</span>`).join('') : '<span class="muted">Kein Zielwert</span>';
 }
 
 function home(data) {
-  const inbound = data.mappings.filter((mapping) => mapping.direction === 'inbound' && mapping.datasetTypeId);
-  const cards = data.datasetTypes.map((type) => {
-    const rules = inbound.filter((mapping) => mapping.datasetTypeId === type.id);
-    if (!rules.length) return '';
-    const systems = [...new Set(rules.map((mapping) => mapping.source.system))]
-      .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
-    return `<a class="dataset-card" href="${escapeHtml(hrefFor({ direction: 'inbound', type: type.id }, true))}" data-nav>
-      <span class="dataset-icon" aria-hidden="true">${escapeHtml(type.label.slice(0, 1))}</span>
-      <span class="dataset-copy"><strong>${escapeHtml(type.label)}</strong><small>${systems.map((id) => escapeHtml(systemLabel(data, id))).join(' · ')}</small></span>
-      <span class="card-count">${rules.length}<small>Zuordnungen</small></span><span class="card-arrow" aria-hidden="true">→</span>
-    </a>`;
+  const types = data.datasetTypes.filter((type) => type.mappingSourceAvailable);
+  const cards = types.map((type) => {
+    const mappings = activeRules(data, 'mapping').filter((rule) => rule.source.datasetType === type.id);
+    const systems = [...new Set(mappings.map((rule) => rule.source.system))].sort(naturalSort);
+    const routing = activeRules(data, 'routing').filter((rule) => rule.target?.datasetType === type.id).length;
+    const fallback = activeRules(data, 'fallback').filter((rule) => rule.source.datasetType === type.id).length;
+    const supplements = [routing ? `${routing} Routing` : '', fallback ? `${fallback} Fallbacks` : ''].filter(Boolean).join(' · ');
+    return `<a class="dataset-card" href="${escapeHtml(hrefFor({ type: type.id, view: 'mapping' }, true))}" data-nav>
+      <span class="dataset-icon" aria-hidden="true">${escapeHtml(type.label.slice(0, 1))}</span><span class="dataset-copy"><strong>${escapeHtml(type.label)}</strong><small>${systems.map((id) => escapeHtml(systemLabel(data, id))).join(' · ')}</small>${supplements ? `<small>${escapeHtml(supplements)}</small>` : ''}</span>
+      <span class="card-count">${mappings.length}<small>Regeln</small></span><span class="card-arrow" aria-hidden="true">→</span></a>`;
   }).join('');
-  return `<section class="hero"><p class="eyebrow">Aktueller Mappingstandard</p><h1>Was wird wie zugeordnet?</h1><p>Datensatzart auswählen und Zuordnungen aus Quell- oder SaTourN-Sicht nachschlagen.</p></section>
-    <section aria-labelledby="imports-title"><div class="section-heading"><div><p class="eyebrow">Quellsysteme → SaTourN</p><h2 id="imports-title">Importe nach SaTourN</h2></div><span>${inbound.length} Regeln</span></div><div class="dataset-grid">${cards}</div></section>
-    <section class="export-section" aria-labelledby="export-title"><div class="section-heading"><div><p class="eyebrow">SaTourN → Zielsystem</p><h2 id="export-title">Export aus SaTourN</h2></div></div>
-      <a class="dataset-card export-card" href="${escapeHtml(hrefFor({ direction: 'outbound', system: 'odta' }, true))}" data-nav>
-        <span class="dataset-icon" aria-hidden="true">O</span><span class="dataset-copy"><strong>ODTA</strong><small>SaTourN → ODTA</small></span><span class="status status-open">Datenquelle offen</span><span class="card-arrow" aria-hidden="true">→</span>
-      </a></section>`;
+  return `<section class="hero"><p class="eyebrow">Autoritativer Mappingstandard</p><h1>SaTourN Mapping Hub</h1><p>Importregeln, Routing, Fallbacks und beobachtete SaTourN-Strukturen.</p></section>
+    <section aria-labelledby="imports-title"><div class="section-heading"><div><p class="eyebrow">Quellsysteme → SaTourN</p><h2 id="imports-title">Import-Datensatzarten</h2></div><span>${data.meta.totalActiveLogicalRules} aktive Regeln</span></div><div class="dataset-grid">${cards}</div></section>
+    <section class="reference-grid" aria-labelledby="references-title"><div class="section-heading"><div><p class="eyebrow">Einordnung</p><h2 id="references-title">Referenzen und Zielsysteme</h2></div></div>
+      <a class="reference-card" href="${escapeHtml(hrefFor({ view: 'reference', system: 'odta' }, true))}" data-nav><strong>ODTA</strong><span>Keine bestätigten Exportregeln</span></a>
+      <a class="reference-card" href="${escapeHtml(hrefFor({ view: 'reference', system: 'satourn' }, true))}" data-nav><strong>SaTourN-Beispielstruktur</strong><span>Beobachtete XML-Felder und Vokabulare</span></a>
+    </section>`;
 }
 
-function navigationControls(data, state, rules) {
-  const dimensions = [...new Set(rules.map((mapping) => mapping.source.dimension))].sort();
+function mappingControls(data, state, rules, type) {
+  const dimensions = [...new Set(rules.map((rule) => rule.source.dimension).filter((value) => DIMENSIONS[value]))].sort();
   const dimension = dimensions.includes(state.dimension) ? state.dimension : dimensions[0];
-  const dimensionRules = rules.filter((mapping) => mapping.source.dimension === dimension);
-  const systems = [...new Set(dimensionRules.map((mapping) => mapping.source.system))]
-    .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
-  const mode = state.mode === 'satourn' ? 'satourn' : 'source';
+  const dimensionRules = rules.filter((rule) => rule.source.dimension === dimension);
+  const systems = [...new Set(dimensionRules.map((rule) => rule.source.system))].sort(naturalSort);
+  const mode = state.mode === 'target' ? 'target' : 'source';
   const system = systems.includes(state.system) ? state.system : systems[0];
-  return { dimensions, dimension, dimensionRules, systems, mode, system, html: `
-    <div class="tabs" aria-label="Informationsart">${dimensions.map((id) => link(DIMENSION_LABELS[id] ?? id, { dimension: id, system: null, term: null }, false, id === dimension ? 'active' : '')).join('')}</div>
-    <div class="toolbar"><div class="segmented" aria-label="Leserichtung">
-      ${link('Quellsystem → SaTourN', { mode: 'source', system: system, term: null }, false, mode === 'source' ? 'active' : '')}
-      ${link('SaTourN → Quellsysteme', { mode: 'satourn', system: null, term: null }, false, mode === 'satourn' ? 'active' : '')}
-    </div>${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { system: id, term: null }, false, id === system ? 'active' : '')).join('')}</div>` : ''}</div>`, };
+  return { dimension, dimensionRules, systems, system, mode, html: `
+    <div class="tabs" aria-label="Dimension">${dimensions.map((id) => link(DIMENSIONS[id], { type, view: 'mapping', dimension: id, system: null, term: null }, true, id === dimension ? 'active' : '')).join('')}</div>
+    <div class="toolbar"><div class="segmented" aria-label="Leserichtung">${link('Quellsystem → SaTourN', { type, view: 'mapping', dimension, mode: 'source', system, term: null }, true, mode === 'source' ? 'active' : '')}${link('SaTourN → Quellsysteme', { type, view: 'mapping', dimension, mode: 'target', system: null, term: null }, true, mode === 'target' ? 'active' : '')}</div>
+    ${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { type, view: 'mapping', dimension, mode, system: id, term: null }, true, id === system ? 'active' : '')).join('')}</div>` : ''}</div>` };
 }
 
-function sourceList(data, rules, state) {
-  const visible = rules.filter((mapping) => mapping.source.system === state.system)
-    .sort((a, b) => naturalSort(a.source.label ?? a.source.key, b.source.label ?? b.source.key));
-  if (!visible.length) return '<div class="empty-state"><h2>Keine Zuordnungen</h2><p>Für diese Auswahl sind im aktuellen Mappingstand keine Zuordnungen hinterlegt.</p></div>';
-  return `<div class="mapping-list">${visible.map((mapping) => `<article class="mapping-item" id="${escapeHtml(mapping.id)}">
-    <div class="mapping-main"><div class="source-value"><span class="system-kicker">${escapeHtml(systemLabel(data, mapping.source.system))}</span><h3>${escapeHtml(mapping.source.label ?? mapping.source.key)}</h3>${behaviorBadge(mapping)}</div>
-      <span class="mapping-arrow" aria-hidden="true">→</span><div class="target-values">${mapping.targets.length ? mapping.targets.map((target) => `<span>${escapeHtml(target.label ?? target.key)}</span>`).join('') : `<span class="muted">Kein Zielwert</span>`}</div></div>
-    ${mapping.display?.note ? `<p class="mapping-note">${escapeHtml(mapping.display.note)}</p>` : ''}${details(mapping, data)}
-  </article>`).join('')}</div>`;
+function sourceList(data, rules, system) {
+  const visible = rules.filter((rule) => rule.source.system === system).sort((a, b) => naturalSort(a.source.value, b.source.value));
+  if (!visible.length) return '<div class="empty-state"><h2>Keine Zuordnungen</h2><p>Für diese Auswahl sind keine Regeln hinterlegt.</p></div>';
+  return `<div class="mapping-list">${visible.map((rule) => `<article class="mapping-item" id="${escapeHtml(rule.id)}"><div class="mapping-main"><div class="source-value"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3></div><span class="mapping-arrow" aria-hidden="true">→</span><div class="target-values">${targetChips(rule)}</div></div>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
 }
 
-function poiValueMatches(mapping, value) {
-  if (value.startsWith('__mapping:')) return mapping.id === value.slice('__mapping:'.length);
-  if (value.startsWith('__behavior:')) {
-    return mapping.targets.length === 0 && mapping.behavior === value.slice('__behavior:'.length);
-  }
-  return mapping.targets.some((target) => (target.label ?? target.key) === value);
-}
-
-function poiControls(data, state, rules) {
-  const dimensions = ['category', 'feature'].filter((dimension) => rules.some((mapping) => mapping.source.dimension === dimension));
-  const dimension = dimensions.includes(state.dimension) ? state.dimension : dimensions[0];
-  const dimensionRules = rules.filter((mapping) => mapping.source.dimension === dimension);
-  const selectedRules = state.value ? dimensionRules.filter((mapping) => poiValueMatches(mapping, state.value)) : dimensionRules;
-  const systems = [...new Set(selectedRules.map((mapping) => mapping.source.system))]
-    .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
-  const system = systems.includes(state.system) ? state.system : systems[0];
-  const mode = state.mode === 'satourn' ? 'satourn' : 'source';
-  const toolbar = state.value ? `<div class="toolbar"><div class="segmented" aria-label="Leserichtung">
-      ${link('Quellsystem → SaTourN', { mode: 'source', system: system, term: null }, false, mode === 'source' ? 'active' : '')}
-      ${link('SaTourN → Quellsysteme', { mode: 'satourn', system: null, term: null }, false, mode === 'satourn' ? 'active' : '')}
-    </div>${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { system: id, term: null }, false, id === system ? 'active' : '')).join('')}</div>` : ''}</div>` : '';
-  return {
-    dimension, dimensionRules, selectedRules, system, mode,
-    html: toolbar,
-  };
-}
-
-function poiDirectory(data, rules, dimension) {
+function reverseList(data, rules, type, dimension) {
   const groups = new Map();
-  for (const mapping of rules) {
-    const targets = mapping.targets.length
-      ? mapping.targets.map((target) => ({ key: target.label ?? target.key, label: target.label ?? target.key }))
-      : [{ key: `__behavior:${mapping.behavior}`, label: BEHAVIOR_LABELS[mapping.behavior] ?? 'Ohne Zielwert' }];
-    for (const target of targets) {
-      if (!groups.has(target.key)) groups.set(target.key, { ...target, mappings: new Map() });
-      groups.get(target.key).mappings.set(mapping.id, mapping);
-    }
-  }
-  const rows = [...groups.values()].sort((a, b) => naturalSort(a.label, b.label));
-  if (!rows.length) return '<div class="empty-state"><h2>Keine POI-Zuordnungen</h2><p>Für diese Dimension sind keine Zuordnungen hinterlegt.</p></div>';
-  return `<div class="poi-directory"><table class="poi-table"><thead><tr><th>${dimension === 'category' ? 'SaTourN-Kategorie' : 'SaTourN-Merkmal'}</th><th>Quellzuordnungen</th><th>Quellsysteme</th></tr></thead><tbody>${rows.map((group) => {
-    const mappings = [...group.mappings.values()];
-    const systems = [...new Set(mappings.map((mapping) => mapping.source.system))]
-      .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
-    return `<tr><td>${link(group.label, { value: group.key, system: null, term: null }, false, 'poi-value-link')}</td><td>${mappings.length}</td><td>${systems.map((id) => escapeHtml(systemLabel(data, id))).join(' · ')}</td></tr>`;
-  }).join('')}</tbody></table></div>`;
-}
-
-function localName(value) {
-  return String(value ?? '').replace(/^.*[:/#]/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
-}
-
-function propertyLabel(path) {
-  return PROPERTY_LABELS[path] ?? localName(path);
-}
-
-function shapeLabel(shape, fallback = 'Struktur') {
-  const classes = shape?.['sh:class'] ?? shape?.['sh:targetClass'] ?? [];
-  return localName(classes[0] ?? fallback);
-}
-
-function firstComment(property) {
-  const comment = property['rdfs:comment'];
-  if (!Array.isArray(comment)) return '';
-  return comment.find((item) => item['@language'] === 'de')?.['@value']
-    ?? comment[0]?.['@value']
-    ?? '';
-}
-
-function orderedProperties(shape) {
-  const properties = shape?.['sh:property'] ?? [];
-  const byPath = new Map(properties.map((property) => [property['sh:path'], property]));
-  const ordered = (shape?.['ds:propertyDisplayOrder'] ?? []).map((path) => byPath.get(path)).filter(Boolean);
-  return [...ordered, ...properties.filter((property) => !ordered.includes(property))];
-}
-
-function rangeTypes(data, property) {
-  return (property['sh:or'] ?? []).map((range) => {
-    if (range['ds:grammarNodeType'] === 'DataType') return { label: localName(range['sh:datatype']), href: null };
-    const reference = range['sh:node']?.['@id'];
-    if (!reference) return { label: localName(range['ds:grammarNodeType']), href: null };
-    const shape = data.shapeById.get(reference) ?? range['sh:node'];
-    return {
-      label: shapeLabel(shape, reference),
-      href: hrefFor({ direction: 'inbound', type: 'poi', node: reference, property: null, dimension: null, value: null, system: null, term: null }, true),
-    };
-  });
-}
-
-function specificationProperties(data, shape) {
-  const rows = orderedProperties(shape).map((property) => {
-    const path = property['sh:path'];
-    const dimension = POI_PROPERTY_DIMENSIONS[path];
-    const propertyHref = dimension
-      ? hrefFor({ direction: 'inbound', type: 'poi', property: dimension, dimension, node: null, value: null, system: null, term: null }, true)
-      : null;
-    const name = propertyHref
-      ? `<a class="poi-value-link" href="${escapeHtml(propertyHref)}" data-nav>${escapeHtml(propertyLabel(path))}</a>`
-      : `<strong>${escapeHtml(propertyLabel(path))}</strong>`;
-    const cardinality = `${property['sh:minCount'] ?? 0}${property['sh:maxCount'] === 1 ? '–1' : '–*'}`;
-    const types = rangeTypes(data, property).map((range) => range.href
-      ? `<a class="poi-value-link" href="${escapeHtml(range.href)}" data-nav>${escapeHtml(range.label)}</a>`
-      : escapeHtml(range.label)).join(' · ');
-    return `<tr><td>${name}</td><td>${escapeHtml(cardinality)}</td><td>${types}</td><td>${escapeHtml(firstComment(property))}</td></tr>`;
-  }).join('');
-  return `<div class="poi-directory property-directory"><table class="poi-table property-table"><thead><tr><th>Eigenschaft</th><th>Kardinalität</th><th>Typ</th><th>Beschreibung</th></tr></thead><tbody>${rows}</tbody></table></div>`;
-}
-
-function poiMappingTable(data, rules, state) {
-  const visible = rules.filter((mapping) => mapping.source.system === state.system)
-    .sort((a, b) => naturalSort(a.source.label ?? a.source.key, b.source.label ?? b.source.key));
-  if (!visible.length) return '<div class="empty-state"><h2>Keine Zuordnungen</h2><p>Für diese Auswahl sind keine Zuordnungen hinterlegt.</p></div>';
-  return `<div class="poi-directory poi-mapping-table"><table class="poi-table"><thead><tr><th>Quellsystem</th><th>Quellwert</th><th>SaTourN-Zielwerte</th><th>Regel</th></tr></thead><tbody>${visible.map((mapping) => `<tr>
-    <td>${escapeHtml(systemLabel(data, mapping.source.system))}</td>
-    <td><strong>${escapeHtml(mapping.source.label ?? mapping.source.key)}</strong></td>
-    <td>${mapping.targets.length ? mapping.targets.map((target) => escapeHtml(target.label ?? target.key)).join(' · ') : '<span class="muted">Kein Zielwert</span>'}</td>
-    <td>${behaviorBadge(mapping)}${mapping.display?.note ? `<small class="poi-rule-note">${escapeHtml(mapping.display.note)}</small>` : ''}${details(mapping, data)}</td>
-  </tr>`).join('')}</tbody></table></div>`;
-}
-
-function poiView(data, state, rules) {
-  const specificationNode = state.node ? data.shapeById.get(state.node) : data.poiSpecification;
-  const propertyDimension = state.property === 'category' ? 'category' : state.property === 'feature' ? 'feature' : null;
-  if (!propertyDimension) {
-    const label = state.node ? shapeLabel(specificationNode, 'POI') : 'POI';
-    const crumb = breadcrumb([
-      { label: 'Start', href: './index.html' },
-      { label: 'Importe', href: './index.html' },
-      ...(state.node ? [{ label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) }, { label }] : [{ label: 'POI' }]),
-    ]);
-    if (!specificationNode) return '<div class="error-state"><h1>POI-Spezifikation konnte nicht geladen werden</h1></div>';
-    return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(label)}</h1><p>Eigenschaften gemäß ODTA-Domänenspezifikation</p></section>${specificationProperties(data, specificationNode)}`;
-  }
-
-  /* Legacy placeholder-property route; POI navigation is now driven by the specification above.
-    const crumb = breadcrumb([
-      { label: 'Start', href: './index.html' },
-      { label: 'Importe', href: './index.html' },
-      { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
-      { label: property.label },
-    ]);
-    return `${crumb}<section class="view-heading"><p class="eyebrow">POI-Eigenschaft</p><h1>${escapeHtml(property.label)}</h1><p>Für diese Eigenschaft sind im aktuellen Mappingstand keine Zuordnungen hinterlegt.</p></section><div class="empty-state"><h2>Noch keine Mappingdaten</h2><p>Die Eigenschaft ist als POI-Navigation vorgesehen, aber in der geladenen Datenbasis noch nicht enthalten.</p></div>`;
-  }
-
-  */
-  const stateWithDimension = { ...state, dimension: propertyDimension };
-  const termMapping = rules.find((mapping) => mapping.id === state.term);
-  const value = state.value ?? (termMapping ? `__mapping:${termMapping.id}` : null);
-  const controls = poiControls(data, { ...stateWithDimension, value }, rules);
-  const selected = Boolean(value);
-  const groupLabel = value?.startsWith('__behavior:')
-    ? BEHAVIOR_LABELS[value.slice('__behavior:'.length)] ?? 'Ohne Zielwert'
-    : value?.startsWith('__mapping:') ? termMapping?.source.label ?? termMapping?.source.key : value;
-  const crumb = breadcrumb([
-    { label: 'Start', href: './index.html' },
-    { label: 'Importe', href: './index.html' },
-    { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
-    selected
-      ? { label: DIMENSION_LABELS[propertyDimension], href: hrefFor({ direction: 'inbound', type: 'poi', property: state.property, dimension: propertyDimension, value: null, system: null, term: null }, true) }
-      : { label: DIMENSION_LABELS[propertyDimension] },
-    ...(selected ? [{ label: groupLabel }] : []),
-  ]);
-  const selectedRules = selected ? controls.selectedRules : [];
-  const systemRules = controls.mode === 'source'
-    ? selectedRules.filter((mapping) => mapping.source.system === controls.system)
-    : selectedRules;
-  const viewState = { ...stateWithDimension, type: 'poi', dimension: controls.dimension, system: controls.system };
-  return `${crumb}<section class="view-heading"><p class="eyebrow">POI-Eigenschaft</p><h1>${escapeHtml(DIMENSION_LABELS[propertyDimension])}</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
-    ${controls.html}${selected ? `<div class="poi-detail-heading"><h2>${escapeHtml(groupLabel)}</h2>${link('Zur Übersicht', { value: null, system: null, term: null }, false, 'poi-back-link')}</div>` : ''}
-    ${scopedNotices(data, viewState)}
-    ${selected
-      ? (controls.mode === 'source' ? poiMappingTable(data, systemRules, viewState) : reverseList(data, systemRules))
-      : poiDirectory(data, controls.dimensionRules, controls.dimension)}
-    ${!selected ? '<p class="poi-scope-note">Für POI sind derzeit Kategorien und Merkmale gemappt. Feldzuordnungen wie Name oder URL sind in der geladenen Datenbasis nicht enthalten.</p>' : ''}`;
-}
-
-function reverseList(data, rules) {
-  const targets = new Map();
-  for (const mapping of rules) {
-    for (const target of mapping.targets) {
-      const key = [target.datasetType, target.dimension, target.key, target.label, target.language].join('\u0000');
-      if (!targets.has(key)) targets.set(key, { target, mappings: [] });
-      targets.get(key).mappings.push(mapping);
-    }
-  }
-  const groups = [...targets.values()].sort((a, b) => naturalSort(a.target.label ?? a.target.key, b.target.label ?? b.target.key));
-  if (!groups.length) return '<div class="empty-state"><h2>Keine Zielwerte</h2><p>Für diese Auswahl sind keine SaTourN-Zielwerte hinterlegt.</p></div>';
-  return `<div class="reverse-list">${groups.map((group) => {
-    const bySystem = new Map();
-    for (const mapping of group.mappings) {
-      if (!bySystem.has(mapping.source.system)) bySystem.set(mapping.source.system, []);
-      bySystem.get(mapping.source.system).push(mapping);
-    }
-    const systemGroups = [...bySystem].sort((a, b) => (data.systemById.get(a[0])?.sortOrder ?? 999) - (data.systemById.get(b[0])?.sortOrder ?? 999));
-    return `<article class="reverse-item"><div class="reverse-heading"><span class="system-kicker">SaTourN</span><h3>${escapeHtml(group.target.label ?? group.target.key)}</h3><small>${group.mappings.length} Quellzuordnung${group.mappings.length === 1 ? '' : 'en'}</small></div>
-      <div class="reverse-systems">${systemGroups.map(([system, mappings]) => `<details><summary><strong>${escapeHtml(systemLabel(data, system))}</strong><span>${mappings.length}</span></summary><ul>${mappings.sort((a, b) => naturalSort(a.source.label, b.source.label)).map((mapping) => `<li><a href="${escapeHtml(hrefFor({ mode: 'source', system, term: mapping.id }))}" data-nav>${escapeHtml(mapping.source.label ?? mapping.source.key)}</a>${mapping.targets.length > 1 ? '<small>setzt mehrere Werte</small>' : ''}</li>`).join('')}</ul></details>`).join('')}</div></article>`;
+  rules.filter((rule) => rule.behavior === 'map').forEach((rule) => (rule.target?.values ?? []).forEach((value) => {
+    const key = `${rule.target.datasetType}\u0000${rule.target.dimension}\u0000${value}`;
+    if (!groups.has(key)) groups.set(key, { value, rules: [] });
+    groups.get(key).rules.push(rule);
+  }));
+  const entries = [...groups.values()].sort((a, b) => naturalSort(a.value, b.value));
+  if (!entries.length) return '<div class="empty-state"><h2>Keine Zielwerte</h2><p>Für diese Auswahl sind keine SaTourN-Zielwerte hinterlegt.</p></div>';
+  return `<div class="reverse-list">${entries.map((entry) => {
+    const systems = new Map();
+    entry.rules.forEach((rule) => { if (!systems.has(rule.source.system)) systems.set(rule.source.system, []); systems.get(rule.source.system).push(rule); });
+    return `<article class="reverse-item"><div class="reverse-heading"><span class="system-kicker">SaTourN</span><h3>${escapeHtml(entry.value)}</h3><small>${entry.rules.length} Quellzuordnung${entry.rules.length === 1 ? '' : 'en'}</small></div><div class="reverse-systems">${[...systems.entries()].sort(([a], [b]) => naturalSort(systemLabel(data, a), systemLabel(data, b))).map(([system, sources]) => `<details><summary><strong>${escapeHtml(systemLabel(data, system))}</strong><span>${sources.length}</span></summary><ul>${sources.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<li><a href="${escapeHtml(hrefFor({ type, view: 'mapping', dimension, mode: 'source', system, term: rule.id }, true))}" data-nav>${escapeHtml(rule.source.value)}</a>${rule.oneToMany ? '<small> setzt mehrere Zielwerte</small>' : ''}</li>`).join('')}</ul></details>`).join('')}</div></article>`;
   }).join('')}</div>`;
 }
 
-function inboundView(data, state) {
-  const type = data.datasetById.has(state.type) ? state.type : data.datasetTypes.find((item) => data.mappings.some((mapping) => mapping.datasetTypeId === item.id))?.id;
-  const rules = data.mappings.filter((mapping) => mapping.direction === 'inbound' && mapping.datasetTypeId === type);
-  if (!type || !rules.length) return home(data);
-  const controls = navigationControls(data, state, rules);
-  const normalizedState = { ...state, type, dimension: controls.dimension, mode: controls.mode, system: controls.system };
-  const crumb = breadcrumb([
-    { label: 'Start', href: './index.html' },
-    { label: 'Importe', href: './index.html' },
-    { label: datasetLabel(data, type), href: hrefFor({ direction: 'inbound', type }, true) },
-    { label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension, href: hrefFor({ direction: 'inbound', type, dimension: controls.dimension }, true) },
-    { label: controls.mode === 'source' ? systemLabel(data, controls.system) : 'SaTourN-Sicht' },
-  ]);
-  return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(datasetLabel(data, type))}</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
-    ${controls.html}${scopedNotices(data, normalizedState)}
-    ${controls.mode === 'source' ? sourceList(data, controls.dimensionRules, normalizedState) : reverseList(data, controls.dimensionRules)}`;
+function routingView(data, type, rules) {
+  if (!rules.length) return '<div class="empty-state"><h2>Kein Routing</h2><p>Für diese Datensatzart gibt es keine bestätigten Routingregeln.</p></div>';
+  return `<div class="routing-list">${rules.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<article class="routing-item" id="${escapeHtml(rule.id)}"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3><p>wird als <strong>${escapeHtml(datasetLabel(data, rule.target.datasetType))}</strong> verarbeitet.</p>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
 }
 
-function outboundView(data, state) {
-  const rules = data.mappings.filter((mapping) => mapping.direction === 'outbound');
-  const crumb = breadcrumb([{ label: 'Start', href: './index.html' }, { label: 'Export', href: './index.html' }, { label: 'ODTA' }]);
-  return `${crumb}<section class="view-heading"><p class="eyebrow">Export aus SaTourN</p><h1>SaTourN → ODTA</h1><p>Exportzuordnungen werden getrennt von den Importen dargestellt.</p></section>
-    ${scopedNotices(data, { ...state, system: 'odta' })}
-    ${rules.length ? sourceList(data, rules, { ...state, system: 'satourn' }) : '<div class="empty-state"><h2>Noch keine Exportregeln veröffentlicht</h2><p>Die gelieferte Datenbasis enthält derzeit keinen belastbaren SaTourN→ODTA-Mappingbestand. Der vorhandene ODTA-Wertekatalog wird nicht als Zuordnung interpretiert.</p></div>'}`;
+function fallbackText(rule) {
+  if (rule.fallback?.mode === 'passSourceValue') return 'FOREIGNVALUE: Quellwert unverändert übernehmen.';
+  if (rule.fallback?.mode === 'literal') return `Fester Fallbackwert: ${rule.fallback.value ?? '–'}.`;
+  if (rule.fallback?.mode === 'empty') return 'Leerer Fallback: Es wird kein Wert gesetzt.';
+  return 'Fallbackregel';
+}
+
+function fallbackView(data, rules) {
+  if (!rules.length) return '<div class="empty-state"><h2>Keine Fallbacks</h2><p>Für diese Datensatzart gibt es keine bestätigten Fallbackregeln.</p></div>';
+  return `<div class="fallback-list">${rules.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<article class="fallback-item" id="${escapeHtml(rule.id)}"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3><p>${escapeHtml(fallbackText(rule))}</p>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
+}
+
+function structureView(data, type) {
+  const profile = data.sampleProfile[type];
+  const fields = data.fields.filter((field) => field.datasetType === type).sort((a, b) => naturalSort(a.field, b.field));
+  const vocabulary = data.vocabularies.filter((row) => row.datasetType === type).sort((a, b) => naturalSort(a.field, b.field) || naturalSort(a.value, b.value));
+  if (!profile && !fields.length) return '<div class="empty-state"><h2>Keine Beispielstruktur</h2><p>Für diese Datensatzart liegt kein beobachtetes SaTourN-Beispiel vor.</p></div>';
+  return `<section class="structure-summary"><p class="notice notice-info"><strong>Beobachtete Struktur</strong><span>Dies sind XML-Felder aus den gelieferten Beispieldaten, keine Importzuordnungen.</span></p>${profile?.sample ? `<p>Beispieldatei: <code>${escapeHtml(profile.sample)}</code></p>` : ''}
+    <h2>Felder</h2><div class="poi-directory"><table class="poi-table"><thead><tr><th>Feld</th><th>Vorkommen</th><th>Sprachen</th><th>Beispielwerte</th></tr></thead><tbody>${fields.map((field) => `<tr><td>${escapeHtml(field.field)}</td><td>${escapeHtml(field.occurrences)}</td><td>${escapeHtml(field.languages)}</td><td>${escapeHtml(field.examples)}</td></tr>`).join('')}</tbody></table></div>
+    ${vocabulary.length ? `<h2>Beobachtete Vokabulare</h2><div class="poi-directory"><table class="poi-table"><thead><tr><th>Feld</th><th>Wert</th><th>Vorkommen</th></tr></thead><tbody>${vocabulary.map((row) => `<tr><td>${escapeHtml(row.field)}</td><td>${escapeHtml(row.value)}</td><td>${escapeHtml(row.occurrences)}</td></tr>`).join('')}</tbody></table></div>` : ''}</section>`;
+}
+
+function datasetView(data, state) {
+  const type = data.datasetById.has(state.type) ? state.type : data.datasetTypes.find((item) => item.mappingSourceAvailable)?.id;
+  const typeMeta = data.datasetById.get(type);
+  if (!type || !typeMeta) return home(data);
+  const mappings = activeRules(data, 'mapping').filter((rule) => rule.source.datasetType === type);
+  const routing = activeRules(data, 'routing').filter((rule) => rule.target?.datasetType === type);
+  const fallbacks = activeRules(data, 'fallback').filter((rule) => rule.source.datasetType === type);
+  const hasStructure = Boolean(data.sampleProfile[type] || data.fields.some((field) => field.datasetType === type));
+  const allowedViews = ['mapping', routing.length ? 'routing' : null, fallbacks.length ? 'fallback' : null, hasStructure ? 'structure' : null].filter(Boolean);
+  const view = allowedViews.includes(state.view) ? state.view : (mappings.length ? 'mapping' : hasStructure ? 'structure' : allowedViews[0]);
+  const crumb = breadcrumbs([{ label: 'Start', href: './index.html' }, { label: datasetLabel(data, type) }]);
+  const tabs = `<div class="tabs view-tabs" aria-label="Ansicht">${allowedViews.map((id) => link(VIEW_LABELS[id], { type, view: id, dimension: null, system: null, mode: null, term: null }, true, id === view ? 'active' : '')).join('')}</div>`;
+  let content;
+  if (view === 'mapping') {
+    const controls = mappingControls(data, state, mappings, type);
+    content = `${controls.html}${controls.mode === 'source' ? sourceList(data, controls.dimensionRules, controls.system) : reverseList(data, controls.dimensionRules, type, controls.dimension)}`;
+  } else if (view === 'routing') content = routingView(data, type, routing);
+  else if (view === 'fallback') content = fallbackView(data, fallbacks);
+  else content = structureView(data, type);
+  return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(datasetLabel(data, type))}</h1><p>${mappings.length} Mappingregeln im autoritativen Bestand</p></section>${tabs}${content}`;
+}
+
+function referenceView(data, state) {
+  const odta = state.system === 'odta';
+  const crumb = breadcrumbs([{ label: 'Start', href: './index.html' }, { label: 'Referenzen und Zielsysteme' }]);
+  if (odta) return `${crumb}<section class="view-heading"><p class="eyebrow">Referenz</p><h1>ODTA</h1><p>ODTA ist als Referenz dokumentiert, nicht als bestätigtes SaTourN-Zielsystem.</p></section><div class="empty-state"><h2>Keine bestätigten Exportregeln</h2><p>Der autoritative Regelbestand enthält keine SaTourN→ODTA-Exportregeln. ODTA-Vokabulare dürfen nicht als Mapping interpretiert werden.</p></div>`;
+  const types = data.datasetTypes.filter((type) => data.sampleProfile[type.id] || data.fields.some((field) => field.datasetType === type.id));
+  return `${crumb}<section class="view-heading"><p class="eyebrow">Referenz</p><h1>SaTourN-Beispielstruktur</h1><p>Beobachtete XML-Felder, Häufigkeiten, Sprachen und Beispielwerte.</p></section><div class="dataset-grid">${types.map((type) => `<a class="dataset-card" href="${escapeHtml(hrefFor({ type: type.id, view: 'structure' }, true))}" data-nav><span class="dataset-icon" aria-hidden="true">${escapeHtml(type.label.slice(0, 1))}</span><span class="dataset-copy"><strong>${escapeHtml(type.label)}</strong><small>Beobachtete Struktur</small></span><span class="card-arrow" aria-hidden="true">→</span></a>`).join('')}</div>`;
 }
 
 function searchView(data, state) {
   const query = state.q?.trim() ?? '';
-  const folded = data.fold(query);
-  const matches = folded ? data.mappings.filter((mapping) => {
-    const values = [mapping.id, mapping.source.key, mapping.source.label, ...mapping.targets.flatMap((target) => [target.key, target.label])];
-    return values.some((value) => data.fold(value).includes(folded));
-  }).sort((a, b) => naturalSort(a.source.label, b.source.label)) : [];
+  const needle = data.fold(query);
+  const matches = needle ? data.rules.filter((rule) => data.fold([rule.id, rule.source?.value, rule.source?.system, rule.source?.datasetType, ...(rule.target?.values ?? []), ...(rule.technicalMarkers ?? [])].join(' ')).includes(needle)) : [];
   const visible = matches.slice(0, 100);
-  return `${breadcrumb([{ label: 'Start', href: './index.html' }, { label: 'Suche' }])}<section class="view-heading"><p class="eyebrow">Globale Suche</p><h1>${query ? `Ergebnisse für „${escapeHtml(query)}“` : 'Mappings durchsuchen'}</h1><p>${matches.length} Treffer im aktuellen Mappingstand</p></section>
-    ${query ? (visible.length ? `<div class="search-results">${visible.map((mapping) => {
-      const type = mapping.datasetTypeId;
-      const targetLabels = mapping.targets.map((target) => target.label ?? target.key).filter(Boolean);
-      const href = hrefFor({ direction: mapping.direction, type, dimension: mapping.source.dimension, mode: 'source', system: mapping.source.system, term: mapping.id, q: null }, true);
-      return `<a class="search-result" href="${escapeHtml(href)}" data-nav><span class="system-kicker">${escapeHtml(systemLabel(data, mapping.source.system))} · ${escapeHtml(datasetLabel(data, type))}</span><strong>${escapeHtml(mapping.source.label ?? mapping.source.key)}</strong><span>${targetLabels.length ? `→ ${escapeHtml(targetLabels.join(' + '))}` : BEHAVIOR_LABELS[mapping.behavior] ?? ''}</span></a>`;
-    }).join('')}</div>${matches.length > visible.length ? `<p class="result-limit">Die ersten ${visible.length} Treffer werden angezeigt. Bitte Suche weiter eingrenzen.</p>` : ''}` : '<div class="empty-state"><h2>Kein Treffer</h2><p>Kein Treffer im aktuellen Mappingstand.</p></div>') : ''}`;
+  return `${breadcrumbs([{ label: 'Start', href: './index.html' }, { label: 'Suche' }])}<section class="view-heading"><p class="eyebrow">Globale Suche</p><h1>${query ? `Ergebnisse für „${escapeHtml(query)}“` : 'Mappingbestand durchsuchen'}</h1><p>${matches.length} Treffer</p></section>${query && (visible.length ? `<div class="search-results">${visible.map((rule) => {
+    const type = rule.source?.datasetType ?? rule.target?.datasetType;
+    const view = rule.ruleKind === 'routing' ? 'routing' : rule.ruleKind === 'fallback' ? 'fallback' : 'mapping';
+    const href = hrefFor({ type, view, dimension: rule.source?.dimension, system: rule.source?.system, mode: 'source', term: rule.id, q: null }, true);
+    return `<a class="search-result" href="${escapeHtml(href)}" data-nav><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source?.system))} · ${escapeHtml(datasetLabel(data, type))}</span><strong>${escapeHtml(rule.source?.value ?? rule.id)}</strong><span>${escapeHtml((rule.target?.values ?? [rule.behavior]).join(' + '))}</span></a>`;
+  }).join('')}</div>` : '<div class="empty-state"><h2>Kein Treffer</h2><p>Kein Treffer im autoritativen Bestand.</p></div>')}</div>`;
 }
 
 export function render(data, state) {
   if (state.q !== undefined) return searchView(data, state);
-  if (state.direction === 'outbound') return outboundView(data, state);
-  if (state.type === 'poi') {
-    const rules = data.mappings.filter((mapping) => mapping.direction === 'inbound' && mapping.datasetTypeId === 'poi');
-    return poiView(data, state, rules);
-  }
-  if (state.direction === 'inbound' || state.type) return inboundView(data, state);
+  if (state.view === 'reference') return referenceView(data, state);
+  if (state.type) return datasetView(data, state);
   return home(data);
 }

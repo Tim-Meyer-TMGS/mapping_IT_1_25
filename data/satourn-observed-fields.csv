@@ -1,0 +1,1376 @@
+﻿datasetType,sourceDirectory,field,occurrences,filesPresent,nonemptyOccurrences,filesNonempty,trueOccurrences,languages,namespaces,examples
+address,Address,Adresse,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+address,Address,Adressen,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+address,Address,EVALUATION_SONSTIGE1_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,EVALUATION_SONSTIGE2_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,EVALUATION_SONSTIGE3_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,Fragment,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+address,Address,GeneratedBooleanKeywords,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,Kategorie,3,1,3,1,0,,urn:schemas-etourist:Adresse,Veranstaltungsort || Veranstalter || Ansprechpartner
+address,Address,Keywords,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,Latitude,1,1,1,1,0,,urn:schemas-etourist:Adresse,51.0688218
+address,Address,Longitude,1,1,1,1,0,,urn:schemas-etourist:Adresse,13.7163235
+address,Address,Name,1,1,1,1,0,,urn:schemas-etourist:Adresse,Dresden Marketing GmbH
+address,Address,OBJECT_BAHNHOF_VORHANDEN,1,1,1,1,0,,urn:schemas-etourist:Adresse,false
+address,Address,OBJECT_CONTACT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Adresse,convention@marketing.dresden.de
+address,Address,OBJECT_CONTACT_FIRMA,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,OBJECT_CONTACT_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,OBJECT_CONTACT_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,OBJECT_CONTACT_STRASSE,1,1,1,1,0,,urn:schemas-etourist:Adresse,Messering 7
+address,Address,OBJECT_CONTACT_WEBSEITE1,1,1,1,1,0,,urn:schemas-etourist:Adresse,www.test.de
+address,Address,OBJECT_CONTACT_WEBSEITE1_XML,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,OBJECT_TEXT_NAME,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,OrteID,1,1,1,1,0,,urn:schemas-etourist:Adresse,14185
+address,Address,Quelle,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,Quellekey,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,SOCIAL_SONSTIGE1_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,SOCIAL_SONSTIGE2_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,SOCIAL_SONSTIGE3_TITEL,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,Tags,1,1,0,0,0,,urn:schemas-etourist:Adresse,
+address,Address,string,2,1,2,1,0,de-DE,urn:eTourist:i18n,Dresden Marketing GmbH || www.test.de
+article,Article,AUTOR_ANREDE,153,153,2,2,0,,urn:schemas-etourist:Artikel,FR
+article,Article,AUTOR_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Artikel,romana.gross@marketing.dresden.de
+article,Article,AUTOR_FIRMA,153,153,1,1,0,,urn:schemas-etourist:Artikel,Dresden Marketing GmbH
+article,Article,AUTOR_NACHNAME,153,153,2,2,0,,urn:schemas-etourist:Artikel,Groß || Wächtler
+article,Article,AUTOR_ORTSTEIL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,AUTOR_POSTFACH,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,AUTOR_STRASSE,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,AUTOR_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,AUTOR_VORNAME,153,153,2,2,0,,urn:schemas-etourist:Artikel,Romana || Sandra
+article,Article,AUTOR_WEBSEITE,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Artikel,153,153,0,0,0,,urn:schemas-etourist:SchemaExtension,
+article,Article,ArtikelList,153,153,0,0,0,,urn:schemas-etourist:SchemaExtension,
+article,Article,Author_InfoText,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Author_Language_Belgisch,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Author_Language_Deutsch,151,151,151,151,1,,urn:schemas-etourist:Artikel,true || false
+article,Article,Author_Language_Dänisch,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Author_Language_Englisch,151,151,151,151,1,,urn:schemas-etourist:Artikel,true || false
+article,Article,Author_Language_Französisch,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Author_Language_Niederländisch,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Author_Zitat,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Bezeichnung,153,153,153,153,0,,urn:schemas-etourist:Artikel,Romana Groß || Test Blogartikel || workshop Artikel
+article,Article,Blog_Date,146,146,146,146,0,,urn:schemas-etourist:Artikel,2021-07-08T00:00:00+02:00 || 2021-09-30T00:00:00+02:00 || 2021-10-25T00:00:00+02:00
+article,Article,Blog_Fazit,5,5,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Blog_Fit_Familien,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Fit_Gruppen,151,151,151,151,1,,urn:schemas-etourist:Artikel,false || true
+article,Article,Blog_Fit_Individual,151,151,151,151,1,,urn:schemas-etourist:Artikel,false || true
+article,Article,Blog_Fit_Paare,151,151,151,151,1,,urn:schemas-etourist:Artikel,false || true
+article,Article,Blog_Fit_ReisendMitHund,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Fit_Schulklassen,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Fit_Senioren,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Property_Accessibility,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Property_BadWeather,151,151,151,151,1,,urn:schemas-etourist:Artikel,false || true
+article,Article,Blog_Season_Autumn,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Season_Spring,151,151,151,151,1,,urn:schemas-etourist:Artikel,false || true
+article,Article,Blog_Season_Summer,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Season_Winter,151,151,151,151,0,,urn:schemas-etourist:Artikel,false
+article,Article,Blog_Tipp,21,21,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,COPYRIGHT_TEXT,2,2,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,CopyrightFallback,153,153,153,153,153,,urn:schemas-etourist:Artikel,true
+article,Article,EVALUATION_SONSTIGE1_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,EVALUATION_SONSTIGE2_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,EVALUATION_SONSTIGE3_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Erweitert,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Fragment,153,153,0,0,0,,urn:schemas-etourist:SchemaExtension,
+article,Article,GeneratedBooleanKeywords,153,153,88,88,0,,urn:schemas-etourist:Artikel,"Deutsch,Englisch || für Gruppen,für Paare,für Individualgäste,Empfehlenswert für Frühling,Schlechtwetterangebot || Autor/Orga Fallback"
+article,Article,IFRAME_URL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Kategorie,329,153,329,153,0,,urn:schemas-etourist:Artikel,Autor*in || Mountainbiken || Dresden Convention Service
+article,Article,Keywords,153,153,119,119,0,,urn:schemas-etourist:Artikel,"Dresden,Famtrip,GCB || Auszeichnungen,Bilderberg Bellevue Dresden,Certified Star Award,Green Meetings,Nachhaltigkeit,sustainable meetings || Dresden,Dresden Convention Service,Frankfurt,IMEX"
+article,Article,Keywords_terminal,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Latitude,6,6,6,6,0,,urn:schemas-etourist:Artikel,51.069879605399052 || 51.047761542651969 || 52.516220863930741
+article,Article,Longitude,6,6,6,6,0,,urn:schemas-etourist:Artikel,13.748016357421875 || 13.740291595458984 || 13.392333984375
+article,Article,MULTIMEDIA_VIDEO_TITEL,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,MULTIMEDIA_VIDEO_URL_XML,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_BESCHREIBUNG,145,145,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_CONTACT_EMAIL,5,5,5,5,0,,urn:schemas-etourist:Artikel,romana.gross@marketing.dresden.de || convention@marketing.dresden.de
+article,Article,OBJECT_CONTACT_FIRMA,153,153,133,133,0,,urn:schemas-etourist:Artikel,Dresden Convention Service || Dresden Convention Service c/o Dresden Marketing GmbH || Dresden Convention Service / Dresden Marketing GmbH
+article,Article,OBJECT_CONTACT_NACHNAME,153,153,93,93,0,,urn:schemas-etourist:Artikel,Groß || Rönsch || Bieligk
+article,Article,OBJECT_CONTACT_ORTID,30,30,30,30,0,,urn:schemas-etourist:Artikel,14185 || 14553
+article,Article,OBJECT_CONTACT_ORTSTEIL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_CONTACT_POSTFACH,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_CONTACT_STRASSE,153,153,33,33,0,,urn:schemas-etourist:Artikel,Messering 7 || Nizzastrasse 55 || Zschortauer Straße 60
+article,Article,OBJECT_CONTACT_VORNAME,153,153,92,92,0,,urn:schemas-etourist:Artikel,Romana || Jutta || Sven
+article,Article,OBJECT_CONTACT_WEBSEITE1,153,153,7,7,0,,urn:schemas-etourist:Artikel,https://www.dresden-convention.com/ || www.dresden-convention.com/ || www.dresden-convention.com
+article,Article,OBJECT_CONTACT_WEBSEITE1_XML,7,7,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_CREATIVECOMMONS,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_GEO_MULTIPOLYGON,153,153,153,153,0,,urn:schemas-etourist:Artikel,GEOMETRYCOLLECTION EMPTY
+article,Article,OBJECT_TEXT_NAME,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_TEXT_NAME_URL,4,4,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_TEXT_SUBTITEL,29,29,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,OBJECT_TEXT_TEASER_HTML,6,6,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,ORG_NAME,153,153,1,1,0,,urn:schemas-etourist:Artikel,Dresden Convention Service
+article,Article,ORG_ORTID,1,1,1,1,0,,urn:schemas-etourist:Artikel,14185
+article,Article,ORG_ORTSTEIL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,ORG_POSTFACH,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,ORG_STRASSE,153,153,1,1,0,,urn:schemas-etourist:Artikel,Messering 7
+article,Article,ORG_WEBSEITE,1,1,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Quelle,153,153,1,1,0,,urn:schemas-etourist:Artikel,eT4
+article,Article,Quellekey,153,153,1,1,0,,urn:schemas-etourist:Artikel,21117
+article,Article,SOCIAL_FACEBOOK,1,1,1,1,0,,urn:schemas-etourist:Artikel,https://www.facebook.com/neustadestinationsolutions/
+article,Article,SOCIAL_SONSTIGE1_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SOCIAL_SONSTIGE2_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SOCIAL_SONSTIGE3_TITEL,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Alpstein,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Feratel,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_GIATA,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_HRS,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Incomingsoft,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Reif,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Schmetterling,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Secra,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_TOMAS,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Tiscover,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Tripadvisor,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_TrustYou,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Wildeast,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_Yelp,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_booking_com,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_green_solutions,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,SYSTEMID_hotel_de,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,Tags,153,153,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,WEB_SEO_KEYWORDS,2,2,0,0,0,,urn:schemas-etourist:Artikel,
+article,Article,WEB_VALID_ONLINE,5,5,5,5,0,,urn:schemas-etourist:Artikel,2021-09-30T00:00:00+02:00 || 2021-10-25T00:00:00+02:00 || 2021-08-30T00:00:00+02:00
+article,Article,string,727,153,727,153,0,de-DE|en-GB,urn:eTourist:i18n,https://www.dresden-convention.com/ || https://www.dresden-convention.com || Romana Groß
+event,Event,AP_CategoryId,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,9
+event,Event,AP_Id,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,106733
+event,Event,AP_OBJECT_CONTACT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,convention@marketing.dresden.de
+event,Event,AP_OBJECT_CONTACT_NAME,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Dresden Marketing GmbH
+event,Event,AP_OBJECT_CONTACT_ORTID,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,14185
+event,Event,AP_OBJECT_CONTACT_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AP_OBJECT_CONTACT_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AP_OBJECT_CONTACT_STRASSE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Messering 7
+event,Event,AP_OBJECT_CONTACT_WEBSEITE1,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,www.test.de
+event,Event,AUTOR_ANREDE,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_FIRMA,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_NACHNAME,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_STRASSE,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,AUTOR_VORNAME,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Announced,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,AnnouncedBy,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Bezeichnung,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Test Event von Fenna
+event,Event,C_HasTitleImage,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,C_LastChange,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,2021-11-11T16:22:00+01:00
+event,Event,C_Ranking,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,40
+event,Event,CopyrightFallback,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,DETAILS_ABGESAGT,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_AUSGEBUCHT,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,DETAILS_DAUERVERANSTALTUNG,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_OPENAIR,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_REGISTRATIONREQUIRED,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_TOURISTISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_VERLEGT,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DETAILS_VIRTUEL,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,DQ_Email,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_GOOD,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,false
+event,Event,DQ_Kategorie,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_Lage,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_MINIMUM,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,false
+event,Event,DQ_OrtInfo,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_Preis,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_RANKING,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,40
+event,Event,DQ_Strasse,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_Teaser,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,false
+event,Event,DQ_Tel,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,false
+event,Event,DQ_Text,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_Titel,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_TitleImage,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_VERYGOOD,1,1,1,1,0,,urn:schemas-etourist:Datenqualitaet,false
+event,Event,DQ_Webseite,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_WeitereFelder,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,DQ_Zielgruppe,1,1,1,1,1,,urn:schemas-etourist:Datenqualitaet,true
+event,Event,EVALUATION_SONSTIGE1_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,EVALUATION_SONSTIGE2_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,EVALUATION_SONSTIGE3_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Erweitert,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Erweitert_Datenqualitaet,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Fragment,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+event,Event,HYGIENE_2G,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_2GPlus,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_3G,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_3GPlus,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_Abstandsregelung,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_AushangHinweisschilder,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_AusreichendeLüftung,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BeachtungDerHygienehinweise,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BegrenzterZugang,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BereitstellungVonEinweghandschuhen,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BereitstellungVonHandedesinfektion,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BereitstellungVonHautschonenderSeife,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BereitstellungVonMundNasenBedeckung,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BereitstellungVonPapierhandtüchern,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BodenmarkierungenAnEmpfangsUndInformationsschaltern,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BodenmarkierungenInWartebereichen,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_BodenmarkierungenVorKassen,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_EinUndAustrittDurchPersonal,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_GeschützerKassenbereich,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_GetrennterEinUndAusgang,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_MundNasenBedeckungPflicht,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_Parkplatzkonzept,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_RegelmäßigeReinigungDesinfektion,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,HYGIENE_SichtkontrolleBesucherzahlen,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,IFRAME_URL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Kategorie,3,1,3,1,0,,urn:schemas-etourist:Veranstaltung,Ausstellung || Führung/Besichtigung || klassisches Konzert
+event,Event,Keywords,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Keywords_terminal,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,KvpXml_PRICEINFO,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,LANGUAGE_ARABISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_CHINESISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_DAENISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_DEUTSCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_ENGLISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_FINNISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_FLAEMISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_FRANZOESISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_GEBAERDEN,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_GRIECHISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_ITALIENISCH,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,LANGUAGE_JAPANISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_KROATISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_NIEDERLAENDISCH,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,LANGUAGE_NORWEGISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_POLNISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_PORTUGIESISCH,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,LANGUAGE_RUMAENISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_RUSSISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_SCHWEDISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_SLOWAKISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_SLOWENISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_SPANISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_TSCHECHISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_TUERKISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,LANGUAGE_UNGARISCH,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_ANREISE,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OBJECT_CONTACT_WEBSEITE1,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,www.test.de
+event,Event,OBJECT_CONTACT_WEBSEITE1_XML,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OBJECT_CREATIVECOMMONS,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OBJECT_FIT_GRUPPEN,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,OBJECT_FIT_HAUSTIERE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_FIT_INDIVIDUALGAESTE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_FIT_SCHLECHTWETTER,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,OBJECT_FIT_SCHULKLASSEN,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_FIT_WETTERUNABHAENGIG,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_HIDE_RCE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OBJECT_TEXT_NAME,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OBJECT_TEXT_NAME_SORTIERUNG,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,ORG_NAME,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,ORG_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,ORG_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,ORG_STRASSE,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,OrtID,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,14185
+event,Event,PRICE_BOXOFFICE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_FREE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_GUESTCARDDISCOUNT,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_INFO,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,PRICE_KARTENLINK,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,www.test.de
+event,Event,PRICE_KARTENLINK_XML,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,PRICE_PAYMENT_AMERICANEXPRESS,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_APPLEPAY,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_BANKOMAT,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_BAR,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_CONTACTLESS,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_DINERSCLUB,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_GOOGLEPAY,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_JCB,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_MASTERCARD,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_PAYPAL,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_SCHECK,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_TWINT,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_UEBERWEISUNG,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PAYMENT_VISA,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,PRICE_PRESALE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,Quelle,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,Quellekey,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SOCIAL_SONSTIGE1_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SOCIAL_SONSTIGE2_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SOCIAL_SONSTIGE3_TITEL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Alpstein,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Feratel,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_GIATA,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_HRS,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Incomingsoft,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Reif,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Schmetterling,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Secra,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_TOMAS,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Tiscover,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Tripadvisor,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_TrustYou,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Wildeast,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_Yelp,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_booking_com,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_green_solutions,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,SYSTEMID_hotel_de,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,TARGET_ERWACHSENE,1,1,1,1,1,,urn:schemas-etourist:Veranstaltung,true
+event,Event,TARGET_SENIOREN,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,false
+event,Event,Tags,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,VA_CategoryId,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,9
+event,Event,VA_Id,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,106733
+event,Event,VA_OBJECT_CONTACT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,convention@marketing.dresden.de
+event,Event,VA_OBJECT_CONTACT_NAME,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Dresden Marketing GmbH
+event,Event,VA_OBJECT_CONTACT_ORTID,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,14185
+event,Event,VA_OBJECT_CONTACT_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,VA_OBJECT_CONTACT_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,VA_OBJECT_CONTACT_STRASSE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Messering 7
+event,Event,VA_OBJECT_CONTACT_WEBSEITE1,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,www.test.de
+event,Event,VO_CategoryId,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,9
+event,Event,VO_Id,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,106733
+event,Event,VO_OBJECT_CONTACT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,convention@marketing.dresden.de
+event,Event,VO_OBJECT_CONTACT_LATITUDE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,51.0688218
+event,Event,VO_OBJECT_CONTACT_LONGITUDE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,13.7163235
+event,Event,VO_OBJECT_CONTACT_NAME,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Dresden Marketing GmbH
+event,Event,VO_OBJECT_CONTACT_ORTID,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,14185
+event,Event,VO_OBJECT_CONTACT_ORTSTEIL,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,VO_OBJECT_CONTACT_POSTFACH,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,VO_OBJECT_CONTACT_STRASSE,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,Messering 7
+event,Event,VO_OBJECT_CONTACT_WEBSEITE1,1,1,1,1,0,,urn:schemas-etourist:Veranstaltung,www.test.de
+event,Event,Veranstaltung,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+event,Event,Veranstaltungen,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+event,Event,VoHintText,1,1,0,0,0,,urn:schemas-etourist:Veranstaltung,
+event,Event,string,10,1,10,1,0,de-DE|en-GB,urn:eTourist:i18n,Test Event von Fenna || Englisch Test Event von Fenna || www.test.de
+gastro,Gastro,ACCESSIBILITY_BLINDNESS,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_BLINDNESS_PARTLY,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,ACCESSIBILITY_COGNITIVE_IMPAIRMENTS,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_DEAFNESS,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_DEAFNESS_PARTLY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_HEARING_IMPAIRMENT,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_HEARING_IMPAIRMENT_PARTLY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_INFO,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_VERIFIED,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_VISUAL_IMPAIRMENT,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_VISUAL_IMPAIRMENT_PARTLY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_WALKING_IMPEDIMENT,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_WALKING_IMPEDIMENT_PARTLY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_WHEELCHAIR,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ACCESSIBILITY_WHEELCHAIR_PARTLY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,ALWAYSOPEN,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,AUTOR_ANREDE,21,21,2,2,0,,urn:schemas-etourist:Gastro,FR || HR
+gastro,Gastro,AUTOR_EMAIL,3,3,3,3,0,,urn:schemas-etourist:Gastro,p-km2@marketing.dresden.de || info@marketing.dresden.de
+gastro,Gastro,AUTOR_FIRMA,21,21,3,3,0,,urn:schemas-etourist:Gastro,Test Katharinas Traumschloss || Dresden Marketing GmbH
+gastro,Gastro,AUTOR_MOBIL,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 172 / 323232
+gastro,Gastro,AUTOR_NACHNAME,21,21,4,4,0,,urn:schemas-etourist:Gastro,Boe || Blüthgen || Dresden Elbland Redaktion
+gastro,Gastro,AUTOR_ORTID,3,3,3,3,0,,urn:schemas-etourist:Gastro,14278 || 14185
+gastro,Gastro,AUTOR_ORTSTEIL,21,21,1,1,0,,urn:schemas-etourist:Gastro,Traumland
+gastro,Gastro,AUTOR_POSTFACH,21,21,1,1,0,,urn:schemas-etourist:Gastro,3
+gastro,Gastro,AUTOR_STRASSE,21,21,3,3,0,,urn:schemas-etourist:Gastro,Wolkenstraße 10 || Messering 7
+gastro,Gastro,AUTOR_TEL,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 351 / 454545
+gastro,Gastro,AUTOR_TITEL,21,21,1,1,0,,urn:schemas-etourist:Gastro,Dr.
+gastro,Gastro,AUTOR_VORNAME,21,21,3,3,0,,urn:schemas-etourist:Gastro,Kate || Marco
+gastro,Gastro,AUTOR_WEBSEITE,3,3,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,BOOKING_LINK1_XML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,BOOKING_TITEL1_XML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Betriebsart,40,21,40,21,0,,urn:schemas-etourist:Gastro,Brauereigaststätte || Gaststätte || Restaurant
+gastro,Gastro,Buchhaltung,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Buchhaltung_Bank,21,21,1,1,0,,urn:schemas-etourist:Gastro,Ostsächsische Sparkasse Dresden
+gastro,Gastro,Buchhaltung_Blz,21,21,1,1,0,,urn:schemas-etourist:Gastro,1234567890987654321
+gastro,Gastro,Buchhaltung_Inhaber,21,21,1,1,0,,urn:schemas-etourist:Gastro,Katharina Böhme
+gastro,Gastro,Buchhaltung_Kto,21,21,1,1,0,,urn:schemas-etourist:Gastro,1234567890987654321
+gastro,Gastro,CONTACT_ANREDE,21,21,1,1,0,,urn:schemas-etourist:Gastro,FR
+gastro,Gastro,CONTACT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Gastro,p-km2@marketing.dresden.de
+gastro,Gastro,CONTACT_FAX,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 9943 / 90522 - 5
+gastro,Gastro,CONTACT_FIRMA,21,21,1,1,0,,urn:schemas-etourist:Gastro,Test Katharinas Traumschloss
+gastro,Gastro,CONTACT_MOBIL,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 159 / 01356027
+gastro,Gastro,CONTACT_NACHNAME,21,21,1,1,0,,urn:schemas-etourist:Gastro,Böhme
+gastro,Gastro,CONTACT_ORTID,1,1,1,1,0,,urn:schemas-etourist:Gastro,14278
+gastro,Gastro,CONTACT_POSTFACH,21,21,1,1,0,,urn:schemas-etourist:Gastro,5
+gastro,Gastro,CONTACT_STRASSE,21,21,1,1,0,,urn:schemas-etourist:Gastro,Mühlberg 4b
+gastro,Gastro,CONTACT_TEL,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 0351 / 6446674
+gastro,Gastro,CONTACT_TITEL,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,CONTACT_VORNAME,21,21,1,1,0,,urn:schemas-etourist:Gastro,Katharina
+gastro,Gastro,CONTACT_WEBSEITE,21,21,1,1,0,,urn:schemas-etourist:Gastro,http://www.jagderlebnisse.de/
+gastro,Gastro,CONTACT_WEBSEITE_XML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,COPYRIGHT_EMAIL,1,1,1,1,0,,urn:schemas-etourist:Gastro,convention@marketing.dresden.de
+gastro,Gastro,COPYRIGHT_TEXT,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,COPYRIGHT_WEBSEITE,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,C_HasRecurrenceRule,21,21,21,21,15,,urn:schemas-etourist:Gastro,true || false
+gastro,Gastro,C_HasTitleImage,21,21,21,21,17,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,C_LastChange,21,21,21,21,0,,urn:schemas-etourist:Gastro,2021-11-01T13:14:00+01:00 || 2021-12-10T14:06:00+01:00 || 2023-12-11T11:34:00+01:00
+gastro,Gastro,C_Ranking,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 40 || 60
+gastro,Gastro,ContentdistributionDescription,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,ContentdistributionTeaser,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,CopyrightFallback,21,21,21,21,21,,urn:schemas-etourist:Gastro,true
+gastro,Gastro,DELIVERYALWAYSOPEN,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,DQ_Betriebsart,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_Eignung,21,21,21,21,2,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Email,21,21,21,21,18,,urn:schemas-etourist:Datenqualitaet,true || false
+gastro,Gastro,DQ_Erreichbarkeit,21,21,21,21,13,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Fremdsprachenkentnisse,21,21,21,21,3,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_GOOD,21,21,21,21,7,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Kueche,21,21,21,21,1,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Kuechenart,20,20,20,20,15,,urn:schemas-etourist:Datenqualitaet,true || false
+gastro,Gastro,DQ_Lage,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_MINIMUM,21,21,21,21,10,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_OrtInfo,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_RANKING,21,21,21,21,0,,urn:schemas-etourist:Datenqualitaet,0 || 40 || 60
+gastro,Gastro,DQ_Sitzplaetze,21,21,21,21,4,,urn:schemas-etourist:Datenqualitaet,true || false
+gastro,Gastro,DQ_Strasse,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_Teaser,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_Tel,21,21,21,21,15,,urn:schemas-etourist:Datenqualitaet,true || false
+gastro,Gastro,DQ_Text,21,21,21,21,20,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Titel,21,21,21,21,21,,urn:schemas-etourist:Datenqualitaet,true
+gastro,Gastro,DQ_TitleImage,21,21,21,21,17,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_VERYGOOD,21,21,21,21,1,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Webseite,21,21,21,21,19,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_WeitereFelder,21,21,21,21,1,,urn:schemas-etourist:Datenqualitaet,false || true
+gastro,Gastro,DQ_Zeiten,21,21,21,21,15,,urn:schemas-etourist:Datenqualitaet,true || false
+gastro,Gastro,DuplicateGroupId,3,3,3,3,0,,urn:schemas-etourist:Gastro,700013675 || 700013688 || 700013388
+gastro,Gastro,EVALUATION_HOLIDAYCHECK,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://www.holidaycheck.de/
+gastro,Gastro,EVALUATION_SONSTIGE1_LINK,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://de.trustpilot.com/review/www.holidaycheck.de
+gastro,Gastro,EVALUATION_SONSTIGE1_TITEL,21,21,1,1,0,,urn:schemas-etourist:Gastro,Trustpilot
+gastro,Gastro,EVALUATION_SONSTIGE2_TITEL,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,EVALUATION_SONSTIGE3_TITEL,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,EVALUATION_TRIPADVISOR,3,3,3,3,0,,urn:schemas-etourist:Gastro,https://www.tripadvisor.de/UserReviewEdit-g187399-d8516244-Kuchen_Atelier-Dresden_Saxony.html || https://www.tripadvisor.de/Restaurant_Review-g187399-d12958564-Reviews-T1_Cafe_Bistro-Dresden_Saxony.html || https://www.tripadvisor.de/Restaurant_Review-g187399-d10214673-Reviews-StudioBar_Cocktailbar-Dresden_Saxony.html
+gastro,Gastro,EVALUATION_YELP,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://www.yelp.com/biz/studiobar-dresden
+gastro,Gastro,Erweitert,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Erweitert_Datenqualitaet,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,FACILITY_UNTERHALTUNG_d,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,FACILITY_UNTERHALTUNG_f,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,Fragment,21,21,0,0,0,,urn:schemas-etourist:SchemaExtension,
+gastro,Gastro,Gastro,21,21,0,0,0,,urn:schemas-etourist:SchemaExtension,
+gastro,Gastro,Gastroname,21,21,21,21,0,,urn:schemas-etourist:Gastro,Test gastro romana || Test Conny || Restaurant Elements
+gastro,Gastro,Gastros,21,21,0,0,0,,urn:schemas-etourist:SchemaExtension,
+gastro,Gastro,GeneratedBooleanKeywords,21,21,20,20,0,,urn:schemas-etourist:Gastro,"Parkplätze vorhanden,Bushaltestelle vorhanden,Autor/Orga Fallback || Bushaltestelle vorhanden,Autor/Orga Fallback || Autor/Orga Fallback,Deutsch,Englisch"
+gastro,Gastro,HYGIENE_2G,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_2GPlus,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_3G,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_3GPlus,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_Abstandsregelung,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_AushangHinweisschilder,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_AusreichendeLüftung,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BeachtungDerHygienehinweise,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BegrenzterZugang,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_BereitstellungVonEinweghandschuhen,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_BereitstellungVonHandedesinfektion,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BereitstellungVonHautschonenderSeife,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BereitstellungVonMundNasenBedeckung,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_BereitstellungVonPapierhandtüchern,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BodenmarkierungenAnEmpfangsUndInformationsschaltern,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_BodenmarkierungenInWartebereichen,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_BodenmarkierungenVorKassen,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_EinUndAustrittDurchPersonal,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_GeschützerKassenbereich,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_GetrennterEinUndAusgang,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,HYGIENE_Information,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,HYGIENE_MundNasenBedeckungPflicht,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_Parkplatzkonzept,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_RegelmäßigeReinigungDesinfektion,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,HYGIENE_SichtkontrolleBesucherzahlen,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,IFRAME_HEIGHT,1,1,1,1,0,,urn:schemas-etourist:Gastro,393
+gastro,Gastro,IFRAME_TITEL,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,IFRAME_URL,21,21,1,1,0,,urn:schemas-etourist:Gastro,https://www.youtube.com/watch?v=5i0Z0E5yaYI
+gastro,Gastro,IFRAME_URL_XML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,INFO_SEASON_1,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 1
+gastro,Gastro,INFO_SEASON_10,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 2
+gastro,Gastro,INFO_SEASON_11,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 2
+gastro,Gastro,INFO_SEASON_12,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 1
+gastro,Gastro,INFO_SEASON_2,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 1
+gastro,Gastro,INFO_SEASON_3,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 2
+gastro,Gastro,INFO_SEASON_4,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 2
+gastro,Gastro,INFO_SEASON_5,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 2
+gastro,Gastro,INFO_SEASON_6,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 3
+gastro,Gastro,INFO_SEASON_7,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 3
+gastro,Gastro,INFO_SEASON_8,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 3
+gastro,Gastro,INFO_SEASON_9,21,21,21,21,0,,urn:schemas-etourist:Gastro,0 || 3
+gastro,Gastro,KITCHENALWAYSOPEN,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,KITCHEN_SPEZIALITAETEN,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,KITCHEN_ZEITEN,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Keywords,21,21,12,12,0,,urn:schemas-etourist:Gastro,"Restaurant,Restaurant Hüftgold || bar,bar dresden,catering,cocktails,tastings || Blaues Wunder,Cafe,Gastronomie,Genuss,Kaffee,Kaffekultur,Kuchen,Kulinarik,Torten"
+gastro,Gastro,Keywords_terminal,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Kuechenart,27,16,27,16,0,,urn:schemas-etourist:Gastro,französisch || international || deutsch
+gastro,Gastro,LANGUAGE_ARABISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_CHINESISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_DAENISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_DEUTSCH,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,LANGUAGE_ENGLISCH,21,21,21,21,3,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,LANGUAGE_FINNISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_FLAEMISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_FRANZOESISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_GRIECHISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_ITALIENISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_JAPANISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_KROATISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_NIEDERLAENDISCH,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,LANGUAGE_NORWEGISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_POLNISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_PORTUGIESISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_RUMAENISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_RUSSISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_SCHWEDISCH,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,LANGUAGE_SLOWAKISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_SLOWENISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_SPANISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_TSCHECHISCH,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,LANGUAGE_UNGARISCH,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,Latitude,21,21,21,21,0,,urn:schemas-etourist:Gastro,51.0688218 || 51.065745 || 51.080831045698773
+gastro,Gastro,Longitude,21,21,21,21,0,,urn:schemas-etourist:Gastro,13.7163235 || 13.8007 || 13.76111626625061
+gastro,Gastro,MULTIMEDIA_AUDIO_BESCHREIBUNG,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_AUDIO_TITEL,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_AUDIO_URL,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://www.youtube.com/watch?v=rHpu3fhGgQI
+gastro,Gastro,MULTIMEDIA_BILDER_BESCHREIBUNG,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_BILDER_TITEL,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_BILDER_URL,1,1,1,1,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_VIDEO_BESCHREIBUNG,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_VIDEO_TITEL,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_VIDEO_URL_XML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_WEBCAM_TITEL,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,MULTIMEDIA_WEBCAM_URL,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://www.vvo-online.de/de/service/verkehrskameras/index.cshtml
+gastro,Gastro,Merkmal,51,9,51,9,0,,urn:schemas-etourist:Gastro,Ausstattung || Gästezimmer || Kinderspielplatz am Grundstück
+gastro,Gastro,OBJECT_ANREISE,13,13,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_ANREISE_LINK,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_BETRIEBSURLAUB,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_BUSSTOPAVAILABLE,21,21,21,21,7,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CLOSED_DIENSTAG,21,21,21,21,3,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CLOSED_DONNERSTAG,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_CLOSED_FEIERTAG,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CLOSED_FREITAG,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_CLOSED_MITWOCH,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CLOSED_MONTAG,21,21,21,21,5,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CLOSED_NONE,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_CLOSED_SAMSTAG,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_CLOSED_SONNTAG,21,21,21,21,3,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_CONTACT_ANREDE,21,21,3,3,0,,urn:schemas-etourist:Gastro,FR || HR
+gastro,Gastro,OBJECT_CONTACT_EMAIL,18,18,18,18,0,,urn:schemas-etourist:Gastro,test@test.de || cornelia.kuehne@marketing.dresden.de || lebensart@restaurant-elements.de
+gastro,Gastro,OBJECT_CONTACT_FAX,2,2,2,2,0,,urn:schemas-etourist:Gastro,+49 9943 / 90522 - 5 || 035207/ 99776
+gastro,Gastro,OBJECT_CONTACT_FIRMA,21,21,13,13,0,,urn:schemas-etourist:Gastro,Test Katharinas Traumschloss || Zapfanstalt – Voigt & Zach GbR || Villa Sorgenfrei Betriebs-GmbH
+gastro,Gastro,OBJECT_CONTACT_MOBIL,2,2,2,2,0,,urn:schemas-etourist:Gastro,+49 159 / 01356027 || 0173 4292053
+gastro,Gastro,OBJECT_CONTACT_NACHNAME,21,21,4,4,0,,urn:schemas-etourist:Gastro,Böhme || Lukas || Koenitz
+gastro,Gastro,OBJECT_CONTACT_ORTSTEIL,21,21,1,1,0,,urn:schemas-etourist:Gastro,Rabenau
+gastro,Gastro,OBJECT_CONTACT_POSTFACH,21,21,1,1,0,,urn:schemas-etourist:Gastro,5
+gastro,Gastro,OBJECT_CONTACT_STRASSE,21,21,21,21,0,,urn:schemas-etourist:Gastro,Messering 7 || Königsbrücker Straße 96 || Mühlberg 4b
+gastro,Gastro,OBJECT_CONTACT_TEL,15,15,15,15,0,,urn:schemas-etourist:Gastro,123456 || 0351-888888 || 0351-2721696
+gastro,Gastro,OBJECT_CONTACT_VORNAME,21,21,4,4,0,,urn:schemas-etourist:Gastro,Katharina || Jens || Luise
+gastro,Gastro,OBJECT_CONTACT_WEBSEITE1,21,21,19,19,0,,urn:schemas-etourist:Gastro,www.test-conny.de || https://www.restaurant-elements.de/ || http://www.jagderlebnisse.de/
+gastro,Gastro,OBJECT_CONTACT_WEBSEITE1_XML,19,19,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_CREATIVECOMMONS,21,21,16,16,0,,urn:schemas-etourist:Gastro,CC0 || CC-BY-SA || CC-BY
+gastro,Gastro,OBJECT_FIT_GRUPPEN,21,21,21,21,2,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_FIT_INDIVIDUALGAESTE,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_FIT_SCHLECHTWETTER,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_FIT_SCHULKLASSEN,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,OBJECT_FIT_WETTERUNABHAENGIG,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_OEFFNUNGSZEITEN,18,18,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_PARKINGAVAILABLE,21,21,21,21,6,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML,20,20,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_BESCHREIBUNG_SPEECH,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_BESCHREIBUNG_WINTER_HTML,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_NAME,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_NAME_SORTIERUNG,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_NAME_URL,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_TEASER_SOMMER_HTML,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_TEASER_SPEECH,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_TEASER_WINTER_HTML,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OBJECT_TEXT_WEITERE_INFO,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,ORG_EMAIL,15,15,15,15,0,,urn:schemas-etourist:Gastro,p-km2@marketing.dresden.de || online@marketing.dresden.de
+gastro,Gastro,ORG_MOBIL,1,1,1,1,0,,urn:schemas-etourist:Gastro,+49 172 / 78787878
+gastro,Gastro,ORG_NAME,21,21,17,17,0,,urn:schemas-etourist:Gastro,Test Katharinas Traumschloss || Dresden Marketing GmbH || Dresden Elbland
+gastro,Gastro,ORG_ORTID,13,13,13,13,0,,urn:schemas-etourist:Gastro,14278 || 14185
+gastro,Gastro,ORG_ORTSTEIL,21,21,1,1,0,,urn:schemas-etourist:Gastro,Seenland
+gastro,Gastro,ORG_POSTFACH,21,21,1,1,0,,urn:schemas-etourist:Gastro,7
+gastro,Gastro,ORG_STRASSE,21,21,15,15,0,,urn:schemas-etourist:Gastro,Wasserstraße 7 || Messering 7
+gastro,Gastro,ORG_TEL,8,8,8,8,0,,urn:schemas-etourist:Gastro,+49 351 / 78787878 || +49 351 501730 || +49 351 50 17 30
+gastro,Gastro,ORG_WEBSEITE,3,3,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,OrtID,21,21,21,21,0,,urn:schemas-etourist:Gastro,14185 || 14190 || 14278
+gastro,Gastro,PRICE_INFO,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,PRICE_KLASSIFIZIERUNG,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,PRICE_PAYMENT_AMERICANEXPRESS,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_APPLEPAY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_BANKOMAT,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,PRICE_PAYMENT_BAR,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,PRICE_PAYMENT_CONTACTLESS,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_DINERSCLUB,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_GOOGLEPAY,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_JCB,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_MASTERCARD,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_PAYPAL,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_SCHECK,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_TWINT,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_UEBERWEISUNG,21,21,21,21,0,,urn:schemas-etourist:Gastro,false
+gastro,Gastro,PRICE_PAYMENT_VISA,21,21,21,21,1,,urn:schemas-etourist:Gastro,false || true
+gastro,Gastro,PeopleCounterAverageStay,1,1,1,1,0,,urn:schemas-etourist:Gastro,30
+gastro,Gastro,PeopleCounterDeviceId,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,PeopleCounterManual,21,21,1,1,0,,urn:schemas-etourist:Gastro,XXX
+gastro,Gastro,PeopleCounterMaxCapacity,1,1,1,1,0,,urn:schemas-etourist:Gastro,90
+gastro,Gastro,PeopleCounterThresholdHigh,1,1,1,1,0,,urn:schemas-etourist:Gastro,80
+gastro,Gastro,PeopleCounterThresholdMedium,1,1,1,1,0,,urn:schemas-etourist:Gastro,50
+gastro,Gastro,PeopleCounterType,21,21,1,1,0,,urn:schemas-etourist:Gastro,people
+gastro,Gastro,Quelle,21,21,1,1,0,,urn:schemas-etourist:Gastro,eT4
+gastro,Gastro,Quellekey,21,21,1,1,0,,urn:schemas-etourist:Gastro,100013388
+gastro,Gastro,ROOM_NICHTRAUCHER,21,21,2,2,0,,urn:schemas-etourist:Gastro,J || N
+gastro,Gastro,ROOM_SITZEGASTGARTEN,4,4,4,4,0,,urn:schemas-etourist:Gastro,40 || 30 || 200
+gastro,Gastro,ROOM_SITZEINDOOR,4,4,4,4,0,,urn:schemas-etourist:Gastro,100 || 550
+gastro,Gastro,ROOM_SITZENEBENZIMMER1,2,2,2,2,0,,urn:schemas-etourist:Gastro,30 || 100
+gastro,Gastro,ROOM_SITZENEBENZIMMER2,2,2,2,2,0,,urn:schemas-etourist:Gastro,5 || 100
+gastro,Gastro,ROOM_SITZENEBENZIMMER3,2,2,2,2,0,,urn:schemas-etourist:Gastro,0 || 100
+gastro,Gastro,ROOM_SITZENEBENZIMMER4,2,2,2,2,0,,urn:schemas-etourist:Gastro,0 || 100
+gastro,Gastro,ROOM_SITZESAAL,4,4,4,4,0,,urn:schemas-etourist:Gastro,50 || 40 || 150
+gastro,Gastro,ROOM_SITZETERRASSE,2,2,2,2,0,,urn:schemas-etourist:Gastro,0 || 200
+gastro,Gastro,ROOM_SONSTIGE,4,4,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SOCIAL_FACEBOOK,8,8,8,8,0,,urn:schemas-etourist:Gastro,https://www.facebook.com/SonderBar.de/ || https://www.facebook.com/hotel.restaurant.sorgenfrei/ || https://www.facebook.com/KuchenAtelierDresden
+gastro,Gastro,SOCIAL_INSTAGRAM,8,8,8,8,0,,urn:schemas-etourist:Gastro,https://www.instagram.com/ || https://www.instagram.com/sonderbardresden/ || https://www.instagram.com/villa.sorgenfrei
+gastro,Gastro,SOCIAL_SONSTIGE1_LINK,1,1,1,1,0,,urn:schemas-etourist:Gastro,https://www.linkedin.com/feed/
+gastro,Gastro,SOCIAL_SONSTIGE1_TITEL,21,21,1,1,0,,urn:schemas-etourist:Gastro,LinkedIn
+gastro,Gastro,SOCIAL_SONSTIGE2_TITEL,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SOCIAL_SONSTIGE3_TITEL,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Alpstein,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Feratel,21,21,1,1,0,,urn:schemas-etourist:Gastro,https://www.feratel.de/login/
+gastro,Gastro,SYSTEMID_GIATA,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_GOOGLEPLACES,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_HRS,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Incomingsoft,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Reif,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Schmetterling,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Secra,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_TOMAS,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Tiscover,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Tripadvisor,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_TrustYou,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Wildeast,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_Yelp,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_booking_com,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_green_solutions,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SYSTEMID_hotel_de,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SocialDescription,1,1,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,SocialTitle,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,Tags,21,21,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,WEB_SEO_BESCHREIBUNG,10,10,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,WEB_SEO_KEYWORDS,2,2,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,WEB_SEO_TITEL,10,10,0,0,0,,urn:schemas-etourist:Gastro,
+gastro,Gastro,string,485,21,485,21,0,cs-CZ|de-DE|en-GB|nl-NL|pl-PL|sk-SK,urn:eTourist:i18n,Test gastro romana || degwsghawe || dw
+accommodation,Hotel,ACCESSIBILITY_BLINDNESS,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_BLINDNESS_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_COGNITIVE_IMPAIRMENTS,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_DEAFNESS,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_DEAFNESS_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_HEARING_IMPAIRMENT,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_HEARING_IMPAIRMENT_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_INFO,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_VERIFIED,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_VISUAL_IMPAIRMENT,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_VISUAL_IMPAIRMENT_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_WALKING_IMPEDIMENT,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_WALKING_IMPEDIMENT_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_WHEELCHAIR,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,ACCESSIBILITY_WHEELCHAIR_PARTLY,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,AUTOR_ANREDE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,FR
+accommodation,Hotel,AUTOR_EMAIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,p-km2@marketing.dresden.de
+accommodation,Hotel,AUTOR_FIRMA,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Test Katharinas Traumschloss
+accommodation,Hotel,AUTOR_MOBIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 172 / 323232
+accommodation,Hotel,AUTOR_NACHNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Bo
+accommodation,Hotel,AUTOR_ORTID,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,14278
+accommodation,Hotel,AUTOR_ORTSTEIL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Traumland
+accommodation,Hotel,AUTOR_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,3
+accommodation,Hotel,AUTOR_STRASSE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Wolkenstraße 10
+accommodation,Hotel,AUTOR_TEL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 351 / 454545
+accommodation,Hotel,AUTOR_TITEL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Dr.
+accommodation,Hotel,AUTOR_VORNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Kate
+accommodation,Hotel,AUTOR_WEBSEITE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,AdaptivPragmatisch,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,AktivVital,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Aktiverelebnis,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Anzahl_Appartments,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,11 || 30
+accommodation,Hotel,Anzahl_Barrierefrei,29,29,29,29,0,,urn:schemas-etourist:TIN_1_0,1 || 2 || 3
+accommodation,Hotel,Anzahl_Doppelzimmer,37,37,37,37,0,,urn:schemas-etourist:TIN_1_0,41 || 160 || 183
+accommodation,Hotel,Anzahl_Dreibettzimmer,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,1 || 30
+accommodation,Hotel,Anzahl_Einzelzimmer,23,23,23,23,0,,urn:schemas-etourist:TIN_1_0,47 || 22 || 5
+accommodation,Hotel,Anzahl_Ferienhaeuser,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,11 || 2
+accommodation,Hotel,Anzahl_GastroMax,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,200 || 500
+accommodation,Hotel,Anzahl_Mehrbettzimmer,17,17,17,17,0,,urn:schemas-etourist:TIN_1_0,3 || 47 || 39
+accommodation,Hotel,Anzahl_Suite,31,31,31,31,0,,urn:schemas-etourist:TIN_1_0,11 || 31 || 13
+accommodation,Hotel,Anzahl_Tagungsraum,112,112,112,112,0,,urn:schemas-etourist:TIN_1_0,5 || 6 || 8
+accommodation,Hotel,Anzahl_TagungsraumMaxPerson,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,300 || 500
+accommodation,Hotel,Architektur,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,BOOKING_LINK1_XML,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,BOOKING_TITEL1_XML,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Barrierefrei,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,BesondereOrte,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Betrieb,127,127,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,Betriebsname,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,njumii - Das Veranstaltungszentrum || Relais & Châteaux Hotel Bülow Palais || Flughafen Dresden
+accommodation,Hotel,Bettenanzahl,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,77 || 230
+accommodation,Hotel,Buchhaltung,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Buchhaltung_Bank,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Ostsächsische Sparkasse Dresden
+accommodation,Hotel,Buchhaltung_Blz,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,1234567890987654321 || 12345678909876543211234567890987654321
+accommodation,Hotel,Buchhaltung_Inhaber,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Katharina Böhme
+accommodation,Hotel,Buchhaltung_Kto,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,1234567890987654321 || 12345678909876543211234567890987654321
+accommodation,Hotel,CONTACT_ABTEILUNG,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Verkauf
+accommodation,Hotel,CONTACT_ANREDE,126,126,3,3,0,,urn:schemas-etourist:TIN_1_0,FR || HR
+accommodation,Hotel,CONTACT_EMAIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,p-km2@marketing.dresden.de
+accommodation,Hotel,CONTACT_FAX,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 9943 / 90522 - 5
+accommodation,Hotel,CONTACT_FIRMA,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Test Katharinas Traumschloss
+accommodation,Hotel,CONTACT_MASTER,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Tourism and Destination
+accommodation,Hotel,CONTACT_MOBIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 159 / 01356027
+accommodation,Hotel,CONTACT_NACHNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Böhme
+accommodation,Hotel,CONTACT_ORTID,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,14278
+accommodation,Hotel,CONTACT_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,5
+accommodation,Hotel,CONTACT_STRASSE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Mühlberg 4b
+accommodation,Hotel,CONTACT_TEL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 0351 / 6446674
+accommodation,Hotel,CONTACT_TITEL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Dr.
+accommodation,Hotel,CONTACT_VORNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Katharina
+accommodation,Hotel,CONTACT_WEBSEITE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,http://www.jagderlebnisse.de/
+accommodation,Hotel,CONTACT_WEBSEITE_XML,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,C_HasTitleImage,127,127,127,127,108,,urn:schemas-etourist:TIN_1_0,true || false
+accommodation,Hotel,C_LastChange,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,2022-08-24T15:32:00+02:00 || 2023-04-05T14:02:00+02:00 || 2024-08-06T12:14:00+02:00
+accommodation,Hotel,C_Ranking,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,80 || 40 || 60
+accommodation,Hotel,ContentdistributionDescription,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,ContentdistributionTeaser,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,CopyrightFallback,127,127,127,127,127,,urn:schemas-etourist:TIN_1_0,true
+accommodation,Hotel,Currency,120,120,1,1,0,,urn:schemas-etourist:TIN_1_0,EUR
+accommodation,Hotel,DQ_Ansprechperson,126,126,126,126,2,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_Eignung,126,126,126,126,3,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_Email,126,126,126,126,115,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Erreichbarkeit,126,126,126,126,2,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_Fremdsprachenkentnisse,126,126,126,126,2,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_GOOD,126,126,126,126,82,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Kategorie,126,126,126,126,126,,urn:schemas-etourist:Datenqualitaet,true
+accommodation,Hotel,DQ_Lage,126,126,126,126,126,,urn:schemas-etourist:Datenqualitaet,true
+accommodation,Hotel,DQ_MINIMUM,126,126,126,126,112,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Merkmale_GOOD,126,126,126,126,85,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Merkmale_VERYGOOD,126,126,126,126,21,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_OrtInfo,126,126,126,126,126,,urn:schemas-etourist:Datenqualitaet,true
+accommodation,Hotel,DQ_RANKING,126,126,126,126,0,,urn:schemas-etourist:Datenqualitaet,80 || 40 || 60
+accommodation,Hotel,DQ_Strasse,126,126,126,126,126,,urn:schemas-etourist:Datenqualitaet,true
+accommodation,Hotel,DQ_Teaser,126,126,126,126,116,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Tel,126,126,126,126,112,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Text,126,126,126,126,115,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_Titel,126,126,126,126,126,,urn:schemas-etourist:Datenqualitaet,true
+accommodation,Hotel,DQ_TitleImage,126,126,126,126,108,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_VERYGOOD,126,126,126,126,2,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,DQ_Webseite,126,126,126,126,116,,urn:schemas-etourist:Datenqualitaet,true || false
+accommodation,Hotel,DQ_WeitereFelder,126,126,126,126,2,,urn:schemas-etourist:Datenqualitaet,false || true
+accommodation,Hotel,EVALUATION_HOLIDAYCHECK,1,1,1,1,0,,urn:schemas-etourist:TIN_1_0,https://www.holidaycheck.de/
+accommodation,Hotel,EVALUATION_SONSTIGE1_TITEL,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EVALUATION_SONSTIGE2_TITEL,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EVALUATION_SONSTIGE3_TITEL,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EVALUATION_TRIPADVISOR,1,1,1,1,0,,urn:schemas-etourist:TIN_1_0,https://www.tripadvisor.de/Attraction_Review-g34515-d143394-Reviews-Walt_Disney_World_Resort-Orlando_Florida.html
+accommodation,Hotel,EightFour,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,EightOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,EightThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,EightTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,EntfernungInfo_Altstadt,114,114,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Autobahn,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Dom,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Flughafen,113,113,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Haltstelle,111,111,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Hauptbahnhof,114,114,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Innenstadt,4,4,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Uni,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EntfernungInfo_Uniklinik,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Erweitert,127,127,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Erweitert_Datenqualitaet,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,EventsFestivals,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Familie,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Familientipps,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FeWoAnzahl,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,10 || 5
+accommodation,Hotel,FiveOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FiveThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FiveTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FourOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FourThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,FourTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Fragment,127,127,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,Freimeldungskalender,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,Freizeitspaß,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,HYGIENE_2G,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_2GPlus,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_3G,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_3GPlus,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_Abstandsregelung,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_AushangHinweisschilder,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_AusreichendeLüftung,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BeachtungDerHygienehinweise,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BegrenzterZugang,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BereitstellungVonEinweghandschuhen,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BereitstellungVonHandedesinfektion,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_BereitstellungVonHautschonenderSeife,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_BereitstellungVonMundNasenBedeckung,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BereitstellungVonPapierhandtüchern,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BodenmarkierungenAnEmpfangsUndInformationsschaltern,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_BodenmarkierungenInWartebereichen,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_BodenmarkierungenVorKassen,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_EinUndAustrittDurchPersonal,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_GeschützerKassenbereich,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_GetrennterEinUndAusgang,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_Information,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,HYGIENE_MundNasenBedeckungPflicht,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_Parkplatzkonzept,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HYGIENE_RegelmäßigeReinigungDesinfektion,127,127,127,127,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,HYGIENE_SichtkontrolleBesucherzahlen,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,HandwerkBrauchtum,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,IFRAME_URL,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,INFO_SEASON_1,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2 || 1
+accommodation,Hotel,INFO_SEASON_10,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 3
+accommodation,Hotel,INFO_SEASON_11,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2
+accommodation,Hotel,INFO_SEASON_12,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2
+accommodation,Hotel,INFO_SEASON_2,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2 || 1
+accommodation,Hotel,INFO_SEASON_3,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2 || 1
+accommodation,Hotel,INFO_SEASON_4,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2 || 1
+accommodation,Hotel,INFO_SEASON_5,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 2 || 3
+accommodation,Hotel,INFO_SEASON_6,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 3
+accommodation,Hotel,INFO_SEASON_7,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 3
+accommodation,Hotel,INFO_SEASON_8,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 3
+accommodation,Hotel,INFO_SEASON_9,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 3
+accommodation,Hotel,Industriekultur,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Kategorie,366,126,366,126,0,,urn:schemas-etourist:TIN_1_0,Tagungs- / Seminarhaus || Tagungskategorien || Tagungshotel
+accommodation,Hotel,Keywords,126,126,112,112,0,,urn:schemas-etourist:TIN_1_0,"Tagungszentrum || Dresden,Eventlocation,Flughafen,Special Event Location || Dresden,Eventlocation,Museum,Residenzschloss"
+accommodation,Hotel,Keywords_terminal,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Klassifizierung_DEHOGA,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 100 || 70
+accommodation,Hotel,Klassifizierung_DEHOGA_G,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 100
+accommodation,Hotel,Klassifizierung_DTV,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,0 || 100 || 40
+accommodation,Hotel,Koordinaten,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,LANGUAGE_ARABISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_CHINESISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_DAENISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_DEUTSCH,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,LANGUAGE_ENGLISCH,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,LANGUAGE_FINNISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_FLAEMISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_FRANZOESISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_GEBAERDEN,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_GRIECHISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_ITALIENISCH,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,LANGUAGE_JAPANISCH,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,LANGUAGE_KROATISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_NIEDERLAENDISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_NORWEGISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_POLNISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_PORTUGIESISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_RUMAENISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_RUSSISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_SCHWEDISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_SLOWAKISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_SLOWENISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_SPANISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_TSCHECHISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_TUERKISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,LANGUAGE_UNGARISCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,Latitude,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,51.082752 || 51.0610782 || 51.125660498612852
+accommodation,Hotel,LiberalIntellektuell,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Longitude,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,13.7659832 || 13.7416786 || 13.764216899871826
+accommodation,Hotel,MTB,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,MULTIMEDIA_WEBCAM_TITEL,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,MULTIMEDIA_WEBCAM_URL,1,1,1,1,0,,urn:schemas-etourist:TIN_1_0,https://www.wetter.com/hd-live-webcams/deutschland/dresden-old-town/5295e1c510594/
+accommodation,Hotel,Merkmal,785,112,785,112,0,,urn:schemas-etourist:TIN_1_0,Aufzug / Lift || Bühne (fest installiert) || Klimaanlage
+accommodation,Hotel,Mindestaufenthaltsdauer,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,3 || 1
+accommodation,Hotel,Museen,126,126,126,126,2,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Musik,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,OBJECT_ANREISE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_ANREISE_LINK,3,3,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_ANZAHL_ELADESTATION,31,31,31,31,0,,urn:schemas-etourist:TIN_1_0,2 || 3 || 5
+accommodation,Hotel,OBJECT_BAHNHOF_TEXT,100,100,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_BAHNHOF_VORHANDEN,126,126,126,126,91,,urn:schemas-etourist:TIN_1_0,true || false
+accommodation,Hotel,OBJECT_CLOSED_DIENSTAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_DONNERSTAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_FEIERTAG,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_CLOSED_FREITAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_MITTWOCH,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_MONTAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_NONE,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_CLOSED_SAMSTAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CLOSED_SONNTAG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_CONTACT_EMAIL,115,115,115,115,0,,urn:schemas-etourist:TIN_1_0,vaz@njumii.de || info.palais@buelow-hotels.de || konferenzcenter@dresden-airport.de
+accommodation,Hotel,OBJECT_CONTACT_EMAIL_ANFRAGEN,115,115,115,115,0,,urn:schemas-etourist:TIN_1_0,vaz@njumii.de || veranstaltung@buelow-hotels.de || konferenzcenter@dresden-airport.de
+accommodation,Hotel,OBJECT_CONTACT_EMAIL_TAGEN,116,116,116,116,0,,urn:schemas-etourist:TIN_1_0,convention@marketing.dresden.de || convention@marketing.desden.de || convention@martketing.dresden.de
+accommodation,Hotel,OBJECT_CONTACT_FAX,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 9943 / 90522 - 5
+accommodation,Hotel,OBJECT_CONTACT_FIRMA,126,126,84,84,0,,urn:schemas-etourist:TIN_1_0,njumii - Das Veranstaltungszentrum || Hotel Bülow Palais || Flughafen Dresden GmbH
+accommodation,Hotel,OBJECT_CONTACT_MOBIL,5,5,5,5,0,,urn:schemas-etourist:TIN_1_0,+49 351 / 881 3050 || +49 159 / 01356027 || +49 351 / 44678
+accommodation,Hotel,OBJECT_CONTACT_ORTSTEIL,126,126,3,3,0,,urn:schemas-etourist:TIN_1_0,Rabenau || Pirna/ OT Graupa
+accommodation,Hotel,OBJECT_CONTACT_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,5
+accommodation,Hotel,OBJECT_CONTACT_STRASSE,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,"Am Lagerplatz 7 || Königstraße 14 || Conference Center, Wilhelmine-Reichhard-Ring 1"
+accommodation,Hotel,OBJECT_CONTACT_TEL,112,112,112,112,0,,urn:schemas-etourist:TIN_1_0,+49 351 / 4 64 04 64 || +49 351 / 8003 149 || +49 351 / 49120
+accommodation,Hotel,OBJECT_CONTACT_WEBSEITE1,126,126,116,116,0,,urn:schemas-etourist:TIN_1_0,https://www.njumii.de/%C3%9Cber-uns/Veranstaltungszentrum || https://www.buelow-palais.de/ || www.dresden-airport.de/events
+accommodation,Hotel,OBJECT_CONTACT_WEBSEITE1_XML,116,116,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_CREATIVECOMMONS,127,127,1,1,0,,urn:schemas-etourist:TIN_1_0,CC-BY-SA
+accommodation,Hotel,OBJECT_FIT_GRUPPEN,126,126,126,126,3,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_FIT_HAUSTIERE,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_FIT_INDIVIDUALGAESTE,126,126,126,126,3,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_FIT_SAISON,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_FIT_SCHLECHTWETTER,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_FIT_SCHULKLASSEN,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,OBJECT_FIT_SONSTIGE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_FIT_WETTERUNABHAENGIG,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,OBJECT_GROESSE_CAMPING,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,50 || 60
+accommodation,Hotel,OBJECT_OEFFNUNGSZEITEN,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_PARKING_ANZAHL,63,63,63,63,0,,urn:schemas-etourist:TIN_1_0,160 || 500 || 80
+accommodation,Hotel,OBJECT_PARKING_BARRIEREFREI,3,3,3,3,0,,urn:schemas-etourist:TIN_1_0,40 || 5 || 4
+accommodation,Hotel,OBJECT_PARKING_BUS,4,4,4,4,0,,urn:schemas-etourist:TIN_1_0,10 || 2 || 1
+accommodation,Hotel,OBJECT_PARKING_GARAGE,34,34,34,34,0,,urn:schemas-etourist:TIN_1_0,58 || 180 || 66
+accommodation,Hotel,OBJECT_PARKING_GEBUEHR,4,4,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_PARKING_SHUTTLESERVICE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_PARKING_UEBERDACHT,4,4,4,4,0,,urn:schemas-etourist:TIN_1_0,200 || 30 || 1059
+accommodation,Hotel,OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML,115,115,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_BESCHREIBUNG_SPEECH,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_BESCHREIBUNG_WINTER_HTML,8,8,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_NAME,127,127,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_NAME_SORTIERUNG,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_NAME_URL,10,10,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_TEASER_SOMMER_HTML,116,116,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_TEASER_SPEECH,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_TEASER_WINTER_HTML,8,8,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OBJECT_TEXT_WEITERE_INFO,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,OPERATOR_ANREDE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,FR
+accommodation,Hotel,OPERATOR_EMAIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,p-km2@marketing.dresden.de
+accommodation,Hotel,OPERATOR_FIRMA,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Boewood
+accommodation,Hotel,OPERATOR_MOBIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 172 / 987654321
+accommodation,Hotel,OPERATOR_NACHNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Boe
+accommodation,Hotel,OPERATOR_ORTID,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,14278
+accommodation,Hotel,OPERATOR_ORTSTEIL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Regenbogenland
+accommodation,Hotel,OPERATOR_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,2
+accommodation,Hotel,OPERATOR_STRASSE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Traumschlossstraße 3
+accommodation,Hotel,OPERATOR_TEL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 351 / 987654321
+accommodation,Hotel,OPERATOR_TITEL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Dr.
+accommodation,Hotel,OPERATOR_VORNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Kate
+accommodation,Hotel,OPERATOR_WEBSEITE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,ORG_EMAIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,p-km2@marketing.dresden.de
+accommodation,Hotel,ORG_MOBIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 172 / 78787878 || +49 351 / 78787878
+accommodation,Hotel,ORG_NAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Test Katharinas Traumschloss
+accommodation,Hotel,ORG_ORTID,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,14278
+accommodation,Hotel,ORG_ORTSTEIL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Seenland
+accommodation,Hotel,ORG_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,7
+accommodation,Hotel,ORG_STRASSE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Wasserstraße 7
+accommodation,Hotel,ORG_TEL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+49 351 / 78787878
+accommodation,Hotel,ORG_WEBSEITE,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Oepnv,126,126,126,126,8,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,OneOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,OrtID,127,127,127,127,0,,urn:schemas-etourist:TIN_1_0,14190 || 14189 || 14192
+accommodation,Hotel,PRICE_DISCOUNT_BEHINDERUNG_f,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_DISCOUNT_FAMILIEN_d,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_DISCOUNT_FAMILIEN_f,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_DISCOUNT_GRUPPEN_d,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_DISCOUNT_GRUPPEN_f,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_DISCOUNT_KINDER_f,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_DISCOUNT_SCHULKLASSE_f,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_DISCOUNT_SENIOREN_d,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_DISCOUNT_SENIOREN_f,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_DISCOUNT_SONSTIGE,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_DISCOUNT_STUDENT_d,1,1,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_DISCOUNT_STUDENT_f,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_FROM,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,100.0000 || 70.0000
+accommodation,Hotel,PRICE_INFO,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_KLASSIFIZIERUNG,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_MEMBER_ADAC,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_MEMBER_OBCARD,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_MEMBER_REGKUR,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_MEMBER_REGKUR_TEXT,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,PRICE_PAYMENT_AMERICANEXPRESS,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_APPLEPAY,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_BANKOMAT,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_BAR,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_CONTACTLESS,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_DINERSCLUB,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_PAYMENT_GOOGLEPAY,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_PAYMENT_JCB,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_PAYMENT_MASTERCARD,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_PAYPAL,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_SCHECK,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_TWINT,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,PRICE_PAYMENT_UEBERWEISUNG,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PRICE_PAYMENT_VISA,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,PassendeDach,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Quelle,126,126,3,3,0,,urn:schemas-etourist:TIN_1_0,eT4
+accommodation,Hotel,Quellekey,126,126,3,3,0,,urn:schemas-etourist:TIN_1_0,45498 || 45714 || 45725
+accommodation,Hotel,Radfahren,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,RausNatur,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Redirect,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SOCIAL_FACEBOOK,63,63,63,63,0,,urn:schemas-etourist:TIN_1_0,https://www.facebook.com/BuelowPalais/ || https://www.facebook.com/HotelTaschenbergpalaisDresden || https://www.facebook.com/profile.php?id=100040742511808
+accommodation,Hotel,SOCIAL_INSTAGRAM,62,62,62,62,0,,urn:schemas-etourist:TIN_1_0,https://www.instagram.com/buelowpalais/ || https://www.instagram.com/kempinskidresden/ || https://www.instagram.com/msu_museen.erleben/
+accommodation,Hotel,SOCIAL_SONSTIGE1_LINK,23,23,23,23,0,,urn:schemas-etourist:TIN_1_0,https://www.linkedin.com/company/kempinski-hotels/ || https://www.linkedin.com/company/msu-museen-erleben-gmbh/ || https://bit.ly/3j2FcX4
+accommodation,Hotel,SOCIAL_SONSTIGE1_TITEL,126,126,23,23,0,,urn:schemas-etourist:TIN_1_0,LinkedIn || LinkedIN
+accommodation,Hotel,SOCIAL_SONSTIGE2_LINK,8,8,8,8,0,,urn:schemas-etourist:TIN_1_0,https://www.xing.com/pages/bilderbergbellevuehoteldresden?sc_o=entity_page_news_module_to_publisher || https://www.xing.com/pages/hiltondresden/ || https://www.xing.com/pages/h-hotels
+accommodation,Hotel,SOCIAL_SONSTIGE2_TITEL,126,126,8,8,0,,urn:schemas-etourist:TIN_1_0,Xing || XING
+accommodation,Hotel,SOCIAL_SONSTIGE3_TITEL,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SOCIAL_TWITTER,15,15,15,15,0,,urn:schemas-etourist:TIN_1_0,https://twitter.com/kempinski || https://twitter.com/bellevuedresden || https://twitter.com/newshiltondd
+accommodation,Hotel,SOCIAL_YOUTUBE,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,https://www.youtube.com/user/jagderlebnisse || https://www.youtube.com/channel/UCKvaRnxMserJ8qU6GE5ZuMg
+accommodation,Hotel,SYSTEMID_Alpstein,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Feratel,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_GIATA,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_GOOGLEPLACES,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_HRS,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Incomingsoft,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Reif,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Schmetterling,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Secra,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_TOMAS,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Tiscover,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Tripadvisor,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_TrustYou,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Wildeast,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_Yelp,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_booking_com,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_digiGGV,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_green_solutions,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SYSTEMID_hotel_de,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,SachsenFamilienfreundlich,21,21,21,21,0,,urn:schemas-etourist:SchemaExtension,keine Sterne
+accommodation,Hotel,SachsensDoerfer,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,SelbstauskunftDerBetriebe,4,4,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,SevenOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,SevenTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,SixOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,SixThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,SixTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Soziooekologisch,126,126,126,126,2,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Staedtetrips,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Tags,126,126,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsdatensatzTyp,126,126,114,114,0,,urn:schemas-etourist:TIN_1_0,T
+accommodation,Hotel,TagungsortAuszeichnung,17,17,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsortAuszeichnungBlauerEngel,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungCertifiedGreenHotels,126,126,126,126,5,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungDehogaUmweltcheck,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungEcoLabel,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungFairpflichtet,126,126,126,126,3,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungGreenMeeting,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungGreenglobe,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungGreentable,126,126,126,126,1,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungISO,126,126,126,126,2,,urn:schemas-etourist:TIN_1_0,false || true
+accommodation,Hotel,TagungsortAuszeichnungViabono,126,126,126,126,0,,urn:schemas-etourist:TIN_1_0,false
+accommodation,Hotel,TagungsortDescription,115,115,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsortGastro,54,54,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsortProgram,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsortTeaser,114,114,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TagungsortWLAN,106,106,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,TextGehbehinderung,2,2,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,TextHoerbehinderung,2,2,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,TextKognitivbehinderung,2,2,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,TextSehbehinderung,2,2,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,TextVital,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,ThreeOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,ThreeThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,ThreeTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,TwoOne,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,TwoThree,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,TwoTwo,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,VERMITTLER_ABTEILUNG,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Verkauf
+accommodation,Hotel,VERMITTLER_ANREDE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,HR
+accommodation,Hotel,VERMITTLER_EMAIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,p-km2@marketing.dresden.de
+accommodation,Hotel,VERMITTLER_FAX,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+ 49 351 / 215900 - 4
+accommodation,Hotel,VERMITTLER_FIRMA,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Deutsche Werkstätten Hellerau
+accommodation,Hotel,VERMITTLER_MASTER,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Engeneering
+accommodation,Hotel,VERMITTLER_MOBIL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+ 49 351 / 123456
+accommodation,Hotel,VERMITTLER_NACHNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Böhme
+accommodation,Hotel,VERMITTLER_ORTID,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,14192
+accommodation,Hotel,VERMITTLER_POSTFACH,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,4
+accommodation,Hotel,VERMITTLER_SERVICEZEITEN,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,VERMITTLER_STRASSE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Moritzburger Weg 68
+accommodation,Hotel,VERMITTLER_TEL,2,2,2,2,0,,urn:schemas-etourist:TIN_1_0,+ 49 351 / 215900
+accommodation,Hotel,VERMITTLER_TITEL,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Dr.
+accommodation,Hotel,VERMITTLER_VORNAME,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,Jörg
+accommodation,Hotel,VERMITTLER_WEBSEITE,126,126,2,2,0,,urn:schemas-etourist:TIN_1_0,https://www.dwh.de/
+accommodation,Hotel,VERMITTLER_WEBSEITE_XML,2,2,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Vermieter,127,127,0,0,0,,urn:schemas-etourist:SchemaExtension,
+accommodation,Hotel,Vital,22,22,22,22,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,WEB_SEO_KEYWORDS,58,58,0,0,0,,urn:schemas-etourist:TIN_1_0,
+accommodation,Hotel,Wandern,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Wasser,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Wasserratten,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,WeihnachtenAdvent,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,Winter,126,126,126,126,0,,urn:schemas-etourist:SchemaExtension,false
+accommodation,Hotel,WissenswertesEntdecker,126,126,126,126,1,,urn:schemas-etourist:SchemaExtension,false || true
+accommodation,Hotel,Zimmeranzahl,40,40,40,40,0,,urn:schemas-etourist:TIN_1_0,58 || 213 || 183
+accommodation,Hotel,string,3051,127,3050,127,0,de-DE|en-GB,urn:eTourist:i18n,njumii - Das Veranstaltungszentrum || Modernste Bedingungen &amp; hoher technischer Standard: njumii – das Veranstaltungszentrum || State-of-the-art conditions &amp; high technical standard: njumii - the event centre
+poi,Poi,ACCESSIBILITY_BLINDNESS,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_BLINDNESS_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_COGNITIVE_IMPAIRMENTS,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_DEAFNESS,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_DEAFNESS_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_HEARING_IMPAIRMENT,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_HEARING_IMPAIRMENT_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_INFO,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_VERIFIED,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_VISUAL_IMPAIRMENT,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_VISUAL_IMPAIRMENT_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_WALKING_IMPEDIMENT,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_WALKING_IMPEDIMENT_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_WHEELCHAIR,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ACCESSIBILITY_WHEELCHAIR_PARTLY,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,ALWAYSOPEN,94,94,94,94,3,,urn:schemas-etourist:Poi,false || true
+poi,Poi,AUTOR_ANREDE,92,92,4,4,0,,urn:schemas-etourist:Poi,HR || FA
+poi,Poi,AUTOR_EMAIL,2,2,2,2,0,,urn:schemas-etourist:Poi,info@marketing.dresden.de
+poi,Poi,AUTOR_FIRMA,92,92,4,4,0,,urn:schemas-etourist:Poi,Dresden Marketing GmbH
+poi,Poi,AUTOR_NACHNAME,92,92,4,4,0,,urn:schemas-etourist:Poi,Blüthgen
+poi,Poi,AUTOR_ORTID,5,5,5,5,0,,urn:schemas-etourist:Poi,14185
+poi,Poi,AUTOR_ORTSTEIL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,AUTOR_POSTFACH,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,AUTOR_STRASSE,92,92,4,4,0,,urn:schemas-etourist:Poi,Messering 7
+poi,Poi,AUTOR_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,AUTOR_VORNAME,92,92,4,4,0,,urn:schemas-etourist:Poi,Marco
+poi,Poi,AUTOR_WEBSEITE,2,2,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,AdaptivPragmatisch,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,AktivVital,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Aktiverelebnis,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Architektur,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,BOOKING_TITEL1_XML,1,1,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Barrierefrei,2,2,2,2,1,,urn:schemas-etourist:SchemaExtension,false || true
+poi,Poi,BesondereOrte,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Bezeichnung,94,94,94,94,0,,urn:schemas-etourist:Poi,Test POI Fenna || Intercom Dresden GmbH || Test Romana
+poi,Poi,CONTACT_ANREDE,92,92,2,2,0,,urn:schemas-etourist:Poi,FR
+poi,Poi,CONTACT_EMAIL,30,30,30,30,0,,urn:schemas-etourist:Poi,romana.gross@marketing.dresden.de || p-km2@marketing.dresden.de || kontakt@aniko-hochzeiten.de
+poi,Poi,CONTACT_FAX,3,3,3,3,0,,urn:schemas-etourist:Poi,+49 (0) 351 43131-17 || 0351 492 55 54 || +49 351 853 5626
+poi,Poi,CONTACT_FIRMA,92,92,6,6,0,,urn:schemas-etourist:Poi,Alter Schlachthof || Kraftwerk Mitte Comedy und Event GmbH || DIE HERKULESKEULE Dresdens Kabarett-Theater GmbH
+poi,Poi,CONTACT_MOBIL,1,1,1,1,0,,urn:schemas-etourist:Poi,+49 176 84 45 10 41
+poi,Poi,CONTACT_NACHNAME,92,92,3,3,0,,urn:schemas-etourist:Poi,Groß || Böhme || Arzner
+poi,Poi,CONTACT_ORTID,35,35,35,35,0,,urn:schemas-etourist:Poi,14185 || 14195 || 14217
+poi,Poi,CONTACT_POSTFACH,92,92,1,1,0,,urn:schemas-etourist:Poi,120162
+poi,Poi,CONTACT_STRASSE,92,92,35,35,0,,urn:schemas-etourist:Poi,Messering 7 || Mühlberg || Voglerstraße 41
+poi,Poi,CONTACT_TEL,30,30,30,30,0,,urn:schemas-etourist:Poi,035150173120 || 0351 0000000 || +49 351 / 313 88355
+poi,Poi,CONTACT_TITEL,92,92,1,1,0,,urn:schemas-etourist:Poi,Besucherservice
+poi,Poi,CONTACT_VORNAME,92,92,3,3,0,,urn:schemas-etourist:Poi,Romana || Katharina || Anikó
+poi,Poi,CONTACT_WEBSEITE,92,92,11,11,0,,urn:schemas-etourist:Poi,www.dmg.de || www.aniko-hochzeiten.de || https://www.aust-konzerte.com/
+poi,Poi,CONTACT_WEBSEITE_XML,10,10,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,C_HasRecurrenceRule,92,92,92,92,25,,urn:schemas-etourist:Poi,true || false
+poi,Poi,C_HasTitleImage,94,94,94,94,75,,urn:schemas-etourist:Poi,false || true
+poi,Poi,C_LastChange,92,92,92,92,0,,urn:schemas-etourist:Poi,2021-07-07T17:15:00+02:00 || 2022-04-07T08:58:00+02:00 || 2021-11-16T13:27:00+01:00
+poi,Poi,C_Ranking,94,94,94,94,0,,urn:schemas-etourist:Poi,0 || 60 || 40
+poi,Poi,CopyrightFallback,94,94,94,94,94,,urn:schemas-etourist:Poi,true
+poi,Poi,Currency,70,70,9,9,0,,urn:schemas-etourist:Poi,EUR
+poi,Poi,DQ_Ansprechperson,92,92,92,92,9,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_Beschreibung_Winter,92,92,92,92,0,,urn:schemas-etourist:Datenqualitaet,false
+poi,Poi,DQ_Eignung,92,92,92,92,5,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_Email,92,92,92,92,81,,urn:schemas-etourist:Datenqualitaet,true || false
+poi,Poi,DQ_Erreichbarkeit,92,92,92,92,51,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_Fremdsprachenkentnisse,92,92,92,92,8,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_GOOD,92,92,92,92,9,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_Kategorie,92,92,92,92,92,,urn:schemas-etourist:Datenqualitaet,true
+poi,Poi,DQ_Lage,92,92,92,92,92,,urn:schemas-etourist:Datenqualitaet,true
+poi,Poi,DQ_MINIMUM,92,92,92,92,79,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_OrtInfo,92,92,92,92,92,,urn:schemas-etourist:Datenqualitaet,true
+poi,Poi,DQ_Preis,92,92,92,92,29,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_RANKING,92,92,92,92,0,,urn:schemas-etourist:Datenqualitaet,0 || 60 || 40
+poi,Poi,DQ_Strasse,92,92,92,92,89,,urn:schemas-etourist:Datenqualitaet,true || false
+poi,Poi,DQ_Teaser,92,92,92,92,91,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_Tel,92,92,92,92,81,,urn:schemas-etourist:Datenqualitaet,true || false
+poi,Poi,DQ_Text,92,92,92,92,92,,urn:schemas-etourist:Datenqualitaet,true
+poi,Poi,DQ_Titel,92,92,92,92,92,,urn:schemas-etourist:Datenqualitaet,true
+poi,Poi,DQ_TitleImage,92,92,92,92,75,,urn:schemas-etourist:Datenqualitaet,false || true
+poi,Poi,DQ_VERYGOOD,92,92,92,92,0,,urn:schemas-etourist:Datenqualitaet,false
+poi,Poi,DQ_Webseite,92,92,92,92,86,,urn:schemas-etourist:Datenqualitaet,true || false
+poi,Poi,DQ_WeitereFelder,92,92,92,92,0,,urn:schemas-etourist:Datenqualitaet,false
+poi,Poi,DQ_Zeiten,92,92,92,92,25,,urn:schemas-etourist:Datenqualitaet,true || false
+poi,Poi,DuplicateGroupId,24,24,24,24,0,,urn:schemas-etourist:Poi,1100061036 || 1100162911 || 1100060053
+poi,Poi,EVALUATION_SONSTIGE1_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,EVALUATION_SONSTIGE2_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,EVALUATION_SONSTIGE3_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,EVALUATION_TRIPADVISOR,2,2,2,2,0,,urn:schemas-etourist:Poi,https://www.tripadvisor.com/Attraction_Review-g651946-d1519641-Reviews-Schloss_Moritzburg-Moritzburg_Saxony.html || https://www.tripadvisor.com/Attraction_Review-g187399-d4271671-Reviews-Dresdner_Parkeisenbahn-Dresden_Saxony.html
+poi,Poi,EightFour,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,EightOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,EightThree,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,EightTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Erweitert,94,94,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Erweitert_Datenqualitaet,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,EventsFestivals,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Familie,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Familientipps,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FiveOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FiveThree,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FiveTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FourOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FourThree,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,FourTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Fragment,94,94,0,0,0,,urn:schemas-etourist:SchemaExtension,
+poi,Poi,Freizeitspaß,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,GeneratedBooleanKeywords,92,92,86,86,0,,urn:schemas-etourist:Poi,"Deutsch,Englisch || für Gruppen,für Individualgäste,Ruhetag Montag,Ruhetag Dienstag,Deutsch,Englisch || Deutsch"
+poi,Poi,HYGIENE_2G,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_2GPlus,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_3G,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_3GPlus,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_Abstandsregelung,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_AushangHinweisschilder,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_AusreichendeLüftung,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BeachtungDerHygienehinweise,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BegrenzterZugang,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BereitstellungVonEinweghandschuhen,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BereitstellungVonHandedesinfektion,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BereitstellungVonHautschonenderSeife,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BereitstellungVonMundNasenBedeckung,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BereitstellungVonPapierhandtüchern,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BodenmarkierungenAnEmpfangsUndInformationsschaltern,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BodenmarkierungenInWartebereichen,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_BodenmarkierungenVorKassen,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_EinUndAustrittDurchPersonal,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_GeschützerKassenbereich,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_GetrennterEinUndAusgang,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_MundNasenBedeckungPflicht,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_Parkplatzkonzept,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_RegelmäßigeReinigungDesinfektion,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HYGIENE_SichtkontrolleBesucherzahlen,94,94,94,94,0,,urn:schemas-etourist:Poi,false
+poi,Poi,HandwerkBrauchtum,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,IFRAME_URL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,INFO_SEASON_1,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_10,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_11,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_12,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_2,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_3,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_4,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_5,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_6,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_7,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_8,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,INFO_SEASON_9,92,92,92,92,0,,urn:schemas-etourist:Poi,0
+poi,Poi,Industriekultur,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Kategorie,314,92,314,92,0,,urn:schemas-etourist:Poi,Museum/Sammlung || Burg || Kirche
+poi,Poi,Keywords,92,92,56,56,0,,urn:schemas-etourist:Poi,"Dresden,Eventagentur || Eventagentur,Technikanbieter || Dresden,Technikanbieter"
+poi,Poi,Keywords_terminal,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,KvpXml_PRICEINFO,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,LANGUAGE_ARABISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_CHINESISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_DAENISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_DEUTSCH,92,92,92,92,7,,urn:schemas-etourist:Poi,false || true
+poi,Poi,LANGUAGE_ENGLISCH,92,92,92,92,7,,urn:schemas-etourist:Poi,false || true
+poi,Poi,LANGUAGE_FINNISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_FLAEMISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_FRANZOESISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_GRIECHISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_ITALIENISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_JAPANISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_KROATISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_NIEDERLAENDISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_NORWEGISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_POLNISCH,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,LANGUAGE_PORTUGIESISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_RUSSISCH,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,LANGUAGE_SCHWEDISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_SLOWAKISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_SLOWENISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_SPANISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,LANGUAGE_TSCHECHISCH,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,LANGUAGE_UNGARISCH,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,Latitude,92,92,92,92,0,,urn:schemas-etourist:Poi,51.0688218 || 51.0296578 || 51.06882995
+poi,Poi,LiberalIntellektuell,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Longitude,92,92,92,92,0,,urn:schemas-etourist:Poi,13.7163235 || 13.7339886 || 13.716023721263737
+poi,Poi,MTB,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Museen,6,6,6,6,1,,urn:schemas-etourist:SchemaExtension,false || true
+poi,Poi,Musik,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,OBJECT_ANREISE,51,51,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_ANREISE_LINK,21,21,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_BUSSTOPAVAILABLE,92,92,92,92,24,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_DIENSTAG,92,92,92,92,9,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_DONNERSTAG,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,OBJECT_CLOSED_FEIERTAG,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_FREITAG,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,OBJECT_CLOSED_MITWOCH,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_MONTAG,92,92,92,92,9,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_SAMSTAG,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CLOSED_SONNTAG,92,92,92,92,5,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_CONTACT_EMAIL,81,81,81,81,0,,urn:schemas-etourist:Poi,test@test.de || dresden@intercom.de || romana.gross@marketing.dresden.de
+poi,Poi,OBJECT_CONTACT_FAX,5,5,5,5,0,,urn:schemas-etourist:Poi,+49 351 320 173 33 || + 49 351 492 55 54 || +49 351 853 5626
+poi,Poi,OBJECT_CONTACT_FIRMA,92,92,65,65,0,,urn:schemas-etourist:Poi,Intercom Dresden GmbH || Test Romana || XY
+poi,Poi,OBJECT_CONTACT_MOBIL,2,2,2,2,0,,urn:schemas-etourist:Poi,+ 49 0176 99 02 56 52 || +49 176 84 45 10 41
+poi,Poi,OBJECT_CONTACT_ORTSTEIL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_CONTACT_POSTFACH,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_CONTACT_STRASSE,92,92,89,89,0,,urn:schemas-etourist:Poi,Messering 7 || Zellescher Weg 3 || Mühlberg
+poi,Poi,OBJECT_CONTACT_TEL,81,81,81,81,0,,urn:schemas-etourist:Poi,64647904 || +49 351 320 173 0 || 035150173120
+poi,Poi,OBJECT_CONTACT_WEBSEITE1,92,92,86,86,0,,urn:schemas-etourist:Poi,www.neusta-ds.de || https://www.intercom-kongresse.de/ || https://www.sam-production.de/
+poi,Poi,OBJECT_CONTACT_WEBSEITE1_XML,86,86,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_CREATIVECOMMONS,94,94,45,45,0,,urn:schemas-etourist:Poi,CC-BY || CC-BY-SA
+poi,Poi,OBJECT_FIT_GRUPPEN,92,92,92,92,4,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_FIT_HAUSTIERE,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_FIT_INDIVIDUALGAESTE,92,92,92,92,4,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_FIT_SCHLECHTWETTER,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_FIT_SCHULKLASSEN,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_FIT_WETTERUNABHAENGIG,92,92,92,92,3,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_OEFFNUNGSZEITEN,45,45,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_PARKINGAVAILABLE,92,92,92,92,37,,urn:schemas-etourist:Poi,false || true
+poi,Poi,OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_TEXT_NAME,94,94,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_TEXT_NAME_SORTIERUNG,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_TEXT_NAME_URL,9,9,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_TEXT_TEASER_SOMMER_HTML,91,91,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,OBJECT_TOLETTANLAGE,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,ORG_EMAIL,48,48,48,48,0,,urn:schemas-etourist:Poi,online@marketing.dresden.de || online@marketing.dresde.de
+poi,Poi,ORG_NAME,92,92,49,49,0,,urn:schemas-etourist:Poi,Dresden Marketing GmbH || Dresden Makreting GmbH
+poi,Poi,ORG_ORTID,47,47,47,47,0,,urn:schemas-etourist:Poi,14185 || 14186
+poi,Poi,ORG_ORTSTEIL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,ORG_POSTFACH,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,ORG_STRASSE,92,92,49,49,0,,urn:schemas-etourist:Poi,Messering 7
+poi,Poi,ORG_TEL,20,20,20,20,0,,urn:schemas-etourist:Poi,+49 351 50 17 30 || + 49 351 50173 0
+poi,Poi,ORG_WEBSEITE,1,1,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Oepnv,71,71,71,71,38,,urn:schemas-etourist:SchemaExtension,false || true
+poi,Poi,OneOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,OrtID,94,94,94,94,0,,urn:schemas-etourist:Poi,14185 || 14188 || 14195
+poi,Poi,PRICE_ADULT,1,1,1,1,0,,urn:schemas-etourist:Poi,10.0000
+poi,Poi,PRICE_CHILD,1,1,1,1,0,,urn:schemas-etourist:Poi,5.0000
+poi,Poi,PRICE_FAMILY,1,1,1,1,0,,urn:schemas-etourist:Poi,22.0000
+poi,Poi,PRICE_FREE,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_INFO,29,29,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,PRICE_KLASSIFIZIERUNG,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,PRICE_PAYMENT_AMERICANEXPRESS,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_APPLEPAY,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_BANKOMAT,92,92,92,92,3,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_BAR,92,92,92,92,7,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_CONTACTLESS,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_DINERSCLUB,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_GOOGLEPAY,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_JCB,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_MASTERCARD,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_PAYPAL,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_SCHECK,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_TWINT,92,92,92,92,0,,urn:schemas-etourist:Poi,false
+poi,Poi,PRICE_PAYMENT_UEBERWEISUNG,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_PAYMENT_VISA,92,92,92,92,1,,urn:schemas-etourist:Poi,false || true
+poi,Poi,PRICE_REDUCED,1,1,1,1,0,,urn:schemas-etourist:Poi,8.0000
+poi,Poi,PassendeDach,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,PeopleCounterDeviceId,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,PeopleCounterManual,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,PeopleCounterType,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Poi,94,94,0,0,0,,urn:schemas-etourist:SchemaExtension,
+poi,Poi,Pois,94,94,0,0,0,,urn:schemas-etourist:SchemaExtension,
+poi,Poi,Quelle,92,92,2,2,0,,urn:schemas-etourist:Poi,eT4
+poi,Poi,Quellekey,92,92,2,2,0,,urn:schemas-etourist:Poi,100119584 || 100059872
+poi,Poi,Radfahren,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,RausNatur,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SOCIAL_FACEBOOK,29,29,29,29,0,,urn:schemas-etourist:Poi,https://de-de.facebook.com/KarlMayMuseum/ || https://www.facebook.com/alterschlachthofdresden || https://www.facebook.com/stromwerkdresden
+poi,Poi,SOCIAL_INSTAGRAM,28,28,28,28,0,,urn:schemas-etourist:Poi,https://www.instagram.com/karl.may.museum/ || https://www.instagram.com/austkonzerte/ || https://instagram.com/stromwerkdresden
+poi,Poi,SOCIAL_SONSTIGE1_LINK,1,1,1,1,0,,urn:schemas-etourist:Poi,https://www.snapchat.com/add/elbeparkdd
+poi,Poi,SOCIAL_SONSTIGE1_TITEL,92,92,1,1,0,,urn:schemas-etourist:Poi,Snapchat
+poi,Poi,SOCIAL_SONSTIGE2_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SOCIAL_SONSTIGE3_TITEL,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SOCIAL_TIKTOK,3,3,3,3,0,,urn:schemas-etourist:Poi,https://www.tiktok.com/@centrum_galerie || https://www.tiktok.com/@elbeparkdd?lang=de-DE || https://www.tiktok.com/@landesbuehnensachsen?
+poi,Poi,SOCIAL_YOUTUBE,18,18,18,18,0,,urn:schemas-etourist:Poi,https://www.youtube.com/channel/UCTaWGZOxdKlq15Vy3vO0H5Q || https://www.youtube.com/channel/UCaxhr1CI1bLEHCs7PZcsyLQ || https://www.youtube.com/user/ELBEPARKdresden
+poi,Poi,SYSTEMID_Alpstein,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Feratel,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_GIATA,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_GOOGLEPLACES,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_HRS,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Incomingsoft,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Reif,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Schmetterling,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Secra,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_TOMAS,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Tiscover,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Tripadvisor,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_TrustYou,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Wildeast,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_Yelp,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_booking_com,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_green_solutions,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SYSTEMID_hotel_de,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SachsensDoerfer,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SevenOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SevenTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SixOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SixThree,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SixTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,SocialDescription,1,1,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,SocialTitle,1,1,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Soziooekologisch,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Staedtetrips,6,6,6,6,1,,urn:schemas-etourist:SchemaExtension,false || true
+poi,Poi,TARGET_SENIOREN,92,92,92,92,2,,urn:schemas-etourist:Poi,false || true
+poi,Poi,Tags,92,92,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,ThreeOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,ThreeThree,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,ThreeTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,TwoOne,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,TwoThree,2,2,2,2,1,,urn:schemas-etourist:SchemaExtension,false || true
+poi,Poi,TwoTwo,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Vital,2,2,2,2,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,WEB_SEO_BESCHREIBUNG,47,47,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,WEB_SEO_KEYWORDS,2,2,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,WEB_SEO_TITEL,48,48,0,0,0,,urn:schemas-etourist:Poi,
+poi,Poi,Wandern,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Wasser,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Wasserratten,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,WeihnachtenAdvent,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,Winter,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,WissenswertesEntdecker,6,6,6,6,0,,urn:schemas-etourist:SchemaExtension,false
+poi,Poi,ZusatzinfoBarrierefrei,1,1,0,0,0,,urn:schemas-etourist:SchemaExtension,
+poi,Poi,string,1982,94,1982,94,0,cs-CZ|de-DE|en-GB|it-IT|nl-NL|pl-PL|sk-SK,urn:eTourist:i18n,Test POI Fenna || Englisch Test POI von Fenna || www.neusta-ds.de

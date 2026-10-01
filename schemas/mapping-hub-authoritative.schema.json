@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SaTourN Mapping Hub authoritative data",
+  "type": "object",
+  "required": ["meta", "systems", "datasetTypes", "rules"],
+  "properties": {
+    "meta": {"type": "object"},
+    "systems": {"type": "array", "items": {"type": "object", "required": ["id", "label", "role"]}},
+    "datasetTypes": {"type": "array", "items": {"type": "object", "required": ["id", "label"]}},
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "ruleKind", "status", "behavior", "source", "target", "provenance"],
+        "properties": {
+          "id": {"type": "string"},
+          "ruleKind": {"enum": ["mapping", "routing", "fallback"]},
+          "status": {"const": "active"},
+          "behavior": {"enum": ["map", "noImport", "noTarget", "route", "fallback"]},
+          "source": {"type": "object"},
+          "target": {"type": "object"},
+          "oneToMany": {"type": "boolean"},
+          "technicalMarkers": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "array", "items": {"type": "string"}},
+          "provenance": {"type": "array", "minItems": 1, "items": {"type": "object"}}
+        }
+      }
+    }
+  }
+}

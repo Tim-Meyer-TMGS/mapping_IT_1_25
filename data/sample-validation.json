@@ -1,0 +1,202 @@
+{
+  "accommodation": {
+    "mappingTargetValues": 21,
+    "sampleObservedValues": 20,
+    "exactMatches": 4,
+    "exactMatchValues": [
+      "Appartement",
+      "Ferienhaus",
+      "Ferienwohnung",
+      "Hotel"
+    ],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [
+      "Burg/Schloss",
+      "Event Location",
+      "Historische Location",
+      "Industriekultur",
+      "Messe",
+      "Messe- / Kongresszentrum",
+      "Moderne Location",
+      "Museum",
+      "Museum/Galerie",
+      "Open Air Location",
+      "Special Location",
+      "Sportstätte",
+      "Tagungs- / Seminarhaus",
+      "Tagungshotel",
+      "Tagungskategorien",
+      "Universität"
+    ],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "address": {
+    "mappingTargetValues": 0,
+    "sampleObservedValues": 3,
+    "exactMatches": 0,
+    "exactMatchValues": [],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [
+      "Ansprechpartner",
+      "Veranstalter",
+      "Veranstaltungsort"
+    ],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "article": {
+    "mappingTargetValues": 0,
+    "sampleObservedValues": 10,
+    "exactMatches": 0,
+    "exactMatchValues": [],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [
+      "Autor*in",
+      "Blog-Artikel",
+      "Branchen News",
+      "Dresden Convention Service",
+      "Kulturfans",
+      "Mountainbiken",
+      "Radfahren",
+      "Standort News",
+      "Veranstaltung News",
+      "Wissenswertes"
+    ],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "event": {
+    "mappingTargetValues": 95,
+    "sampleObservedValues": 3,
+    "exactMatches": 3,
+    "exactMatchValues": [
+      "Ausstellung",
+      "Führung/Besichtigung",
+      "klassisches Konzert"
+    ],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "gastro": {
+    "mappingTargetValues": 12,
+    "sampleObservedValues": 12,
+    "exactMatches": 11,
+    "exactMatchValues": [
+      "Ausflugslokal",
+      "Bar",
+      "Biergarten",
+      "Bistro",
+      "Brauereigaststätte",
+      "Café",
+      "Eisdiele/Eiscafé",
+      "Gasthof",
+      "Gaststätte",
+      "Pub/Kneipe",
+      "Restaurant"
+    ],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [
+      "Fischlokal"
+    ],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "package": {
+    "mappingTargetValues": 29,
+    "sampleObservedValues": 0,
+    "exactMatches": 0,
+    "exactMatchValues": [],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "poi": {
+    "mappingTargetValues": 214,
+    "sampleObservedValues": 64,
+    "exactMatches": 43,
+    "exactMatchValues": [
+      "Architektur",
+      "Audioguide",
+      "Aussichtspunkt/-turm",
+      "Besucherbergwerk",
+      "Burg",
+      "Bücherei",
+      "Denkmal",
+      "Einzelhandel",
+      "Eisen-/Schmalspurbahn",
+      "Festung",
+      "Fitness",
+      "Freibad",
+      "Freilichtbühne/-theater",
+      "Freizeitbahn",
+      "Freizeitpark",
+      "Funsport",
+      "Fußgängerzone",
+      "Galerie",
+      "Hallenbad/Erlebnisbad",
+      "Historische Stätte",
+      "Industrie-/Werksbesichtigung",
+      "Jugendtreff",
+      "Kinderspielplatz",
+      "Kirche",
+      "Klettern",
+      "Kultur-/Veranstaltungsort",
+      "Kulturzentrum",
+      "Luftsport",
+      "Museum/Sammlung",
+      "Park/Garten",
+      "Saunalandschaft",
+      "Schauwerkstatt/Manufaktur",
+      "Schloss",
+      "Sehenswertes",
+      "Sonstige Mobilität und Services",
+      "Sonstige Sehenswürdigkeit",
+      "Souvenirs",
+      "Spa/Wellness",
+      "Spielstätte",
+      "Theater",
+      "Wassersport",
+      "Zoo/Tierpark",
+      "Öffentlicher Nahverkehr"
+    ],
+    "normalizedOnlyMatches": [
+      {
+        "sampleValue": "Kreativität/Gestalten",
+        "mappingValues": [
+          "Kreativität / Gestalten"
+        ]
+      }
+    ],
+    "sampleOnlyValues": [
+      "Agenturen",
+      "Ausflugsziele",
+      "Ausstattung",
+      "Cateringunternehmen",
+      "Disko/Club",
+      "Erholung und Gesundheit",
+      "Event- und Incentiveagenturen",
+      "Event- und Inventiveagenturen",
+      "Geschäfte und Dienstleistung",
+      "Interaktiv",
+      "Klangkörper & Ensemble",
+      "Kreativität/Gestalten",
+      "Logistik",
+      "Mobil und Service",
+      "Orgel",
+      "PCOs",
+      "Servicedienstleister",
+      "Sport und Freizeit",
+      "Technikanbieter",
+      "Unterhaltung",
+      "Öffentliche Gebäude"
+    ],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  },
+  "tour": {
+    "mappingTargetValues": 14,
+    "sampleObservedValues": 0,
+    "exactMatches": 0,
+    "exactMatchValues": [],
+    "normalizedOnlyMatches": [],
+    "sampleOnlyValues": [],
+    "warning": "AH67-T309 is a sample, not a complete SaTourN taxonomy. Sample-only or mapping-only values are not errors by themselves."
+  }
+}

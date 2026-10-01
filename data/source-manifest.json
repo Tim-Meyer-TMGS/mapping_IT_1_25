@@ -1,0 +1,31 @@
+{
+  "createdAt": "2026-10-01",
+  "sources": [
+    {
+      "path": "input/Mappinguebersicht_Fremdsysteme_2026-09-24.docx",
+      "sha256": "f862307acfa7b1bbb058884aa90d5941f27c06d29de4aabf0376fcdba5eb400f",
+      "role": "raw mapping source",
+      "authority": "authoritative for explicit mapping rows",
+      "bytes": 61591
+    },
+    {
+      "path": "input/Mappingbestand_Extraktion_Arbeitsstand_2026-09-24.json",
+      "sha256": "5bca251ac2c435c86152cb98890a991a409649d0c1a15fba48f07b08959bfca5",
+      "role": "machine extraction of mapping document",
+      "authority": "authoritative only when checked against document structure",
+      "bytes": 456656
+    },
+    {
+      "path": "input/AH67-T309.zip",
+      "sha256": "48096f7c9b859a483e45e21c8144595f4e4a438fdf2d8e513fdf8e634fe3bc1f",
+      "role": "real eT4/SaTourN examples",
+      "authority": "observational evidence, not full taxonomy",
+      "bytes": 1895478
+    }
+  ],
+  "githubPrototype": {
+    "repository": "Tim-Meyer-TMGS/mapping_IT_1_25",
+    "inspectedCommit": "d3a4cebf88c2c851f9ef7c142dbeecf87f262d52",
+    "role": "implementation/UI reference only; never source of mapping truth"
+  }
+}

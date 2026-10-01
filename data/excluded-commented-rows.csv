@@ -1,0 +1,10 @@
+﻿system,line,record_kind,source_value,target_value,status,context,group_kind,market,type,note,raw,quality_flag
+Outdooractive,374,category,Feriendorf,todo,commented,Hotel,,,,Hotel,"<CategoryMapping outdooractive=""Feriendorf"" eT4=""todo"" />",todo
+Outdooractive,375,category,Hütte,todo,commented,Hotel,,,,Hotel,"<CategoryMapping outdooractive=""Hütte"" eT4=""todo"" />",todo
+Outdooractive,376,category,Aparthotel,todo,commented,Hotel,,,,Hotel,"<CategoryMapping outdooractive=""Aparthotel"" eT4=""todo"" />",todo
+TIS POI,1017,mapping,Heiraten,todo,commented,,,,,Laut Kunden nicht importieren,"<Mapping Foreign=""Heiraten"" eT4=""todo"" />",todo
+TIS POI,1018,mapping,Grenzübergänge,todo,commented,,,,,Laut Kunden nicht importieren,"<Mapping Foreign=""Grenzübergänge"" eT4=""todo"" />",todo
+TIS POI,1019,mapping,Regionalebene,todo,commented,,,,,Laut Kunden nicht importieren,"<Mapping Foreign=""Regionalebene"" eT4=""todo"" />",todo
+TIS POI,1020,mapping,Billard,todo,commented,,,,,Laut Kunden nicht importieren,"<Mapping Foreign=""Billard"" eT4=""todo"" />",todo
+TIS POI,1024,mapping,Wintersport,todo,commented,,,,,"Laut Kunden ""schwierig"", weil eigentlich Tour","<Mapping Foreign=""Wintersport"" eT4=""todo"" />",todo
+TIS POI,1025,mapping,Wandern,todo,commented,,,,,"Laut Kunden ""schwierig"", weil eigentlich Tour","<Mapping Foreign=""Wandern"" eT4=""todo"" />",todo
