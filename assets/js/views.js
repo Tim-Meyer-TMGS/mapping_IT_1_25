@@ -128,6 +128,92 @@ function sourceList(data, rules, state) {
   </article>`).join('')}</div>`;
 }
 
+function poiValueMatches(mapping, value) {
+  if (value.startsWith('__mapping:')) return mapping.id === value.slice('__mapping:'.length);
+  if (value.startsWith('__behavior:')) {
+    return mapping.targets.length === 0 && mapping.behavior === value.slice('__behavior:'.length);
+  }
+  return mapping.targets.some((target) => (target.label ?? target.key) === value);
+}
+
+function poiControls(data, state, rules) {
+  const dimensions = ['category', 'feature'].filter((dimension) => rules.some((mapping) => mapping.source.dimension === dimension));
+  const dimension = dimensions.includes(state.dimension) ? state.dimension : dimensions[0];
+  const dimensionRules = rules.filter((mapping) => mapping.source.dimension === dimension);
+  const selectedRules = state.value ? dimensionRules.filter((mapping) => poiValueMatches(mapping, state.value)) : dimensionRules;
+  const systems = [...new Set(selectedRules.map((mapping) => mapping.source.system))]
+    .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
+  const system = systems.includes(state.system) ? state.system : systems[0];
+  const mode = state.mode === 'satourn' ? 'satourn' : 'source';
+  const toolbar = state.value ? `<div class="toolbar"><div class="segmented" aria-label="Leserichtung">
+      ${link('Quellsystem → SaTourN', { mode: 'source', system: system, term: null }, false, mode === 'source' ? 'active' : '')}
+      ${link('SaTourN → Quellsysteme', { mode: 'satourn', system: null, term: null }, false, mode === 'satourn' ? 'active' : '')}
+    </div>${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { system: id, term: null }, false, id === system ? 'active' : '')).join('')}</div>` : ''}</div>` : '';
+  return {
+    dimension, dimensionRules, selectedRules, system, mode,
+    html: `<div class="tabs" aria-label="POI-Mappingdimension">${dimensions.map((id) => link(DIMENSION_LABELS[id] ?? id, { dimension: id, system: null, value: null, term: null }, false, id === dimension ? 'active' : '')).join('')}</div>${toolbar}`,
+  };
+}
+
+function poiDirectory(data, rules, dimension) {
+  const groups = new Map();
+  for (const mapping of rules) {
+    const targets = mapping.targets.length
+      ? mapping.targets.map((target) => ({ key: target.label ?? target.key, label: target.label ?? target.key }))
+      : [{ key: `__behavior:${mapping.behavior}`, label: BEHAVIOR_LABELS[mapping.behavior] ?? 'Ohne Zielwert' }];
+    for (const target of targets) {
+      if (!groups.has(target.key)) groups.set(target.key, { ...target, mappings: new Map() });
+      groups.get(target.key).mappings.set(mapping.id, mapping);
+    }
+  }
+  const rows = [...groups.values()].sort((a, b) => naturalSort(a.label, b.label));
+  if (!rows.length) return '<div class="empty-state"><h2>Keine POI-Zuordnungen</h2><p>Für diese Dimension sind keine Zuordnungen hinterlegt.</p></div>';
+  return `<div class="poi-directory"><table class="poi-table"><thead><tr><th>${dimension === 'category' ? 'SaTourN-Kategorie' : 'SaTourN-Merkmal'}</th><th>Quellzuordnungen</th><th>Quellsysteme</th></tr></thead><tbody>${rows.map((group) => {
+    const mappings = [...group.mappings.values()];
+    const systems = [...new Set(mappings.map((mapping) => mapping.source.system))]
+      .sort((a, b) => (data.systemById.get(a)?.sortOrder ?? 999) - (data.systemById.get(b)?.sortOrder ?? 999));
+    return `<tr><td>${link(group.label, { value: group.key, system: null, term: null }, false, 'poi-value-link')}</td><td>${mappings.length}</td><td>${systems.map((id) => escapeHtml(systemLabel(data, id))).join(' · ')}</td></tr>`;
+  }).join('')}</tbody></table></div>`;
+}
+
+function poiMappingTable(data, rules, state) {
+  const visible = rules.filter((mapping) => mapping.source.system === state.system)
+    .sort((a, b) => naturalSort(a.source.label ?? a.source.key, b.source.label ?? b.source.key));
+  if (!visible.length) return '<div class="empty-state"><h2>Keine Zuordnungen</h2><p>Für diese Auswahl sind keine Zuordnungen hinterlegt.</p></div>';
+  return `<div class="poi-directory poi-mapping-table"><table class="poi-table"><thead><tr><th>Quellsystem</th><th>Quellwert</th><th>SaTourN-Zielwerte</th><th>Regel</th></tr></thead><tbody>${visible.map((mapping) => `<tr>
+    <td>${escapeHtml(systemLabel(data, mapping.source.system))}</td>
+    <td><strong>${escapeHtml(mapping.source.label ?? mapping.source.key)}</strong></td>
+    <td>${mapping.targets.length ? mapping.targets.map((target) => escapeHtml(target.label ?? target.key)).join(' · ') : '<span class="muted">Kein Zielwert</span>'}</td>
+    <td>${behaviorBadge(mapping)}${mapping.display?.note ? `<small class="poi-rule-note">${escapeHtml(mapping.display.note)}</small>` : ''}${details(mapping, data)}</td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+function poiView(data, state, rules) {
+  const termMapping = rules.find((mapping) => mapping.id === state.term);
+  const value = state.value ?? (termMapping ? `__mapping:${termMapping.id}` : null);
+  const controls = poiControls(data, { ...state, value }, rules);
+  const selected = Boolean(value);
+  const groupLabel = value?.startsWith('__behavior:')
+    ? BEHAVIOR_LABELS[value.slice('__behavior:'.length)] ?? 'Ohne Zielwert'
+    : value?.startsWith('__mapping:') ? termMapping?.source.label ?? termMapping?.source.key : value;
+  const crumb = breadcrumb([
+    { label: 'Start', href: './index.html' }, { label: 'Importe' }, { label: 'POI' },
+    ...(selected ? [{ label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension, href: hrefFor({ value: null, system: null, term: null }) }, { label: groupLabel }] : [{ label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension }]),
+  ]);
+  const selectedRules = selected ? controls.selectedRules : [];
+  const systemRules = controls.mode === 'source'
+    ? selectedRules.filter((mapping) => mapping.source.system === controls.system)
+    : selectedRules;
+  const viewState = { ...state, type: 'poi', dimension: controls.dimension, system: controls.system };
+  return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>POI</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
+    ${controls.html}${selected ? `<div class="poi-detail-heading"><h2>${escapeHtml(groupLabel)}</h2>${link('Zur Übersicht', { value: null, system: null, term: null }, false, 'poi-back-link')}</div>` : ''}
+    ${scopedNotices(data, viewState)}
+    ${selected
+      ? (controls.mode === 'source' ? poiMappingTable(data, systemRules, viewState) : reverseList(data, systemRules))
+      : poiDirectory(data, controls.dimensionRules, controls.dimension)}
+    ${!selected ? '<p class="poi-scope-note">Für POI sind derzeit Kategorien und Merkmale gemappt. Feldzuordnungen wie Name oder URL sind in der geladenen Datenbasis nicht enthalten.</p>' : ''}`;
+}
+
 function reverseList(data, rules) {
   const targets = new Map();
   for (const mapping of rules) {
@@ -195,6 +281,10 @@ function searchView(data, state) {
 export function render(data, state) {
   if (state.q !== undefined) return searchView(data, state);
   if (state.direction === 'outbound') return outboundView(data, state);
+  if (state.type === 'poi') {
+    const rules = data.mappings.filter((mapping) => mapping.direction === 'inbound' && mapping.datasetTypeId === 'poi');
+    return poiView(data, state, rules);
+  }
   if (state.direction === 'inbound' || state.type) return inboundView(data, state);
   return home(data);
 }

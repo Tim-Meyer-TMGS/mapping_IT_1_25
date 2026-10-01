@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>SaTourN Mapping · Tour</title>
+<style>
+:root { --bg:#0b1020; --panel:#111833; --line:#233057; --text:#e6edff; --muted:#8aa0c6; --head:#0e1730; --ok:#1fbf7a; --bad:#ff6b6b; --accent:#1fbf7a; }
+* { box-sizing:border-box; }
+body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); }
+header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; }
+.brand { font-weight:600; letter-spacing:.2px; }
+nav { display:flex; gap:8px; flex-wrap:wrap; }
+nav a { text-decoration:none; color:var(--muted); padding:6px 10px; border:1px solid var(--line); border-radius:999px; font-size:13px; background:#0e1730; }
+nav a.active { color:var(--text); background:#1b2551; }
+main { max-width:1100px; margin:0 auto; padding:20px; }
+section { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:20px; }
+h1 { font-size:18px; margin:0 0 4px; }
+h2 { font-size:16px; margin:0 0 12px; }
+.sub { font-size:13px; color:var(--muted); margin:0; }
+table { width:100%; border-collapse:separate; border-spacing:0; }
+th, td { padding:8px 10px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top; }
+th { text-align:left; background:#0e1730; position:sticky; top:0; z-index:2; }
+tbody tr:nth-child(odd) { background:#0b142d; }
+.new { color:var(--ok); font-weight:600; }
+.removed { color:var(--bad); font-weight:600; text-decoration:line-through; }
+code { background:#0e1730; padding:2px 6px; border-radius:6px; border:1px solid var(--line); }
+
+/* Clearer separation for top-level categories */
+tr.topcat td { 
+  background: linear-gradient(90deg, rgba(31,191,122,0.15), rgba(31,191,122,0.05) 35%, transparent);
+  font-weight:700;
+  font-size:15px;
+  border-top:2px solid var(--accent);
+  position:relative;
+}
+tr.topcat td:first-child::before {
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:4px;
+  background:var(--accent);
+}
+
+/* subtle left guides for sublevels */
+tr.depth-1 td:nth-child(2) { box-shadow: inset 3px 0 0 rgba(138,160,198,.25); }
+tr.depth-2 td:nth-child(2) { box-shadow: inset 6px 0 0 rgba(138,160,198,.18); }
+tr.depth-3 td:nth-child(2) { box-shadow: inset 9px 0 0 rgba(138,160,198,.12); }
+  </style>
+<script defer="" src="easteregg-two-eggs.js"></script>
+</head>
+<body>
+<header>
+<div class="brand">SaTourN Mapping</div>
+<nav aria-label="Hauptmenü">
+<a href="index.html" poi="">POI</a>
+<a href="gastro.html">Gastro</a>
+<a aria-current="page" class="active" href="tour.html">Touren</a>
+<a href="events.html">Veranstaltungen</a>
+<a href="blog.html">Artikel</a>
+<a href="vermieter.html">Vermieter</a>
+<a href="odta.html">ODTA</a>
+</nav>
+</header>
+<main>
+<section>
+<h1>Tour-Mapping Outdooractive -&gt; SaTourN -&gt; ODTA</h1>
+
+
+</section>
+<section>
+<table>
+<thead>
+<tr><th>OA-Kategorie(n)</th><th>SaTourN/eT4</th><th>ODTA</th><th>schema.org</th></tr>
+</thead>
+<tbody id="tbody-mapping">
+<tr><td>Alpinklettern</td><td class="new">Alpinklettern</td><td>AlpineClimbing</td><td>https://odta.io/voc/AlpineClimbingTrail</td></tr><tr><td></td><td>Barrierefrei</td><td></td><td></td></tr><tr><td>Bergtour</td><td class="new">Bergtour</td><td>MountainTour</td><td>https://odta.io/voc/MountainTourTrail</td></tr><tr><td>Bootstour</td><td>Bootstour</td><td></td><td>https://odta.io/voc/WaterTrail</td></tr><tr><td>E-Bike</td><td>E-Bike</td><td>BikeTour</td><td>https://odta.io/voc/BikeTourTrail</td></tr><tr><td>Eisklettern</td><td class="new">Eisklettern</td><td>IceClimbing</td><td>https://odta.io/voc/IceClimbingTrail</td></tr><tr><td>Fernradweg</td><td>Fernradweg</td><td>LongDistanceBikeTour</td><td>https://odta.io/voc/LongDistanceBikeTourTrail</td></tr><tr><td>Fernwanderweg</td><td>Fernwanderweg</td><td>LongDistanceHikeTrail</td><td>https://odta.io/voc/LongDistanceHikeTrail</td></tr><tr><td>Gravel-Bike</td><td class="new">Gravel-Bike</td><td>MountainBikeTour</td><td>https://odta.io/voc/MountainBikeTourTrail</td></tr><tr><td>Hochtour</td><td class="new">Hochtour</td><td>HighAltitudeTour</td><td>https://odta.io/voc/HighAltitudeTourTrail</td></tr><tr><td>Inline-Skating</td><td>Inline-Skating</td><td>InlineSkating</td><td>https://odta.io/voc/InlineSkatingTrail</td></tr><tr><td>Jogging</td><td class="new">Jogging</td><td>Jogging</td><td>https://odta.io/voc/JoggingTrail</td></tr><tr><td>Canyoning; Kajak</td><td>Kajak</td><td>Kayak</td><td>https://odta.io/voc/KayakTrail</td></tr><tr><td>Kanu</td><td>Kanu</td><td>Canoe</td><td>https://odta.io/voc/CanoeTrail</td></tr><tr><td>Klettersteig</td><td>Klettersteig</td><td>AlpineClimbing</td><td>https://odta.io/voc/AlpineClimbingTrail</td></tr><tr><td>Kutschfahrt</td><td class="new">Kutschfahrt</td><td></td><td>https://odta.io/voc/Trail</td></tr><tr><td>Langlauf</td><td>Langlauf</td><td>AlpineTour</td><td>https://odta.io/voc/CrossCountrySkiingTrail</td></tr><tr><td>MTB-Transalp</td><td>MTB-Transalp</td><td>MountainBikeTour</td><td>https://odta.io/voc/MountainBikeTourTrail</td></tr><tr><td>Motorrad</td><td>Motorrad</td><td>Motorcycle</td><td>https://odta.io/voc/MotorcycleTrail</td></tr><tr><td>Mountainbike</td><td>Mountainbike</td><td>MountainBikeTour</td><td>https://odta.io/voc/MountainBikeTourTrail</td></tr><tr><td>Nordic Walking</td><td>Nordic Walking</td><td>NordicWalking</td><td>https://odta.io/voc/NordicWalkingTrail</td></tr><tr><td>Offroad</td><td class="new">Offroad</td><td>Offroad</td><td>https://odta.io/voc/OffroadTrail</td></tr><tr><td>Panoramastraße</td><td>Panoramastraße</td><td>Panorama</td><td>https://odta.io/voc/PanoramaTrail</td></tr><tr><td>Pferdeschlitten</td><td class="new">Pferdeschlitten</td><td>HorseRiding</td><td>https://odta.io/voc/HorseDrawnSleighTrail</td></tr><tr><td>Pilgerweg</td><td>Pilgerweg</td><td>PilgrimageTrail</td><td>https://odta.io/voc/PilgrimageTrail</td></tr><tr><td>Qualitätswege</td><td>Qualitätswanderwege</td><td>HikeTrail</td><td>https://odta.io/voc/HikingTrail</td></tr><tr><td>Radfahren; Radtour</td><td>Radfahren</td><td>BikeTour</td><td>https://odta.io/voc/BikeTourTrail</td></tr><tr><td>Reiten</td><td>Reiten</td><td>HorseRiding</td><td>https://odta.io/voc/HorseTrail</td></tr><tr><td>Rennrad</td><td>Rennrad</td><td>RacingBikeTour</td><td>https://odta.io/voc/RacingBikeTourTrail</td></tr><tr><td>Rodeln</td><td>Rodeln</td><td>AlpineTour</td><td>https://odta.io/voc/WinterTobogganRun</td></tr><tr><td>SUP</td><td class="new">SUP</td><td>SUP</td><td>https://odta.io/voc/SUPTrail</td></tr><tr><td>Schneeschuh</td><td>Schneeschuh</td><td>AlpineTour</td><td>https://odta.io/voc/SnowShoeHikeTrail</td></tr><tr><td>Ski-Freeride; Skidurchquerung; Skifahren; Skijöring; Skitour</td><td>Skitour</td><td>AlpineTour</td><td>https://odta.io/voc/SkiTourTrail</td></tr><tr><td>Stadtrundgang</td><td class="new">Stadtrundgang</td><td>SightseeingTrail</td><td>https://odta.io/voc/SightseeingTrail</td></tr><tr><td>Themenweg</td><td>Themenweg</td><td>ThematicTrail</td><td>https://odta.io/voc/ThematicTrail</td></tr><tr><td>Trailrunning</td><td class="new">Trailrunning</td><td>TrailRunning</td><td>https://odta.io/voc/TrailRunning</td></tr><tr><td>Wanderung</td><td>Wandern</td><td>HikeTrail</td><td>https://odta.io/voc/HikingTrail</td></tr><tr><td>Winterwandern</td><td>Winterwandern</td><td>AlpineTour</td><td>https://odta.io/voc/WinterHikeTrail</td></tr><tr><td>Wohnmobil</td><td class="new">Wohnmobil</td><td></td><td></td></tr>
+</tbody>
+</table>
+</section>
+<section id="sec-changes-tours">
+
+<p class="sub">
+<strong>13</strong> hinzugefügt (davon <strong>13</strong> mit OA-Mapping sichtbar),
+        <strong>0</strong> entfernt.
+      </p>
+<table>
+<thead><tr><th>Kategorie</th><th>Status</th></tr></thead>
+<tbody id="tbody-changes">
+<tr><td class="new">Alpinklettern</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Bergtour</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Eisklettern</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Gravel-Bike</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Hochtour</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Jogging</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Kutschfahrt</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Offroad</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Pferdeschlitten</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">SUP</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Stadtrundgang</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Trailrunning</td><td class="new">Hinzugefügt</td></tr><tr><td class="new">Wohnmobil</td><td class="new">Hinzugefügt</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+</body>
+</html>

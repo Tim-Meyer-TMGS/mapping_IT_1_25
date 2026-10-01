@@ -73,6 +73,23 @@ button, input { font: inherit; }
 .system-filter a { border: 1px solid var(--line); background: var(--surface); }
 
 .mapping-list, .reverse-list, .search-results { display: grid; gap: .75rem; }
+.poi-directory { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); }
+.poi-table { width: 100%; border-collapse: collapse; text-align: left; }
+.poi-table th, .poi-table td { padding: .72rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.poi-table th { background: var(--surface-soft); color: var(--muted); font-size: .75rem; font-weight: 800; text-transform: uppercase; }
+.poi-table tbody tr:last-child td { border-bottom: 0; }
+.poi-table tbody tr:hover { background: #f7faf8; }
+.poi-table td:not(:first-child) { color: var(--muted); font-size: .9rem; }
+.poi-value-link { color: var(--green-dark); font-weight: 700; text-decoration: none; }
+.poi-value-link:hover, .poi-back-link:hover { text-decoration: underline; }
+.poi-detail-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: .4rem 0 1rem; }
+.poi-detail-heading h2 { margin: 0; font-size: 1.2rem; }
+.poi-back-link { color: var(--green); font-size: .9rem; font-weight: 700; text-decoration: none; }
+.poi-rule-note { display: block; margin-top: .35rem; color: var(--muted); }
+.poi-mapping-table .technical-details { min-width: 190px; margin-top: .5rem; border-top: 0; }
+.poi-mapping-table .technical-details > summary { padding: .3rem 0; }
+.poi-mapping-table .technical-details dl { padding: .2rem 0 .6rem; }
+.poi-scope-note { margin-top: 1rem; color: var(--muted); font-size: .88rem; }
 .mapping-item, .reverse-item { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
 .mapping-main { display: grid; grid-template-columns: minmax(180px, .9fr) auto minmax(220px, 1.2fr); gap: 1.2rem; align-items: center; padding: 1.15rem 1.25rem; }
 .source-value h3, .reverse-heading h3 { margin: .18rem 0 0; font-size: 1.05rem; }
@@ -130,6 +147,9 @@ button, input { font: inherit; }
   .segmented a { min-width: 0; text-align: center; white-space: normal; overflow-wrap: anywhere; }
   .system-filter { justify-content: flex-start; }
   .mapping-main { grid-template-columns: 1fr; gap: .65rem; }
+  .poi-table { min-width: 580px; }
+  .poi-mapping-table .poi-table { min-width: 760px; }
+  .poi-detail-heading { align-items: flex-start; flex-direction: column; }
   .mapping-arrow { transform: rotate(90deg); width: fit-content; }
   .technical-details dl { grid-template-columns: 1fr; }
   .search-result { grid-template-columns: 1fr; gap: .35rem; }
