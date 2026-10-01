@@ -197,7 +197,9 @@ function poiView(data, state, rules) {
     ? BEHAVIOR_LABELS[value.slice('__behavior:'.length)] ?? 'Ohne Zielwert'
     : value?.startsWith('__mapping:') ? termMapping?.source.label ?? termMapping?.source.key : value;
   const crumb = breadcrumb([
-    { label: 'Start', href: './index.html' }, { label: 'Importe' }, { label: 'POI' },
+    { label: 'Start', href: './index.html' },
+    { label: 'Importe', href: './index.html' },
+    { label: 'POI', href: hrefFor({ direction: 'inbound', type: 'poi' }, true) },
     ...(selected ? [{ label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension, href: hrefFor({ value: null, system: null, term: null }) }, { label: groupLabel }] : [{ label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension }]),
   ]);
   const selectedRules = selected ? controls.selectedRules : [];
@@ -244,8 +246,10 @@ function inboundView(data, state) {
   const controls = navigationControls(data, state, rules);
   const normalizedState = { ...state, type, dimension: controls.dimension, mode: controls.mode, system: controls.system };
   const crumb = breadcrumb([
-    { label: 'Start', href: './index.html' }, { label: 'Importe' }, { label: datasetLabel(data, type) },
-    { label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension },
+    { label: 'Start', href: './index.html' },
+    { label: 'Importe', href: './index.html' },
+    { label: datasetLabel(data, type), href: hrefFor({ direction: 'inbound', type }, true) },
+    { label: DIMENSION_LABELS[controls.dimension] ?? controls.dimension, href: hrefFor({ direction: 'inbound', type, dimension: controls.dimension }, true) },
     { label: controls.mode === 'source' ? systemLabel(data, controls.system) : 'SaTourN-Sicht' },
   ]);
   return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(datasetLabel(data, type))}</h1><p>${rules.length} Zuordnungen im aktuellen Mappingstand</p></section>
@@ -255,7 +259,7 @@ function inboundView(data, state) {
 
 function outboundView(data, state) {
   const rules = data.mappings.filter((mapping) => mapping.direction === 'outbound');
-  const crumb = breadcrumb([{ label: 'Start', href: './index.html' }, { label: 'Export' }, { label: 'ODTA' }]);
+  const crumb = breadcrumb([{ label: 'Start', href: './index.html' }, { label: 'Export', href: './index.html' }, { label: 'ODTA' }]);
   return `${crumb}<section class="view-heading"><p class="eyebrow">Export aus SaTourN</p><h1>SaTourN → ODTA</h1><p>Exportzuordnungen werden getrennt von den Importen dargestellt.</p></section>
     ${scopedNotices(data, { ...state, system: 'odta' })}
     ${rules.length ? sourceList(data, rules, { ...state, system: 'satourn' }) : '<div class="empty-state"><h2>Noch keine Exportregeln veröffentlicht</h2><p>Die gelieferte Datenbasis enthält derzeit keinen belastbaren SaTourN→ODTA-Mappingbestand. Der vorhandene ODTA-Wertekatalog wird nicht als Zuordnung interpretiert.</p></div>'}`;
