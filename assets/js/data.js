@@ -1,9 +1,8 @@
+import { enrichData } from './catalog.js';
+
 const FILES = {
   hub: './data/mapping-hub-authoritative.json',
-  sampleProfile: './data/satourn-sample-profile.json',
-  fields: './data/satourn-observed-fields.csv',
-  vocabularies: './data/satourn-observed-vocabularies.csv',
-  validation: './data/sample-validation.json',
+  fields: './data/field-definitions.json',
 };
 
 async function fetchJson(url) {
@@ -12,13 +11,8 @@ async function fetchJson(url) {
   return response.json();
 }
 
-async function fetchText(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
-  return response.text();
-}
-
-function parseCsv(text) {
+export function parseCsv(text) {
+  text = text.replace(/^\uFEFF/, '');
   const rows = [];
   let row = [], value = '', quoted = false;
   for (let index = 0; index < text.length; index += 1) {
@@ -41,16 +35,15 @@ export function fold(value) {
 }
 
 export async function loadData() {
-  const [hub, sampleProfile, fieldsText, vocabulariesText, sampleValidation] = await Promise.all([
-    fetchJson(FILES.hub), fetchJson(FILES.sampleProfile), fetchText(FILES.fields), fetchText(FILES.vocabularies), fetchJson(FILES.validation),
+  const [hub, fields] = await Promise.all([
+    fetchJson(FILES.hub), fetchJson(FILES.fields),
   ]);
   const rules = hub.rules.filter((rule) => rule.status === 'active');
   const systemsById = new Map(hub.systems.map((system) => [system.id, system]));
   const datasetById = new Map(hub.datasetTypes.map((dataset) => [dataset.id, dataset]));
   const rulesByKind = new Map(['mapping', 'routing', 'fallback'].map((kind) => [kind, rules.filter((rule) => rule.ruleKind === kind)]));
-  return {
-    meta: hub.meta, systems: hub.systems, datasetTypes: hub.datasetTypes, rules, sampleProfile,
-    fields: parseCsv(fieldsText), vocabularies: parseCsv(vocabulariesText), sampleValidation,
+  return enrichData({
+    meta: hub.meta, systems: hub.systems, datasetTypes: hub.datasetTypes, rules, fields,
     systemsById, datasetById, rulesByKind, fold,
-  };
+  });
 }

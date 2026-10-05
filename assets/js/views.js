@@ -1,185 +1,194 @@
-import { hrefFor } from './router.js';
+import { hrefFor, withOrigin, originState } from './router.js';
+import { DISPLAY_GROUPS as FIELD_GROUPS } from './field-groups.js';
+import { DIMENSIONS, naturalSort, fieldKey, typeOfRule, rulesForType, fieldsForType, filterRules, searchCatalog } from './catalog.js';
 
-const DIMENSIONS = { category: 'Kategorien', feature: 'Merkmale' };
-const VIEW_LABELS = { mapping: 'Zuordnungen', routing: 'Routing', fallback: 'Fallbacks', structure: 'SaTourN-Struktur' };
-
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
-}
-
-function naturalSort(a, b) {
-  return String(a ?? '').localeCompare(String(b ?? ''), 'de', { sensitivity: 'base', numeric: true });
-}
-
-function systemLabel(data, id) { return data.systemsById.get(id)?.label ?? id ?? '–'; }
-function datasetLabel(data, id) { return data.datasetById.get(id)?.label ?? id ?? '–'; }
-
-function link(label, changes, replace = false, className = '') {
-  return `<a${className ? ` class="${escapeHtml(className)}"` : ''} href="${escapeHtml(hrefFor(changes, replace))}" data-nav>${escapeHtml(label)}</a>`;
-}
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const typeLabel = (data, id) => data.datasetById.get(id)?.label ?? id ?? 'Nicht dokumentiert';
+const systemLabel = (data, id) => data.systemsById.get(id)?.label ?? id ?? 'Nicht dokumentiert';
+const link = (label, state, attributes = '') => `<a href="${esc(hrefFor(state, true))}" data-nav ${attributes}>${esc(label)}</a>`;
+const viewLabels = { overview: 'Übersicht', fields: 'Datenfelder', mapping: 'Mappings', routing: 'Routing', fallback: 'Fallbacks' };
+const empty = message => `<p class="empty-state">${esc(message)}</p>`;
+const input = (name, label, value = '', placeholder = '') => `<label for="filter-${name}">${esc(label)}<input id="filter-${name}" name="${name}" type="search" value="${esc(value)}" placeholder="${esc(placeholder)}" autocomplete="off"></label>`;
+const select = (name, label, value, choices) => `<label for="filter-${name}">${esc(label)}<select id="filter-${name}" name="${name}"><option value="">Alle</option>${choices.map(([id, title]) => `<option value="${esc(id)}"${id === value ? ' selected' : ''}>${esc(title)}</option>`).join('')}</select></label>`;
+const hidden = (name, value) => value ? `<input type="hidden" name="${name}" value="${esc(value)}">` : '';
 
 function breadcrumbs(items) {
-  return `<nav class="breadcrumb" aria-label="Brotkrümelnavigation">${items.map((item, index) => `${index ? '<span aria-hidden="true">›</span>' : ''}${item.href ? `<a href="${escapeHtml(item.href)}" data-nav>${escapeHtml(item.label)}</a>` : `<span aria-current="page">${escapeHtml(item.label)}</span>`}`).join('')}</nav>`;
+  return `<nav class="breadcrumb" aria-label="Brotkrümelnavigation">${link('Start', {})}${items.map(([label, state]) => `<span aria-hidden="true">/</span>${state ? link(label, state) : `<span aria-current="page">${esc(label)}</span>`}`).join('')}</nav>`;
 }
 
-function activeRules(data, kind) { return data.rulesByKind.get(kind) ?? []; }
-function typeRules(data, kind, type) { return activeRules(data, kind).filter((rule) => rule.source?.datasetType === type || rule.target?.datasetType === type); }
-
-function details(rule) {
-  const provenance = rule.provenance ?? [];
-  const rows = [
-    ['Regel-ID', rule.id], ['Regelart', rule.ruleKind], ['Verhalten', rule.behavior],
-    ['Quell-Datensatzart', rule.source?.datasetTypeRaw ?? rule.source?.datasetType],
-    ['Dimension', rule.source?.dimension], ['Sprache', rule.source?.language],
-    ['Zielfeld', rule.target?.field], ['Feldnachweis', rule.target?.fieldEvidence],
-    ['Marker', (rule.technicalMarkers ?? []).join(', ')],
-  ].filter(([, value]) => value !== undefined && value !== null && value !== '');
-  return `<details class="technical-details"${new URLSearchParams(location.search).get('term') === rule.id ? ' open' : ''}>
-    <summary>Technische Details</summary><dl>${rows.map(([name, value]) => `<div><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>
-    ${provenance.length ? `<div class="provenance"><strong>Provenienz</strong><ul>${provenance.map((item) => `<li>${escapeHtml(item.sourceFile)}${item.sourceLine ? `, Zeile ${escapeHtml(item.sourceLine)}` : ''}${item.market ? `, Markt ${escapeHtml(item.market)}` : ''}${item.raw ? `<details class="raw"><summary>Quelltext</summary><pre>${escapeHtml(item.raw)}</pre></details>` : ''}</li>`).join('')}</ul></div>` : ''}
-  </details>`;
+function navigation(data, type, active) {
+  const views = ['overview', 'fields', 'mapping', ...(rulesForType(data, type, 'routing').length ? ['routing'] : []), ...(rulesForType(data, type, 'fallback').length ? ['fallback'] : [])];
+  return `<nav class="section-nav" aria-label="Bereiche">${views.map(view => link(viewLabels[view], { type, ...(view === 'overview' ? {} : { view }) }, active === view ? 'aria-current="page"' : '')).join('')}</nav>`;
 }
 
-function ruleNotice(rule) {
-  const notes = [...(rule.notes ?? []), ...(rule.reviewFlag ? ['Prüfhinweis vorhanden'] : [])];
-  return notes.length ? `<p class="mapping-note">${escapeHtml(notes.join(' · '))}</p>` : '';
+function datasetHeader(data, type, active, title = typeLabel(data, type), subcrumb = null) {
+  const items = active === 'overview' ? [[typeLabel(data, type), null]] : [[typeLabel(data, type), { type }], [viewLabels[active], subcrumb ? { type, view: active } : null], ...(subcrumb ? [[subcrumb, null]] : [])];
+  return `${breadcrumbs(items)}<header class="view-heading"><h1>${esc(title)}</h1></header>${navigation(data, type, active)}`;
 }
 
-function targetChips(rule) {
-  if (rule.behavior === 'noImport') return '<span class="status status-noImport">nicht übernehmen</span>';
-  if (rule.behavior === 'noTarget') return '<span class="status status-noTarget">kein Zielwert</span>';
-  const values = rule.target?.values ?? [];
-  return values.length ? values.map((value) => `<span>${escapeHtml(value)}</span>`).join('') : '<span class="muted">Kein Zielwert</span>';
+function typeSystems(data, type) {
+  return [...new Set(data.rules.filter(rule => typeOfRule(rule) === type || rule.source?.datasetType === type).map(rule => rule.source?.system))].filter(Boolean).sort(naturalSort);
 }
 
-function home(data) {
-  const types = data.datasetTypes.filter((type) => type.mappingSourceAvailable);
-  const cards = types.map((type) => {
-    const mappings = activeRules(data, 'mapping').filter((rule) => rule.source.datasetType === type.id);
-    const systems = [...new Set(mappings.map((rule) => rule.source.system))].sort(naturalSort);
-    const routing = activeRules(data, 'routing').filter((rule) => rule.target?.datasetType === type.id).length;
-    const fallback = activeRules(data, 'fallback').filter((rule) => rule.source.datasetType === type.id).length;
-    const supplements = [routing ? `${routing} Routing` : '', fallback ? `${fallback} Fallbacks` : ''].filter(Boolean).join(' · ');
-    return `<a class="dataset-card" href="${escapeHtml(hrefFor({ type: type.id, view: 'mapping' }, true))}" data-nav>
-      <span class="dataset-icon" aria-hidden="true">${escapeHtml(type.label.slice(0, 1))}</span><span class="dataset-copy"><strong>${escapeHtml(type.label)}</strong><small>${systems.map((id) => escapeHtml(systemLabel(data, id))).join(' · ')}</small>${supplements ? `<small>${escapeHtml(supplements)}</small>` : ''}</span>
-      <span class="card-count">${mappings.length}<small>Regeln</small></span><span class="card-arrow" aria-hidden="true">→</span></a>`;
-  }).join('');
-  return `<section class="hero"><p class="eyebrow">Autoritativer Mappingstandard</p><h1>SaTourN Mapping Hub</h1><p>Importregeln, Routing, Fallbacks und beobachtete SaTourN-Strukturen.</p></section>
-    <section aria-labelledby="imports-title"><div class="section-heading"><div><p class="eyebrow">Quellsysteme → SaTourN</p><h2 id="imports-title">Import-Datensatzarten</h2></div><span>${data.meta.totalActiveLogicalRules} aktive Regeln</span></div><div class="dataset-grid">${cards}</div></section>
-    <section class="reference-grid" aria-labelledby="references-title"><div class="section-heading"><div><p class="eyebrow">Einordnung</p><h2 id="references-title">Referenzen und Zielsysteme</h2></div></div>
-      <a class="reference-card" href="${escapeHtml(hrefFor({ view: 'reference', system: 'odta' }, true))}" data-nav><strong>ODTA</strong><span>Keine bestätigten Exportregeln</span></a>
-      <a class="reference-card" href="${escapeHtml(hrefFor({ view: 'reference', system: 'satourn' }, true))}" data-nav><strong>SaTourN-Beispielstruktur</strong><span>Beobachtete XML-Felder und Vokabulare</span></a>
-    </section>`;
+function home(data, catalog = false) {
+  return `<header class="view-heading"><h1>SaTourN Mapping Hub</h1><p>Mappings und Datenfelder nach Datensatzart.</p></header>
+    ${catalog ? '<h2>Datenfelder und Mappings nachschlagen</h2>' : `<nav class="task-entries" aria-label="Aufgabe wählen"><section><h2>${link('Wo landet mein Wert?', { view: 'guide' })}</h2><p>Schritt für Schritt vom Wert im Quellsystem zum dokumentierten Ziel in SaTourN.</p></section><section><h2>${link('Datenfelder und Mappings nachschlagen', { view: 'catalog' })}</h2><p>Direkt zu Feldtypen, Filtern und technischen Regeln.</p></section></nav><h2>Direkt zu einer Datensatzart</h2>`}
+    <div class="table-scroll"><table><caption class="sr-only">Datensatzarten</caption><thead><tr><th>Datensatzart</th><th>Datenfelder</th><th>Mappings</th><th>Quellsysteme</th></tr></thead><tbody>${data.datasetTypes.map(type => `<tr><th scope="row">${link(type.label, { type: type.id })}</th><td>${data.fields.filter(field => field.datasetType === type.id).length}</td><td>${rulesForType(data, type.id).length}</td><td>${esc(typeSystems(data, type.id).map(id => systemLabel(data, id)).join(' · ') || 'Keine dokumentiert')}</td></tr>`).join('')}</tbody></table></div>
+    <p class="secondary">${link('ODTA-Referenz', { view: 'reference', system: 'odta' })}</p>`;
 }
 
-function mappingControls(data, state, rules, type) {
-  const dimensions = [...new Set(rules.map((rule) => rule.source.dimension).filter((value) => DIMENSIONS[value]))].sort();
-  const dimension = dimensions.includes(state.dimension) ? state.dimension : dimensions[0];
-  const dimensionRules = rules.filter((rule) => rule.source.dimension === dimension);
-  const systems = [...new Set(dimensionRules.map((rule) => rule.source.system))].sort(naturalSort);
-  const mode = state.mode === 'target' ? 'target' : 'source';
-  const system = systems.includes(state.system) ? state.system : systems[0];
-  return { dimension, dimensionRules, systems, system, mode, html: `
-    <div class="tabs" aria-label="Dimension">${dimensions.map((id) => link(DIMENSIONS[id], { type, view: 'mapping', dimension: id, system: null, term: null }, true, id === dimension ? 'active' : '')).join('')}</div>
-    <div class="toolbar"><div class="segmented" aria-label="Leserichtung">${link('Quellsystem → SaTourN', { type, view: 'mapping', dimension, mode: 'source', system, term: null }, true, mode === 'source' ? 'active' : '')}${link('SaTourN → Quellsysteme', { type, view: 'mapping', dimension, mode: 'target', system: null, term: null }, true, mode === 'target' ? 'active' : '')}</div>
-    ${mode === 'source' ? `<div class="system-filter" aria-label="Quellsystem">${systems.map((id) => link(systemLabel(data, id), { type, view: 'mapping', dimension, mode, system: id, term: null }, true, id === system ? 'active' : '')).join('')}</div>` : ''}</div>` };
+function overview(data, type) {
+  const fields = fieldsForType(data, type), mappings = rulesForType(data, type);
+  return `${datasetHeader(data, type, 'overview')}<p>Datenfelder und Import-Mappings für ${esc(typeLabel(data, type))} in SaTourN.</p>
+    <dl class="overview-facts"><div><dt>Datenfelder</dt><dd>${link(`${fields.length} verfügbare Felder`, { type, view: 'fields' })}</dd></div><div><dt>Mappings</dt><dd>${link(`${mappings.length} aktive Mappingregeln`, { type, view: 'mapping' })}</dd></div><div><dt>Quellsysteme</dt><dd>${typeSystems(data, type).map(system => link(systemLabel(data, system), { type, view: 'mapping', system })).join(' · ') || 'Keine dokumentiert'}</dd></div></dl>`;
 }
 
-function sourceList(data, rules, system) {
-  const visible = rules.filter((rule) => rule.source.system === system).sort((a, b) => naturalSort(a.source.value, b.source.value));
-  if (!visible.length) return '<div class="empty-state"><h2>Keine Zuordnungen</h2><p>Für diese Auswahl sind keine Regeln hinterlegt.</p></div>';
-  return `<div class="mapping-list">${visible.map((rule) => `<article class="mapping-item" id="${escapeHtml(rule.id)}"><div class="mapping-main"><div class="source-value"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3></div><span class="mapping-arrow" aria-hidden="true">→</span><div class="target-values">${targetChips(rule)}</div></div>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
+function guide(data, state) {
+  const all = data.rules.filter(rule => rule.ruleKind === 'mapping');
+  const scoped = all.filter(rule => !state.system || rule.source?.system === state.system);
+  const needle = (state.source ?? '').trim();
+  // Suggest loosely, but never present a partial or accent-folded match as a rule.
+  const matches = scoped.filter(rule => rule.source?.value === needle);
+  const types = [...new Set(matches.map(typeOfRule))].filter(Boolean);
+  const validType = types.includes(state.type) ? state.type : null;
+  const selected = matches.filter(rule => !validType || typeOfRule(rule) === validType);
+  const suggestions = [...new Set(scoped.map(rule => rule.source?.value).filter(value => typeof value === 'string' && value && data.fold(value).includes(data.fold(needle))))].sort(naturalSort);
+  const systems = [...new Set(all.map(rule => rule.source?.system).filter(Boolean))].sort(naturalSort);
+  const needsType = types.length > 1 && !validType;
+  return `${breadcrumbs([['Wert nachschlagen', null]])}<h1>Wo landet mein Wert?</h1>
+    <p>Ein Quellwert ist eine Bezeichnung im liefernden System. Das Zielfeld ist der Ort, an dem eine dokumentierte Regel den Wert in SaTourN zuordnet.</p>
+    <form class="filters guide-form" data-filter-form>${hidden('view', 'guide')}
+    <label for="filter-system">1. Woher kommt der Wert?<select id="filter-system" name="system"><option value="">Weiß ich nicht – alle Quellsysteme</option>${systems.map(id => `<option value="${esc(id)}"${state.system === id ? ' selected' : ''}>${esc(systemLabel(data, id))}</option>`).join('')}</select></label>
+    <label for="filter-source">2. Welchen Quellwert suchst du?<input id="filter-source" type="search" name="source" value="${esc(state.source)}" list="documented-values" autocomplete="off" placeholder="Bezeichnung eingeben"><datalist id="documented-values">${suggestions.slice(0, 100).map(value => `<option value="${esc(value)}"></option>`).join('')}</datalist></label>
+    ${types.length > 1 ? select('type', '3. Welche Datensatzart?', state.type, types.map(id => [id, typeLabel(data, id)])) : ''}<button>Zuordnung anzeigen</button>${link('Neu beginnen', { view: 'guide' })}</form>
+    <p class="secondary">Vorschläge stammen ausschließlich aus dokumentierten Mappingregeln, nicht aus Testdatensätzen. Die Suche bestätigt nur exakt geschriebene Quellwerte.</p>
+    ${!needle ? empty('Wähle ein Quellsystem oder lasse es offen und gib einen Quellwert ein.') : !matches.length ? `<h2>Keine passende Regel dokumentiert</h2><p>Das bedeutet nicht, dass der Wert nicht importiert wird. Ohne passende Regel lässt sich die Übernahme hier nicht bestätigen.</p>${suggestions.length ? `<h3>Meintest du eine dieser Bezeichnungen?</h3><ul>${suggestions.slice(0, 12).map(value => `<li>${link(value, { view: 'guide', system: state.system, source: value })}</li>`).join('')}</ul>` : ''}` : needsType ? `<h2>Bitte die Datensatzart auswählen</h2><p>Dieser Quellwert kommt bei mehreren Datensatzarten vor. Die Auswahl oben grenzt die dokumentierten Zuordnungen ein.</p>` : `<h2>Dokumentierte Zuordnung${selected.length === 1 ? '' : 'en'}</h2><p role="status">${selected.length} passende Regel${selected.length === 1 ? '' : 'n'}. ${!state.system ? 'Das Quellsystem ist offen: Beachte die Herkunft jeder Regel.' : ''}</p>${selected.map(rule => `<article class="guide-result"><h3>${esc(systemLabel(data, rule.source?.system))} · ${esc(typeLabel(data, typeOfRule(rule)))}</h3><p>Quelle: <strong>${esc(rule.source?.value)}</strong> (${esc(DIMENSIONS[rule.source?.dimension] ?? rule.source?.dimension)}) → SaTourN</p><dl class="facts"><div><dt>Zielfeld</dt><dd>${targetField(data, rule, state)}</dd></div><div><dt>Zielwert / Verhalten</dt><dd>${targetValue(data, rule)}</dd></div></dl>${rule.behavior === 'noImport' ? '<p>Diese Regel sieht keine Übernahme dieses Wertes vor. Daraus folgt keine Aussage über den gesamten Datensatz.</p>' : rule.behavior === 'noTarget' ? '<p>Für diese Regel ist kein Zielwert hinterlegt. Das weitere Importverhalten lässt sich daraus nicht ableiten.</p>' : ''}<p>${link('Regel und technische Details öffnen', withOrigin(ruleState(rule), state))}</p></article>`).join('')}`}
+    <p>${link('Zum vollständigen Feld- und Mappingkatalog', { view: 'catalog' })}</p>`;
 }
 
-function reverseList(data, rules, type, dimension) {
-  const groups = new Map();
-  rules.filter((rule) => rule.behavior === 'map').forEach((rule) => (rule.target?.values ?? []).forEach((value) => {
-    const key = `${rule.target.datasetType}\u0000${rule.target.dimension}\u0000${value}`;
-    if (!groups.has(key)) groups.set(key, { value, rules: [] });
-    groups.get(key).rules.push(rule);
-  }));
-  const entries = [...groups.values()].sort((a, b) => naturalSort(a.value, b.value));
-  if (!entries.length) return '<div class="empty-state"><h2>Keine Zielwerte</h2><p>Für diese Auswahl sind keine SaTourN-Zielwerte hinterlegt.</p></div>';
-  return `<div class="reverse-list">${entries.map((entry) => {
-    const systems = new Map();
-    entry.rules.forEach((rule) => { if (!systems.has(rule.source.system)) systems.set(rule.source.system, []); systems.get(rule.source.system).push(rule); });
-    return `<article class="reverse-item"><div class="reverse-heading"><span class="system-kicker">SaTourN</span><h3>${escapeHtml(entry.value)}</h3><small>${entry.rules.length} Quellzuordnung${entry.rules.length === 1 ? '' : 'en'}</small></div><div class="reverse-systems">${[...systems.entries()].sort(([a], [b]) => naturalSort(systemLabel(data, a), systemLabel(data, b))).map(([system, sources]) => `<details><summary><strong>${escapeHtml(systemLabel(data, system))}</strong><span>${sources.length}</span></summary><ul>${sources.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<li><a href="${escapeHtml(hrefFor({ type, view: 'mapping', dimension, mode: 'source', system, term: rule.id }, true))}" data-nav>${escapeHtml(rule.source.value)}</a>${rule.oneToMany ? '<small> setzt mehrere Zielwerte</small>' : ''}</li>`).join('')}</ul></details>`).join('')}</div></article>`;
-  }).join('')}</div>`;
+function pager(state, total, pageSize = 100, key = 'page') {
+  const pages = Math.max(1, Math.ceil(total / pageSize));
+  const page = Math.min(pages, Math.max(1, Number.parseInt(state[key], 10) || 1));
+  return { page, start: (page - 1) * pageSize, html: pages > 1 ? `<nav class="pagination" aria-label="Ergebnisseiten ${esc(key)}">${page > 1 ? link('← Zurück', { ...state, [key]: page - 1 }) : '<span></span>'}<span>Seite ${page} von ${pages}</span>${page < pages ? link('Weiter →', { ...state, [key]: page + 1 }) : '<span></span>'}</nav>` : '' };
 }
 
-function routingView(data, type, rules) {
-  if (!rules.length) return '<div class="empty-state"><h2>Kein Routing</h2><p>Für diese Datensatzart gibt es keine bestätigten Routingregeln.</p></div>';
-  return `<div class="routing-list">${rules.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<article class="routing-item" id="${escapeHtml(rule.id)}"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3><p>wird als <strong>${escapeHtml(datasetLabel(data, rule.target.datasetType))}</strong> verarbeitet.</p>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
+function fieldTable(data, fields, global = false, state = null) {
+  return `<div class="table-scroll"><table class="field-table"><caption class="sr-only">Datenfelder</caption><thead><tr><th>Technischer Feldname</th><th>Bereich</th><th>Feldtyp</th><th>Mappings</th></tr></thead><tbody>${fields.map(field => {
+    const count = (data.incoming.get(fieldKey(field.datasetType, field.field)) ?? []).length;
+    return `<tr><th scope="row"><code>${link(field.field, withOrigin({ type: field.datasetType, view: 'fields', field: field.field }, state))}</code>${global ? `<small class="block">${esc(typeLabel(data, field.datasetType))}</small>` : ''}${field.languages?.length ? `<small class="block">${esc(field.languages.join(', '))}</small>` : ''}</th><td>${esc(field.group.label)}</td><td>${field.fieldType.status === 'inferred' ? `${esc(field.fieldType.label)} <small>abgeleitet</small>` : '<span class="secondary">—</span>'}</td><td>${count ? link(String(count), { type: field.datasetType, view: 'mapping', field: field.field }) : '<span class="secondary">Keine dokumentiert</span>'}</td></tr>`;
+  }).join('')}</tbody></table></div>`;
 }
 
-function fallbackText(rule) {
-  if (rule.fallback?.mode === 'passSourceValue') return 'FOREIGNVALUE: Quellwert unverändert übernehmen.';
-  if (rule.fallback?.mode === 'literal') return `Fester Fallbackwert: ${rule.fallback.value ?? '–'}.`;
-  if (rule.fallback?.mode === 'empty') return 'Leerer Fallback: Es wird kein Wert gesetzt.';
-  return 'Fallbackregel';
+function fieldCatalog(data, state) {
+  const type = state.type, all = fieldsForType(data, type), fields = fieldsForType(data, type, state);
+  const groups = FIELD_GROUPS.filter(group => all.some(field => field.group.id === group.id));
+  return `${datasetHeader(data, type, 'fields')}<div class="heading-row"><h2>${all.length} verfügbare ${esc(typeLabel(data, type))}-Felder</h2><button class="text-button" type="button" data-export-spec>JSON-LD herunterladen</button></div>
+    <form class="filters" data-filter-form>${hidden('type', type)}${hidden('view', 'fields')}${input('filter', 'Feld durchsuchen', state.filter, 'Feldname oder Bereich')}${select('group', 'Bereich', state.group, groups.map(group => [group.id, group.label]))}<button>Suchen</button>${link('Zurücksetzen', { type, view: 'fields' })}</form>
+    <p class="result-count" role="status">${fields.length} von ${all.length} Feldern</p>${fields.length ? fieldTable(data, fields, false, state) : empty(all.length ? 'Keine Felder passen zu diesen Filtern.' : 'Für diese Datensatzart sind keine Datenfelder dokumentiert.')}`;
 }
 
-function fallbackView(data, rules) {
-  if (!rules.length) return '<div class="empty-state"><h2>Keine Fallbacks</h2><p>Für diese Datensatzart gibt es keine bestätigten Fallbackregeln.</p></div>';
-  return `<div class="fallback-list">${rules.sort((a, b) => naturalSort(a.source.value, b.source.value)).map((rule) => `<article class="fallback-item" id="${escapeHtml(rule.id)}"><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source.system))}</span><h3>${escapeHtml(rule.source.value)}</h3><p>${escapeHtml(fallbackText(rule))}</p>${ruleNotice(rule)}${details(rule)}</article>`).join('')}</div>`;
+function targetField(data, rule, state = null) {
+  const target = rule.target;
+  if (!target?.field) return '<span class="secondary">Nicht dokumentiert</span>';
+  return data.fieldsByKey.has(fieldKey(target.datasetType, target.field)) ? link(target.field, withOrigin({ type: target.datasetType, view: 'fields', field: target.field }, state)) : esc(target.field);
 }
 
-function structureView(data, type) {
-  const profile = data.sampleProfile[type];
-  const fields = data.fields.filter((field) => field.datasetType === type).sort((a, b) => naturalSort(a.field, b.field));
-  const vocabulary = data.vocabularies.filter((row) => row.datasetType === type).sort((a, b) => naturalSort(a.field, b.field) || naturalSort(a.value, b.value));
-  if (!profile && !fields.length) return '<div class="empty-state"><h2>Keine Beispielstruktur</h2><p>Für diese Datensatzart liegt kein beobachtetes SaTourN-Beispiel vor.</p></div>';
-  return `<section class="structure-summary"><p class="notice notice-info"><strong>Beobachtete Struktur</strong><span>Dies sind XML-Felder aus den gelieferten Beispieldaten, keine Importzuordnungen.</span></p>${profile?.sample ? `<p>Beispieldatei: <code>${escapeHtml(profile.sample)}</code></p>` : ''}
-    <h2>Felder</h2><div class="poi-directory"><table class="poi-table"><thead><tr><th>Feld</th><th>Vorkommen</th><th>Sprachen</th><th>Beispielwerte</th></tr></thead><tbody>${fields.map((field) => `<tr><td>${escapeHtml(field.field)}</td><td>${escapeHtml(field.occurrences)}</td><td>${escapeHtml(field.languages)}</td><td>${escapeHtml(field.examples)}</td></tr>`).join('')}</tbody></table></div>
-    ${vocabulary.length ? `<h2>Beobachtete Vokabulare</h2><div class="poi-directory"><table class="poi-table"><thead><tr><th>Feld</th><th>Wert</th><th>Vorkommen</th></tr></thead><tbody>${vocabulary.map((row) => `<tr><td>${escapeHtml(row.field)}</td><td>${escapeHtml(row.value)}</td><td>${escapeHtml(row.occurrences)}</td></tr>`).join('')}</tbody></table></div>` : ''}</section>`;
+function targetValue(data, rule) {
+  if (rule.behavior === 'noImport') return 'Nicht importieren';
+  if (rule.behavior === 'noTarget') return 'Kein Zielwert';
+  if (rule.ruleKind === 'routing') return `Datensatzart: ${esc(typeLabel(data, rule.target?.datasetType))}`;
+  if (rule.ruleKind === 'fallback') {
+    if (rule.fallback?.mode === 'passSourceValue') return 'Quellwert unverändert übernehmen';
+    if (rule.fallback?.mode === 'empty') return 'Keinen Wert setzen';
+    return `Fester Wert: ${esc(rule.fallback?.value ?? 'Nicht dokumentiert')}`;
+  }
+  return (rule.target?.values ?? []).map(esc).join('<br>') + (rule.oneToMany ? '<small class="block">Alle Zielwerte werden gesetzt</small>' : '');
 }
 
-function datasetView(data, state) {
-  const type = data.datasetById.has(state.type) ? state.type : data.datasetTypes.find((item) => item.mappingSourceAvailable)?.id;
-  const typeMeta = data.datasetById.get(type);
-  if (!type || !typeMeta) return home(data);
-  const mappings = activeRules(data, 'mapping').filter((rule) => rule.source.datasetType === type);
-  const routing = activeRules(data, 'routing').filter((rule) => rule.target?.datasetType === type);
-  const fallbacks = activeRules(data, 'fallback').filter((rule) => rule.source.datasetType === type);
-  const hasStructure = Boolean(data.sampleProfile[type] || data.fields.some((field) => field.datasetType === type));
-  const allowedViews = ['mapping', routing.length ? 'routing' : null, fallbacks.length ? 'fallback' : null, hasStructure ? 'structure' : null].filter(Boolean);
-  const view = allowedViews.includes(state.view) ? state.view : (mappings.length ? 'mapping' : hasStructure ? 'structure' : allowedViews[0]);
-  const crumb = breadcrumbs([{ label: 'Start', href: './index.html' }, { label: datasetLabel(data, type) }]);
-  const tabs = `<div class="tabs view-tabs" aria-label="Ansicht">${allowedViews.map((id) => link(VIEW_LABELS[id], { type, view: id, dimension: null, system: null, mode: null, term: null }, true, id === view ? 'active' : '')).join('')}</div>`;
-  let content;
-  if (view === 'mapping') {
-    const controls = mappingControls(data, state, mappings, type);
-    content = `${controls.html}${controls.mode === 'source' ? sourceList(data, controls.dimensionRules, controls.system) : reverseList(data, controls.dimensionRules, type, controls.dimension)}`;
-  } else if (view === 'routing') content = routingView(data, type, routing);
-  else if (view === 'fallback') content = fallbackView(data, fallbacks);
-  else content = structureView(data, type);
-  return `${crumb}<section class="view-heading"><p class="eyebrow">Importe nach SaTourN</p><h1>${escapeHtml(datasetLabel(data, type))}</h1><p>${mappings.length} Mappingregeln im autoritativen Bestand</p></section>${tabs}${content}`;
+function ruleState(rule) {
+  return { type: typeOfRule(rule), view: rule.ruleKind === 'mapping' ? 'mapping' : rule.ruleKind, term: rule.id };
 }
 
-function referenceView(data, state) {
-  const odta = state.system === 'odta';
-  const crumb = breadcrumbs([{ label: 'Start', href: './index.html' }, { label: 'Referenzen und Zielsysteme' }]);
-  if (odta) return `${crumb}<section class="view-heading"><p class="eyebrow">Referenz</p><h1>ODTA</h1><p>ODTA ist als Referenz dokumentiert, nicht als bestätigtes SaTourN-Zielsystem.</p></section><div class="empty-state"><h2>Keine bestätigten Exportregeln</h2><p>Der autoritative Regelbestand enthält keine SaTourN→ODTA-Exportregeln. ODTA-Vokabulare dürfen nicht als Mapping interpretiert werden.</p></div>`;
-  const types = data.datasetTypes.filter((type) => data.sampleProfile[type.id] || data.fields.some((field) => field.datasetType === type.id));
-  return `${crumb}<section class="view-heading"><p class="eyebrow">Referenz</p><h1>SaTourN-Beispielstruktur</h1><p>Beobachtete XML-Felder, Häufigkeiten, Sprachen und Beispielwerte.</p></section><div class="dataset-grid">${types.map((type) => `<a class="dataset-card" href="${escapeHtml(hrefFor({ type: type.id, view: 'structure' }, true))}" data-nav><span class="dataset-icon" aria-hidden="true">${escapeHtml(type.label.slice(0, 1))}</span><span class="dataset-copy"><strong>${escapeHtml(type.label)}</strong><small>Beobachtete Struktur</small></span><span class="card-arrow" aria-hidden="true">→</span></a>`).join('')}</div>`;
+function mappingTable(data, rules, state = null) {
+  if (!rules.length) return empty('Keine Regeln passen zu diesen Filtern.');
+  return `<div class="table-scroll"><table class="mapping-table"><caption class="sr-only">Quelle und Ziel der Mappingregeln</caption><thead><tr><th>Quellsystem</th><th>Dimension</th><th>Quellwert / Regel öffnen</th><th>Zielfeld · SaTourN</th><th>Zielwert / Verhalten</th></tr></thead><tbody>${rules.map(rule => `<tr><td>${esc(systemLabel(data, rule.source?.system))}</td><td>${esc(DIMENSIONS[rule.source?.dimension] ?? rule.source?.dimension)}${rule.source?.language ? `<small class="block">${esc(rule.source.language)}</small>` : ''}</td><th scope="row">${link(rule.source?.value ?? 'Regel', withOrigin(ruleState(rule), state))}</th><td>${targetField(data, rule, state)}</td><td>${targetValue(data, rule)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function mappingList(data, state) {
+  const { type } = state, kind = ['routing', 'fallback'].includes(state.view) ? state.view : 'mapping';
+  const all = rulesForType(data, type, kind), filtered = filterRules(data, all, state);
+  const choices = getter => [...new Set(all.map(getter).filter(Boolean))].sort(naturalSort);
+  const pagination = pager(state, filtered.length);
+  return `${datasetHeader(data, type, kind)}<h2>${esc(viewLabels[kind])}</h2>
+    <form class="filters mapping-filters" data-filter-form>${hidden('type', type)}${hidden('view', kind)}${hidden('mode', state.mode)}
+    ${select('system', 'Quellsystem', state.system, choices(rule => rule.source?.system).map(id => [id, systemLabel(data, id)]))}
+    ${input('filter', 'Mappings durchsuchen', state.filter, 'Quellwert, Zielwert, Feld oder Regel-ID')}
+    <details class="advanced-filters"${['dimension', 'field', 'source', 'target'].some(key => state[key]) ? ' open' : ''}><summary>Weitere Filter${['dimension', 'field', 'source', 'target'].filter(key => state[key]).length ? ` (${['dimension', 'field', 'source', 'target'].filter(key => state[key]).length} aktiv)` : ''}</summary><div class="filters">
+    ${select('dimension', 'Dimension', state.dimension, choices(rule => rule.source?.dimension).map(id => [id, DIMENSIONS[id] ?? id]))}
+    ${select('field', 'Zielfeld', state.field, choices(rule => rule.target?.field).map(id => [id, id]))}
+    ${input('source', 'Quellwert', state.source)}${input('target', 'Zielwert', state.target)}</div></details>
+    <button>Suchen</button>${link('Zurücksetzen', { type, view: kind })}</form>
+    <p class="result-count" role="status">${filtered.length} von ${all.length} Regeln${state.mode === 'target' ? ' · nach Zielwert sortiert' : ''}</p>
+    ${mappingTable(data, filtered.slice(pagination.start, pagination.start + 100), state)}${pagination.html}`;
+}
+
+function technicalDetails(rule) {
+  const facts = [['Regel-ID', rule.id], ['Technischer Regeltyp', rule.ruleKind], ['Verhalten', rule.behavior], ['Dimension', rule.source?.dimension], ['Quell-Datensatzart', rule.source?.datasetTypeRaw], ['Feldnachweis', rule.target?.fieldEvidence], ['Technische Marker', rule.technicalMarkers?.join(', ')]];
+  const notes = [...new Set([...(rule.notes ?? []), ...(rule.reviewFlag ? [String(rule.reviewFlag)] : [])])];
+  return `<details class="technical-details"><summary>Technische Details</summary><dl class="facts">${facts.filter(([,value]) => value).map(([name,value]) => `<div><dt>${esc(name)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
+    ${notes.length ? `<h3>Interner Prüfhinweis</h3><ul>${notes.map(note => `<li>${esc(note)}</li>`).join('')}</ul>` : ''}
+    <details class="provenance"><summary>Provenienz anzeigen</summary>${(rule.provenance ?? []).map(item => `<div class="provenance-item"><p>${esc(item.sourceFile)}${item.sourceLine ? ` · Zeile ${esc(item.sourceLine)}` : ''}${item.market ? ` · ${esc(item.market)}` : ''}</p>${item.note ? `<p>Interner Prüfhinweis: ${esc(item.note)}</p>` : ''}${item.raw ? `<details><summary>Quelltext anzeigen</summary><pre>${esc(item.raw)}</pre></details>` : ''}</div>`).join('')}</details></details>`;
+}
+
+function ruleDetail(data, state) {
+  const rule = data.rulesById.get(state.term);
+  if (!rule) return `${datasetHeader(data, state.type, 'mapping')}<h2>Regel nicht gefunden</h2>${link('Mappings öffnen', { type: state.type, view: 'mapping' })}`;
+  const type = typeOfRule(rule), view = rule.ruleKind === 'mapping' ? 'mapping' : rule.ruleKind;
+  return `${datasetHeader(data, type, view, rule.source?.value ?? 'Mapping', 'Regel')}<div class="mapping-detail">
+    <section><h2>Quelle</h2><dl class="facts"><div><dt>Quellsystem</dt><dd>${esc(systemLabel(data, rule.source?.system))}</dd></div><div><dt>Datensatzart</dt><dd>${esc(typeLabel(data, rule.source?.datasetType))}</dd></div><div><dt>Dimension / Feld</dt><dd>${esc(DIMENSIONS[rule.source?.dimension] ?? rule.source?.dimension)}</dd></div><div><dt>Wert</dt><dd>${esc(rule.source?.value)}</dd></div>${rule.source?.language ? `<div><dt>Sprache</dt><dd>${esc(rule.source.language)}</dd></div>` : ''}</dl></section>
+    <span class="direction-arrow" aria-hidden="true">→</span><section><h2>Ziel</h2><dl class="facts"><div><dt>System</dt><dd>SaTourN</dd></div><div><dt>Datensatzart</dt><dd>${esc(typeLabel(data, rule.target?.datasetType))}</dd></div><div><dt>Feld</dt><dd>${targetField(data, rule, state)}</dd></div><div><dt>Wert / Verhalten</dt><dd>${targetValue(data, rule)}</dd></div></dl></section></div>
+    <p>${link(originState(state) ? 'Zurück zur Auswahl' : 'Zur Mappingliste', originState(state) ?? { ...state, type, view, term: null, from: null }, 'data-return')}</p>${technicalDetails(rule)}`;
+}
+
+function fieldDetail(data, state) {
+  const { type, field: name } = state, field = data.fieldsByKey.get(fieldKey(type, name));
+  if (!field) return `${datasetHeader(data, type, 'fields')}<h2>Feld nicht gefunden</h2>${link('Datenfelder öffnen', { type, view: 'fields' })}`;
+  const incoming = data.incoming.get(fieldKey(type, name)) ?? [];
+  const values = [...(data.fieldValues.get(fieldKey(type, name))?.values() ?? [])].sort((a,b) => naturalSort(a.value,b.value));
+  const filteredValues = values.filter(entry => data.fold(entry.value).includes(data.fold(state.valueFilter ?? '').trim()));
+  const filteredIncoming = filterRules(data, incoming, { filter: state.ruleFilter });
+  const valuePager = pager(state, filteredValues.length, 30, 'valuePage');
+  const rulePager = pager(state, filteredIncoming.length, 30, 'rulePage');
+  const detailSearch = (key, label) => `<form class="filters" data-filter-form>${Object.entries(state).filter(([name]) => name !== key && name !== (key === 'valueFilter' ? 'valuePage' : 'rulePage')).map(([name, value]) => hidden(name, value)).join('')}${input(key, label, state[key])}<button>Suchen</button>${link('Filter löschen', { ...state, [key]: null, [key === 'valueFilter' ? 'valuePage' : 'rulePage']: null })}</form>`;
+  return `${datasetHeader(data, type, 'fields', name, name)}<dl class="facts"><div><dt>Datensatzart</dt><dd>${esc(typeLabel(data, type))}</dd></div><div><dt>Technischer Feldname</dt><dd><code>${esc(name)}</code></dd></div><div><dt>Bereich</dt><dd>${link(field.group.label, { type, view: 'fields', group: field.group.id })}</dd></div>${field.fieldType.status === 'inferred' ? `<div><dt>Feldtyp</dt><dd>${esc(field.fieldType.label)} <span class="secondary">(abgeleitet)</span></dd></div>` : ''}</dl>
+    <section><h2>Werte</h2><p class="secondary">${values.length} Zielwerte aus dokumentierten Mappingregeln. Keine vollständige Liste aller zulässigen Feldwerte.</p>${values.length ? `${detailSearch('valueFilter', 'Zielwerte durchsuchen')}<p role="status">${filteredValues.length} von ${values.length} Zielwerten</p>${filteredValues.length ? `<ul class="field-values">${filteredValues.slice(valuePager.start, valuePager.start + 30).map(entry => `<li>${link(entry.value, { type, view: 'mapping', field: name, target: entry.value })}</li>`).join('')}</ul>` : empty('Keine Zielwerte passen zu dieser Suche.')}${valuePager.html}` : empty('Für dieses Feld sind keine Zielwerte dokumentiert.')}</section>
+    <p>${link(originState(state) ? 'Zurück zur Auswahl' : 'Zum Feldkatalog', originState(state) ?? { type, view: 'fields' }, 'data-return')}</p>
+    <section><div class="heading-row"><h2>Eingehende Mappings</h2>${link('Alle Regeln für dieses Feld', { type, view: 'mapping', field: name })}</div><p>${incoming.length} Regeln befüllen dieses Feld bzw. steuern seine Übernahme. Nicht dokumentiert bedeutet nicht: kein Import.</p>${incoming.length ? detailSearch('ruleFilter', 'Eingehende Mappings durchsuchen') : ''}<p role="status">${filteredIncoming.length} von ${incoming.length} Regeln</p>${mappingTable(data, filteredIncoming.slice(rulePager.start, rulePager.start + 30), state)}${rulePager.html}</section>
+    <details class="technical-details"><summary>Technische Informationen</summary><dl class="facts"><div><dt>Namespace</dt><dd>${esc(field.namespaces || 'Nicht dokumentiert')}</dd></div><div><dt>Sprachen</dt><dd>${esc(field.languages?.join(', ') || 'Keine Sprachangabe')}</dd></div><div><dt>Nutzung im Datenbestand</dt><dd>${esc(field.usage?.occurrences ?? '—')} Vorkommen, davon ${esc(field.usage?.nonemptyOccurrences ?? '—')} befüllt; in ${esc(field.usage?.filesPresent ?? '—')} Dateien</dd></div><div><dt>Feldquelle</dt><dd>AH67-T309 / ${esc(field.sourceDirectory)}</dd></div><div><dt>Typableitung</dt><dd>${esc(field.fieldType.label)}; aus verfügbaren Testwerten, keine verbindliche Typdefinition.</dd></div><div><dt>Pflichtfeld / Kardinalität</dt><dd>Nicht dokumentiert</dd></div><div><dt>Gruppierung</dt><dd>Navigationsmetadatum nach Feldnamen; keine offizielle SaTourN-Spezifikation.</dd></div></dl></details>`;
 }
 
 function searchView(data, state) {
-  const query = state.q?.trim() ?? '';
-  const needle = data.fold(query);
-  const matches = needle ? data.rules.filter((rule) => data.fold([rule.id, rule.source?.value, rule.source?.system, rule.source?.datasetType, ...(rule.target?.values ?? []), ...(rule.technicalMarkers ?? [])].join(' ')).includes(needle)) : [];
-  const visible = matches.slice(0, 100);
-  return `${breadcrumbs([{ label: 'Start', href: './index.html' }, { label: 'Suche' }])}<section class="view-heading"><p class="eyebrow">Globale Suche</p><h1>${query ? `Ergebnisse für „${escapeHtml(query)}“` : 'Mappingbestand durchsuchen'}</h1><p>${matches.length} Treffer</p></section>${query && (visible.length ? `<div class="search-results">${visible.map((rule) => {
-    const type = rule.source?.datasetType ?? rule.target?.datasetType;
-    const view = rule.ruleKind === 'routing' ? 'routing' : rule.ruleKind === 'fallback' ? 'fallback' : 'mapping';
-    const href = hrefFor({ type, view, dimension: rule.source?.dimension, system: rule.source?.system, mode: 'source', term: rule.id, q: null }, true);
-    return `<a class="search-result" href="${escapeHtml(href)}" data-nav><span class="system-kicker">${escapeHtml(systemLabel(data, rule.source?.system))} · ${escapeHtml(datasetLabel(data, type))}</span><strong>${escapeHtml(rule.source?.value ?? rule.id)}</strong><span>${escapeHtml((rule.target?.values ?? [rule.behavior]).join(' + '))}</span></a>`;
-  }).join('')}</div>` : '<div class="empty-state"><h2>Kein Treffer</h2><p>Kein Treffer im autoritativen Bestand.</p></div>')}</div>`;
+  const query = state.q?.trim() ?? '', result = searchCatalog(data, query);
+  const categories = [['fields', 'Datenfelder'], ['rules', 'Mappings'], ['values', 'Feldwerte']];
+  const total = result.fields.length + result.rules.length + result.values.length;
+  const selected = categories.some(([id]) => id === state.group) ? state.group : (result.fields.length ? 'fields' : result.rules.length ? 'rules' : 'values');
+  const pagination = pager(state, result[selected].length), visible = result[selected].slice(pagination.start, pagination.start + 100);
+  let content;
+  if (selected === 'fields') content = fieldTable(data, visible, true, state);
+  else if (selected === 'rules') content = `<div class="search-results">${visible.map(rule => `<article class="search-result"><p class="result-kind">MAPPING · ${esc(systemLabel(data, rule.source?.system))} · ${esc(typeLabel(data, typeOfRule(rule)))}</p><p>Quelle: ${link(rule.source?.value ?? 'Regel', withOrigin(ruleState(rule), state))} → SaTourN · ${esc(typeLabel(data, rule.target?.datasetType))} · Feld: ${targetField(data, rule, state)} · Wert: ${targetValue(data, rule)}</p></article>`).join('')}</div>`;
+  else content = `<div class="search-results">${visible.map(entry => `<article class="search-result"><p class="result-kind">FELDWERT · ${esc(typeLabel(data, entry.type))}</p><p>Feld: ${link(entry.field, withOrigin({ type: entry.type, view: 'fields', field: entry.field }, state))} · Wert: ${esc(entry.value)}</p><small>Aus ${entry.ruleIds.length} Mappingregeln</small></article>`).join('')}</div>`;
+  return `${breadcrumbs([['Suche', null]])}<header class="view-heading"><h1>${query ? `Suche: ${esc(query)}` : 'Suche'}</h1><p>${total} Treffer</p></header><nav class="section-nav" aria-label="Treffertypen">${categories.map(([id,label]) => link(`${label} (${result[id].length})`, { q: query, group: id }, selected === id ? 'aria-current="page"' : '')).join('')}</nav>${visible.length ? content : empty('Keine Treffer in diesem Bereich.')}${pagination.html}`;
 }
 
 export function render(data, state) {
   if (state.q !== undefined) return searchView(data, state);
-  if (state.view === 'reference') return referenceView(data, state);
-  if (state.type) return datasetView(data, state);
-  return home(data);
+  if (state.view === 'guide') return guide(data, state);
+  if (state.view === 'catalog') return home(data, true);
+  if (state.view === 'reference') return state.system === 'odta' ? `${breadcrumbs([['ODTA', null]])}<h1>ODTA</h1><p>Keine bestätigten SaTourN-zu-ODTA-Mappings dokumentiert.</p>` : home(data);
+  if (!state.type) return home(data);
+  if (!data.datasetById.has(state.type)) return `${breadcrumbs([['Datensatzart', null]])}<h1>Datensatzart nicht gefunden</h1>${link('Zur Startseite', {})}`;
+  if (state.term) return ruleDetail(data, state);
+  if (['fields', 'model', 'structure'].includes(state.view)) return state.field ? fieldDetail(data, state) : fieldCatalog(data, state);
+  if (['mapping', 'routing', 'fallback'].includes(state.view)) return mappingList(data, state);
+  return overview(data, state.type);
 }

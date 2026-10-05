@@ -1,24 +1,7 @@
 ---
-layout: mapping
+layout: null
 permalink: /artikel.html
-browser_title: SaTourN Mapping · Artikel
-h1: Artikel - Kategorien SaTourN
-subtitles:
-- Grün = wurde neu hinzugefügt. OA-Spalte leer, wenn kein Mapping existiert.
-- 'Gesamt: 41 · Mit OA-Mapping: 0 · Ohne OA-Mapping: 41 · Änderungen: 13 neu, 0 entfernt.'
-tables:
-- kind: mapping
-  data: artikel_mapping
-  headers:
-  - OA-Kategorie(n)
-  - SaTourN/eT4
-  - ODTA
-  - schema.org
-- kind: changes
-  data: artikel_changes
-  h2: Änderungen · Artikel
-  headers:
-  - Kategorie
-  - Status
 ---
+
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=./index.html?type=article"><title>Artikel – SaTourN Mapping Hub</title></head><body><p><a href="./index.html?type=article">Zur Übersicht: Artikel</a></p><script>location.replace('./index.html?type=article');</script></body></html>
 
