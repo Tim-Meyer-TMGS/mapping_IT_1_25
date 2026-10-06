@@ -62,12 +62,12 @@ assert.ok(fieldsForType(data, 'poi')[0].group.id === 'base');
 assert.ok(!list.includes('class="advanced-filters" open'));
 assert.ok(render(data, { type: 'poi', view: 'mapping', source: 'Reiten' }).includes('class="advanced-filters" open'));
 const guided = render(data, { view: 'guide', system: 'outdooractive', source: 'Reiten', type: 'poi' });
-assert.ok(guided.includes('Dokumentierte Zuordnung') && guided.includes('Kategorie'));
-assert.ok(render(data, { view: 'guide', source: 'not-a-real-value-923' }).includes('Keine passende Regel dokumentiert'));
-assert.ok(render(data, { view: 'guide', source: 'Reit' }).includes('Keine passende Regel dokumentiert'));
+assert.ok(guided.includes('<h2>Zuordnung</h2>') && guided.includes('Kategorie'));
+assert.ok(render(data, { view: 'guide', source: 'not-a-real-value-923' }).includes('Keine Regel gefunden'));
+assert.ok(render(data, { view: 'guide', source: 'Reit' }).includes('Keine Regel gefunden'));
 const ambiguous = data.rules.find(rule => rule.ruleKind === 'mapping' && new Set(data.rules.filter(other => other.ruleKind === 'mapping' && other.source.value === rule.source.value).map(other => other.target?.datasetType ?? other.source.datasetType)).size > 1);
 assert.ok(ambiguous);
-assert.ok(render(data, { view: 'guide', source: ambiguous.source.value }).includes('Bitte die Datensatzart auswählen'));
+assert.ok(render(data, { view: 'guide', source: ambiguous.source.value }).includes('Datensatzart auswählen'));
 const multiple = data.rules.find(rule => rule.ruleKind === 'mapping' && rule.oneToMany);
 assert.ok(render(data, { view: 'guide', system: multiple.source.system, source: multiple.source.value, type: multiple.target?.datasetType ?? multiple.source.datasetType }).includes('Alle Zielwerte werden gesetzt'));
 for (const behavior of ['noImport', 'noTarget']) {

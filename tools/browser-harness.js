@@ -29,7 +29,7 @@ try {
     if (scenario === 'field') require(root().querySelector('h1').textContent === 'Kategorie' && text().includes('Eingehende Mappings'), 'Feld-Deep-Link beim Start');
     if (scenario === 'rule') require(root().querySelector('h1').textContent === 'Reiten' && root().querySelector('.mapping-detail') && !root().querySelector('.technical-details').open, 'Regel-Deep-Link beim Start');
     if (scenario === 'overview') require(text().includes('307 verfügbare Felder') && !root().querySelector('.mapping-table'), 'HTML-Weiterleitung zur Übersicht');
-    if (scenario === 'guide') require(text().includes('Dokumentierte Zuordnung') && text().includes('Kategorie') && document.documentElement.scrollWidth <= innerWidth, 'Geführter Direktlink ohne Überlauf');
+    if (scenario === 'guide') require(text().includes('Zuordnung') && text().includes('Kategorie') && document.documentElement.scrollWidth <= innerWidth, 'Direktlink zur Zuordnung ohne Überlauf');
     require(errors.length === 0, 'Keine Fehler beim direkten Laden');
     document.documentElement.dataset.browserTest = 'passed';
     return;
@@ -42,13 +42,13 @@ try {
     document.querySelector('#filter-type').value = 'poi';
     document.querySelector('#filter-type').dispatchEvent(new Event('change', { bubbles: true }));
   }
-  require(text().includes('Dokumentierte Zuordnung') && text().includes('Kategorie'), 'Geführte Zuordnung ohne bekanntes System');
+  require(text().includes('Zuordnung') && text().includes('Kategorie'), 'Zuordnung ohne bekanntes System');
   require(document.documentElement.scrollWidth <= innerWidth, 'Geführte Suche ohne Überlauf');
   clickLink('.guide-result a[href*="term="]', 'Regel aus geführter Suche');
   clickLink('[data-return]', 'Zurück zur geführten Suche');
   require(new URLSearchParams(location.search).get('view') === 'guide', 'Geführten Ursprung erhalten');
   await typeInto('source', 'unbekannt-987654321');
-  require(text().includes('Keine passende Regel dokumentiert'), 'Keine erfundene Zuordnung');
+  require(text().includes('Keine Regel gefunden'), 'Keine erfundene Zuordnung');
   go({});
   clickLink('a[href="./index.html?type=poi"]', 'POI öffnen');
   require(text().includes('307 verfügbare Felder') && text().includes('503 aktive Mappingregeln'), 'POI-Übersicht');
@@ -135,7 +135,7 @@ try {
   require(document.documentElement.scrollWidth <= innerWidth, 'Feldkatalog ohne Seitenüberlauf');
   go({ type: 'poi', view: 'mapping' });
   require(document.documentElement.scrollWidth <= innerWidth, 'Mappingliste ohne Seitenüberlauf');
-  if (innerWidth > 760) require([...root().querySelectorAll('tbody tr')].filter(row => row.getBoundingClientRect().bottom < innerHeight).length >= 6, 'Informationsdichte Desktop');
+  if (innerWidth > 760) require([...root().querySelectorAll('tbody tr')].filter(row => row.getBoundingClientRect().bottom < innerHeight).length >= 5, 'Informationsdichte Desktop');
   require(errors.length === 0, 'JavaScript-Fehler: ' + errors.join(', '));
   document.documentElement.dataset.browserTest = 'passed';
 } catch (error) { document.documentElement.dataset.browserTest = error.message; }

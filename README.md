@@ -15,9 +15,9 @@ Die Skripte sind ausschließlich Entwicklungshilfen. Die veröffentlichte Seite 
 
 ## Navigation und Datenfelder
 
-Die Startseite bietet zwei Aufgaben-Einstiege: „Wo landet mein Wert?“ führt von
-Quellsystem und Quellwert zur dokumentierten Zuordnung. „Datenfelder und Mappings
-nachschlagen“ öffnet den direkten Katalog. Zusätzlich bleiben alle Datensatzarten
+Die Startseite bietet zwei Einstiege: „Zuordnung suchen“ führt von Quellsystem und
+Quellwert zum dokumentierten Ziel. „Felder und Mappings“ öffnet den Katalog.
+Zusätzlich bleiben alle Datensatzarten
 mit Feldanzahl, Mappinganzahl und Quellen direkt erreichbar.
 Die geführte Suche erlaubt ein unbekanntes Quellsystem, schlägt ausschließlich
 dokumentierte Quellwerte vor und verlangt bei mehreren Datensatzarten eine Auswahl.
@@ -30,7 +30,7 @@ Routing und Fallbacks sind zusätzliche Bereiche, sofern Regeln vorliegen.
 | URL-State | Ansicht |
 | --- | --- |
 | `?view=guide` | Geführte Quellwertsuche |
-| `?view=guide&system=outdooractive&source=Reiten` | Dokumentierte Zuordnung nachschlagen |
+| `?view=guide&system=outdooractive&source=Reiten` | Zuordnung anzeigen |
 | `?view=catalog` | Direkter Katalogeinstieg |
 | `?type=poi` | POI-Übersicht |
 | `?type=poi&view=fields` | Gruppierter Feldkatalog |
