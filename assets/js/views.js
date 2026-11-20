@@ -30,9 +30,45 @@ function typeSystems(data, type) {
   return [...new Set(data.rules.filter(rule => typeOfRule(rule) === type || rule.source?.datasetType === type).map(rule => rule.source?.system))].filter(Boolean).sort(naturalSort);
 }
 
-function home(data, catalog = false) {
+function odtaCategories(row) {
+  const vocabulary = 'https://odta.io/voc/';
+  const values = row.odta.map(value => {
+    if (value.startsWith(vocabulary)) return `<a href="${esc(value)}">${esc(value.slice(vocabulary.length))}</a>`;
+    return esc(value);
+  });
+  if (row.odtaKind && !row.odta.includes(row.odtaKind) && !row.odta.includes(vocabulary + row.odtaKind)) {
+    values.push(`${esc(row.odtaKind)} <small>(OdtaKind)</small>`);
+  }
+  return values.join('<br>') || '-';
+}
+
+const categoryValues = values => values.map(esc).join('<br>') || '-';
+
+function categoryOverview(data, state) {
+  const tabs = data.categoryTabs;
+  const active = tabs.find(tab => tab.id === state.type) ?? tabs[0];
+  const hasDeskline = ['accommodation', 'package'].includes(active.id);
+  const sourceLabel = hasDeskline ? 'Deskline (Feratel)' : 'Outdooractive';
+  return `<header class="view-heading">
+    <div class="heading-row"><h1>Kategoriemappings</h1><nav class="category-tools" aria-label="Weitere Ansichten">${link('Zuordnung suchen', { view: 'guide' })}${link('Felder und Mappings', { view: 'catalog' })}</nav></div>
+  </header>
+  <nav class="section-nav" aria-label="Datensatzarten">${tabs.map(tab => link(tab.label, { view: 'categories', type: tab.id }, tab === active ? 'aria-current="page"' : '')).join('')}</nav>
+  <p class="result-count">ODTA- und schema.org-Werte aus den SaTourN-Kategoriebäumen. Ein „-“ steht für eine fehlende Zuordnung.</p>
+  <div class="table-scroll" role="region" aria-label="Kategoriemappings für ${esc(active.label)}" tabindex="0"><table class="category-table">
+    <caption class="sr-only">Kategoriemappings für ${esc(active.label)}</caption>
+    <thead><tr><th scope="col">${sourceLabel}</th><th scope="col">DAMAS</th><th scope="col">SaTourN</th><th scope="col">ODTA-Kategorie</th></tr></thead>
+    <tbody>${active.rows.map(row => {
+      const sourceValues = hasDeskline ? row.deskline.map(entry => entry.label) : row.outdooractive;
+      const sourceId = row.outdooractiveCategoryId ? ` <small>(ID ${esc(row.outdooractiveCategoryId)})</small>` : '';
+      return `<tr><td>${categoryValues(sourceValues)}${sourceId}</td><td>${categoryValues(row.damas)}</td><th scope="row">${esc(row.satourn ?? '-')}</th><td>${odtaCategories(row)}</td></tr>`;
+    }).join('')}</tbody>
+  </table></div>
+  ${active.rows.length ? '' : empty('Für diese Datensatzart sind keine Kategoriemappings dokumentiert.')}`;
+}
+
+function catalogOverview(data) {
   return `<header class="view-heading"><h1>SaTourN Mapping Hub</h1><p>Mappings und Datenfelder nach Datensatzart.</p></header>
-    ${catalog ? '<h2>Felder und Mappings</h2>' : `<nav class="task-entries" aria-label="Bereiche"><section><h2>${link('Zuordnung suchen', { view: 'guide' })}</h2><p>Quellwert und zugehöriges Ziel in SaTourN.</p></section><section><h2>${link('Felder und Mappings', { view: 'catalog' })}</h2><p>Feldtypen und Regeln nach Datensatzart.</p></section></nav><h2>Datensatzarten</h2>`}
+    <h2>Felder und Mappings</h2>
     <div class="table-scroll"><table><caption class="sr-only">Datensatzarten</caption><thead><tr><th>Datensatzart</th><th>Datenfelder</th><th>Mappings</th><th>Quellsysteme</th></tr></thead><tbody>${data.datasetTypes.map(type => `<tr><th scope="row">${link(type.label, { type: type.id })}</th><td>${data.fields.filter(field => field.datasetType === type.id).length}</td><td>${rulesForType(data, type.id).length}</td><td>${esc(typeSystems(data, type.id).map(id => systemLabel(data, id)).join(' · ') || 'Keine dokumentiert')}</td></tr>`).join('')}</tbody></table></div>
     <p class="secondary">${link('ODTA-Referenz', { view: 'reference', system: 'odta' })}</p>`;
 }
@@ -182,9 +218,9 @@ function searchView(data, state) {
 export function render(data, state) {
   if (state.q !== undefined) return searchView(data, state);
   if (state.view === 'guide') return guide(data, state);
-  if (state.view === 'catalog') return home(data, true);
-  if (state.view === 'reference') return state.system === 'odta' ? `${breadcrumbs([['ODTA', null]])}<h1>ODTA</h1><p>Keine bestätigten SaTourN-zu-ODTA-Mappings dokumentiert.</p>` : home(data);
-  if (!state.type) return home(data);
+  if (state.view === 'catalog') return catalogOverview(data);
+  if (state.view === 'reference' && state.system === 'odta') return `${breadcrumbs([['ODTA', null]])}<h1>ODTA</h1><p>${link('ODTA-Kategorien in der Mappingübersicht', { view: 'categories' })}</p>`;
+  if (state.view === 'categories' || !state.type) return categoryOverview(data, state);
   if (!data.datasetById.has(state.type)) return `${breadcrumbs([['Datensatzart', null]])}<h1>Datensatzart nicht gefunden</h1>${link('Zur Startseite', {})}`;
   if (state.term) return ruleDetail(data, state);
   if (['fields', 'model', 'structure'].includes(state.view)) return state.field ? fieldDetail(data, state) : fieldCatalog(data, state);

@@ -15,10 +15,32 @@ Die Skripte sind ausschließlich Entwicklungshilfen. Die veröffentlichte Seite 
 
 ## Navigation und Datenfelder
 
-Die Startseite bietet zwei Einstiege: „Zuordnung suchen“ führt von Quellsystem und
-Quellwert zum dokumentierten Ziel. „Felder und Mappings“ öffnet den Katalog.
-Zusätzlich bleiben alle Datensatzarten
-mit Feldanzahl, Mappinganzahl und Quellen direkt erreichbar.
+Die Startseite zeigt die Kategoriemappings für Outdooractive, Deskline (Feratel),
+DAMAS, SaTourN und ODTA in Tabs nach Datensatzart. `data/category-mappings.json` kombiniert die
+Outdooractive-Paare aus „Alle XML-Mappingregeln“ in
+`SaTourN_Outdooractive_Kategoriemapping_bidirektional.xlsx` mit den Attributen
+`schemaorg` und `OdtaKind` aus den fünf SaTourN-Kategoriebäumen (ODTA V2.1).
+Deskline stammt aus den vollständigen Quell-/Zielpaaren in `Feratel-Mapping.xlsx`.
+DAMAS stammt aus den `Foreign`-/`done`-Paaren der fünf DAMAS-XML-Dateien.
+Die Liste bündelt alle Quellwerte je Datensatzart und exaktem SaTourN-Kategorienamen.
+Outdooractive-Kategorien ohne belegtes Ziel aus „Alle Kategorien“ sowie
+XML-Regeln mit einem Ziel außerhalb des aktuellen SaTourN-Kategoriebaums
+erscheinen mit Bindestrichen bei SaTourN und ODTA.
+Gastgeber und Angebote zeigen Deskline, die übrigen Tabs Outdooractive. DAMAS
+erscheint in allen Tabs.
+Die Liste zeigt einzelne und mehrfache Werte aus `schemaorg` und verlinkt
+die dort hinterlegten ODTA-URLs. Ein Bindestrich steht für eine fehlende
+Zuordnung.
+
+Das PowerShell-Skript erzeugt die Kategoriemappings aus den Quelldateien.
+
+```powershell
+.\tools\build-category-mappings.ps1 -Workbook 'Pfad\zur\Arbeitsmappe.xlsx' -CategoryDirectory 'Pfad\zu\ODTA V2.1' -AdditionalMappingDirectory 'Pfad\zu\Mapping'
+```
+
+„Zuordnung suchen“ führt von Quellsystem und Quellwert zum dokumentierten Ziel.
+„Felder und Mappings“ öffnet den Katalog mit Feldanzahl, Mappinganzahl und Quellen
+je Datensatzart.
 Die geführte Suche erlaubt ein unbekanntes Quellsystem, schlägt ausschließlich
 dokumentierte Quellwerte vor und verlangt bei mehreren Datensatzarten eine Auswahl.
 Nur exakte Quellwerte bestätigen eine Regel; Teiltreffer dienen als Vorschläge.
@@ -29,6 +51,7 @@ Routing und Fallbacks sind zusätzliche Bereiche, sofern Regeln vorliegen.
 
 | URL-State | Ansicht |
 | --- | --- |
+| `?view=categories&type=poi` | Kategoriemappings im POI-Tab |
 | `?view=guide` | Geführte Quellwertsuche |
 | `?view=guide&system=outdooractive&source=Reiten` | Zuordnung anzeigen |
 | `?view=catalog` | Direkter Katalogeinstieg |
@@ -66,7 +89,7 @@ werden nicht ergänzt. Testwerte und Testvokabulare werden weder geladen noch
 angezeigt oder exportiert. Feldwerte stammen ausschließlich aus dokumentierten
 Mapping-Zielwerten; sie sind kein vollständiges offizielles Vokabular. Sprachen
 und Nutzungszahlen stehen als Metadaten zur Verfügung. Die Oberfläche lädt nur
-`data/field-definitions.json` und die Mappingdokumentation. Die ursprünglichen
+`data/field-definitions.json`, die Mappingdokumentation und die Kategoriemappings. Die ursprünglichen
 Testdateien bleiben für die lokale Ableitung erhalten. Die übermittelte ODTA-Spezifikation dient als Strukturvorlage,
 nicht als Nachweis einer SaTourN-zu-ODTA-Zuordnung.
 
@@ -101,7 +124,7 @@ node tools/serve.mjs
 ```
 
 Vorschau: http://127.0.0.1:4173/ (anderer Port als Argument möglich).
-Der Server ist nur lokal erreichbar und liefert die Oberfläche sowie ihre beiden
+Der Server ist nur lokal erreichbar und liefert die Oberfläche sowie ihre
 Datendateien aus. Quellen, Testdaten und Git-Metadaten werden nicht ausgeliefert.
 Die Veröffentlichung bleibt eine statische GitHub-Pages-Anwendung.
 

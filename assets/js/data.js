@@ -3,6 +3,7 @@ import { enrichData } from './catalog.js';
 const FILES = {
   hub: './data/mapping-hub-authoritative.json',
   fields: './data/field-definitions.json',
+  categories: './data/category-mappings.json',
 };
 
 async function fetchJson(url) {
@@ -35,8 +36,8 @@ export function fold(value) {
 }
 
 export async function loadData() {
-  const [hub, fields] = await Promise.all([
-    fetchJson(FILES.hub), fetchJson(FILES.fields),
+  const [hub, fields, categories] = await Promise.all([
+    fetchJson(FILES.hub), fetchJson(FILES.fields), fetchJson(FILES.categories),
   ]);
   const rules = hub.rules.filter((rule) => rule.status === 'active');
   const systemsById = new Map(hub.systems.map((system) => [system.id, system]));
@@ -44,6 +45,7 @@ export async function loadData() {
   const rulesByKind = new Map(['mapping', 'routing', 'fallback'].map((kind) => [kind, rules.filter((rule) => rule.ruleKind === kind)]));
   return enrichData({
     meta: hub.meta, systems: hub.systems, datasetTypes: hub.datasetTypes, rules, fields,
+    categoryTabs: categories.tabs,
     systemsById, datasetById, rulesByKind, fold,
   });
 }

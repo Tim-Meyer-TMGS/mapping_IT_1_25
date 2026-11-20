@@ -14,7 +14,7 @@ const server = createServer(async (request, response) => {
     const pathname = decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname);
     // Serve only the public app, not sources, Git metadata or test datasets.
     const allowed = /^\/[a-z-]+\.html$/.test(pathname) || /^\/assets\/(js|css)\/[\w.-]+$/.test(pathname)
-      || ['/data/field-definitions.json', '/data/mapping-hub-authoritative.json'].includes(pathname);
+      || ['/data/category-mappings.json', '/data/field-definitions.json', '/data/mapping-hub-authoritative.json'].includes(pathname);
     if (!allowed) { response.writeHead(404).end('Nicht gefunden'); return; }
     const filename = path.resolve(root, '.' + pathname);
     if (!filename.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }

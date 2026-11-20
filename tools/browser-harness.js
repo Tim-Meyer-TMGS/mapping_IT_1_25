@@ -35,7 +35,18 @@ try {
     return;
   }
   await waitFor(() => root().querySelector('table'), 'Startseite laden');
+  require(root().querySelector('table.category-table') && text().includes('HikingTrail'), 'Kategoriemappings auf der Startseite');
+  require(root().querySelectorAll('nav[aria-label="Datensatzarten"] a').length === 6, 'Sechs Datensatz-Tabs');
+  clickLink('a[href*="type=accommodation"][href*="view=categories"]', 'Gastgeber-Tab öffnen');
+  require(root().querySelector('nav[aria-label="Datensatzarten"] a[aria-current]')?.textContent === 'Gastgeber', 'Aktiven Tab markieren');
+  require(root().querySelector('thead th')?.textContent === 'Deskline (Feratel)' && text().includes('ApartmentHotel'), 'Deskline als Quellsystem für Gastgeber');
+  const mountainHut = [...root().querySelectorAll('tbody tr')].find(row => row.cells[2].textContent === 'Berg-/Skihütte');
+  require(mountainHut?.cells[0].textContent === 'Wanderherberge' && mountainHut?.cells[1].textContent === 'Berg-/ Skihütten', 'Deskline und DAMAS je SaTourN-Kategorie');
+  require(document.documentElement.scrollWidth <= innerWidth, 'Kategorietabelle ohne Seitenüberlauf');
+  clickLink('a[href*="view=catalog"]', 'Katalog öffnen');
   require(root().querySelectorAll('tbody tr').length === 8, 'Alle Datensatzarten');
+  history.back();
+  await waitFor(() => root().querySelector('table.category-table'), 'Zurück zum Kategorie-Tab');
   clickLink('a[href*="view=guide"]', 'Geführten Einstieg öffnen');
   await typeInto('source', 'Reiten');
   if (document.querySelector('#filter-type')) {
@@ -50,6 +61,7 @@ try {
   await typeInto('source', 'unbekannt-987654321');
   require(text().includes('Keine Regel gefunden'), 'Keine erfundene Zuordnung');
   go({});
+  clickLink('a[href*="view=catalog"]', 'Datensatzkatalog öffnen');
   clickLink('a[href="./index.html?type=poi"]', 'POI öffnen');
   require(text().includes('307 verfügbare Felder') && text().includes('503 aktive Mappingregeln'), 'POI-Übersicht');
   require(!root().querySelector('.mapping-table'), 'Übersicht statt Mappingliste');

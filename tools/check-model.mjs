@@ -21,13 +21,40 @@ globalThis.fetch = async url => {
   return { ok: true, json: async () => JSON.parse(content), text: async () => content };
 };
 const data = await loadData();
-assert.deepEqual(fetched.sort(), ['./data/field-definitions.json', './data/mapping-hub-authoritative.json']);
+assert.deepEqual(fetched.sort(), ['./data/category-mappings.json', './data/field-definitions.json', './data/mapping-hub-authoritative.json']);
 const originalFields = parseCsv(await readFile(path.join(root, 'data/satourn-observed-fields.csv'), 'utf8'));
 assert.deepEqual(data.fields.map(({ group, ...field }) => field), buildFieldDefinitions(originalFields));
 assert.equal(data.fields.length, 1375);
 assert.equal(fieldsForType(data, 'poi').length, 307);
 assert.equal(data.rules.length, 916);
 assert.equal(rulesForType(data, 'poi').length, 503);
+
+const categories = render(data, {});
+for (const [type, source] of [
+  [undefined, 'Outdooractive'], ['tour', 'Outdooractive'], ['event', 'Outdooractive'],
+  ['poi', 'Outdooractive'], ['gastro', 'Outdooractive'],
+  ['accommodation', 'Deskline (Feratel)'], ['package', 'Deskline (Feratel)'],
+]) {
+  const view = render(data, { view: 'categories', type });
+  const columns = [...view.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map(match => match[1]);
+  assert.deepEqual(columns, [source, 'DAMAS', 'SaTourN', 'ODTA-Kategorie']);
+}
+assert.ok(categories.includes('<td>Wanderung</td><td>Naturerlebnispfad</td><th scope="row">Wandern</th><td><a href="https://odta.io/voc/HikingTrail">HikingTrail</a>'));
+assert.ok(categories.includes('<td>Ferienstraße</td><td>-</td><th scope="row">-</th><td>-</td>'));
+assert.ok(categories.includes('<td>Gravel Bike</td><td>-</td><th scope="row">-</th><td>-</td>'));
+const poiCategories = render(data, { view: 'categories', type: 'poi' });
+assert.ok(poiCategories.includes('<td>Bildungsstätte<br>Schule</td><td>-</td><th scope="row">Schulen</th><td>EducationalOrganization</td>'));
+assert.ok(poiCategories.includes('<td>Rastplatz</td><td>-</td><th scope="row">-</th><td>-</td>'));
+assert.ok(poiCategories.includes('Garten- &amp; Landschaftsbauer <small>(ID 6095359)</small>'));
+assert.ok(poiCategories.includes('Garten- &amp; Landschaftsbauer <small>(ID 6095361)</small>'));
+const gastroCategories = render(data, { view: 'categories', type: 'gastro' });
+assert.ok(gastroCategories.includes('<th scope="row">Brauereigaststätte</th><td>Brewery<br>FoodEstablishment</td>'));
+const accommodationCategories = render(data, { view: 'categories', type: 'accommodation' });
+assert.ok(accommodationCategories.includes('<td>Wanderherberge</td><td>Berg-/ Skihütten</td><th scope="row">Berg-/Skihütte</th><td><a href="https://odta.io/voc/MountainHut">MountainHut</a>'));
+assert.ok(accommodationCategories.includes('<th scope="row">Wohnmobilstellplatz</th><td>LodgingBusiness<br>CamperPark <small>(OdtaKind)</small></td>'));
+assert.ok(!accommodationCategories.includes('<td>Gruppenunterkunft</td>'));
+assert.ok(render(data, { view: 'categories', type: 'event' }).includes('<th scope="row">Ausflugsfahrt</th><td><a href="https://odta.io/voc/Excursion">Excursion</a></td>'));
+assert.ok(render(data, { view: 'categories', type: 'package' }).includes('<tbody></tbody>'));
 
 for (const [examples, expected] of [['true || false', 'boolean'], ['0 || 1', 'integer'], ['1 || -2.5', 'decimal'], ['1.2e3 || 2', 'double'], ['2024-02-29', 'date'], ['2023-02-29', 'string'], ['2026-10-01T12:30:00Z', 'dateTime'], ['https://example.org/', 'anyURI'], ['01234', 'string']]) {
   assert.equal(inferFieldType({ field: 'Example', examples }).datatype?.split('#')[1], expected);
