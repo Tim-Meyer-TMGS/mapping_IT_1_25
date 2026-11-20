@@ -44,16 +44,35 @@ function odtaCategories(row) {
 
 const categoryValues = values => values.map(esc).join('<br>') || '-';
 
+function mappingHeader(tabs, active, view) {
+  const sections = [['categories', 'Kategorien'], ['features', 'Merkmale']];
+  return `<header class="mapping-heading">
+    <h1>Zuordnungen</h1>
+    <p>Quellsystem → SaTourN${view === 'categories' ? ' → ODTA' : ''}</p>
+  </header>
+  <nav class="mapping-entries" aria-label="Mappingarten">${sections.map(([id, label]) => link(label, { type: active.id, view: id }, id === view ? 'aria-current="page"' : '')).join('')}</nav>
+  <nav class="section-nav category-nav" aria-label="Datensatzarten">${tabs.map(tab => link(tab.label, { view, type: tab.id }, tab === active ? 'aria-current="page"' : '')).join('')}</nav>`;
+}
+
 function categoryOverview(data, state) {
   const tabs = data.categoryTabs;
   const active = tabs.find(tab => tab.id === state.type) ?? tabs[0];
   const hasDeskline = ['accommodation', 'package'].includes(active.id);
   const sourceLabel = hasDeskline ? 'Deskline (Feratel)' : 'Outdooractive';
-  return `<header class="view-heading">
-    <div class="heading-row"><h1>Kategoriemappings</h1><nav class="category-tools" aria-label="Weitere Ansichten">${link('Zuordnung suchen', { view: 'guide' })}${link('Felder und Mappings', { view: 'catalog' })}</nav></div>
-  </header>
-  <nav class="section-nav" aria-label="Datensatzarten">${tabs.map(tab => link(tab.label, { view: 'categories', type: tab.id }, tab === active ? 'aria-current="page"' : '')).join('')}</nav>
-  <p class="result-count">ODTA- und schema.org-Werte aus den SaTourN-Kategoriebäumen. Ein „-“ steht für eine fehlende Zuordnung.</p>
+  const count = active.rows.length;
+  const importLinks = [
+    [rulesForType(data, active.id, 'routing'), 'routing', 'Routingregeln'],
+    [rulesForType(data, active.id, 'fallback').filter(rule => rule.source.dimension === 'category'), 'fallback', 'Fallbacks'],
+  ].filter(([rules]) => rules.length).map(([rules, view, label]) =>
+    link(`${label} (${rules.length})`, { type: active.id, view, ...(view === 'fallback' ? { dimension: 'category' } : {}) }));
+  const documentGaps = active.documentGaps ?? [];
+  return `${mappingHeader(tabs, active, 'categories')}
+  <div class="category-summary"><strong>${count} ${count === 1 ? 'Eintrag' : 'Einträge'}</strong><div class="category-tools">${importLinks.join('')}<span>„-“ steht für eine fehlende Zuordnung</span></div></div>
+  ${documentGaps.length ? `<details class="document-gaps"><summary>Dokumentierte Ziele außerhalb des Kategoriebaums (${documentGaps.length})</summary>
+     <ul>${documentGaps.map(entry => {
+       const rule = data.rulesById.get(entry.rule);
+       return `<li>${esc(systemLabel(data, rule.source.system))} · ${link(rule.source.value, withOrigin(ruleState(rule), state))} → ${esc(entry.target)}</li>`;
+     }).join('')}</ul></details>` : ''}
   <div class="table-scroll" role="region" aria-label="Kategoriemappings für ${esc(active.label)}" tabindex="0"><table class="category-table">
     <caption class="sr-only">Kategoriemappings für ${esc(active.label)}</caption>
     <thead><tr><th scope="col">${sourceLabel}</th><th scope="col">DAMAS</th><th scope="col">SaTourN</th><th scope="col">ODTA-Kategorie</th></tr></thead>
@@ -64,6 +83,43 @@ function categoryOverview(data, state) {
     }).join('')}</tbody>
   </table></div>
   ${active.rows.length ? '' : empty('Für diese Datensatzart sind keine Kategoriemappings dokumentiert.')}`;
+}
+
+function featureOverview(data, state) {
+  const tabs = data.categoryTabs;
+  const active = tabs.find(tab => tab.id === state.type) ?? tabs[0];
+  const xslt = data.featureTabs.find(tab => tab.id === active.id);
+  const existing = data.rules.filter(rule =>
+    rule.source?.datasetType === active.id && rule.source.dimension === 'feature' &&
+    rule.ruleKind === 'mapping' && data.fold(rule.source.value) !== 'barrierefrei');
+  const mappings = [
+    ...(xslt?.rows ?? []).map(row => ({
+      system: 'Outdooractive',
+      group: row.group ?? 'traits',
+      sources: row.sourceLabel ? [row.sourceLabel] : row.sources,
+      targets: row.targets.map(target => target.label),
+    })),
+    ...existing.map(rule => ({
+      system: rule.source.system === 'feratel' ? 'Deskline (Feratel)' : systemLabel(data, rule.source.system),
+      group: 'traits',
+      sources: [rule.source.value],
+      targets: rule.behavior === 'noImport' ? ['Kein Import'] : (rule.target?.values ?? []),
+    })),
+  ];
+  const rows = [...new Map(mappings.map(row => [JSON.stringify(row), row])).values()]
+    .sort((a, b) => naturalSort(a.sources[0], b.sources[0]));
+  const basis = rows.filter(row => row.group === 'basis');
+  const content = rows.filter(row => row.group === 'content');
+  const traits = rows.filter(row => row.group === 'traits');
+  const body = (items, label) => `<tbody>${label && items.length ? `<tr class="feature-group"><th scope="rowgroup" colspan="3">${label}</th></tr>` : ''}${items.map(row =>
+    `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${categoryValues(row.targets)}</td></tr>`).join('')}</tbody>`;
+  return `${mappingHeader(tabs, active, 'features')}
+  <div class="table-scroll" role="region" aria-label="Merkmalsmappings für ${esc(active.label)}" tabindex="0"><table class="category-table feature-table">
+    <caption class="sr-only">Merkmalsmappings für ${esc(active.label)}</caption>
+    <thead><tr><th scope="col">Quellsystem</th><th scope="col">Information im Quellsystem</th><th scope="col">Information in SaTourN</th></tr></thead>
+    ${basis.length ? body(basis, 'Basisdaten') : ''}${content.length ? body(content, 'Weitere Datenfelder') : ''}${body(traits, basis.length || content.length ? 'Merkmale' : '')}
+  </table></div>
+  ${rows.length ? '' : empty('Für diese Datensatzart sind keine Merkmalszuordnungen hinterlegt.')}`;
 }
 
 function catalogOverview(data) {
@@ -220,6 +276,7 @@ export function render(data, state) {
   if (state.view === 'guide') return guide(data, state);
   if (state.view === 'catalog') return catalogOverview(data);
   if (state.view === 'reference' && state.system === 'odta') return `${breadcrumbs([['ODTA', null]])}<h1>ODTA</h1><p>${link('ODTA-Kategorien in der Mappingübersicht', { view: 'categories' })}</p>`;
+  if (state.view === 'features') return featureOverview(data, state);
   if (state.view === 'categories' || !state.type) return categoryOverview(data, state);
   if (!data.datasetById.has(state.type)) return `${breadcrumbs([['Datensatzart', null]])}<h1>Datensatzart nicht gefunden</h1>${link('Zur Startseite', {})}`;
   if (state.term) return ruleDetail(data, state);

@@ -6,15 +6,15 @@ import path from 'node:path';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.argv[2] ?? 4173);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw Error('Ungültiger Port');
-const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml' };
+const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.ttf': 'font/ttf', '.txt': 'text/plain' };
 const server = createServer(async (request, response) => {
   if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405).end(); return; }
   try {
     const url = new URL(request.url, 'http://localhost');
     const pathname = decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname);
     // Serve only the public app, not sources, Git metadata or test datasets.
-    const allowed = /^\/[a-z-]+\.html$/.test(pathname) || /^\/assets\/(js|css)\/[\w.-]+$/.test(pathname)
-      || ['/data/category-mappings.json', '/data/field-definitions.json', '/data/mapping-hub-authoritative.json'].includes(pathname);
+    const allowed = /^\/[a-z-]+\.html$/.test(pathname) || /^\/assets\/(js|css|brand)\/[\w.-]+$/.test(pathname)
+      || ['/data/category-mappings.json', '/data/feature-mappings.json', '/data/field-definitions.json', '/data/mapping-hub-authoritative.json'].includes(pathname);
     if (!allowed) { response.writeHead(404).end('Nicht gefunden'); return; }
     const filename = path.resolve(root, '.' + pathname);
     if (!filename.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }

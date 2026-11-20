@@ -1,0 +1,47 @@
+{
+  "examples": [
+    {
+      "datasetType": "event",
+      "title": "Treibjagd im Dunkelwald",
+      "outdooractiveId": "813045836",
+      "satournId": "e_101398798",
+      "satournUrl": "https://meta.et4.de/rest.ashx/search/ET2014A.json/?experience=sachsen-tourismus&type=Event&q=globalid%3Ae_101398798&limit=1",
+      "rows": [
+        {"field": "Name", "outdooractive": "title", "satourn": "title"},
+        {"field": "Längengrad", "outdooractive": "point[0]", "satourn": "geo.main.longitude"},
+        {"field": "Breitengrad", "outdooractive": "point[1]", "satourn": "geo.main.latitude"},
+        {"field": "Postleitzahl", "outdooractive": "locationInfo.address.zipcode", "satourn": "zip"},
+        {"field": "Land", "outdooractive": "locationInfo.address.country", "satourn": "country"},
+        {"field": "Ort", "outdooractive": "locationInfo.address.town", "satourn": "city", "note": "SaTourN führt den Ortsnamen mit Zusatz."},
+        {"field": "Website", "outdooractive": "homepage", "satourn": "web"},
+        {"field": "Ticketlink", "outdooractive": "registrationInfo.ticketUrl", "satourn": "media_objects[rel=PRICE_KARTENLINK].url"},
+        {"field": "Beschreibung (HTML)", "outdooractive": "texts.long", "satourn": "texts[rel=details, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Kurzbeschreibung (HTML)", "outdooractive": "texts.short", "satourn": "texts[rel=teaser, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Veranstaltungsbeginn", "outdooractive": "nextDates[0].timeFrom", "satourn": "timeIntervals[0].start", "includeInBasis": true, "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."},
+        {"field": "Veranstaltungsende", "outdooractive": "nextDates[0].timeTo", "satourn": "timeIntervals[0].end", "includeInBasis": true, "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."}
+      ]
+    },
+    {
+      "datasetType": "gastro",
+      "title": "Test POI Gastro TMGS",
+      "outdooractiveId": "806500218",
+      "satournId": "g_100043901",
+      "note": "Straße, Ort und Postleitzahl weichen in den beiden Exporten ab. Zur Höhe und zu den Kontaktdaten ergibt sich aus diesem Paar keine Übereinstimmung.",
+      "rows": [
+        {"field": "Name", "outdooractive": "title", "satourn": "title"},
+        {"field": "Längengrad", "outdooractive": "point[0]", "satourn": "geo.main.longitude"},
+        {"field": "Breitengrad", "outdooractive": "point[1]", "satourn": "geo.main.latitude"},
+        {"field": "Land", "outdooractive": "contact.address.country", "satourn": "country"},
+        {"field": "Kategorie", "outdooractive": "category.title", "satourn": "categories[].value", "note": "In beiden Exporten Restaurant."},
+        {"field": "Beschreibung (HTML)", "outdooractive": "texts.long", "satourn": "texts[rel=details, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Kurzbeschreibung", "outdooractive": "texts.short", "satourn": "texts[rel=teaser].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Öffnungszeiten (Text)", "outdooractive": "texts.businessHours", "satourn": "texts[rel=openings].value"},
+        {"field": "Öffnungszeiten (Wochentage)", "outdooractive": "openTimes.weekdays[].times[]", "satourn": "timeIntervals[]", "includeInBasis": true, "note": "Täglich 18–22 Uhr in beiden Ausgaben. SaTourN verwendet wöchentliche Intervalle je Wochentag in Europe/Berlin."},
+        {"field": "Preisinformation (Text)", "outdooractive": "texts.fee", "satourn": "texts[rel=PRICE_INFO].value"},
+        {"field": "Eigenschaften als Stichworte", "outdooractive": "properties[].title", "satourn": "keywords[].value", "note": "70 Eigenschaftsbezeichnungen stimmen exakt mit Stichworten überein."},
+        {"field": "Ausgewählte Merkmale", "outdooractive": "properties[].title", "satourn": "features[].value", "note": "Klimaanlage, Selbstbedienung, Lieferservice und Barzahlung stehen in beiden Listen."},
+        {"field": "Küchenstile als Stichworte", "outdooractive": "classifications[name=internationalCuisine].tags[].title", "satourn": "keywords[].value", "note": "Alle 28 Bezeichnungen kommen als Stichworte vor. cuisineTypes enthält im Beispiel „sonstiges“."}
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ const FILES = {
   hub: './data/mapping-hub-authoritative.json',
   fields: './data/field-definitions.json',
   categories: './data/category-mappings.json',
+  features: './data/feature-mappings.json',
 };
 
 async function fetchJson(url) {
@@ -36,16 +37,19 @@ export function fold(value) {
 }
 
 export async function loadData() {
-  const [hub, fields, categories] = await Promise.all([
-    fetchJson(FILES.hub), fetchJson(FILES.fields), fetchJson(FILES.categories),
+  const [hub, fields, categories, features] = await Promise.all([
+    fetchJson(FILES.hub), fetchJson(FILES.fields), fetchJson(FILES.categories), fetchJson(FILES.features),
   ]);
-  const rules = hub.rules.filter((rule) => rule.status === 'active');
-  const systemsById = new Map(hub.systems.map((system) => [system.id, system]));
+  const allowedSources = new Set(['outdooractive', 'feratel', 'damas']);
+  const systems = hub.systems.filter(system => allowedSources.has(system.id) || ['satourn', 'odta'].includes(system.id));
+  const rules = hub.rules.filter(rule => rule.status === 'active' && allowedSources.has(rule.source?.system));
+  const systemsById = new Map(systems.map((system) => [system.id, system]));
   const datasetById = new Map(hub.datasetTypes.map((dataset) => [dataset.id, dataset]));
   const rulesByKind = new Map(['mapping', 'routing', 'fallback'].map((kind) => [kind, rules.filter((rule) => rule.ruleKind === kind)]));
   return enrichData({
-    meta: hub.meta, systems: hub.systems, datasetTypes: hub.datasetTypes, rules, fields,
+    meta: hub.meta, systems, datasetTypes: hub.datasetTypes, rules, fields,
     categoryTabs: categories.tabs,
+    featureTabs: features.tabs,
     systemsById, datasetById, rulesByKind, fold,
   });
 }

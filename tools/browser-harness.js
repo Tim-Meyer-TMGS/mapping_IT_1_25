@@ -35,19 +35,30 @@ try {
     return;
   }
   await waitFor(() => root().querySelector('table'), 'Startseite laden');
+  await waitFor(() => document.querySelector('.brand img')?.naturalWidth > 0, 'Originales SaTourN-Logo laden');
+  await document.fonts.ready;
+  require([...document.fonts].some(font => font.family === 'Spartan' && font.status === 'loaded'), 'Lokale Spartan-Schrift laden');
   require(root().querySelector('table.category-table') && text().includes('HikingTrail'), 'Kategoriemappings auf der Startseite');
   require(root().querySelectorAll('nav[aria-label="Datensatzarten"] a').length === 6, 'Sechs Datensatz-Tabs');
+  require(!root().querySelector('a[href*="view=guide"], a[href*="view=catalog"]'), 'Startseite zeigt die zwei Haupteinstiege');
+  clickLink('.mapping-entries a[href*="view=features"]', 'Merkmalsmappings öffnen');
+  require(root().querySelector('table.feature-table') && text().includes('Einkehrmöglichkeit'), 'XSLT-Merkmale mit deutschen Anzeigenamen');
+  require(text().includes('Basisdaten') && text().includes('Breitengrad') && !text().includes('geo:lat'), 'Basisdaten mit lesbaren Quellfeldern');
+  require(!text().includes('INFO_EINKEHRMOEGLICHKEIT') && !/barrierefrei/i.test(text()), 'Merkmalsansicht ohne Feldcodes und Barrierefreiheit');
+  require(!/XSLT-Quelle|JSON-Abgleich|Nur wenn|Quellwert übernehmen/.test(text()), 'Merkmalsansicht ohne technische Hinweise');
+  require(document.documentElement.scrollWidth <= innerWidth, 'Merkmalstabelle ohne Seitenüberlauf');
+  clickLink('.mapping-entries a[href*="view=categories"]', 'Zur Kategorieübersicht wechseln');
   clickLink('a[href*="type=accommodation"][href*="view=categories"]', 'Gastgeber-Tab öffnen');
   require(root().querySelector('nav[aria-label="Datensatzarten"] a[aria-current]')?.textContent === 'Gastgeber', 'Aktiven Tab markieren');
   require(root().querySelector('thead th')?.textContent === 'Deskline (Feratel)' && text().includes('ApartmentHotel'), 'Deskline als Quellsystem für Gastgeber');
   const mountainHut = [...root().querySelectorAll('tbody tr')].find(row => row.cells[2].textContent === 'Berg-/Skihütte');
   require(mountainHut?.cells[0].textContent === 'Wanderherberge' && mountainHut?.cells[1].textContent === 'Berg-/ Skihütten', 'Deskline und DAMAS je SaTourN-Kategorie');
   require(document.documentElement.scrollWidth <= innerWidth, 'Kategorietabelle ohne Seitenüberlauf');
-  clickLink('a[href*="view=catalog"]', 'Katalog öffnen');
+  go({ view: 'catalog' });
   require(root().querySelectorAll('tbody tr').length === 8, 'Alle Datensatzarten');
   history.back();
   await waitFor(() => root().querySelector('table.category-table'), 'Zurück zum Kategorie-Tab');
-  clickLink('a[href*="view=guide"]', 'Geführten Einstieg öffnen');
+  go({ view: 'guide' });
   await typeInto('source', 'Reiten');
   if (document.querySelector('#filter-type')) {
     document.querySelector('#filter-type').value = 'poi';
@@ -60,10 +71,9 @@ try {
   require(new URLSearchParams(location.search).get('view') === 'guide', 'Geführten Ursprung erhalten');
   await typeInto('source', 'unbekannt-987654321');
   require(text().includes('Keine Regel gefunden'), 'Keine erfundene Zuordnung');
-  go({});
-  clickLink('a[href*="view=catalog"]', 'Datensatzkatalog öffnen');
+  go({ view: 'catalog' });
   clickLink('a[href="./index.html?type=poi"]', 'POI öffnen');
-  require(text().includes('307 verfügbare Felder') && text().includes('503 aktive Mappingregeln'), 'POI-Übersicht');
+  require(text().includes('307 verfügbare Felder') && text().includes('361 aktive Mappingregeln'), 'POI-Übersicht');
   require(!root().querySelector('.mapping-table'), 'Übersicht statt Mappingliste');
   clickLink('.section-nav a[href*="view=fields"]', 'Datenfelder öffnen');
   require(root().querySelectorAll('.field-table tbody tr').length === 307, 'Alle POI-Felder');

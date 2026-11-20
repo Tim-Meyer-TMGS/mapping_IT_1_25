@@ -94,6 +94,12 @@ if ($desklineSheet[0].A -cne 'Deskline' -or $desklineSheet[0].B -cne 'GUID' -or 
     throw 'Unexpected columns in the Deskline workbook.'
 }
 $desklineRules = @($desklineSheet | Select-Object -Skip 1 | Where-Object { $_.A -and $_.C })
+$hubPath = Join-Path (Split-Path $PSScriptRoot) 'data/mapping-hub-authoritative.json'
+$hub = Get-Content -LiteralPath $hubPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$documentRules = @($hub.rules | Where-Object {
+    $_.status -eq 'active' -and $_.ruleKind -eq 'mapping' -and $_.behavior -eq 'map' -and
+    $_.source.dimension -eq 'category' -and $_.source.system -in 'outdooractive', 'damas', 'feratel'
+})
 
 $result = @(
     foreach ($id in $tabs.Keys) {
@@ -113,6 +119,33 @@ $result = @(
             }
         }
         $outdooractiveGaps = @()
+        $documentGaps = @()
+        $documentOutdooractive = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        foreach ($rule in ($documentRules | Where-Object { $_.target.datasetType -eq $id })) {
+            $system = $rule.source.system
+            if ($system -eq 'outdooractive' -and $id -in 'accommodation', 'package') { continue }
+            if ($system -eq 'feratel' -and $id -notin 'accommodation', 'package') { continue }
+            $source = $rule.source.value
+            foreach ($target in $rule.target.values) {
+                if ($categoryFiles.ContainsKey($id) -and !$treeNames.Contains($target)) {
+                    $documentGaps += [ordered]@{ rule = $rule.id; target = $target }
+                    continue
+                }
+                $row = Get-CategoryRow $categories $target
+                switch ($system) {
+                    'outdooractive' {
+                        if ($row.outdooractive -cnotcontains $source) { $row.outdooractive += $source }
+                        $null = $documentOutdooractive.Add($source)
+                    }
+                    'damas' {
+                        if ($row.damas -cnotcontains $source) { $row.damas += $source }
+                    }
+                    'feratel' {
+                        if ($row.deskline.label -cnotcontains $source) { $row.deskline += [ordered]@{ label = $source; guid = $null } }
+                    }
+                }
+            }
+        }
         if ($id -notin 'accommodation', 'package') {
             $missingRuleSources = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
             foreach ($rule in ($outdooractiveRules | Where-Object { $_.A -ceq $tabs[$id] })) {
@@ -124,7 +157,7 @@ $result = @(
                 if ($row.outdooractive -cnotcontains $rule.B) { $row.outdooractive += $rule.B }
             }
             $gapGroups = $outdooractiveCategories |
-                Where-Object { $_.A -ceq $tabs[$id] -and (!$_.F -or $missingRuleSources.Contains($_.C)) } |
+                Where-Object { $_.A -ceq $tabs[$id] -and ((!$_.F -and !$documentOutdooractive.Contains($_.C)) -or $missingRuleSources.Contains($_.C)) } |
                 Group-Object -CaseSensitive { $_.C }
             $outdooractiveGaps = @(
                 foreach ($group in $gapGroups) {
@@ -140,7 +173,10 @@ $result = @(
         if ($id -eq 'accommodation') {
             foreach ($rule in $desklineRules) {
                 $row = Get-CategoryRow $categories $rule.C.Trim()
-                $row.deskline += [ordered]@{ label = $rule.A.Trim(); guid = $rule.B }
+                $label = $rule.A.Trim()
+                $existing = $row.deskline | Where-Object { $_.label -ceq $label } | Select-Object -First 1
+                if ($existing) { $existing.guid = $rule.B }
+                else { $row.deskline += [ordered]@{ label = $label; guid = $rule.B } }
             }
         }
         if ($damasFiles.ContainsKey($id)) {
@@ -155,13 +191,14 @@ $result = @(
         }
         $rows = @($categories.Values | Sort-Object -Culture de-DE { $_.satourn })
         $rows += @($outdooractiveGaps | Sort-Object -Culture de-DE { $_.outdooractive[0] }, { $_.outdooractiveCategoryId })
-        [ordered]@{ id = $id; label = $tabs[$id]; rows = $rows }
+        [ordered]@{ id = $id; label = $tabs[$id]; documentGaps = $documentGaps; rows = $rows }
     }
 )
 
 $sources = [ordered]@{
     outdooractive = [IO.Path]::GetFileName($Workbook)
     deskline = $desklineFilename
+    document = 'Mappingübersicht Fremdsysteme.docx'
     damas = @($tabs.Keys | ForEach-Object { $damasFiles[$_] } | Where-Object { $_ })
     odta = @($tabs.Keys | ForEach-Object { $categoryFiles[$_] } | Where-Object { $_ })
 }

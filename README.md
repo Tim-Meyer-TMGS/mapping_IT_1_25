@@ -15,13 +15,20 @@ Die Skripte sind ausschließlich Entwicklungshilfen. Die veröffentlichte Seite 
 
 ## Navigation und Datenfelder
 
-Die Startseite zeigt die Kategoriemappings für Outdooractive, Deskline (Feratel),
+Die Startseite bietet die Einstiege **Kategorien** und **Merkmale**.
+Der aktuelle Datenfluss führt vom Quellsystem über SaTourN nach ODTA.
+Kategorien zeigt die Kategoriemappings für Outdooractive, Deskline (Feratel),
 DAMAS, SaTourN und ODTA in Tabs nach Datensatzart. `data/category-mappings.json` kombiniert die
 Outdooractive-Paare aus „Alle XML-Mappingregeln“ in
 `SaTourN_Outdooractive_Kategoriemapping_bidirektional.xlsx` mit den Attributen
 `schemaorg` und `OdtaKind` aus den fünf SaTourN-Kategoriebäumen (ODTA V2.1).
 Deskline stammt aus den vollständigen Quell-/Zielpaaren in `Feratel-Mapping.xlsx`.
 DAMAS stammt aus den `Foreign`-/`done`-Paaren der fünf DAMAS-XML-Dateien.
+Die dokumentierten Kategorienregeln für diese drei Quellsysteme ergänzen die
+Zuordnungen. Zusätzliche Ziele außerhalb der gelieferten Kategoriebäume
+bleiben als dokumentierte Fälle verlinkt. Bei Angeboten liefert die
+Mappingübersicht die Zielwerte. Routing und Kategorie-Fallbacks sind bei den
+betroffenen Datensatzarten verlinkt.
 Die Liste bündelt alle Quellwerte je Datensatzart und exaktem SaTourN-Kategorienamen.
 Outdooractive-Kategorien ohne belegtes Ziel aus „Alle Kategorien“ sowie
 XML-Regeln mit einem Ziel außerhalb des aktuellen SaTourN-Kategoriebaums
@@ -38,9 +45,28 @@ Das PowerShell-Skript erzeugt die Kategoriemappings aus den Quelldateien.
 .\tools\build-category-mappings.ps1 -Workbook 'Pfad\zur\Arbeitsmappe.xlsx' -CategoryDirectory 'Pfad\zu\ODTA V2.1' -AdditionalMappingDirectory 'Pfad\zu\Mapping'
 ```
 
-„Zuordnung suchen“ führt von Quellsystem und Quellwert zum dokumentierten Ziel.
-„Felder und Mappings“ öffnet den Katalog mit Feldanzahl, Mappinganzahl und Quellen
-je Datensatzart.
+Merkmale zeigt je Datensatzart die vorhandenen Merkmalsregeln aus dem Hub sowie
+die Outdooractive-Regeln aus `Tour.xslt`, `Veranstaltung.xslt`, `Poi.xslt` und
+`Gastro.xslt`. Die XSLT-Daten umfassen die aktiven Merkmalszweige und die direkten
+Übernahmen von `family_friendly`, `rest_stop` und `round_tour`. Die Merkmalsansicht
+verwendet die deutschen Anzeigenamen aus `Poi_Basis.xsd.xml` und
+`PoiMerkmalTree.xml`. Für Felder ohne Schema-Anzeigenamen verwendet sie
+Bezeichnungen aus der XSLT.
+Barrierefreiheitsregeln sind aus der Merkmalsansicht ausgeklammert.
+Unter „Basisdaten“ stehen dokumentierte Regeln für Name, Koordinaten, Adresse
+und Kontakt. „Weitere Datenfelder“ enthält weitere XSLT-Zuordnungen wie Texte,
+Preise, Öffnungszeiten, Buchungslinks und Tourdetails. Die Quellausdrücke
+und ihre Bedingungen stammen aus den
+Import-XSLT-Dateien. Die Tabelle zeigt die lesbaren Namen aus Quellsystem und
+SaTourN. Technische Ausdrücke und Bedingungen stehen im Datenbestand.
+Die JSON-Abgleiche einschließlich der beobachteten Termin- und
+Öffnungszeitenfelder stehen in `source/field-mapping-observations.json`.
+
+```powershell
+.\tools\build-feature-mappings.ps1 -XsltDirectory 'Pfad\zu\Mapping OA' -SchemaDirectory 'Pfad\zu\schema'
+```
+
+Die geführte Suche und der Feldkatalog sind über ihre direkten URLs verfügbar.
 Die geführte Suche erlaubt ein unbekanntes Quellsystem, schlägt ausschließlich
 dokumentierte Quellwerte vor und verlangt bei mehreren Datensatzarten eine Auswahl.
 Nur exakte Quellwerte bestätigen eine Regel; Teiltreffer dienen als Vorschläge.
@@ -52,6 +78,7 @@ Routing und Fallbacks sind zusätzliche Bereiche, sofern Regeln vorliegen.
 | URL-State | Ansicht |
 | --- | --- |
 | `?view=categories&type=poi` | Kategoriemappings im POI-Tab |
+| `?view=features&type=poi` | Merkmalsmappings im POI-Tab |
 | `?view=guide` | Geführte Quellwertsuche |
 | `?view=guide&system=outdooractive&source=Reiten` | Zuordnung anzeigen |
 | `?view=catalog` | Direkter Katalogeinstieg |
@@ -89,7 +116,8 @@ werden nicht ergänzt. Testwerte und Testvokabulare werden weder geladen noch
 angezeigt oder exportiert. Feldwerte stammen ausschließlich aus dokumentierten
 Mapping-Zielwerten; sie sind kein vollständiges offizielles Vokabular. Sprachen
 und Nutzungszahlen stehen als Metadaten zur Verfügung. Die Oberfläche lädt nur
-`data/field-definitions.json`, die Mappingdokumentation und die Kategoriemappings. Die ursprünglichen
+`data/field-definitions.json`, die Mappingdokumentation sowie die Kategorie-
+und Merkmalsmappings. Die ursprünglichen
 Testdateien bleiben für die lokale Ableitung erhalten. Die übermittelte ODTA-Spezifikation dient als Strukturvorlage,
 nicht als Nachweis einer SaTourN-zu-ODTA-Zuordnung.
 
@@ -108,9 +136,10 @@ Navigation, geführte Suche, Feld- und globale Suche, Mappingfilter, technische 
 Zurück/Vorwärts, alte Deep Links, Download und Seitenüberlauf. Es erzeugt
 Screenshots in einem ausgegebenen temporären Verzeichnis. Keine npm-Abhängigkeiten.
 
-`check-data.mjs` prüft den älteren Bestand mit 848 Regeln. Der produktiv geladene
-autoritative Bestand enthält 855 Mappings, 55 Routing- und 6 Fallbackregeln und
-wird von `check_authoritative_data.py` und `check-model.mjs` geprüft.
+`check-data.mjs` prüft den älteren Bestand mit 848 Regeln.
+`check_authoritative_data.py` prüft den vollständigen Quellenbestand.
+`check-model.mjs` prüft die im Hub sichtbaren 627 dokumentierten Mappings,
+55 Routingregeln und 3 Fallbacks für Outdooractive, Deskline und DAMAS.
 
 Fachliche Lücken: kein Feldkatalog für Touren/Angebote; teilweise unbekannte
 Zielfelder; keine belegten ODTA-Exportmappings; keine verbindlichen Pflichtangaben

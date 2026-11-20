@@ -12,11 +12,11 @@
   <header class="app-header">
     <div class="header-inner">
       <a class="brand" href="./index.html" data-nav aria-label="SaTourN Mapping Hub – Startseite">
-        <span><strong>SaTourN</strong><small>Mapping Hub</small></span>
+        <img src="./assets/brand/satourn-logo.svg" width="1780" height="600" alt="SaTourN – Sachsen Tourismus Netzwerk">
       </a>
       <form class="global-search" role="search" data-search-form>
-        <label class="sr-only" for="global-search">Datenfelder, Mappings und Feldwerte durchsuchen</label>
-        <input id="global-search" name="q" type="search" placeholder="Datenfeld, Wert oder Regel-ID suchen" autocomplete="off">
+        <label class="sr-only" for="global-search">Feld oder Zuordnung suchen</label>
+        <input id="global-search" name="q" type="search" placeholder="Feld oder Zuordnung suchen" autocomplete="off">
         <button type="submit">Suchen</button>
       </form>
     </div>
@@ -25,8 +25,10 @@
     <div class="loading" role="status">Mappingdaten werden geladen …</div>
   </main>
   <footer class="app-footer">
-    <span>SaTourN Mapping Hub</span>
-    <span data-data-stand></span>
+    <div class="footer-inner">
+      <span>SaTourN Mapping Hub</span>
+      <span data-data-stand></span>
+    </div>
   </footer>
   <script type="module" src="./assets/js/app.js"></script>
 </body>

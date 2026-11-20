@@ -21,13 +21,16 @@ globalThis.fetch = async url => {
   return { ok: true, json: async () => JSON.parse(content), text: async () => content };
 };
 const data = await loadData();
-assert.deepEqual(fetched.sort(), ['./data/category-mappings.json', './data/field-definitions.json', './data/mapping-hub-authoritative.json']);
+assert.deepEqual(fetched.sort(), ['./data/category-mappings.json', './data/feature-mappings.json', './data/field-definitions.json', './data/mapping-hub-authoritative.json']);
 const originalFields = parseCsv(await readFile(path.join(root, 'data/satourn-observed-fields.csv'), 'utf8'));
 assert.deepEqual(data.fields.map(({ group, ...field }) => field), buildFieldDefinitions(originalFields));
 assert.equal(data.fields.length, 1375);
 assert.equal(fieldsForType(data, 'poi').length, 307);
-assert.equal(data.rules.length, 916);
-assert.equal(rulesForType(data, 'poi').length, 503);
+assert.equal(data.rules.length, 685);
+assert.equal(rulesForType(data, 'poi').length, 361);
+assert.ok(data.rules.every(rule => ['outdooractive', 'feratel', 'damas'].includes(rule.source.system)));
+assert.equal(data.rulesByKind.get('routing').length, 55);
+assert.equal(data.rulesByKind.get('fallback').length, 3);
 
 const categories = render(data, {});
 for (const [type, source] of [
@@ -39,12 +42,15 @@ for (const [type, source] of [
   const columns = [...view.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map(match => match[1]);
   assert.deepEqual(columns, [source, 'DAMAS', 'SaTourN', 'ODTA-Kategorie']);
 }
-assert.ok(categories.includes('<td>Wanderung</td><td>Naturerlebnispfad</td><th scope="row">Wandern</th><td><a href="https://odta.io/voc/HikingTrail">HikingTrail</a>'));
-assert.ok(categories.includes('<td>Ferienstraße</td><td>-</td><th scope="row">-</th><td>-</td>'));
-assert.ok(categories.includes('<td>Gravel Bike</td><td>-</td><th scope="row">-</th><td>-</td>'));
+assert.ok(categories.includes('<td>Wanderung</td>') && categories.includes('Naturerlebnispfad') && categories.includes('HikingTrail'));
+assert.ok(categories.includes('<td>Ferienstraße<br>Themenweg</td>'));
+assert.ok(categories.includes('<td>Gravel Bike<br>Gravel-Bike</td><td>-</td><th scope="row">Gravel-Bike</th>'));
+assert.ok(!categories.includes('<td>Ferienstraße</td><td>-</td><th scope="row">-</th>'));
 const poiCategories = render(data, { view: 'categories', type: 'poi' });
-assert.ok(poiCategories.includes('<td>Bildungsstätte<br>Schule</td><td>-</td><th scope="row">Schulen</th><td>EducationalOrganization</td>'));
+assert.ok(poiCategories.includes('Bildungsstätte') && poiCategories.includes('<th scope="row">Schulen</th><td>EducationalOrganization</td>'));
+assert.ok(poiCategories.includes('<td>Museen</td><th scope="row">Museum/Sammlung</th>'));
 assert.ok(poiCategories.includes('<td>Rastplatz</td><td>-</td><th scope="row">-</th><td>-</td>'));
+assert.ok(poiCategories.includes('Dokumentierte Ziele außerhalb des Kategoriebaums'));
 assert.ok(poiCategories.includes('Garten- &amp; Landschaftsbauer <small>(ID 6095359)</small>'));
 assert.ok(poiCategories.includes('Garten- &amp; Landschaftsbauer <small>(ID 6095361)</small>'));
 const gastroCategories = render(data, { view: 'categories', type: 'gastro' });
@@ -54,7 +60,53 @@ assert.ok(accommodationCategories.includes('<td>Wanderherberge</td><td>Berg-/ Sk
 assert.ok(accommodationCategories.includes('<th scope="row">Wohnmobilstellplatz</th><td>LodgingBusiness<br>CamperPark <small>(OdtaKind)</small></td>'));
 assert.ok(!accommodationCategories.includes('<td>Gruppenunterkunft</td>'));
 assert.ok(render(data, { view: 'categories', type: 'event' }).includes('<th scope="row">Ausflugsfahrt</th><td><a href="https://odta.io/voc/Excursion">Excursion</a></td>'));
-assert.ok(render(data, { view: 'categories', type: 'package' }).includes('<tbody></tbody>'));
+const packageCategories = render(data, { view: 'categories', type: 'package' });
+assert.ok(packageCategories.includes('<td>Bestseller</td><td>-</td><th scope="row">Bestseller</th><td>-</td>'));
+assert.ok(packageCategories.includes('Fallbacks (2)') && accommodationCategories.includes('Routingregeln (26)'));
+
+const tourFeatures = render(data, { view: 'features', type: 'tour' });
+assert.ok(tourFeatures.includes('Basisdaten') && tourFeatures.includes('Einkehrmöglichkeit'));
+for (const label of ['Breitengrad', 'Längengrad', 'Streckenverlauf', 'Höhenmeter bergauf', 'Höhenmeter bergab', 'Minimale Höhe', 'Maximale Höhe']) {
+  assert.ok(tourFeatures.includes(`<th scope="row">${label}</th><td>${label}</td>`));
+}
+const tourFields = data.featureTabs.find(tab => tab.id === 'tour').rows;
+assert.ok(tourFields.some(row => row.sources.includes('georss:polygon') && row.targets.some(target => target.field === 'OBJECT_GEO_POLYGON')));
+for (const label of ['Weitere Datenfelder', 'Streckenlänge', 'Dauer', 'Startpunkt', 'Zielpunkt', 'Untergrund · Asphalt', 'Wegbeschreibung']) {
+  assert.ok(tourFeatures.includes(label));
+}
+assert.ok(!tourFields.some(row => row.sources.some(source => source.includes('elevationProfile'))));
+const poiFeatures = render(data, { view: 'features', type: 'poi' });
+for (const [source, target] of [['Name', 'Name (mehrsprachig)'], ['Breitengrad', 'Breitengrad'], ['Straße', 'Straße']]) {
+  assert.ok(poiFeatures.includes(`<th scope="row">${source}</th><td>${target}</td>`));
+}
+assert.ok(poiFeatures.includes('<th scope="row">Eintritt frei</th><td>Eintritt frei</td>'));
+assert.ok(poiFeatures.includes('Kein Import'));
+const eventFeatures = render(data, { view: 'features', type: 'event' });
+assert.ok(eventFeatures.includes('<th scope="row">Open Air</th><td>Open Air</td>'));
+assert.ok(eventFeatures.includes('<th scope="row">Ticketlink</th><td>Ticketlink</td>'));
+for (const label of ['Veranstaltungsbeginn', 'Veranstaltungsende']) {
+  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th><td>${label}</td>`));
+  assert.ok(!tourFeatures.includes(label));
+}
+const eventFields = data.featureTabs.find(tab => tab.id === 'event').rows;
+assert.deepEqual(eventFields.filter(row => row.evidence?.kind === 'json-observation').map(row => [row.sources[0], row.targets[0].field]), [
+  ['nextDates[0].timeFrom', 'timeIntervals[0].start'],
+  ['nextDates[0].timeTo', 'timeIntervals[0].end'],
+]);
+assert.ok(eventFeatures.includes('<th scope="row">Veranstaltungsort · Straße</th><td>Veranstaltungsort · Straße</td>'));
+assert.equal([...eventFeatures.matchAll(/<th scope="row">Veranstalter · Fax<\/th><td>Veranstalter · Fax<\/td>/g)].length, 1);
+const gastroFeatures = render(data, { view: 'features', type: 'gastro' });
+assert.ok(gastroFeatures.includes('<th scope="row">Merkmalsliste</th><td>Merkmal</td>'));
+for (const label of ['Öffnungszeiten (Text)', 'Öffnungszeiten (Wochentage)', 'Preisinformation', 'Küchenart', 'Sitzplätze innen']) {
+  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th><td>${label}</td>`));
+}
+const accommodationFeatures = render(data, { view: 'features', type: 'accommodation' });
+const packageFeatures = render(data, { view: 'features', type: 'package' });
+assert.ok(packageFeatures.includes('<tbody></tbody>'));
+for (const view of [tourFeatures, poiFeatures, eventFeatures, gastroFeatures, accommodationFeatures, packageFeatures]) {
+  assert.doesNotMatch(view, /barrierefrei|barrierfree|accessibility_|handicapped_access|rollstuhl|Quellwert.*übernehmen|Nur wenn|util:|XSLT-Quelle|JSON-Abgleich|<code>|title="/i);
+}
+for (const view of [categories, eventFeatures]) assert.doesNotMatch(view, /Zuordnung suchen|Felder und Mappings/);
 
 for (const [examples, expected] of [['true || false', 'boolean'], ['0 || 1', 'integer'], ['1 || -2.5', 'decimal'], ['1.2e3 || 2', 'double'], ['2024-02-29', 'date'], ['2023-02-29', 'string'], ['2026-10-01T12:30:00Z', 'dateTime'], ['https://example.org/', 'anyURI'], ['01234', 'string']]) {
   assert.equal(inferFieldType({ field: 'Example', examples }).datatype?.split('#')[1], expected);
@@ -64,7 +116,7 @@ assert.equal(inferFieldType({ field: 'Example', examples: 'true || 123' }).statu
 assert.equal(inferFieldType({ field: 'CONTACT_PHONE', examples: '123456' }).datatype?.split('#')[1], 'string');
 
 const overview = render(data, { type: 'poi' });
-assert.ok(overview.includes('307 verfügbare Felder') && overview.includes('503 aktive Mappingregeln'));
+assert.ok(overview.includes('307 verfügbare Felder') && overview.includes('361 aktive Mappingregeln'));
 assert.ok(!overview.includes('mapping-table') && !overview.includes('technical-details'));
 for (const [query, expected] of [['öffnung', 'OBJECT_OEFFNUNGSZEITEN'], ['price', 'PRICE_ADULT'], ['contact', 'OBJECT_CONTACT_EMAIL'], ['Kategorie', 'Kategorie']]) {
   assert.ok(fieldsForType(data, 'poi', { filter: query }).some(field => field.field === expected));
@@ -97,10 +149,8 @@ assert.ok(ambiguous);
 assert.ok(render(data, { view: 'guide', source: ambiguous.source.value }).includes('Datensatzart auswählen'));
 const multiple = data.rules.find(rule => rule.ruleKind === 'mapping' && rule.oneToMany);
 assert.ok(render(data, { view: 'guide', system: multiple.source.system, source: multiple.source.value, type: multiple.target?.datasetType ?? multiple.source.datasetType }).includes('Alle Zielwerte werden gesetzt'));
-for (const behavior of ['noImport', 'noTarget']) {
-  const special = data.rules.find(rule => rule.ruleKind === 'mapping' && rule.behavior === behavior);
-  assert.ok(render(data, { view: 'guide', system: special.source.system, source: special.source.value, type: special.target?.datasetType ?? special.source.datasetType }).includes(behavior === 'noImport' ? 'Nicht importieren' : 'Kein Zielwert'));
-}
+const noImport = data.rules.find(rule => rule.behavior === 'noImport');
+assert.ok(render(data, { view: 'guide', system: noImport.source.system, source: noImport.source.value, type: noImport.target.datasetType }).includes('Nicht importieren'));
 assert.ok(render(data, { type: 'poi', view: 'fields', field: 'Kategorie', valueFilter: 'Reiten', ruleFilter: 'Reiten' }).includes('Reiten'));
 const selection = { type: 'poi', view: 'mapping', system: 'outdooractive', source: 'Reiten', page: '2' };
 const ruleSelection = withOrigin({ type: 'poi', view: 'mapping', term: rule.id }, selection);
@@ -137,7 +187,7 @@ window.location.search = '';
 const spec = createSpecification(data);
 assert.equal(spec['@graph'].length, 8);
 assert.equal(spec['@graph'].reduce((n, node) => n + node['sh:property'].length, 0), data.fields.length);
-assert.equal(new Set(spec['@graph'].flatMap(node => node['hub:rules'].map(rule => rule.id))).size, 916);
+assert.equal(new Set(spec['@graph'].flatMap(node => node['hub:rules'].map(rule => rule.id))).size, data.rules.length);
 assert.ok(!JSON.stringify(spec).includes('"sh:datatype"') && !JSON.stringify(spec).includes('"sh:minCount"'));
 const sentinel = 'TEST_VALUE_MUST_NOT_APPEAR_987654321';
 const contaminated = enrichData({ ...data, fields: data.fields.map(field => ({ ...field, examples: sentinel })), vocabularies: [{ datasetType: 'poi', field: 'Kategorie', value: sentinel }] });
@@ -152,7 +202,7 @@ for (const entry of data.valueEntries) for (const id of entry.ruleIds) {
   assert.equal(fieldKey(rule.target.datasetType, rule.target.field), fieldKey(entry.type, entry.field));
   assert.ok(rule.target.values.includes(entry.value));
 }
-console.log('OK: 8 types, 1375 fields, 916 rules; overview, grouping, filters, global search, all deep links, export, no sample values.');
+console.log(`OK: 8 types, 1375 fields, ${data.rules.length} rules; overview, grouping, filters, global search, all deep links, export, no sample values.`);
 
 const browser = process.argv[2];
 if (browser) {
@@ -164,7 +214,7 @@ if (browser) {
       if (!filename.startsWith(root + path.sep)) { response.writeHead(403).end(); return; }
       let content = await readFile(filename);
       if (filename.endsWith('index.html')) content = content.toString().replace('</body>', `<script>globalThis.hubTestScenario = ${JSON.stringify(scenario)};</script><script type="module" src="./tools/browser-harness.js"></script></body>`);
-      const mime = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css' }[path.extname(filename)] ?? 'text/plain';
+      const mime = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.css': 'text/css', '.svg': 'image/svg+xml', '.ttf': 'font/ttf' }[path.extname(filename)] ?? 'text/plain';
       response.writeHead(200, { 'Content-Type': `${mime}; charset=utf-8` }); response.end(content);
     } catch { response.writeHead(404).end(); }
   });
