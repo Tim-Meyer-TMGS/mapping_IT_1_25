@@ -17,8 +17,8 @@
         {"field": "Ticketlink", "outdooractive": "registrationInfo.ticketUrl", "satourn": "media_objects[rel=PRICE_KARTENLINK].url"},
         {"field": "Beschreibung (HTML)", "outdooractive": "texts.long", "satourn": "texts[rel=details, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
         {"field": "Kurzbeschreibung (HTML)", "outdooractive": "texts.short", "satourn": "texts[rel=teaser, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
-        {"field": "Veranstaltungsbeginn", "outdooractive": "nextDates[0].timeFrom", "satourn": "timeIntervals[0].start", "includeInBasis": true, "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."},
-        {"field": "Veranstaltungsende", "outdooractive": "nextDates[0].timeTo", "satourn": "timeIntervals[0].end", "includeInBasis": true, "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."}
+        {"field": "Veranstaltungsbeginn", "outdooractive": "nextDates[0].timeFrom", "satourn": "timeIntervals[0].start", "includeInBasis": true, "editorPaths": ["Termine bearbeiten"], "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."},
+        {"field": "Veranstaltungsende", "outdooractive": "nextDates[0].timeTo", "satourn": "timeIntervals[0].end", "includeInBasis": true, "editorPaths": ["Termine bearbeiten"], "note": "Gleicher Zeitpunkt mit unterschiedlicher Zeitzonendarstellung."}
       ]
     },
     {

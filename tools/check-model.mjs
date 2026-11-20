@@ -103,15 +103,18 @@ assert.ok(poiFeatures.includes(fieldDescription('Detaillierte Beschreibung (HTML
 assert.ok(poiFeatures.includes(fieldDescription('Einleitung (HTML)', 'Informationen → Beschreibung (Sommer)')));
 assert.ok(poiFeatures.includes('Kein Import'));
 const eventFeatures = render(data, { view: 'features', type: 'event' });
+const eventContactTab = 'Veranstaltungsort/Veranstalter/Ansprechpartner';
 for (const [source, target, path] of [
   ['Open Air', 'Open Air', 'Informationen → Veranstaltungsdaten'],
   ['Ticketlink', 'Link zum Kartenverkauf', 'Preise → Allgemeine Informationen'],
-  ['Veranstaltungsort · Straße', 'Veranstaltungsort · Straße'],
+  ['Veranstaltungsort · Straße', 'Straße', `${eventContactTab} → Veranstaltungsort`],
+  ['Breitengrad', 'Latitude', `${eventContactTab} → Veranstaltungsort`],
+  ['Ansprechpartner · E-Mail', 'E-Mail', `${eventContactTab} → Ansprechpartner/Kontakt (optional)`],
 ]) {
   assert.ok(eventFeatures.includes(`<th scope="row">${source}</th>${fieldDescription(target, path)}`));
 }
 for (const label of ['Veranstaltungsbeginn', 'Veranstaltungsende']) {
-  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label)}`));
+  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label, 'Termine bearbeiten')}`));
   assert.ok(!tourFeatures.includes(label));
 }
 const eventFields = data.featureTabs.find(tab => tab.id === 'event').rows;
@@ -119,7 +122,7 @@ assert.deepEqual(eventFields.filter(row => row.evidence?.kind === 'json-observat
   ['nextDates[0].timeFrom', 'timeIntervals[0].start'],
   ['nextDates[0].timeTo', 'timeIntervals[0].end'],
 ]);
-assert.equal(eventFeatures.split(`<th scope="row">Veranstalter · Fax</th>${fieldDescription('Veranstalter · Fax')}`).length, 2);
+assert.equal(eventFeatures.split(`<th scope="row">Veranstalter · Fax</th>${fieldDescription('Telefax', `${eventContactTab} → Veranstalter (optional)`)}`).length, 2);
 const gastroFeatures = render(data, { view: 'features', type: 'gastro' });
 for (const [source, target, path] of [
   ['Merkmalsliste', 'Merkmal', 'Merkmale'],

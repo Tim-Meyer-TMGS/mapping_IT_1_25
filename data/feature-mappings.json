@@ -2901,7 +2901,10 @@
                                                           "field":  "timeIntervals[0].start",
                                                           "label":  "Veranstaltungsbeginn",
                                                           "displayLabel":  null,
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "paths":  [
+                                                                        "Termine bearbeiten"
+                                                                    ]
                                                       }
                                                   ],
                                       "evidence":  {
@@ -2921,7 +2924,10 @@
                                                           "field":  "timeIntervals[0].end",
                                                           "label":  "Veranstaltungsende",
                                                           "displayLabel":  null,
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "paths":  [
+                                                                        "Termine bearbeiten"
+                                                                    ]
                                                       }
                                                   ],
                                       "evidence":  {
@@ -2971,7 +2977,11 @@
                                                       {
                                                           "field":  "Longitude",
                                                           "label":  "Längengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Longitude",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "point[0]"
@@ -2986,7 +2996,11 @@
                                                       {
                                                           "field":  "Latitude",
                                                           "label":  "Breitengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Latitude",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "point[1]"
@@ -3212,7 +3226,11 @@
                                                       {
                                                           "field":  "VO_NAME",
                                                           "label":  "Veranstaltungsort · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Veranstaltungsortes",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "locationInfo.name"
@@ -3227,7 +3245,11 @@
                                                       {
                                                           "field":  "VO_TEL",
                                                           "label":  "Veranstaltungsort · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ]
                                   },
@@ -3241,7 +3263,11 @@
                                                       {
                                                           "field":  "VO_MOBIL",
                                                           "label":  "Veranstaltungsort · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:mobile"
@@ -3256,7 +3282,11 @@
                                                       {
                                                           "field":  "VO_MOBIL",
                                                           "label":  "Veranstaltungsort · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:mobile)) and (ec:phone2)"
@@ -3271,7 +3301,11 @@
                                                       {
                                                           "field":  "VO_FAX",
                                                           "label":  "Veranstaltungsort · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ]
                                   },
@@ -3285,7 +3319,11 @@
                                                       {
                                                           "field":  "VO_EMAIL",
                                                           "label":  "Veranstaltungsort · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:email != \u0027\u0027"
@@ -3300,7 +3338,11 @@
                                                       {
                                                           "field":  "VO_EMAIL",
                                                           "label":  "Veranstaltungsort · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:email != \u0027\u0027)"
@@ -3315,7 +3357,11 @@
                                                       {
                                                           "field":  "VO_LINK",
                                                           "label":  "Veranstaltungsort · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:link[@rel=\u0027venuewebsite\u0027]/@url != \u0027\u0027"
@@ -3330,7 +3376,11 @@
                                                       {
                                                           "field":  "VO_LINK",
                                                           "label":  "Veranstaltungsort · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:link[@rel=\u0027venuewebsite\u0027]/@url != \u0027\u0027)"
@@ -3390,7 +3440,11 @@
                                                       {
                                                           "field":  "VO_CITYID",
                                                           "label":  "Veranstaltungsort · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "$voCityId \u003e -1"
@@ -3405,7 +3459,11 @@
                                                       {
                                                           "field":  "VO_STREET",
                                                           "label":  "Veranstaltungsort · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ]
                                   },
@@ -3419,7 +3477,11 @@
                                                       {
                                                           "field":  "VO_DISTRICT",
                                                           "label":  "Veranstaltungsort · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ]
                                   },
@@ -3433,7 +3495,11 @@
                                                       {
                                                           "field":  "VO_LAT",
                                                           "label":  "Veranstaltungsort · Breitengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Latitude",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "point[1]"
@@ -3448,7 +3514,11 @@
                                                       {
                                                           "field":  "VO_LON",
                                                           "label":  "Veranstaltungsort · Längengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Longitude",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstaltungsort"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "point[0]"
@@ -3463,7 +3533,11 @@
                                                       {
                                                           "field":  "VA_NAME",
                                                           "label":  "Veranstalter · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Veranstalters",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "outdooractivePath":  "organizer.name",
@@ -3479,7 +3553,11 @@
                                                       {
                                                           "field":  "VA_NAME",
                                                           "label":  "Veranstalter · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Veranstalters",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and (not($organizer/name != \u0027\u0027))"
@@ -3494,7 +3572,11 @@
                                                       {
                                                           "field":  "VA_STREET",
                                                           "label":  "Veranstalter · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organizer\u0027]"
@@ -3509,7 +3591,11 @@
                                                       {
                                                           "field":  "VA_DISTRICT",
                                                           "label":  "Veranstalter · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organizer\u0027]"
@@ -3554,7 +3640,11 @@
                                                       {
                                                           "field":  "VA_CITYID",
                                                           "label":  "Veranstalter · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and ($vaCityId \u003e -1)"
@@ -3584,7 +3674,11 @@
                                                       {
                                                           "field":  "VA_TEL",
                                                           "label":  "Veranstalter · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organizer\u0027]"
@@ -3599,7 +3693,11 @@
                                                       {
                                                           "field":  "VA_MOBIL",
                                                           "label":  "Veranstalter · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and ($organizer/mobile)"
@@ -3614,7 +3712,11 @@
                                                       {
                                                           "field":  "VA_MOBIL",
                                                           "label":  "Veranstalter · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and (not($organizer/mobile)) and ($organizer/phone2)"
@@ -3629,7 +3731,11 @@
                                                       {
                                                           "field":  "VA_FAX",
                                                           "label":  "Veranstalter · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organizer\u0027]"
@@ -3644,7 +3750,11 @@
                                                       {
                                                           "field":  "VA_EMAIL",
                                                           "label":  "Veranstalter · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and ($organizer/email != \u0027\u0027)"
@@ -3659,7 +3769,11 @@
                                                       {
                                                           "field":  "VA_EMAIL",
                                                           "label":  "Veranstalter · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and (not($organizer/email != \u0027\u0027))"
@@ -3674,7 +3788,11 @@
                                                       {
                                                           "field":  "VA_LINK",
                                                           "label":  "Veranstalter · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organizer\u0027]) and (util:GetLanguage() = \u0027de-DE\u0027)"
@@ -3704,7 +3822,11 @@
                                                       {
                                                           "field":  "VA_NAME",
                                                           "label":  "Veranstalter · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Veranstalters",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and (ec:organizer_company != \u0027\u0027)"
@@ -3719,7 +3841,11 @@
                                                       {
                                                           "field":  "VA_NAME",
                                                           "label":  "Veranstalter · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Veranstalters",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and (not(ec:organizer_company != \u0027\u0027))"
@@ -3734,7 +3860,11 @@
                                                       {
                                                           "field":  "VA_STREET",
                                                           "label":  "Veranstalter · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])"
@@ -3749,7 +3879,11 @@
                                                       {
                                                           "field":  "VA_DISTRICT",
                                                           "label":  "Veranstalter · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])"
@@ -3794,7 +3928,11 @@
                                                       {
                                                           "field":  "VA_CITYID",
                                                           "label":  "Veranstalter · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and ($vaCityId \u003e -1)"
@@ -3824,7 +3962,11 @@
                                                       {
                                                           "field":  "VA_TEL",
                                                           "label":  "Veranstalter · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])"
@@ -3839,7 +3981,11 @@
                                                       {
                                                           "field":  "VA_MOBIL",
                                                           "label":  "Veranstalter · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and (ec:contact_mobile)"
@@ -3854,7 +4000,11 @@
                                                       {
                                                           "field":  "VA_MOBIL",
                                                           "label":  "Veranstalter · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and (not(ec:contact_mobile)) and (ec:contact_phone2)"
@@ -3869,7 +4019,11 @@
                                                       {
                                                           "field":  "VA_FAX",
                                                           "label":  "Veranstalter · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])"
@@ -3884,7 +4038,11 @@
                                                       {
                                                           "field":  "VA_EMAIL",
                                                           "label":  "Veranstalter · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])"
@@ -3899,7 +4057,11 @@
                                                       {
                                                           "field":  "VA_LINK",
                                                           "label":  "Veranstalter · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Veranstalter (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027organizer\u0027])) and (util:GetLanguage() = \u0027de-DE\u0027)"
@@ -3929,7 +4091,11 @@
                                                       {
                                                           "field":  "AP_NAME",
                                                           "label":  "Ansprechpartner · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Ansprechpartners",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -3959,7 +4125,11 @@
                                                       {
                                                           "field":  "AP_STREET",
                                                           "label":  "Ansprechpartner · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -3974,7 +4144,11 @@
                                                       {
                                                           "field":  "AP_DISTRICT",
                                                           "label":  "Ansprechpartner · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -4019,7 +4193,11 @@
                                                       {
                                                           "field":  "AP_CITYID",
                                                           "label":  "Ansprechpartner · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($apCityId \u003e -1)"
@@ -4049,7 +4227,11 @@
                                                       {
                                                           "field":  "AP_TEL",
                                                           "label":  "Ansprechpartner · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -4064,7 +4246,11 @@
                                                       {
                                                           "field":  "AP_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($contact_person/mobile)"
@@ -4079,7 +4265,11 @@
                                                       {
                                                           "field":  "AP_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (not($contact_person/mobile)) and ($contact_person/phone2)"
@@ -4094,7 +4284,11 @@
                                                       {
                                                           "field":  "AP_FAX",
                                                           "label":  "Ansprechpartner · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -4109,7 +4303,11 @@
                                                       {
                                                           "field":  "AP_EMAIL",
                                                           "label":  "Ansprechpartner · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($contact_person/email)"
@@ -4124,7 +4322,11 @@
                                                       {
                                                           "field":  "AP_EMAIL",
                                                           "label":  "Ansprechpartner · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (not($contact_person/email))"
@@ -4139,7 +4341,11 @@
                                                       {
                                                           "field":  "AP_LINK",
                                                           "label":  "Ansprechpartner · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (util:GetLanguage() = \u0027de-DE\u0027)"
@@ -4169,7 +4375,11 @@
                                                       {
                                                           "field":  "AP_NAME",
                                                           "label":  "Ansprechpartner · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name des Ansprechpartners",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4199,7 +4409,11 @@
                                                       {
                                                           "field":  "AP_STREET",
                                                           "label":  "Ansprechpartner · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4214,7 +4428,11 @@
                                                       {
                                                           "field":  "AP_DISTRICT",
                                                           "label":  "Ansprechpartner · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4259,7 +4477,11 @@
                                                       {
                                                           "field":  "AP_CITYID",
                                                           "label":  "Ansprechpartner · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and ($apCityId \u003e -1)"
@@ -4289,7 +4511,11 @@
                                                       {
                                                           "field":  "AP_TEL",
                                                           "label":  "Ansprechpartner · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4304,7 +4530,11 @@
                                                       {
                                                           "field":  "AP_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (ec:contact_mobile)"
@@ -4319,7 +4549,11 @@
                                                       {
                                                           "field":  "AP_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (not(ec:contact_mobile)) and (ec:contact_phone2)"
@@ -4334,7 +4568,11 @@
                                                       {
                                                           "field":  "AP_FAX",
                                                           "label":  "Ansprechpartner · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4349,7 +4587,11 @@
                                                       {
                                                           "field":  "AP_EMAIL",
                                                           "label":  "Ansprechpartner · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -4364,7 +4606,11 @@
                                                       {
                                                           "field":  "AP_LINK",
                                                           "label":  "Ansprechpartner · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite",
+                                                          "paths":  [
+                                                                        "Veranstaltungsort/Veranstalter/Ansprechpartner → Ansprechpartner/Kontakt (optional)"
+                                                                    ]
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (util:GetLanguage() = \u0027de-DE\u0027)"

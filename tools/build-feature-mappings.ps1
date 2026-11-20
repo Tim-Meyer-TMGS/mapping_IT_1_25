@@ -97,8 +97,27 @@ foreach ($type in $editorNames.Keys) {
     $editors[$type] = @{ fields = $definitions; byGroup = $byGroup; byName = $byName; valuePaths = $valuePaths }
 }
 
+$eventEditorFields = @{
+    Latitude = 'VO_OBJECT_CONTACT_LATITUDE'
+    Longitude = 'VO_OBJECT_CONTACT_LONGITUDE'
+    VO_LAT = 'VO_OBJECT_CONTACT_LATITUDE'
+    VO_LON = 'VO_OBJECT_CONTACT_LONGITUDE'
+}
+# Outdooractive's event import and the editor use different field names for the
+# same contact roles. Link only fields with a matching meaning in both sources.
+$eventContactFields = @{
+    NAME = 'NAME'; STREET = 'STRASSE'; DISTRICT = 'ORTSTEIL'; CITYID = 'ORTID'
+    TEL = 'TEL'; MOBIL = 'MOBIL'; FAX = 'FAX'; EMAIL = 'EMAIL'; LINK = 'WEBSEITE1'
+}
+foreach ($role in 'VO', 'VA', 'AP') {
+    foreach ($name in $eventContactFields.Keys) {
+        $eventEditorFields["${role}_$name"] = "${role}_OBJECT_CONTACT_$($eventContactFields[$name])"
+    }
+}
+
 function Add-EditorLocation($target, $type, $field, $featureValue) {
     $editor = $editors[$type]
+    if ($type -eq 'event' -and $eventEditorFields[$field]) { $field = $eventEditorFields[$field] }
     $definition = $editor.fields[$field]
     if ($definition -and !$definition.hidden -and $definition.label) { $target.displayLabel = $definition.label }
     $paths = if ($definition -and !$definition.hidden -and $definition.group -and $editor.byGroup[$definition.group]) {
@@ -322,16 +341,18 @@ $tabs = @(
             foreach ($example in ($observations.examples | Where-Object datasetType -eq $type)) {
                 foreach ($observation in ($example.rows | Where-Object { ($_.includeInBasis -or $_.displayGroup) -and $_.satourn })) {
                     $editorField = if ($observation.editorField) { $observation.editorField } else { $observation.satourn }
+                    $target = [ordered]@{
+                        field = $observation.satourn
+                        label = if ($observation.satournLabel) { $observation.satournLabel } else { $observation.field }
+                        displayLabel = $observation.satournLabel
+                        value = $null
+                    }
+                    if ($observation.editorPaths) { $target.paths = @($observation.editorPaths) }
                     [ordered]@{
                         group = if ($observation.displayGroup) { $observation.displayGroup } else { 'basis' }
                         sources = @($observation.outdooractive)
                         sourceLabel = $observation.field
-                        targets = @(Add-EditorLocation ([ordered]@{
-                            field = $observation.satourn
-                            label = if ($observation.satournLabel) { $observation.satournLabel } else { $observation.field }
-                            displayLabel = $observation.satournLabel
-                            value = $null
-                        }) $type $editorField $observation.satournLabel)
+                        targets = @(Add-EditorLocation $target $type $editorField $observation.satournLabel)
                         evidence = [ordered]@{ kind = 'json-observation'; outdooractiveId = $example.outdooractiveId; satournId = $example.satournId }
                     }
                 }

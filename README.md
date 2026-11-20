@@ -65,6 +65,8 @@ SaTourN-Anzeigenamen oder Feldbeschreibungen. Technische Ausdrücke
 und Bedingungen stehen im Datenbestand.
 Die JSON-Abgleiche einschließlich der beobachteten Termin- und
 Öffnungszeitenfelder stehen in `source/field-mapping-observations.json`.
+Veranstaltungsbeginn und -ende werden über den Menüpunkt „Termine bearbeiten“
+gepflegt. Siehe [one.data-Hilfe zur Veranstaltungspflege](https://help.destination.one/portal/de/kb/articles/destination-data-veranstaltungen-pflegen).
 
 ```powershell
 .\tools\build-feature-mappings.ps1 -XsltDirectory 'Pfad\zu\Mapping OA' -SchemaDirectory 'Pfad\zu\schema' -EditorDirectory 'Pfad\zu\SaTourN-Bearbeitungsmasken'
