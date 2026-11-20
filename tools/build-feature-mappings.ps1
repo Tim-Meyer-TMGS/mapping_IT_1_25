@@ -1,6 +1,7 @@
 ﻿param(
     [Parameter(Mandatory)][string]$XsltDirectory,
-    [Parameter(Mandatory)][string]$SchemaDirectory
+    [Parameter(Mandatory)][string]$SchemaDirectory,
+    [Parameter(Mandatory)][string]$EditorDirectory
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,9 +11,15 @@ $stylesheets = [ordered]@{
     poi = 'Poi.xslt'
     gastro = 'Gastro.xslt'
 }
+$editorNames = [ordered]@{
+    tour = 'Tour'; event = 'Veranstaltung'; poi = 'Poi'; gastro = 'Gastro'
+    accommodation = 'Vermieter'; package = 'GlobalePauschale'
+}
 $xsl = 'http://www.w3.org/1999/XSL/Transform'
 $root = Split-Path $PSScriptRoot
 $observations = Get-Content -LiteralPath (Join-Path $root 'source/field-mapping-observations.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$documentedFeatures = (Get-Content -LiteralPath (Join-Path $root 'data/mapping-hub-authoritative.json') -Raw -Encoding UTF8 | ConvertFrom-Json).rules |
+    Where-Object { $_.source.dimension -eq 'feature' -and $_.ruleKind -eq 'mapping' }
 
 function Read-Xml($path) {
     [xml]([IO.File]::ReadAllText((Resolve-Path -LiteralPath $path).Path).TrimStart())
@@ -35,6 +42,71 @@ foreach ($example in $observations.examples) {
     foreach ($entry in $example.satournFieldLabels) {
         $verifiedLabels[$example.datasetType][$entry.field] = $entry.label
     }
+}
+
+# The import and editor stylesheets have the same filenames but different roles.
+# Only sections linked from the editor's tab bar participate in field locations.
+$editors = @{}
+foreach ($type in $editorNames.Keys) {
+    $name = $editorNames[$type]
+    $layout = Read-Xml (Join-Path $EditorDirectory "$name.xslt")
+    $captions = @{}
+    foreach ($link in $layout.SelectNodes('//*[@id="tabs"]/ul//a[@href] | //h3/a[@id]')) {
+        $caption = $link.SelectSingleNode('./*[local-name()="value-of"]/@select').Value
+        if ($caption -cmatch "^methods:Translate\('([^']+)'\)$") {
+            $key = if ($link.GetAttribute('href') -eq '#') { $link.id -creplace '_link$', '_content' } else { $link.href.TrimStart('#') }
+            $captions[$key] = $Matches[1]
+        }
+    }
+    $byName = @{}
+    $byGroup = @{}
+    foreach ($select in $layout.SelectNodes('//*[@id="tabs"]//*/@select')) {
+        $tab = $select.OwnerElement.SelectSingleNode('ancestor::div[contains(concat(" ",normalize-space(@class)," ")," tab ")][1]')
+        if (!$tab -or !$captions[$tab.id]) { continue }
+        $section = $select.OwnerElement.SelectSingleNode('ancestor::div[@id and contains(@id,"_content")][1]')
+        $path = $captions[$tab.id]
+        if ($section -and $captions[$section.id] -and $captions[$section.id] -ne $path) { $path += " → $($captions[$section.id])" }
+        foreach ($reference in [regex]::Matches($select.Value, "BinderElement\[(Name|Group)='([^']+)'\]")) {
+            $index = if ($reference.Groups[1].Value -eq 'Name') { $byName } else { $byGroup }
+            $field = $reference.Groups[2].Value
+            $index[$field] = @($index[$field] | Where-Object { $_ }) + @($path) | Select-Object -Unique
+        }
+    }
+    $definitions = @{}
+    foreach ($suffix in '_Basis.xsd', '.xsd') {
+        $editorSchema = Read-Xml (Join-Path $EditorDirectory "$name$suffix")
+        foreach ($element in $editorSchema.SelectNodes('//*[local-name()="element" and @name]')) {
+            $params = $element.GetNamespaceOfPrefix('params')
+            if (!$params) { continue }
+            $field = $element.GetAttribute('name')
+            $group = $element.GetAttribute('Group', $params)
+            $label = $element.GetAttribute('DisplayName', $params).Trim()
+            $hidden = $element.GetAttribute('Hidden', $params) -eq 'true'
+            if ($group -or $label -or $hidden) { $definitions[$field] = @{ label = $label; group = $group; hidden = $hidden } }
+        }
+    }
+    $valuePaths = @{}
+    $tree = Read-Xml (Join-Path $EditorDirectory "${name}MerkmalTree.xml")
+    foreach ($feature in $tree.SelectNodes('//Category[not(Category)]')) {
+        $label = $feature.SelectSingleNode('DisplayName[@*[name()="xml:lang" and .="de-DE"]]').InnerText
+        $field = $feature.GetAttribute('InternalName')
+        if (!$field) { $field = $feature.GetAttribute('Name') }
+        if ($field -and $label -and $verifiedLabels.ContainsKey($type) -and !$verifiedLabels[$type][$field]) { $verifiedLabels[$type][$field] = $label.Trim() }
+        if ($label -and $byName['Merkmal']) { $valuePaths[$label.Trim()] = @($byName['Merkmal']) }
+    }
+    $editors[$type] = @{ fields = $definitions; byGroup = $byGroup; byName = $byName; valuePaths = $valuePaths }
+}
+
+function Add-EditorLocation($target, $type, $field, $featureValue) {
+    $editor = $editors[$type]
+    $definition = $editor.fields[$field]
+    if ($definition -and !$definition.hidden -and $definition.label) { $target.displayLabel = $definition.label }
+    $paths = if ($definition -and !$definition.hidden -and $definition.group -and $editor.byGroup[$definition.group]) {
+        $editor.byGroup[$definition.group]
+    } else { $editor.byName[$field] }
+    if (!$paths -and $featureValue) { $paths = $editor.valuePaths[$featureValue] }
+    if ($paths) { $target.paths = @($paths) }
+    $target
 }
 
 $fallbackLabels = @{
@@ -192,7 +264,7 @@ function Get-SourceLabel($source, $target) {
     throw "Missing source label for $source."
 }
 
-function Get-Targets($elements, $copyValue, $schemaNamespace, $displayLabels, $sourceLabel) {
+function Get-Targets($elements, $copyValue, $schemaNamespace, $type, $sourceLabel) {
     foreach ($element in $elements) {
         $field = $element.LocalName
         if ($field -match '^(ACCESSIBILITY_|DETAILS_BARRIERFREE$|INFO_BARRIEREFREI$|OBJECT_HANDICAPPED_ACCESS$)') { continue }
@@ -202,9 +274,9 @@ function Get-Targets($elements, $copyValue, $schemaNamespace, $displayLabels, $s
         if (!$label) { $label = $fallbackLabels[$field] }
         if (!$label) { $label = if ($sourceLabel) { $sourceLabel } else { $field } }
         $target = [ordered]@{ field = $field; label = $label; value = if ($copyValue) { $null } else { $element.InnerText.Trim() } }
-        if ($displayLabels[$field]) { $target.displayLabel = $displayLabels[$field] }
+        if ($verifiedLabels[$type][$field]) { $target.displayLabel = $verifiedLabels[$type][$field] }
         if ($element.NamespaceURI -and $element.NamespaceURI -cne $schemaNamespace) { $target.namespace = $element.NamespaceURI }
-        $target
+        Add-EditorLocation $target $type $field
     }
 }
 
@@ -228,7 +300,18 @@ function Get-BasisConditions($value, $ns) {
 }
 
 $tabs = @(
-    foreach ($type in $stylesheets.Keys) {
+    foreach ($type in $editorNames.Keys) {
+        $editor = $editors[$type]
+        $categoryField = if ($type -eq 'gastro') { 'Betriebsart' } else { 'Kategorie' }
+        $categoryPaths = @($editor.byName[$categoryField] | Where-Object { $_ })
+        $valuePaths = [ordered]@{}
+        foreach ($value in ($documentedFeatures | Where-Object { $_.target.datasetType -eq $type } | ForEach-Object { $_.target.values } | Sort-Object -Unique)) {
+            if ($editor.valuePaths.Keys -ccontains $value) { $valuePaths[$value] = $editor.valuePaths[$value] }
+        }
+        if (!$stylesheets.Contains($type)) {
+            [ordered]@{ id = $type; rows = @(); categoryPaths = $categoryPaths; valuePaths = $valuePaths }
+            continue
+        }
         $file = $stylesheets[$type]
         $xml = Read-Xml (Join-Path $XsltDirectory $file)
         $ns = [System.Xml.XmlNamespaceManager]::new($xml.NameTable)
@@ -238,16 +321,17 @@ $tabs = @(
         $rows = @(
             foreach ($example in ($observations.examples | Where-Object datasetType -eq $type)) {
                 foreach ($observation in ($example.rows | Where-Object { ($_.includeInBasis -or $_.displayGroup) -and $_.satourn })) {
+                    $editorField = if ($observation.editorField) { $observation.editorField } else { $observation.satourn }
                     [ordered]@{
                         group = if ($observation.displayGroup) { $observation.displayGroup } else { 'basis' }
                         sources = @($observation.outdooractive)
                         sourceLabel = $observation.field
-                        targets = @([ordered]@{
+                        targets = @(Add-EditorLocation ([ordered]@{
                             field = $observation.satourn
                             label = if ($observation.satournLabel) { $observation.satournLabel } else { $observation.field }
                             displayLabel = $observation.satournLabel
                             value = $null
-                        })
+                        }) $type $editorField $observation.satournLabel)
                         evidence = [ordered]@{ kind = 'json-observation'; outdooractiveId = $example.outdooractiveId; satournId = $example.satournId }
                     }
                 }
@@ -267,7 +351,7 @@ $tabs = @(
                         group = if ($isBasis) { 'basis' } else { 'content' }
                         sources = @($select)
                         sourceLabel = if ($isBasis) { Get-SourceLabel $select $fieldName } else { Get-ContentSourceLabel $select $fieldName }
-                        targets = @(Get-Targets $field $true $schemaNamespace $verifiedLabels[$type])
+                        targets = @(Get-Targets $field $true $schemaNamespace $type)
                     }
                     $context = $value.SelectSingleNode('ancestor::xsl:for-each[1]', $ns)
                     if ($context) { $row.context = $context.GetAttribute('select') }
@@ -285,7 +369,7 @@ $tabs = @(
                     $test = $rule.GetAttribute('test')
                     if ($test -cnotmatch "^\.\s*=\s*'[^']+'(?:\s+or\s+\.\s*=\s*'[^']+')*$") { throw "Unsupported feature rule in ${file}: $test" }
                     $values = @([regex]::Matches($test, "'([^']+)'") | ForEach-Object { $_.Groups[1].Value })
-                    $targets = @(Get-Targets $rule.SelectNodes('./*[namespace-uri() != "http://www.w3.org/1999/XSL/Transform"]', $ns) $false $schemaNamespace $verifiedLabels[$type] $values[0])
+                    $targets = @(Get-Targets $rule.SelectNodes('./*[namespace-uri() != "http://www.w3.org/1999/XSL/Transform"]', $ns) $false $schemaNamespace $type $values[0])
                     if (!$targets.Count) { continue }
                     $row = [ordered]@{
                         sources = $values
@@ -296,16 +380,16 @@ $tabs = @(
                 }
                 foreach ($field in $loop.SelectNodes('./*[xsl:value-of/@select = "."]', $ns)) {
                     $source = 'ec:features/ec:feature'
-                    [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $field $true $schemaNamespace $verifiedLabels[$type]) }
+                    [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $field $true $schemaNamespace $type) }
                 }
             }
             $directFields = '//xsl:value-of[@select="ec:family_friendly" or @select="ec:rest_stop" or @select="ec:round_tour"]'
             foreach ($value in $xml.SelectNodes($directFields, $ns)) {
                 $source = $value.GetAttribute('select')
-                [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $value.ParentNode $true $schemaNamespace $verifiedLabels[$type]) }
+                [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $value.ParentNode $true $schemaNamespace $type) }
             }
         )
-        [ordered]@{ id = $type; file = $file; rows = $rows }
+        [ordered]@{ id = $type; file = $file; rows = $rows; categoryPaths = $categoryPaths; valuePaths = $valuePaths }
     }
 )
 

@@ -33,14 +33,14 @@ assert.equal(data.rulesByKind.get('routing').length, 55);
 assert.equal(data.rulesByKind.get('fallback').length, 3);
 
 const categories = render(data, {});
-for (const [type, source] of [
-  [undefined, 'Outdooractive'], ['tour', 'Outdooractive'], ['event', 'Outdooractive'],
-  ['poi', 'Outdooractive'], ['gastro', 'Outdooractive'],
-  ['accommodation', 'Deskline (Feratel)'], ['package', 'Deskline (Feratel)'],
+for (const [type, source, categoryPath] of [
+  [undefined, 'Outdooractive', 'Kategorien'], ['tour', 'Outdooractive', 'Kategorien'], ['event', 'Outdooractive', 'Kategorien'],
+  ['poi', 'Outdooractive', 'Kategorien'], ['gastro', 'Outdooractive', 'Betriebsarten'],
+  ['accommodation', 'Deskline (Feratel)', 'Betriebsart'], ['package', 'Deskline (Feratel)', 'Kategorisierung'],
 ]) {
   const view = render(data, { view: 'categories', type });
-  const columns = [...view.matchAll(/<th scope="col">([^<]+)<\/th>/g)].map(match => match[1]);
-  assert.deepEqual(columns, [source, 'DAMAS', 'SaTourN', 'ODTA-Kategorie']);
+  const columns = [...view.matchAll(/<th scope="col">(.*?)<\/th>/g)].map(match => match[1]);
+  assert.deepEqual(columns, [source, 'DAMAS', `SaTourN<small class="editor-path">${categoryPath}</small>`, 'ODTA-Kategorie']);
 }
 assert.ok(categories.includes('<td>Wanderung</td>') && categories.includes('Naturerlebnispfad') && categories.includes('HikingTrail'));
 assert.ok(categories.includes('<td>Ferienstraße<br>Themenweg</td>'));
@@ -66,34 +66,49 @@ assert.ok(packageCategories.includes('Fallbacks (2)') && accommodationCategories
 
 const tourFeatures = render(data, { view: 'features', type: 'tour' });
 assert.ok(tourFeatures.includes('Basisdaten') && tourFeatures.includes('Einkehrmöglichkeit'));
-const fieldDescription = label => `<td>${label}</td>`;
+const fieldDescription = (label, path) => `<td><div class="feature-target">${label}${path ? `<small class="editor-path">${path}</small>` : ''}</div></td>`;
 assert.doesNotMatch(tourFeatures, /†|Der genaue SaTourN-Anzeigename ist offen/);
-for (const label of ['Breitengrad', 'Längengrad', 'Streckenverlauf', 'Höhenmeter bergauf', 'Höhenmeter bergab', 'Minimale Höhe', 'Maximale Höhe']) {
-  assert.ok(tourFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label)}`));
+for (const [source, target, path] of [
+  ['Breitengrad', 'Latitude', 'Tourenverlauf → Touren-Editor'],
+  ['Längengrad', 'Longitude', 'Tourenverlauf → Touren-Editor'],
+  ['Streckenverlauf', 'Streckenverlauf', 'Tourenverlauf → Touren-Editor'],
+  ['Höhenmeter bergauf', 'Höhenmeter', 'Tour-Info → Strecke'],
+  ['Höhenmeter bergab', 'Höhenmeter absteigend', 'Tour-Info → Strecke'],
+  ['Minimale Höhe', 'tiefster Punkt', 'Tour-Info → Strecke'],
+  ['Maximale Höhe', 'höchster Punkt', 'Tour-Info → Strecke'],
+  ['Startpunkt', 'Ausgangspunkt', 'Tour-Info → Start/Ziel'],
+]) {
+  assert.ok(tourFeatures.includes(`<th scope="row">${source}</th>${fieldDescription(target, path)}`));
 }
 const tourFields = data.featureTabs.find(tab => tab.id === 'tour').rows;
 assert.ok(tourFields.some(row => row.sources.includes('georss:polygon') && row.targets.some(target => target.field === 'OBJECT_GEO_POLYGON')));
 assert.ok(tourFields.some(row => row.evidence?.satournId === 't_100298605' && row.sources.includes('geoJson.coordinates[]') && row.targets[0].field === 'geo.geometry.value'));
-assert.ok(tourFeatures.includes('<th scope="row">Rundtour</th><td>Rundweg</td>'));
-assert.ok(tourFeatures.includes('<th scope="row">hundefreundlich</th><td>Tour mit Hund</td>'));
+assert.ok(tourFeatures.includes(`<th scope="row">Rundtour</th>${fieldDescription('Rundweg', 'Tour-Info → Toureigenschaften')}`));
+assert.ok(tourFeatures.includes(`<th scope="row">hundefreundlich</th>${fieldDescription('Tour mit Hund', 'Tour-Info → Toureigenschaften')}`));
 for (const label of ['Kinderwagentauglich', 'Gipfel', 'Kulturell interessant', 'Einkehrmöglichkeit']) {
-  assert.ok(tourFeatures.includes(`<td>${label}</td>`));
+  assert.ok(tourFeatures.includes(`<div class="feature-target">${label}<`));
 }
 for (const label of ['Weitere Datenfelder', 'Streckenlänge', 'Dauer', 'Startpunkt', 'Zielpunkt', 'Untergrund · Asphalt', 'Wegbeschreibung']) {
   assert.ok(tourFeatures.includes(label));
 }
 assert.ok(!tourFields.some(row => row.sources.some(source => source.includes('elevationProfile'))));
 const poiFeatures = render(data, { view: 'features', type: 'poi' });
-for (const [source, target] of [['Name', 'Bezeichnung *'], ['Breitengrad', 'Latitude'], ['Straße', 'Straße']]) {
-  assert.ok(poiFeatures.includes(`<th scope="row">${source}</th><td>${target}</td>`));
+for (const [source, target, path] of [
+  ['Name', 'Bezeichnung *', 'Kontakt → Kontaktdaten'], ['Breitengrad', 'Latitude', 'Lage → Geo-Informationen'],
+  ['Straße', 'Straße', 'Kontakt → Kontaktdaten'], ['Eintritt frei', 'Eintritt frei', 'Preise → Allgemeine Informationen'],
+]) {
+  assert.ok(poiFeatures.includes(`<th scope="row">${source}</th>${fieldDescription(target, path)}`));
 }
-assert.ok(poiFeatures.includes('<th scope="row">Eintritt frei</th><td>Eintritt frei</td>'));
-assert.ok(poiFeatures.includes('<td>Detaillierte Beschreibung (HTML)</td>'));
-assert.ok(poiFeatures.includes('<td>Einleitung (HTML)</td>'));
+assert.ok(poiFeatures.includes(fieldDescription('Detaillierte Beschreibung (HTML)', 'Informationen → Beschreibung (Sommer)')));
+assert.ok(poiFeatures.includes(fieldDescription('Einleitung (HTML)', 'Informationen → Beschreibung (Sommer)')));
 assert.ok(poiFeatures.includes('Kein Import'));
 const eventFeatures = render(data, { view: 'features', type: 'event' });
-for (const label of ['Open Air', 'Ticketlink', 'Veranstaltungsort · Straße']) {
-  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label)}`));
+for (const [source, target, path] of [
+  ['Open Air', 'Open Air', 'Informationen → Veranstaltungsdaten'],
+  ['Ticketlink', 'Link zum Kartenverkauf', 'Preise → Allgemeine Informationen'],
+  ['Veranstaltungsort · Straße', 'Veranstaltungsort · Straße'],
+]) {
+  assert.ok(eventFeatures.includes(`<th scope="row">${source}</th>${fieldDescription(target, path)}`));
 }
 for (const label of ['Veranstaltungsbeginn', 'Veranstaltungsende']) {
   assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label)}`));
@@ -106,14 +121,22 @@ assert.deepEqual(eventFields.filter(row => row.evidence?.kind === 'json-observat
 ]);
 assert.equal(eventFeatures.split(`<th scope="row">Veranstalter · Fax</th>${fieldDescription('Veranstalter · Fax')}`).length, 2);
 const gastroFeatures = render(data, { view: 'features', type: 'gastro' });
-assert.ok(gastroFeatures.includes(`<th scope="row">Merkmalsliste</th>${fieldDescription('Merkmal')}`));
-for (const label of ['Öffnungszeiten (Text)', 'Öffnungszeiten (Wochentage)', 'Preisinformation', 'Küchenart', 'Sitzplätze innen']) {
-  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label)}`));
+for (const [source, target, path] of [
+  ['Merkmalsliste', 'Merkmal', 'Merkmale'],
+  ['Öffnungszeiten (Text)', 'Öffnungs-/Betriebszeiten', 'Informationen → Öffnungszeiten'],
+  ['Öffnungszeiten (Wochentage)', 'Öffnungszeiten (Wochentage)'],
+  ['Preisinformation', 'Allgemeine Preisinformationen', 'Preise → Allgemeine Informationen'],
+  ['Küchenart', 'Küchenart', 'Küchenarten'],
+  ['Sitzplätze innen', 'Sitzplätze (Innen gesamt)', 'Informationen → Sitzplätze / Räume'],
+  ['Barzahlung', 'Barzahlung', 'Preise → Zahlungs-Möglichkeiten'],
+]) {
+  assert.ok(gastroFeatures.includes(`<th scope="row">${source}</th>${fieldDescription(target, path)}`));
 }
-for (const label of ['Klimaanlage', 'Selbstbedienung', 'Lieferservice', 'Barzahlung']) {
-  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th><td>${label}</td>`));
+for (const label of ['Klimaanlage', 'Selbstbedienung', 'Lieferservice']) {
+  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th>${fieldDescription(label, 'Merkmale')}`));
 }
 const accommodationFeatures = render(data, { view: 'features', type: 'accommodation' });
+assert.ok(accommodationFeatures.includes(fieldDescription('Auswahl von Lebensmitteln/Getränken in zertifizierter Bio-Qualität', 'Merkmale')));
 const packageFeatures = render(data, { view: 'features', type: 'package' });
 assert.ok(packageFeatures.includes('<tbody></tbody>'));
 for (const view of [tourFeatures, poiFeatures, eventFeatures, gastroFeatures, accommodationFeatures, packageFeatures]) {

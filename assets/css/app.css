@@ -112,6 +112,9 @@ table a { display: inline-block; padding: .12rem 0; }
 .feature-table thead th:first-child { width: 18%; }
 .feature-table thead th:nth-child(2) { width: 36%; }
 .feature-table tbody .feature-group th { background: var(--soft); border-top: 1px solid var(--line); color: var(--brand-dark); font-weight: 800; }
+.editor-path { display: block; margin-top: .14rem; color: var(--muted); font-size: .82em; font-weight: 500; }
+.category-table thead .editor-path { color: var(--surface); }
+.feature-target + .feature-target { margin-top: .4rem; }
 .document-gaps { margin-bottom: .65rem; color: var(--muted); font-size: .875rem; }
 .document-gaps summary { padding: .3rem 0; }
 .mapping-table { min-width: 730px; table-layout: fixed; font-size: .875rem; }

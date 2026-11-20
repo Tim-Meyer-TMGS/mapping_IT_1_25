@@ -49,9 +49,10 @@ Merkmale zeigt je Datensatzart die vorhandenen Merkmalsregeln aus dem Hub sowie
 die Outdooractive-Regeln aus `Tour.xslt`, `Veranstaltung.xslt`, `Poi.xslt` und
 `Gastro.xslt`. Die XSLT-Daten umfassen die aktiven Merkmalszweige und die direkten
 Übernahmen von `family_friendly`, `rest_stop` und `round_tour`. Die Merkmalsansicht
-verwendet die SaTourN-Anzeigenamen aus `Poi_Basis.xsd.xml` und
-`PoiMerkmalTree.xml` für POI sowie die belegten Merkmalsnamen aus den
-JSON-Abgleichen der jeweiligen Datensatzart. Ist der genaue Anzeigename offen,
+verwendet die SaTourN-Anzeigenamen aus den Sachsen-Schemata, den Merkmalbäumen
+und den JSON-Abgleichen der jeweiligen Datensatzart. Unter dem Zielfeld steht
+der belegte Pfad aus der Bearbeitungsmaske. In Kategorien steht der Reiter im
+SaTourN-Spaltenkopf. Ist der genaue Anzeigename offen,
 steht die Beschreibung des zugeordneten Felds in der Tabelle.
 Ein Bindestrich steht für eine fehlende Zuordnung.
 Barrierefreiheitsregeln sind aus der Merkmalsansicht ausgeklammert.
@@ -66,8 +67,15 @@ Die JSON-Abgleiche einschließlich der beobachteten Termin- und
 Öffnungszeitenfelder stehen in `source/field-mapping-observations.json`.
 
 ```powershell
-.\tools\build-feature-mappings.ps1 -XsltDirectory 'Pfad\zu\Mapping OA' -SchemaDirectory 'Pfad\zu\schema'
+.\tools\build-feature-mappings.ps1 -XsltDirectory 'Pfad\zu\Mapping OA' -SchemaDirectory 'Pfad\zu\schema' -EditorDirectory 'Pfad\zu\SaTourN-Bearbeitungsmasken'
 ```
+
+Das Editor-Verzeichnis enthält je Datensatzart die Bearbeitungsmaske (`.xslt`),
+das Haupt- und Basisschema (`.xsd`, `_Basis.xsd`) sowie den Merkmalbaum
+(`MerkmalTree.xml`). Die Dateinamen beginnen mit `Tour`, `Veranstaltung`, `Poi`,
+`Gastro`, `Vermieter` oder `GlobalePauschale`. Die Sachsen-Schemata stehen in der
+[SaTourN-Dokumentation](https://sachsen.tourismusnetzwerk.info/digitales/digitalarchitektur/satourn-dokumentation/datenausgabe/sachsen-spezifische-parameter/).
+Die Bearbeitungsmasken stehen unter `https://data.destination.one/Templates/eTouristV4/<Name>/Sachsen-Tourismus/<Name>.xslt`.
 
 Die geführte Suche und der Feldkatalog sind über ihre direkten URLs verfügbar.
 Die geführte Suche erlaubt ein unbekanntes Quellsystem, schlägt ausschließlich

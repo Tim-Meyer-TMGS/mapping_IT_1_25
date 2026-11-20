@@ -43,6 +43,7 @@ function odtaCategories(row) {
 }
 
 const categoryValues = values => values.map(esc).join('<br>') || '-';
+const editorPaths = (paths = []) => paths.map(path => `<small class="editor-path">${esc(path)}</small>`).join('');
 
 function mappingHeader(tabs, active, view) {
   const sections = [['categories', 'Kategorien'], ['features', 'Merkmale']];
@@ -57,6 +58,7 @@ function mappingHeader(tabs, active, view) {
 function categoryOverview(data, state) {
   const tabs = data.categoryTabs;
   const active = tabs.find(tab => tab.id === state.type) ?? tabs[0];
+  const categoryPaths = data.featureTabs.find(tab => tab.id === active.id)?.categoryPaths;
   const hasDeskline = ['accommodation', 'package'].includes(active.id);
   const sourceLabel = hasDeskline ? 'Deskline (Feratel)' : 'Outdooractive';
   const count = active.rows.length;
@@ -75,7 +77,7 @@ function categoryOverview(data, state) {
      }).join('')}</ul></details>` : ''}
   <div class="table-scroll" role="region" aria-label="Kategoriemappings für ${esc(active.label)}" tabindex="0"><table class="category-table">
     <caption class="sr-only">Kategoriemappings für ${esc(active.label)}</caption>
-    <thead><tr><th scope="col">${sourceLabel}</th><th scope="col">DAMAS</th><th scope="col">SaTourN</th><th scope="col">ODTA-Kategorie</th></tr></thead>
+    <thead><tr><th scope="col">${sourceLabel}</th><th scope="col">DAMAS</th><th scope="col">SaTourN${editorPaths(categoryPaths)}</th><th scope="col">ODTA-Kategorie</th></tr></thead>
     <tbody>${active.rows.map(row => {
       const sourceValues = hasDeskline ? row.deskline.map(entry => entry.label) : row.outdooractive;
       const sourceId = row.outdooractiveCategoryId ? ` <small>(ID ${esc(row.outdooractiveCategoryId)})</small>` : '';
@@ -88,22 +90,23 @@ function categoryOverview(data, state) {
 function featureOverview(data, state) {
   const tabs = data.categoryTabs;
   const active = tabs.find(tab => tab.id === state.type) ?? tabs[0];
-  const xslt = data.featureTabs.find(tab => tab.id === active.id);
+  const featureTab = data.featureTabs.find(tab => tab.id === active.id);
   const existing = data.rules.filter(rule =>
     rule.source?.datasetType === active.id && rule.source.dimension === 'feature' &&
     rule.ruleKind === 'mapping' && data.fold(rule.source.value) !== 'barrierefrei');
   const mappings = [
-    ...(xslt?.rows ?? []).map(row => ({
+    ...(featureTab?.rows ?? []).map(row => ({
       system: 'Outdooractive',
       group: row.group ?? 'traits',
       sources: row.sourceLabel ? [row.sourceLabel] : row.sources,
-      targets: row.targets.map(target => target.displayLabel ?? target.label),
+      targets: row.targets.map(target => ({ label: target.displayLabel ?? target.label, paths: target.paths ?? [] })),
     })),
     ...existing.map(rule => ({
       system: rule.source.system === 'feratel' ? 'Deskline (Feratel)' : systemLabel(data, rule.source.system),
       group: 'traits',
       sources: [rule.source.value],
-      targets: rule.behavior === 'noImport' ? ['Kein Import'] : (rule.target?.values ?? []),
+      targets: rule.behavior === 'noImport' ? [{ label: 'Kein Import', paths: [] }] :
+        (rule.target?.values ?? []).map(label => ({ label, paths: featureTab?.valuePaths?.[label] ?? [] })),
     })),
   ];
   const rows = [...new Map(mappings.map(row => [JSON.stringify(row), row])).values()]
@@ -112,7 +115,8 @@ function featureOverview(data, state) {
   const content = rows.filter(row => row.group === 'content');
   const traits = rows.filter(row => row.group === 'traits');
   const body = (items, label) => `<tbody>${label && items.length ? `<tr class="feature-group"><th scope="rowgroup" colspan="3">${label}</th></tr>` : ''}${items.map(row =>
-    `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${categoryValues(row.targets)}</td></tr>`).join('')}</tbody>`;
+    `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${row.targets.map(target =>
+      `<div class="feature-target">${esc(target.label)}${editorPaths(target.paths)}</div>`).join('') || '-'}</td></tr>`).join('')}</tbody>`;
   return `${mappingHeader(tabs, active, 'features')}
   <div class="table-scroll" role="region" aria-label="Merkmalsmappings für ${esc(active.label)}" tabindex="0"><table class="category-table feature-table">
     <caption class="sr-only">Merkmalsmappings für ${esc(active.label)}</caption>
