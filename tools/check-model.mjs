@@ -66,8 +66,10 @@ assert.ok(packageCategories.includes('Fallbacks (2)') && accommodationCategories
 
 const tourFeatures = render(data, { view: 'features', type: 'tour' });
 assert.ok(tourFeatures.includes('Basisdaten') && tourFeatures.includes('Einkehrmöglichkeit'));
+const descriptiveTarget = label => `<td>${label} <sup>†</sup></td>`;
+assert.ok(tourFeatures.includes('Der genaue SaTourN-Anzeigename ist offen.'));
 for (const label of ['Breitengrad', 'Längengrad', 'Streckenverlauf', 'Höhenmeter bergauf', 'Höhenmeter bergab', 'Minimale Höhe', 'Maximale Höhe']) {
-  assert.ok(tourFeatures.includes(`<th scope="row">${label}</th><td>-</td>`));
+  assert.ok(tourFeatures.includes(`<th scope="row">${label}</th>${descriptiveTarget(label)}`));
 }
 const tourFields = data.featureTabs.find(tab => tab.id === 'tour').rows;
 assert.ok(tourFields.some(row => row.sources.includes('georss:polygon') && row.targets.some(target => target.field === 'OBJECT_GEO_POLYGON')));
@@ -90,10 +92,11 @@ assert.ok(poiFeatures.includes('<td>Detaillierte Beschreibung (HTML)</td>'));
 assert.ok(poiFeatures.includes('<td>Einleitung (HTML)</td>'));
 assert.ok(poiFeatures.includes('Kein Import'));
 const eventFeatures = render(data, { view: 'features', type: 'event' });
-assert.ok(eventFeatures.includes('<th scope="row">Open Air</th><td>-</td>'));
-assert.ok(eventFeatures.includes('<th scope="row">Ticketlink</th><td>-</td>'));
+for (const label of ['Open Air', 'Ticketlink', 'Veranstaltungsort · Straße']) {
+  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${descriptiveTarget(label)}`));
+}
 for (const label of ['Veranstaltungsbeginn', 'Veranstaltungsende']) {
-  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th><td>-</td>`));
+  assert.ok(eventFeatures.includes(`<th scope="row">${label}</th>${descriptiveTarget(label)}`));
   assert.ok(!tourFeatures.includes(label));
 }
 const eventFields = data.featureTabs.find(tab => tab.id === 'event').rows;
@@ -101,12 +104,11 @@ assert.deepEqual(eventFields.filter(row => row.evidence?.kind === 'json-observat
   ['nextDates[0].timeFrom', 'timeIntervals[0].start'],
   ['nextDates[0].timeTo', 'timeIntervals[0].end'],
 ]);
-assert.ok(eventFeatures.includes('<th scope="row">Veranstaltungsort · Straße</th><td>-</td>'));
-assert.equal([...eventFeatures.matchAll(/<th scope="row">Veranstalter · Fax<\/th><td>-<\/td>/g)].length, 1);
+assert.equal(eventFeatures.split(`<th scope="row">Veranstalter · Fax</th>${descriptiveTarget('Veranstalter · Fax')}`).length, 2);
 const gastroFeatures = render(data, { view: 'features', type: 'gastro' });
-assert.ok(gastroFeatures.includes('<th scope="row">Merkmalsliste</th><td>-</td>'));
+assert.ok(gastroFeatures.includes(`<th scope="row">Merkmalsliste</th>${descriptiveTarget('Merkmal')}`));
 for (const label of ['Öffnungszeiten (Text)', 'Öffnungszeiten (Wochentage)', 'Preisinformation', 'Küchenart', 'Sitzplätze innen']) {
-  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th><td>-</td>`));
+  assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th>${descriptiveTarget(label)}`));
 }
 for (const label of ['Klimaanlage', 'Selbstbedienung', 'Lieferservice', 'Barzahlung']) {
   assert.ok(gastroFeatures.includes(`<th scope="row">${label}</th><td>${label}</td>`));
