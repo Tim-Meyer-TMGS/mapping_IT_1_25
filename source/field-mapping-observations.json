@@ -26,6 +26,9 @@
       "title": "Test POI Gastro TMGS",
       "outdooractiveId": "806500218",
       "satournId": "g_100043901",
+      "satournFieldLabels": [
+        {"field": "PRICE_PAYMENT_BAR", "label": "Barzahlung"}
+      ],
       "note": "Straße, Ort und Postleitzahl weichen in den beiden Exporten ab. Zur Höhe und zu den Kontaktdaten ergibt sich aus diesem Paar keine Übereinstimmung.",
       "rows": [
         {"field": "Name", "outdooractive": "title", "satourn": "title"},
@@ -40,7 +43,62 @@
         {"field": "Preisinformation (Text)", "outdooractive": "texts.fee", "satourn": "texts[rel=PRICE_INFO].value"},
         {"field": "Eigenschaften als Stichworte", "outdooractive": "properties[].title", "satourn": "keywords[].value", "note": "70 Eigenschaftsbezeichnungen stimmen exakt mit Stichworten überein."},
         {"field": "Ausgewählte Merkmale", "outdooractive": "properties[].title", "satourn": "features[].value", "note": "Klimaanlage, Selbstbedienung, Lieferservice und Barzahlung stehen in beiden Listen."},
+        {"field": "Klimaanlage", "outdooractive": "properties[title=Klimaanlage].title", "satourn": "features[value=Klimaanlage].value", "satournLabel": "Klimaanlage", "displayGroup": "traits"},
+        {"field": "Selbstbedienung", "outdooractive": "properties[title=Selbstbedienung].title", "satourn": "features[value=Selbstbedienung].value", "satournLabel": "Selbstbedienung", "displayGroup": "traits"},
+        {"field": "Lieferservice", "outdooractive": "properties[title=Lieferservice].title", "satourn": "features[value=Lieferservice].value", "satournLabel": "Lieferservice", "displayGroup": "traits"},
+        {"field": "Barzahlung", "outdooractive": "properties[title=Barzahlung].title", "satourn": "features[value=Barzahlung].value", "satournLabel": "Barzahlung"},
         {"field": "Küchenstile als Stichworte", "outdooractive": "classifications[name=internationalCuisine].tags[].title", "satourn": "keywords[].value", "note": "Alle 28 Bezeichnungen kommen als Stichworte vor. cuisineTypes enthält im Beispiel „sonstiges“."}
+      ]
+    },
+    {
+      "datasetType": "tour",
+      "title": "Tourtest 806476828",
+      "outdooractiveId": "806476828",
+      "satournId": "t_100298605",
+      "satournFieldLabels": [
+        {"field": "OBJECT_FIT_KINDERWAGEN", "label": "Kinderwagentauglich"},
+        {"field": "OBJECT_GIPFEL", "label": "Gipfel"},
+        {"field": "INFO_KULTURELL", "label": "Kulturell interessant"},
+        {"field": "INFO_EINKEHRMOEGLICHKEIT", "label": "Einkehrmöglichkeit"},
+        {"field": "INFO_RUNDWEG", "label": "Rundweg"},
+        {"field": "INFO_TOUR_HUND", "label": "Tour mit Hund"}
+      ],
+      "rows": [
+        {"field": "Name", "outdooractive": "title", "satourn": "title"},
+        {"field": "Längengrad", "outdooractive": "point[0]", "satourn": "geo.main.longitude"},
+        {"field": "Breitengrad", "outdooractive": "point[1]", "satourn": "geo.main.latitude"},
+        {"field": "Kategorie", "outdooractive": "category.title", "satourn": "categories[].value", "note": "Wanderung entspricht im Beispiel Wandern."},
+        {"field": "Streckenverlauf", "outdooractive": "geoJson.coordinates[]", "satourn": "geo.geometry.value", "includeInBasis": true, "note": "Alle 708 Punkte stimmen in derselben Reihenfolge auf fünf Dezimalstellen überein. SaTourN gibt Breitengrad und Längengrad als Textfolge aus."},
+        {"field": "Höhe je Streckenpunkt", "outdooractive": "geoJson.coordinates[][2]", "satourn": null, "note": "Outdooractive liefert 708 Höhenwerte. Der entsprechende SaTourN-Streckenverlauf enthält nur Breiten- und Längengrade."},
+        {"field": "Höhenprofil", "outdooractive": "metrics.elevation.elevationProfile", "satourn": null, "note": "Ein Feld für den Höhenprofil-Link ist im SaTourN-JSON dieses Beispiels unbelegt."},
+        {"field": "Höhenmeter bergauf", "outdooractive": "metrics.elevation.ascent", "satourn": "totalAscent"},
+        {"field": "Höhenmeter bergab", "outdooractive": "metrics.elevation.descent", "satourn": "totalDescent"},
+        {"field": "Minimale Höhe", "outdooractive": "metrics.elevation.minAltitude", "satourn": "elevationMin"},
+        {"field": "Maximale Höhe", "outdooractive": "metrics.elevation.maxAltitude", "satourn": "elevationMax"},
+        {"field": "Dauer", "outdooractive": "metrics.duration.minimal", "satourn": "duration", "note": "210 Minuten entsprechen 12.600 Sekunden."},
+        {"field": "Streckenlänge", "outdooractive": "metrics.length", "satourn": "length", "note": "Die Werte weichen um einen Meter ab. Die Ursache ist im Beispiel unbelegt."},
+        {"field": "Rundtour", "outdooractive": "properties[name=loopTour]", "satourn": "roundTrip", "satournLabel": "Rundweg", "includeInBasis": true, "note": "Outdooractive enthält das Merkmal Rundtour. In SaTourN ist Rundweg aktiv."},
+        {"field": "Gipfel-Tour", "outdooractive": "properties[name=mountainTopTour].title", "satourn": "features[value=Gipfel].value", "satournLabel": "Gipfel"},
+        {"field": "kulturell / historisch", "outdooractive": "properties[name=culture].title", "satourn": "features[value=Kulturell interessant].value", "satournLabel": "Kulturell interessant"},
+        {"field": "kinderwagengerecht", "outdooractive": "properties[name=suitableforperambulators].title", "satourn": "features[value=Kinderwagentauglich].value", "satournLabel": "Kinderwagentauglich"},
+        {"field": "Einkehrmöglichkeit", "outdooractive": "properties[name=dining].title", "satourn": "features[value=Einkehrmöglichkeit].value", "satournLabel": "Einkehrmöglichkeit"},
+        {"field": "hundefreundlich", "outdooractive": "properties[name=dogFriendly].title", "satourn": "features[value=Tour mit Hund].value", "satournLabel": "Tour mit Hund", "displayGroup": "traits"},
+        {"field": "Wegbeschaffenheit", "outdooractive": "wayTypeInfo.elements[].type", "satourn": "geo.attributes[].classification", "note": "34 von 39 Klassifikationen sind an derselben Position identisch. An den übrigen fünf Positionen steht in Outdooractive way und in SaTourN trail."},
+        {"field": "Geeignete Monate", "outdooractive": "season", "satourn": "seasons[].suitable", "note": "April, Mai und Juni sind in beiden Ausgaben als geeignet markiert."},
+        {"field": "Beschreibung (HTML)", "outdooractive": "texts.long", "satourn": "texts[rel=details, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Kurzbeschreibung (HTML)", "outdooractive": "texts.short", "satourn": "texts[rel=teaser, type=text/html].value", "note": "Textinhalt nach HTML-Normalisierung gleich."},
+        {"field": "Startpunkt", "outdooractive": "texts.startingPoint", "satourn": "texts[rel=ROUTE_START].value"},
+        {"field": "Zielpunkt", "outdooractive": "texts.destination", "satourn": "texts[rel=ROUTE_ZIEL].value"},
+        {"field": "Wegbeschreibung", "outdooractive": "texts.directions", "satourn": "texts[rel=TourMoreInfos_directions].value"},
+        {"field": "Sicherheitshinweise", "outdooractive": "texts.safetyGuidelines", "satourn": "texts[rel=TourMoreInfos_safetyGuidelines].value"},
+        {"field": "Ausrüstung", "outdooractive": "texts.equipment", "satourn": "texts[rel=TourMoreInfos_equipment].value"},
+        {"field": "Tipp", "outdooractive": "texts.tip", "satourn": "texts[rel=TourMoreInfos_tip].value"},
+        {"field": "Anfahrt", "outdooractive": "texts.gettingThere", "satourn": "texts[rel=TourMoreInfos_gettingThere].value"},
+        {"field": "Parken", "outdooractive": "texts.parking", "satourn": "texts[rel=TourMoreInfos_parking].value"},
+        {"field": "Öffentliche Verkehrsmittel", "outdooractive": "texts.publicTransit", "satourn": "texts[rel=TourMoreInfos_publicTransit].value"},
+        {"field": "Literatur", "outdooractive": "texts.recommendedLiterature", "satourn": "texts[rel=TourMoreInfos_literature].value"},
+        {"field": "Karten", "outdooractive": "texts.recommendedMaps", "satourn": "texts[rel=TourMoreInfos_maps].value"},
+        {"field": "Weitere Toureninformationen", "outdooractive": "texts.additionalInformation", "satourn": "texts[rel=TourMoreInfos_additionalInformation].value"}
       ]
     }
   ]

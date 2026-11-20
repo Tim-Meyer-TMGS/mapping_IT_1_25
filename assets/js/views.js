@@ -97,7 +97,7 @@ function featureOverview(data, state) {
       system: 'Outdooractive',
       group: row.group ?? 'traits',
       sources: row.sourceLabel ? [row.sourceLabel] : row.sources,
-      targets: row.targets.map(target => target.label),
+      targets: row.targets.map(target => target.displayLabel ?? '-'),
     })),
     ...existing.map(rule => ({
       system: rule.source.system === 'feratel' ? 'Deskline (Feratel)' : systemLabel(data, rule.source.system),
@@ -114,6 +114,7 @@ function featureOverview(data, state) {
   const body = (items, label) => `<tbody>${label && items.length ? `<tr class="feature-group"><th scope="rowgroup" colspan="3">${label}</th></tr>` : ''}${items.map(row =>
     `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${categoryValues(row.targets)}</td></tr>`).join('')}</tbody>`;
   return `${mappingHeader(tabs, active, 'features')}
+  ${rows.some(row => row.targets.includes('-')) ? '<p class="result-count">„-“ steht für einen unbelegten SaTourN-Anzeigenamen.</p>' : ''}
   <div class="table-scroll" role="region" aria-label="Merkmalsmappings für ${esc(active.label)}" tabindex="0"><table class="category-table feature-table">
     <caption class="sr-only">Merkmalsmappings für ${esc(active.label)}</caption>
     <thead><tr><th scope="col">Quellsystem</th><th scope="col">Information im Quellsystem</th><th scope="col">Information in SaTourN</th></tr></thead>

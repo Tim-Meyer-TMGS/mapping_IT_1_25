@@ -49,16 +49,17 @@ Merkmale zeigt je Datensatzart die vorhandenen Merkmalsregeln aus dem Hub sowie
 die Outdooractive-Regeln aus `Tour.xslt`, `Veranstaltung.xslt`, `Poi.xslt` und
 `Gastro.xslt`. Die XSLT-Daten umfassen die aktiven Merkmalszweige und die direkten
 Übernahmen von `family_friendly`, `rest_stop` und `round_tour`. Die Merkmalsansicht
-verwendet die deutschen Anzeigenamen aus `Poi_Basis.xsd.xml` und
-`PoiMerkmalTree.xml`. Für Felder ohne Schema-Anzeigenamen verwendet sie
-Bezeichnungen aus der XSLT.
+verwendet die SaTourN-Anzeigenamen aus `Poi_Basis.xsd.xml` und
+`PoiMerkmalTree.xml` für POI sowie die belegten Merkmalsnamen aus den
+JSON-Abgleichen der jeweiligen Datensatzart. Ein Bindestrich zeigt an,
+dass der SaTourN-Anzeigename offen ist.
 Barrierefreiheitsregeln sind aus der Merkmalsansicht ausgeklammert.
 Unter „Basisdaten“ stehen dokumentierte Regeln für Name, Koordinaten, Adresse
 und Kontakt. „Weitere Datenfelder“ enthält weitere XSLT-Zuordnungen wie Texte,
 Preise, Öffnungszeiten, Buchungslinks und Tourdetails. Die Quellausdrücke
 und ihre Bedingungen stammen aus den
-Import-XSLT-Dateien. Die Tabelle zeigt die lesbaren Namen aus Quellsystem und
-SaTourN. Technische Ausdrücke und Bedingungen stehen im Datenbestand.
+Import-XSLT-Dateien. Die Tabelle zeigt lesbare Quellnamen und belegte
+SaTourN-Anzeigenamen. Technische Ausdrücke und Bedingungen stehen im Datenbestand.
 Die JSON-Abgleiche einschließlich der beobachteten Termin- und
 Öffnungszeitenfelder stehen in `source/field-mapping-observations.json`.
 

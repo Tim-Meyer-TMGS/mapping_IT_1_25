@@ -7,6 +7,66 @@
                                   {
                                       "group":  "basis",
                                       "sources":  [
+                                                      "geoJson.coordinates[]"
+                                                  ],
+                                      "sourceLabel":  "Streckenverlauf",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "geo.geometry.value",
+                                                          "label":  "Streckenverlauf",
+                                                          "displayLabel":  null,
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806476828",
+                                                       "satournId":  "t_100298605"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "basis",
+                                      "sources":  [
+                                                      "properties[name=loopTour]"
+                                                  ],
+                                      "sourceLabel":  "Rundtour",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "roundTrip",
+                                                          "label":  "Rundweg",
+                                                          "displayLabel":  "Rundweg",
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806476828",
+                                                       "satournId":  "t_100298605"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "traits",
+                                      "sources":  [
+                                                      "properties[name=dogFriendly].title"
+                                                  ],
+                                      "sourceLabel":  "hundefreundlich",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "features[value=Tour mit Hund].value",
+                                                          "label":  "Tour mit Hund",
+                                                          "displayLabel":  "Tour mit Hund",
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806476828",
+                                                       "satournId":  "t_100298605"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "basis",
+                                      "sources":  [
                                                       "title"
                                                   ],
                                       "sourceLabel":  "Name",
@@ -2059,7 +2119,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_KINDERWAGEN",
                                                           "label":  "Kinderwagentauglich",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Kinderwagentauglich"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2086,7 +2147,8 @@
                                                       {
                                                           "field":  "INFO_EINKEHRMOEGLICHKEIT",
                                                           "label":  "Einkehrmöglichkeit",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Einkehrmöglichkeit"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2100,7 +2162,8 @@
                                                       {
                                                           "field":  "OBJECT_GIPFEL",
                                                           "label":  "Gipfel",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Gipfel"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2115,7 +2178,8 @@
                                                       {
                                                           "field":  "INFO_KULTURELL",
                                                           "label":  "Kulturell interessant",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Kulturell interessant"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2155,7 +2219,8 @@
                                                       {
                                                           "field":  "INFO_RUNDWEG",
                                                           "label":  "Rundweg",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Rundweg"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2194,7 +2259,8 @@
                                                       {
                                                           "field":  "INFO_TOUR_HUND",
                                                           "label":  "Tour mit Hund",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Tour mit Hund"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -2221,7 +2287,8 @@
                                                       {
                                                           "field":  "INFO_EINKEHRMOEGLICHKEIT",
                                                           "label":  "Einkehrmöglichkeit",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Einkehrmöglichkeit"
                                                       }
                                                   ]
                                   },
@@ -2234,7 +2301,8 @@
                                                       {
                                                           "field":  "INFO_RUNDWEG",
                                                           "label":  "Rundweg",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Rundweg"
                                                       }
                                                   ]
                                   }
@@ -2254,6 +2322,7 @@
                                                       {
                                                           "field":  "timeIntervals[0].start",
                                                           "label":  "Veranstaltungsbeginn",
+                                                          "displayLabel":  null,
                                                           "value":  null
                                                       }
                                                   ],
@@ -2273,6 +2342,7 @@
                                                       {
                                                           "field":  "timeIntervals[0].end",
                                                           "label":  "Veranstaltungsende",
+                                                          "displayLabel":  null,
                                                           "value":  null
                                                       }
                                                   ],
@@ -4792,7 +4862,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_NAME",
                                                           "label":  "Name (mehrsprachig)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Bezeichnung *"
                                                       }
                                                   ]
                                   },
@@ -4806,7 +4877,8 @@
                                                       {
                                                           "field":  "Bezeichnung",
                                                           "label":  "Bezeichnung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Bezeichnung"
                                                       }
                                                   ],
                                       "condition":  "util:GetLanguage() = \u0027de-DE\u0027"
@@ -4821,7 +4893,8 @@
                                                       {
                                                           "field":  "OrtID",
                                                           "label":  "Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort"
                                                       }
                                                   ]
                                   },
@@ -4863,7 +4936,8 @@
                                                       {
                                                           "field":  "Longitude",
                                                           "label":  "Längengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Longitude"
                                                       }
                                                   ]
                                   },
@@ -4877,7 +4951,8 @@
                                                       {
                                                           "field":  "Latitude",
                                                           "label":  "Breitengrad",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Latitude"
                                                       }
                                                   ]
                                   },
@@ -4906,7 +4981,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_ORTSTEIL",
                                                           "label":  "Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil"
                                                       }
                                                   ]
                                   },
@@ -4920,7 +4996,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_STRASSE",
                                                           "label":  "Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße"
                                                       }
                                                   ]
                                   },
@@ -4934,7 +5011,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_FIRMA",
                                                           "label":  "Firma",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Firma"
                                                       }
                                                   ]
                                   },
@@ -4948,7 +5026,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_TEL",
                                                           "label":  "Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon"
                                                       }
                                                   ]
                                   },
@@ -4962,7 +5041,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_MOBIL",
                                                           "label":  "Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "ec:mobile"
@@ -4977,7 +5057,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_MOBIL",
                                                           "label":  "Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:mobile)) and (ec:phone2)"
@@ -4992,7 +5073,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_FAX",
                                                           "label":  "Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax"
                                                       }
                                                   ]
                                   },
@@ -5006,7 +5088,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_EMAIL",
                                                           "label":  "E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ]
                                   },
@@ -5020,7 +5103,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_WEBSEITE1",
                                                           "label":  "Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "util:GetLanguage() = \u0027de-DE\u0027"
@@ -5035,7 +5119,8 @@
                                                       {
                                                           "field":  "OBJECT_CONTACT_WEBSEITE1_XML",
                                                           "label":  "Website (mehrsprachig)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ]
                                   },
@@ -5049,7 +5134,8 @@
                                                       {
                                                           "field":  "CONTACT_ORTID",
                                                           "label":  "Ansprechpartner · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($contactOrtId \u003e 0)"
@@ -5064,7 +5150,8 @@
                                                       {
                                                           "field":  "CONTACT_ANREDE",
                                                           "label":  "Ansprechpartner · Anrede",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Anrede"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5079,7 +5166,8 @@
                                                       {
                                                           "field":  "CONTACT_VORNAME",
                                                           "label":  "Ansprechpartner · Vorname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Vorname"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5094,7 +5182,8 @@
                                                       {
                                                           "field":  "CONTACT_NACHNAME",
                                                           "label":  "Ansprechpartner · Nachname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Nachname"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($contact_person/lastname)"
@@ -5109,7 +5198,8 @@
                                                       {
                                                           "field":  "CONTACT_NACHNAME",
                                                           "label":  "Ansprechpartner · Nachname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Nachname"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (not($contact_person/lastname)) and ($contact_person/name and $contact_person/firstname != $contact_person/name)"
@@ -5124,7 +5214,8 @@
                                                       {
                                                           "field":  "CONTACT_FIRMA",
                                                           "label":  "Ansprechpartner · Firma",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Firma"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5139,7 +5230,8 @@
                                                       {
                                                           "field":  "CONTACT_STRASSE",
                                                           "label":  "Ansprechpartner · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5154,7 +5246,8 @@
                                                       {
                                                           "field":  "CONTACT_TEL",
                                                           "label":  "Ansprechpartner · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5169,7 +5262,8 @@
                                                       {
                                                           "field":  "CONTACT_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and ($contact_person/mobile)"
@@ -5184,7 +5278,8 @@
                                                       {
                                                           "field":  "CONTACT_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (not($contact_person/mobile)) and ($contact_person/phone2)"
@@ -5199,7 +5294,8 @@
                                                       {
                                                           "field":  "CONTACT_FAX",
                                                           "label":  "Ansprechpartner · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5214,7 +5310,8 @@
                                                       {
                                                           "field":  "CONTACT_EMAIL",
                                                           "label":  "Ansprechpartner · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5229,7 +5326,8 @@
                                                       {
                                                           "field":  "CONTACT_WEBSEITE",
                                                           "label":  "Ansprechpartner · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027contact_person\u0027]) and (util:GetLanguage() = \u0027de-DE\u0027)"
@@ -5244,7 +5342,8 @@
                                                       {
                                                           "field":  "CONTACT_WEBSEITE_XML",
                                                           "label":  "Ansprechpartner · Website (mehrsprachig)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027contact_person\u0027]"
@@ -5259,7 +5358,8 @@
                                                       {
                                                           "field":  "CONTACT_ORTID",
                                                           "label":  "Ansprechpartner · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and ($contactOrtId \u003e 0)"
@@ -5274,7 +5374,8 @@
                                                       {
                                                           "field":  "CONTACT_ANREDE",
                                                           "label":  "Ansprechpartner · Anrede",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Anrede"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5289,7 +5390,8 @@
                                                       {
                                                           "field":  "CONTACT_VORNAME",
                                                           "label":  "Ansprechpartner · Vorname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Vorname"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5304,7 +5406,8 @@
                                                       {
                                                           "field":  "CONTACT_NACHNAME",
                                                           "label":  "Ansprechpartner · Nachname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Nachname"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (ec:contact_lastname)"
@@ -5319,7 +5422,8 @@
                                                       {
                                                           "field":  "CONTACT_NACHNAME",
                                                           "label":  "Ansprechpartner · Nachname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Nachname"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (not(ec:contact_lastname)) and (ec:contact_name and (ec:contact_firstname != \u0027\u0027 or not(ec:contact_firstname)))"
@@ -5334,7 +5438,8 @@
                                                       {
                                                           "field":  "CONTACT_FIRMA",
                                                           "label":  "Ansprechpartner · Firma",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Firma"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5349,7 +5454,8 @@
                                                       {
                                                           "field":  "CONTACT_STRASSE",
                                                           "label":  "Ansprechpartner · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5364,7 +5470,8 @@
                                                       {
                                                           "field":  "CONTACT_TEL",
                                                           "label":  "Ansprechpartner · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5379,7 +5486,8 @@
                                                       {
                                                           "field":  "CONTACT_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (ec:contact_mobile)"
@@ -5394,7 +5502,8 @@
                                                       {
                                                           "field":  "CONTACT_MOBIL",
                                                           "label":  "Ansprechpartner · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (not(ec:contact_mobile)) and (ec:contact_phone2)"
@@ -5409,7 +5518,8 @@
                                                       {
                                                           "field":  "CONTACT_FAX",
                                                           "label":  "Ansprechpartner · Fax",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefax"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5424,7 +5534,8 @@
                                                       {
                                                           "field":  "CONTACT_EMAIL",
                                                           "label":  "Ansprechpartner · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5439,7 +5550,8 @@
                                                       {
                                                           "field":  "CONTACT_WEBSEITE",
                                                           "label":  "Ansprechpartner · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "(not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])) and (util:GetLanguage() = \u0027de-DE\u0027)"
@@ -5454,7 +5566,8 @@
                                                       {
                                                           "field":  "CONTACT_WEBSEITE_XML",
                                                           "label":  "Ansprechpartner · Website (mehrsprachig)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "not(ec:addresses/ec:address[@rel=\u0027contact_person\u0027])"
@@ -5469,7 +5582,8 @@
                                                       {
                                                           "field":  "AUTOR_ANREDE",
                                                           "label":  "Autor · Anrede",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Anrede"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5484,7 +5598,8 @@
                                                       {
                                                           "field":  "AUTOR_TITEL",
                                                           "label":  "Autor · Titel",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Titel"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5499,7 +5614,8 @@
                                                       {
                                                           "field":  "AUTOR_VORNAME",
                                                           "label":  "Autor · Vorname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Vorname"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5514,7 +5630,8 @@
                                                       {
                                                           "field":  "AUTOR_NACHNAME",
                                                           "label":  "Autor · Nachname",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Nachname"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5529,7 +5646,8 @@
                                                       {
                                                           "field":  "AUTOR_STRASSE",
                                                           "label":  "Autor · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5544,7 +5662,8 @@
                                                       {
                                                           "field":  "AUTOR_ORTSTEIL",
                                                           "label":  "Autor · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5559,7 +5678,8 @@
                                                       {
                                                           "field":  "AUTOR_FIRMA",
                                                           "label":  "Autor · Firma",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Firma"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5574,7 +5694,8 @@
                                                       {
                                                           "field":  "AUTOR_ORTID",
                                                           "label":  "Autor · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027author\u0027]) and ($autorOrtId \u003e 0)"
@@ -5589,7 +5710,8 @@
                                                       {
                                                           "field":  "AUTOR_POSTFACH",
                                                           "label":  "Autor · Postfach",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Postfach"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5604,7 +5726,8 @@
                                                       {
                                                           "field":  "AUTOR_TEL",
                                                           "label":  "Autor · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5619,7 +5742,8 @@
                                                       {
                                                           "field":  "AUTOR_MOBIL",
                                                           "label":  "Autor · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5634,7 +5758,8 @@
                                                       {
                                                           "field":  "AUTOR_EMAIL",
                                                           "label":  "Autor · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5649,7 +5774,8 @@
                                                       {
                                                           "field":  "AUTOR_WEBSEITE",
                                                           "label":  "Autor · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027author\u0027]"
@@ -5664,7 +5790,8 @@
                                                       {
                                                           "field":  "ORG_NAME",
                                                           "label":  "Organisation · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Name"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5679,7 +5806,8 @@
                                                       {
                                                           "field":  "ORG_STRASSE",
                                                           "label":  "Organisation · Straße",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Straße"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5694,7 +5822,8 @@
                                                       {
                                                           "field":  "ORG_ORTSTEIL",
                                                           "label":  "Organisation · Ortsteil",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ortsteil"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5709,7 +5838,8 @@
                                                       {
                                                           "field":  "ORG_ORTID",
                                                           "label":  "Organisation · Orts-ID",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "PLZ - Ort"
                                                       }
                                                   ],
                                       "condition":  "(ec:addresses/ec:address[@rel=\u0027organisation\u0027]) and ($orgOrtId \u003e 0)"
@@ -5724,7 +5854,8 @@
                                                       {
                                                           "field":  "ORG_POSTFACH",
                                                           "label":  "Organisation · Postfach",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Postfach"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5739,7 +5870,8 @@
                                                       {
                                                           "field":  "ORG_TEL",
                                                           "label":  "Organisation · Telefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Telefon"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5754,7 +5886,8 @@
                                                       {
                                                           "field":  "ORG_MOBIL",
                                                           "label":  "Organisation · Mobiltelefon",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Mobil"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5769,7 +5902,8 @@
                                                       {
                                                           "field":  "ORG_EMAIL",
                                                           "label":  "Organisation · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5784,7 +5918,8 @@
                                                       {
                                                           "field":  "ORG_WEBSEITE",
                                                           "label":  "Organisation · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027organisation\u0027]"
@@ -5799,7 +5934,8 @@
                                                       {
                                                           "field":  "COPYRIGHT_TEXT",
                                                           "label":  "Urheberrecht · Name",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Text"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027copyright\u0027]"
@@ -5814,7 +5950,8 @@
                                                       {
                                                           "field":  "COPYRIGHT_EMAIL",
                                                           "label":  "Urheberrecht · E-Mail",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "E-Mail"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027copyright\u0027]"
@@ -5829,7 +5966,8 @@
                                                       {
                                                           "field":  "COPYRIGHT_WEBSEITE",
                                                           "label":  "Urheberrecht · Website",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Webseite"
                                                       }
                                                   ],
                                       "condition":  "ec:addresses/ec:address[@rel=\u0027copyright\u0027]"
@@ -5874,7 +6012,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_TEASER_SOMMER_HTML",
                                                           "label":  "Kurzbeschreibung (HTML)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Einleitung (HTML)"
                                                       }
                                                   ],
                                       "condition":  "(util:CheckOverwriteWithNull()) and (util:GetSource() = \u0027outdooractive\u0027 or util:GetSource() = \u0027toubiz\u0027 or util:GetSource() = \u0027feratel\u0027 or util:GetSource() = \u0027dpmuensterland\u0027)"
@@ -5889,7 +6028,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML",
                                                           "label":  "Beschreibung (HTML)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Detaillierte Beschreibung (HTML)"
                                                       }
                                                   ],
                                       "condition":  "(util:CheckOverwriteWithNull()) and (util:GetSource() = \u0027outdooractive\u0027 or util:GetSource() = \u0027toubiz\u0027 or util:GetSource() = \u0027feratel\u0027 or util:GetSource() = \u0027dpmuensterland\u0027)"
@@ -5904,7 +6044,8 @@
                                                       {
                                                           "field":  "OBJECT_OEFFNUNGSZEITEN",
                                                           "label":  "Öffnungszeiten (Text)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Öffnungs-/Betriebszeiten"
                                                       }
                                                   ],
                                       "condition":  "(util:CheckOverwriteWithNull()) and (util:GetSource() = \u0027outdooractive\u0027 or util:GetSource() = \u0027toubiz\u0027 or util:GetSource() = \u0027feratel\u0027 or util:GetSource() = \u0027dpmuensterland\u0027)"
@@ -5919,7 +6060,8 @@
                                                       {
                                                           "field":  "PRICE_INFO",
                                                           "label":  "Preisinformation",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Allgemeine Preisinformationen"
                                                       }
                                                   ],
                                       "condition":  "(util:CheckOverwriteWithNull()) and (util:GetSource() = \u0027outdooractive\u0027 or util:GetSource() = \u0027toubiz\u0027 or util:GetSource() = \u0027feratel\u0027 or util:GetSource() = \u0027dpmuensterland\u0027)"
@@ -5934,7 +6076,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_TEASER_SOMMER_HTML",
                                                           "label":  "Kurzbeschreibung (HTML)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Einleitung (HTML)"
                                                       }
                                                   ],
                                       "condition":  "(not(util:CheckOverwriteWithNull())) and ($teaser != \u0027\u0027)"
@@ -5949,7 +6092,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_BESCHREIBUNG_SOMMER_HTML",
                                                           "label":  "Beschreibung (HTML)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Detaillierte Beschreibung (HTML)"
                                                       }
                                                   ],
                                       "condition":  "(not(util:CheckOverwriteWithNull())) and ($desc != \u0027\u0027)"
@@ -5964,7 +6108,8 @@
                                                       {
                                                           "field":  "OBJECT_OEFFNUNGSZEITEN",
                                                           "label":  "Öffnungszeiten (Text)",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Öffnungs-/Betriebszeiten"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -5980,7 +6125,8 @@
                                                       {
                                                           "field":  "PRICE_INFO",
                                                           "label":  "Preisinformation",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Allgemeine Preisinformationen"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -5996,7 +6142,8 @@
                                                       {
                                                           "field":  "OBJECT_TEXT_WEITERE_INFO",
                                                           "label":  "Weitere Informationen",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Weitere Infos"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6012,7 +6159,8 @@
                                                       {
                                                           "field":  "OBJECT_ANREISE",
                                                           "label":  "Anreise",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Beschreibung"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6044,7 +6192,8 @@
                                                       {
                                                           "field":  "WEB_SEO_TITEL",
                                                           "label":  "Suchmaschinen · Titel",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Meta Title"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6060,7 +6209,8 @@
                                                       {
                                                           "field":  "WEB_SEO_BESCHREIBUNG",
                                                           "label":  "Suchmaschinen · Beschreibung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Meta Description"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6076,7 +6226,8 @@
                                                       {
                                                           "field":  "WEB_SEO_KEYWORDS",
                                                           "label":  "Suchmaschinen · Stichworte",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Meta Keywords"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6092,7 +6243,8 @@
                                                       {
                                                           "field":  "HYGIENE_Information",
                                                           "label":  "Hygienehinweise",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Informationen zu Maßnahmen"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6108,7 +6260,8 @@
                                                       {
                                                           "field":  "HYGIENE_Information",
                                                           "label":  "Hygienehinweise",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Informationen zu Maßnahmen"
                                                       }
                                                   ],
                                       "context":  "ec:text",
@@ -6124,7 +6277,8 @@
                                                       {
                                                           "field":  "WEB_SEO_CANONICAL",
                                                           "label":  "Bevorzugte Webadresse",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Canonical URL"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6140,7 +6294,8 @@
                                                       {
                                                           "field":  "SOCIAL_WIKIPEDIA_XML",
                                                           "label":  "Wikipedia",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Wikipedia"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6156,7 +6311,8 @@
                                                       {
                                                           "field":  "BOOKING_TITEL1_XML",
                                                           "label":  "Buchungstitel 1",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 1 (Titel)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6172,7 +6328,8 @@
                                                       {
                                                           "field":  "BOOKING_LINK1_XML",
                                                           "label":  "Buchungslink 1",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 1 (Link)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6188,7 +6345,8 @@
                                                       {
                                                           "field":  "BOOKING_TITEL2_XML",
                                                           "label":  "Buchungstitel 2",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 2 (Titel)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6204,7 +6362,8 @@
                                                       {
                                                           "field":  "BOOKING_LINK2_XML",
                                                           "label":  "Buchungslink 2",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 2 (Link)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6220,7 +6379,8 @@
                                                       {
                                                           "field":  "BOOKING_TITEL3_XML",
                                                           "label":  "Buchungstitel 3",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 3 (Titel)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6236,7 +6396,8 @@
                                                       {
                                                           "field":  "BOOKING_LINK3_XML",
                                                           "label":  "Buchungslink 3",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Buchungssystem 3 (Link)"
                                                       }
                                                   ],
                                       "context":  "ec:link",
@@ -6252,7 +6413,8 @@
                                                       {
                                                           "field":  "SYSTEMID_Feratel",
                                                           "label":  "Feratel-Kennung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Feratel-ID"
                                                       }
                                                   ],
                                       "context":  "ec:attributes/ec:attribute",
@@ -6318,7 +6480,8 @@
                                                       {
                                                           "field":  "OBJECT_CREATIVECOMMONS",
                                                           "label":  "Lizenz",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Creative Commons"
                                                       }
                                                   ],
                                       "context":  "ec:attributes/ec:attribute",
@@ -6335,6 +6498,7 @@
                                                           "field":  "TempClosed",
                                                           "label":  "Vorübergehend geschlossen",
                                                           "value":  null,
+                                                          "displayLabel":  "vorübergehend geschlossen",
                                                           "namespace":  "urn:schemas-etourist:SchemaExtension"
                                                       }
                                                   ],
@@ -6351,7 +6515,8 @@
                                                       {
                                                           "field":  "PRICE_ADULT",
                                                           "label":  "Preis für Erwachsene",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Preis Erwachsener"
                                                       }
                                                   ],
                                       "context":  "ec:numbers/ec:number",
@@ -6367,7 +6532,8 @@
                                                       {
                                                           "field":  "PRICE_CHILD",
                                                           "label":  "Preis für Kinder",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Preis Kind"
                                                       }
                                                   ],
                                       "context":  "ec:numbers/ec:number",
@@ -6383,7 +6549,8 @@
                                                       {
                                                           "field":  "PRICE_FAMILY",
                                                           "label":  "Familienpreis",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Preis Familie"
                                                       }
                                                   ],
                                       "context":  "ec:numbers/ec:number",
@@ -6399,7 +6566,8 @@
                                                       {
                                                           "field":  "PRICE_REDUCED",
                                                           "label":  "Ermäßigter Preis",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Preis ermäßigt"
                                                       }
                                                   ],
                                       "context":  "ec:numbers/ec:number",
@@ -6415,7 +6583,8 @@
                                                       {
                                                           "field":  "SOCIAL_FACEBOOK",
                                                           "label":  "Facebook",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Facebook"
                                                       }
                                                   ]
                                   },
@@ -6429,7 +6598,8 @@
                                                       {
                                                           "field":  "SOCIAL_INSTAGRAM",
                                                           "label":  "Instagram",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Instagram"
                                                       }
                                                   ]
                                   },
@@ -6443,7 +6613,8 @@
                                                       {
                                                           "field":  "SOCIAL_TWITTER",
                                                           "label":  "Twitter",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "X"
                                                       }
                                                   ]
                                   },
@@ -6457,7 +6628,8 @@
                                                       {
                                                           "field":  "SYSTEMID_TrustYou",
                                                           "label":  "TrustYou-Kennung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "TrustYou-ID"
                                                       }
                                                   ]
                                   },
@@ -6471,7 +6643,8 @@
                                                       {
                                                           "field":  "SYSTEMID_Tripadvisor",
                                                           "label":  "Tripadvisor-Kennung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "TripAdvisor-ID"
                                                       }
                                                   ]
                                   },
@@ -6485,7 +6658,8 @@
                                                       {
                                                           "field":  "C_LastChange",
                                                           "label":  "Letzte Änderung",
-                                                          "value":  null
+                                                          "value":  null,
+                                                          "displayLabel":  "Ranking"
                                                       }
                                                   ]
                                   },
@@ -6497,7 +6671,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_SCHLECHTWETTER",
                                                           "label":  "Schlechtwetterangebot",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Schlechtwetterangebot"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6510,7 +6685,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_WETTERUNABHAENGIG",
                                                           "label":  "für jedes Wetter",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für jedes Wetter"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6523,7 +6699,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_GRUPPEN",
                                                           "label":  "für Gruppen",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Gruppen"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6536,7 +6713,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_SCHULKLASSEN",
                                                           "label":  "für Schulklassen",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Schulklassen"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6549,7 +6727,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_FAMILIEN",
                                                           "label":  "für Familien",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Familien"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6562,7 +6741,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_INDIVIDUALGAESTE",
                                                           "label":  "für Individualgäste",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Individualgäste"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6575,7 +6755,8 @@
                                                       {
                                                           "field":  "TARGET_SENIOREN",
                                                           "label":  "Zielgruppe Senioren",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Zielgruppe Senioren"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6588,7 +6769,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_HAUSTIERE",
                                                           "label":  "Haustiere erlaubt",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Haustiere erlaubt"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6601,7 +6783,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_KINDERWAGEN",
                                                           "label":  "Kinderwagentauglich",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Kinderwagentauglich"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6614,7 +6797,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_KINDER_3BIS6",
                                                           "label":  "für Kinder (3-6 Jahre)",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Kinder (3-6 Jahre)"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6628,7 +6812,8 @@
                                                       {
                                                           "field":  "OBJECT_FIT_KINDER",
                                                           "label":  "für Kinder (jedes Alter)",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "für Kinder (jedes Alter)"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6641,7 +6826,8 @@
                                                       {
                                                           "field":  "OBJECT_PARKINGAVAILABLE",
                                                           "label":  "Parkplätze vorhanden",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Parkplätze vorhanden"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6654,7 +6840,8 @@
                                                       {
                                                           "field":  "PRICE_FREE",
                                                           "label":  "Eintritt frei",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Eintritt frei"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6667,7 +6854,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_BAR",
                                                           "label":  "Barzahlung",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Barzahlung"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6680,7 +6868,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_DINERSCLUB",
                                                           "label":  "Diners Club",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Diners Club"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6693,7 +6882,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_BANKOMAT",
                                                           "label":  "EC-Karte",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "EC-Karte"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6706,7 +6896,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_UEBERWEISUNG",
                                                           "label":  "Überweisung",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Überweisung"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6719,7 +6910,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_VISA",
                                                           "label":  "Visa",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Visa"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6732,7 +6924,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_AMERICANEXPRESS",
                                                           "label":  "American Express",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "American Express"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6758,7 +6951,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_PAYPAL",
                                                           "label":  "PayPal",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "PayPal"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6773,7 +6967,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_MASTERCARD",
                                                           "label":  "Mastercard",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Mastercard"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6786,7 +6981,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_JCB",
                                                           "label":  "JCB",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "JCB"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6799,7 +6995,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_SCHECK",
                                                           "label":  "Scheck",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Scheck"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6812,7 +7009,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_TWINT",
                                                           "label":  "Twint",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Twint"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6825,7 +7023,8 @@
                                                       {
                                                           "field":  "OBJECT_SPIELECKEOUTDOOR",
                                                           "label":  "Kinderspielplatz (im Freien)",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Kinderspielplatz (im Freien)"
                                                       }
                                                   ],
                                       "condition":  "util:IsUpdateFeaturesFalse()"
@@ -6859,6 +7058,67 @@
                                                       {
                                                           "field":  "timeIntervals[]",
                                                           "label":  "Öffnungszeiten (Wochentage)",
+                                                          "displayLabel":  null,
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806500218",
+                                                       "satournId":  "g_100043901"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "traits",
+                                      "sources":  [
+                                                      "properties[title=Klimaanlage].title"
+                                                  ],
+                                      "sourceLabel":  "Klimaanlage",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "features[value=Klimaanlage].value",
+                                                          "label":  "Klimaanlage",
+                                                          "displayLabel":  "Klimaanlage",
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806500218",
+                                                       "satournId":  "g_100043901"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "traits",
+                                      "sources":  [
+                                                      "properties[title=Selbstbedienung].title"
+                                                  ],
+                                      "sourceLabel":  "Selbstbedienung",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "features[value=Selbstbedienung].value",
+                                                          "label":  "Selbstbedienung",
+                                                          "displayLabel":  "Selbstbedienung",
+                                                          "value":  null
+                                                      }
+                                                  ],
+                                      "evidence":  {
+                                                       "kind":  "json-observation",
+                                                       "outdooractiveId":  "806500218",
+                                                       "satournId":  "g_100043901"
+                                                   }
+                                  },
+                                  {
+                                      "group":  "traits",
+                                      "sources":  [
+                                                      "properties[title=Lieferservice].title"
+                                                  ],
+                                      "sourceLabel":  "Lieferservice",
+                                      "targets":  [
+                                                      {
+                                                          "field":  "features[value=Lieferservice].value",
+                                                          "label":  "Lieferservice",
+                                                          "displayLabel":  "Lieferservice",
                                                           "value":  null
                                                       }
                                                   ],
@@ -8553,7 +8813,8 @@
                                                       {
                                                           "field":  "PRICE_PAYMENT_BAR",
                                                           "label":  "Barzahlung",
-                                                          "value":  "true"
+                                                          "value":  "true",
+                                                          "displayLabel":  "Barzahlung"
                                                       }
                                                   ]
                                   },

@@ -30,6 +30,12 @@ foreach ($element in $schema.SelectNodes('//*[local-name()="element" and @name]'
     $label = $element.Attributes | Where-Object LocalName -eq 'DisplayName' | Select-Object -First 1 -ExpandProperty Value
     if ($label) { $fieldLabels[$element.GetAttribute('name')] = $label.Trim() }
 }
+$verifiedLabels = @{ poi = $fieldLabels; tour = @{}; gastro = @{}; event = @{} }
+foreach ($example in $observations.examples) {
+    foreach ($entry in $example.satournFieldLabels) {
+        $verifiedLabels[$example.datasetType][$entry.field] = $entry.label
+    }
+}
 
 $fallbackLabels = @{
     INFO_FAMILIENFREUNDLICH = 'Familienfreundlich'
@@ -186,7 +192,7 @@ function Get-SourceLabel($source, $target) {
     throw "Missing source label for $source."
 }
 
-function Get-Targets($elements, $copyValue, $schemaNamespace, $sourceLabel) {
+function Get-Targets($elements, $copyValue, $schemaNamespace, $displayLabels, $sourceLabel) {
     foreach ($element in $elements) {
         $field = $element.LocalName
         if ($field -match '^(ACCESSIBILITY_|DETAILS_BARRIERFREE$|INFO_BARRIEREFREI$|OBJECT_HANDICAPPED_ACCESS$)') { continue }
@@ -196,6 +202,7 @@ function Get-Targets($elements, $copyValue, $schemaNamespace, $sourceLabel) {
         if (!$label) { $label = $fallbackLabels[$field] }
         if (!$label) { $label = if ($sourceLabel) { $sourceLabel } else { $field } }
         $target = [ordered]@{ field = $field; label = $label; value = if ($copyValue) { $null } else { $element.InnerText.Trim() } }
+        if ($displayLabels[$field]) { $target.displayLabel = $displayLabels[$field] }
         if ($element.NamespaceURI -and $element.NamespaceURI -cne $schemaNamespace) { $target.namespace = $element.NamespaceURI }
         $target
     }
@@ -230,12 +237,17 @@ $tabs = @(
 
         $rows = @(
             foreach ($example in ($observations.examples | Where-Object datasetType -eq $type)) {
-                foreach ($observation in ($example.rows | Where-Object includeInBasis)) {
+                foreach ($observation in ($example.rows | Where-Object { ($_.includeInBasis -or $_.displayGroup) -and $_.satourn })) {
                     [ordered]@{
-                        group = 'basis'
+                        group = if ($observation.displayGroup) { $observation.displayGroup } else { 'basis' }
                         sources = @($observation.outdooractive)
                         sourceLabel = $observation.field
-                        targets = @([ordered]@{ field = $observation.satourn; label = $observation.field; value = $null })
+                        targets = @([ordered]@{
+                            field = $observation.satourn
+                            label = if ($observation.satournLabel) { $observation.satournLabel } else { $observation.field }
+                            displayLabel = $observation.satournLabel
+                            value = $null
+                        })
                         evidence = [ordered]@{ kind = 'json-observation'; outdooractiveId = $example.outdooractiveId; satournId = $example.satournId }
                     }
                 }
@@ -255,7 +267,7 @@ $tabs = @(
                         group = if ($isBasis) { 'basis' } else { 'content' }
                         sources = @($select)
                         sourceLabel = if ($isBasis) { Get-SourceLabel $select $fieldName } else { Get-ContentSourceLabel $select $fieldName }
-                        targets = @(Get-Targets $field $true $schemaNamespace)
+                        targets = @(Get-Targets $field $true $schemaNamespace $verifiedLabels[$type])
                     }
                     $context = $value.SelectSingleNode('ancestor::xsl:for-each[1]', $ns)
                     if ($context) { $row.context = $context.GetAttribute('select') }
@@ -273,7 +285,7 @@ $tabs = @(
                     $test = $rule.GetAttribute('test')
                     if ($test -cnotmatch "^\.\s*=\s*'[^']+'(?:\s+or\s+\.\s*=\s*'[^']+')*$") { throw "Unsupported feature rule in ${file}: $test" }
                     $values = @([regex]::Matches($test, "'([^']+)'") | ForEach-Object { $_.Groups[1].Value })
-                    $targets = @(Get-Targets $rule.SelectNodes('./*[namespace-uri() != "http://www.w3.org/1999/XSL/Transform"]', $ns) $false $schemaNamespace $values[0])
+                    $targets = @(Get-Targets $rule.SelectNodes('./*[namespace-uri() != "http://www.w3.org/1999/XSL/Transform"]', $ns) $false $schemaNamespace $verifiedLabels[$type] $values[0])
                     if (!$targets.Count) { continue }
                     $row = [ordered]@{
                         sources = $values
@@ -284,13 +296,13 @@ $tabs = @(
                 }
                 foreach ($field in $loop.SelectNodes('./*[xsl:value-of/@select = "."]', $ns)) {
                     $source = 'ec:features/ec:feature'
-                    [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $field $true $schemaNamespace) }
+                    [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $field $true $schemaNamespace $verifiedLabels[$type]) }
                 }
             }
             $directFields = '//xsl:value-of[@select="ec:family_friendly" or @select="ec:rest_stop" or @select="ec:round_tour"]'
             foreach ($value in $xml.SelectNodes($directFields, $ns)) {
                 $source = $value.GetAttribute('select')
-                [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $value.ParentNode $true $schemaNamespace) }
+                [ordered]@{ sources = @($source); sourceLabel = $sourceLabels[$source]; targets = @(Get-Targets $value.ParentNode $true $schemaNamespace $verifiedLabels[$type]) }
             }
         )
         [ordered]@{ id = $type; file = $file; rows = $rows }
