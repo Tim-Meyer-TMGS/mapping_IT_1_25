@@ -97,16 +97,13 @@ function featureOverview(data, state) {
       system: 'Outdooractive',
       group: row.group ?? 'traits',
       sources: row.sourceLabel ? [row.sourceLabel] : row.sources,
-      targets: row.targets.map(target => ({
-        label: target.displayLabel ?? target.label,
-        descriptive: !target.displayLabel,
-      })),
+      targets: row.targets.map(target => target.displayLabel ?? target.label),
     })),
     ...existing.map(rule => ({
       system: rule.source.system === 'feratel' ? 'Deskline (Feratel)' : systemLabel(data, rule.source.system),
       group: 'traits',
       sources: [rule.source.value],
-      targets: (rule.behavior === 'noImport' ? ['Kein Import'] : (rule.target?.values ?? [])).map(label => ({ label, descriptive: false })),
+      targets: rule.behavior === 'noImport' ? ['Kein Import'] : (rule.target?.values ?? []),
     })),
   ];
   const rows = [...new Map(mappings.map(row => [JSON.stringify(row), row])).values()]
@@ -115,10 +112,8 @@ function featureOverview(data, state) {
   const content = rows.filter(row => row.group === 'content');
   const traits = rows.filter(row => row.group === 'traits');
   const body = (items, label) => `<tbody>${label && items.length ? `<tr class="feature-group"><th scope="rowgroup" colspan="3">${label}</th></tr>` : ''}${items.map(row =>
-    `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${row.targets.map(target =>
-      `${esc(target.label)}${target.descriptive ? ' <sup>†</sup>' : ''}`).join('<br>') || '-'}</td></tr>`).join('')}</tbody>`;
+    `<tr><td>${esc(row.system)}</td><th scope="row">${categoryValues(row.sources)}</th><td>${categoryValues(row.targets)}</td></tr>`).join('')}</tbody>`;
   return `${mappingHeader(tabs, active, 'features')}
-  ${rows.some(row => row.targets.some(target => target.descriptive)) ? '<p class="result-count">† Beschreibt das zugeordnete Feld. Der genaue SaTourN-Anzeigename ist offen.</p>' : ''}
   <div class="table-scroll" role="region" aria-label="Merkmalsmappings für ${esc(active.label)}" tabindex="0"><table class="category-table feature-table">
     <caption class="sr-only">Merkmalsmappings für ${esc(active.label)}</caption>
     <thead><tr><th scope="col">Quellsystem</th><th scope="col">Information im Quellsystem</th><th scope="col">Information in SaTourN</th></tr></thead>

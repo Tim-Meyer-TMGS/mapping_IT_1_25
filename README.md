@@ -52,7 +52,7 @@ die Outdooractive-Regeln aus `Tour.xslt`, `Veranstaltung.xslt`, `Poi.xslt` und
 verwendet die SaTourN-Anzeigenamen aus `Poi_Basis.xsd.xml` und
 `PoiMerkmalTree.xml` für POI sowie die belegten Merkmalsnamen aus den
 JSON-Abgleichen der jeweiligen Datensatzart. Ist der genaue Anzeigename offen,
-steht die Beschreibung des zugeordneten Felds mit † in der Tabelle.
+steht die Beschreibung des zugeordneten Felds in der Tabelle.
 Ein Bindestrich steht für eine fehlende Zuordnung.
 Barrierefreiheitsregeln sind aus der Merkmalsansicht ausgeklammert.
 Unter „Basisdaten“ stehen dokumentierte Regeln für Name, Koordinaten, Adresse
@@ -60,7 +60,7 @@ und Kontakt. „Weitere Datenfelder“ enthält weitere XSLT-Zuordnungen wie Tex
 Preise, Öffnungszeiten, Buchungslinks und Tourdetails. Die Quellausdrücke
 und ihre Bedingungen stammen aus den
 Import-XSLT-Dateien. Die Tabelle zeigt lesbare Quellnamen und belegte
-SaTourN-Anzeigenamen oder gekennzeichnete Feldbeschreibungen. Technische Ausdrücke
+SaTourN-Anzeigenamen oder Feldbeschreibungen. Technische Ausdrücke
 und Bedingungen stehen im Datenbestand.
 Die JSON-Abgleiche einschließlich der beobachteten Termin- und
 Öffnungszeitenfelder stehen in `source/field-mapping-observations.json`.
